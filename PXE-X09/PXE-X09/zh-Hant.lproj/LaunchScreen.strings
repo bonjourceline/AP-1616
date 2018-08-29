@@ -1,0 +1,35 @@
+//*******TopBar 顶部状态栏*******//
+"L_TopBar_Back" = "返回";
+
+
+//*******TabBar 底部状态栏*******//
+"L_TabBar_Delay" = "延時";
+"L_TabBar_XOver" = "濾波器";
+"L_TabBar_Output" = "通道";
+"L_TabBar_EQ" = "EQ";
+"L_TabBar_Mixer" = "混音";
+
+
+
+//*******Master 主页*******//
+"L_Master_Master" = "主頁";
+"L_Master_Advance" = "高級設置";
+
+
+//*******Delay 延时*******//
+
+
+//*******XOver 滤波器*******//
+
+
+//*******XOverOutput 滤波器+通道输出*******//
+
+
+//*******Output 通道输出*******//
+
+
+
+//*******EQ 均衡器*******//
+
+
+//*******Mixer 混音*******//

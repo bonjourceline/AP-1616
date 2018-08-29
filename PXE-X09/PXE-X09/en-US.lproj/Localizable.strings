@@ -1,0 +1,710 @@
+/*
+ Localizable.strings
+ FL_DCP810
+ 
+ Created by chsdsp on 2017/3/9.
+ Copyright © 2017年 hmaudio. All rights reserved.
+ */
+//*******系統用語*******//
+"L_System_OK" = "Sure";
+"L_System_Cancel" = "Cancel";
+"L_System_Save" = "Save";
+"L_System_Delete" = "Delete";
+"L_System_Title" = "System message";
+"L_System_CMsg"  = "Please connect device！";
+"L_BLE_DeviceOpen" = "Open bluetooth";
+"L_BLE_DeviceOpenSettings" = "Please open bluetooth in settings";
+"L_BLE_DeviceSEL" = "Please select BLE Device";
+"L_BLE_DeviceScan" = "Scanning devices...";
+"L_BLE_DeviceScanNULL" = "No device found, please check Bluetooth settings";
+"L_BLE_DeviceCantNotUSE" = "Bluetooth device not available";
+"L_BLE_DeviceConTimeOut" = "Bluetooth connection timeout, please select the correct Bluetooth device to connect";
+"L_BLE_DeviceConnectERR" = "Connection failed. Please select the correct Bluetooth device to connect to.";
+"L_DeviceVersionERR" = "Version error, please connect the correct version.";
+"L_BLE_Disconnect"="Bluetooth is disconnected";
+
+"L_Data_Sync" = "Synchronize...";
+"L_Data_Save" = "Save...";
+//连接状态
+"L_Connected" = "ON";
+"L_Disconnected" = "OFF";
+"L_Connecting" = "Connecting";
+//*******TopBar 顶部状态栏*******//
+"L_TopBar_Back" = "Back";
+//*******TopBar 顶部状态栏菜单关于*******//
+"L_Menu_ShareCurSEFF" = "Share preset file";
+"L_Menu_ShareMACSEFF" = "Share all preset file";
+"L_Menu_SaveSEFF" = "Save preset file";
+"L_Menu_LoadSEFF" = "Load Preset file";
+"L_Menu_About" = "About";
+"L_Menu_Exit" = "Exit";
+"L_Menu_Help" = "Help";
+"L_Menu_Connect" = "Connect";
+"L_Menu_Disconnect" = "Disconnect";
+"L_Menu_ClickOneMSG" = "Click:Call mode";
+"L_Menu_ClickTwoMSG" = "dblclick:Delete mode";
+"L_Menu_ClickLongMSG" = "long press:Save mode";
+
+
+"L_Menu_About_device" = "Device：";
+"L_Menu_About_DevVersion" = "Device version：";
+"L_Menu_About_SoftVersion" = "Software version：";
+"L_Menu_About_Copyright" = "Copyright：";
+
+
+
+//*******TabBar 底部状态栏*******//
+"L_TabBar_Delay" = "Delay";
+"L_TabBar_XOver" = "XOver";
+"L_TabBar_Output" = "Output";
+"L_TabBar_EQ" = "EQ";
+"L_TabBar_Mixer" = "Mixer";
+"L_TabBar_OutputPage" = "Output";
+"L_TabBar_Input" = "Input";
+
+
+//*******Master 主页*******//
+"L_Master_Master" = "Home";
+"L_Master_Advance" = "Advanced settings";
+"L_Master_Encryption" = "Encryption";
+"L_Master_MasterVolumeText" ="Main Volume";
+"L_Master_SUBVolumeText" = "Sub Volume";
+"L_Master_SrcVolumeText" = "Input Volume";
+"L_Master_Preset" = "Preset";//Memory
+"L_Master_Preset1" = "Preset1";
+"L_Master_Preset2" = "Preset2";
+"L_Master_Preset3" = "Preset3";
+"L_Master_Preset4" = "Preset4";
+"L_Master_Preset5" = "Preset5";
+"L_Master_Preset6" = "Preset6";
+"L_Master_Preset7" = "Memory7";
+"L_Master_Preset8" = "Memory8";
+"L_Master_Preset9" = "Memory9";
+"L_Master_Preset10" = "Memory10";
+"L_Master_PresetOpt" = "Preset operation";
+"L_Master_PresetSaveMsg" = "This operation will cover this group of data！";
+"L_Master_PresetDeleteMsg" = "This operation will delete this group of data！";
+"L_Master_PresetSave"   = "Save";
+"L_Master_PresetSaveMsg"= "Please enter the name!";
+"L_Master_PresetRecall" = "Recall";
+"L_Master_PresetDelete" = "Delete";
+
+"L_Master_EN_Encryption" = "Encrypt";
+"L_Master_EN_Deciphering" = "Decode";
+"L_Master_EN_SetEncryption" = "Please set the encryption password";
+"L_Master_EN_SetDeciphering" = "Please enter the decryption password";
+"L_Master_EN_PasswordIncorrect" = "Please enter the correct password";
+"L_Master_EN_Password" = "Password:";
+"L_Master_EN_HadEncryption" = "Data was encrypted";
+"L_Master_EN_EncryptionSet" = "Data encryption settings";
+"L_Master_EN_EncryptionClean" = "Clean";
+"L_Master_EN_SetEncryptionClean" = "Clean encrypted data";
+"L_Master_EN_EncryptionCleanSet" = "This action will clear the current set of encrypted data, restore the default";
+"L_Master_EN_EncryptionSave" = "Data conversion, please do not interrupt";
+"L_Master_EN_DataProtection" = "Data Protection";
+"L_Master_EN_Decrypt" = "Decrypt";
+"L_Master_EN_EnterMsg" = "Please enter 6 bit password！";
+//音源
+"L_MixerInputSourceSelect" = "Mixer Source";
+"L_MainInputSource" = "Main Source";
+"L_MainInputSourceVal" = "Main Source Vol";
+
+
+
+"L_InputSourceSelect" = "Input Source";
+"L_InputSource_High" = "Hi.Level";
+"L_InputSource_AUX" = "AUX";
+"L_InputSource_Optical" = "Optical";
+"L_InputSource_Coaxial" = "Coaxial";
+"L_InputSource_Bluetooth" = "Bluetooth";
+"L_InputSource_Digtit" = "S/PDIF";
+
+
+"L_IMMToHSet" = "Please enter password!";
+"L_MMError" = "Password error!";   
+"L_FREQ_ALL" = "1-Way";
+"L_FREQ_TWO" = "2-Way";
+"L_MSUB_VAL" = "Bass volume";
+"L_MSUB_SetCh" = "Please set the bass channel first";
+
+//*******Delay 延时*******//
+"L_Delay_SetOutputDelay" = "Set Output Delay";
+"L_Delay_SetDelay" = "Delay";
+"L_Delay_CM" = "Cm";
+"L_Delay_MS" = "Ms";
+"L_Delay_Inch" = "Inch";
+"L_Delay_Unit" = "Unit:";
+
+
+
+
+//*******XOver 滤波器*******//
+"L_XOver_XOver"          = "XOver";
+"L_XOver_HighPassFilter" = "HP";
+"L_XOver_LowPassFilter"  = "LP";
+"L_XOver_HighPass"  = "HPF";
+"L_XOver_LowPass"   = "LPF";
+"L_XOver_Type"      = "Type";
+"L_XOver_Frequency" = "Freq";
+"L_XOver_Slope"     = "Oct";
+"L_XOver_FrontLeft" = "FL";
+"L_XOver_FrontRight"= "FR";
+"L_XOver_RearLeft"  = "RL";
+"L_XOver_RearRight" = "RR";
+"L_XOver_Center"  = "Center";
+"L_XOver_Sub"     = "Sub";
+"L_XOver_LeftSub" = "L-Sub";
+"L_XOver_RightSub"= "R-Sub";
+"L_XOver_SetFreq" = "Set Frequency";
+"L_XOver_SetEQ"   = "Set EQ";
+"L_XOver_SetGain" = "Set Gain";
+"L_XOver_Filter"  = "Filter";
+"L_XOver_Oct"     = "Oct";
+"L_XOver_Freq"    = "Freq";
+"L_XOver_FilterLR"= "Link-Ril";
+"L_XOver_FilterB" = "Bessel";
+"L_XOver_FilterBW"= "Butter-W";
+"L_XOver_Otc6dB"  = "6dB/Oct";
+"L_XOver_Otc12dB" = "12dB/Oct";
+"L_XOver_Otc18dB" = "18dB/Oct";
+"L_XOver_Otc24dB" = "24dB/Oct";
+"L_XOver_Otc30dB" = "30dB/Oct";
+"L_XOver_Otc36dB" = "36dB/Oct";
+"L_XOver_Otc42dB" = "42dB/Oct";
+"L_XOver_Otc48dB" = "48dB/Oct";
+"L_XOver_OtcOFF"  = "OFF";
+//*******XOverOutput 滤波器+通道输出*******//
+"L_Out_TypeSet" = "Output Volume";
+"L_Out_SignalOutput" = "Signal Output";
+"L_Out_OutputValText" = "Output volume";
+"L_Out_Output" = "Output";
+"L_Out_Polar_P" = "0°";
+"L_Out_Polar_N" = "180°";
+"L_Out_Type" = "Set output type";
+"L_Out_NULL" = "NULL";
+"L_Out_F" = "Front";
+"L_Out_R" = "Rear";
+"L_Out_C" = "Center";
+"L_Out_S" = "Subwoofer";
+"L_Out_Left" = "Left";
+"L_Out_Right" = "Right";
+"L_Out_Hi" = "Tweeter";
+"L_Out_Mid" = "Woofer";
+"L_Out_All" = "Full";
+"L_Out_FL_Tweeter" = "FL-Tweeter";
+"L_Out_FL_Midrange" = "FL-Midrange";
+"L_Out_FL_Woofer" = "FL-Woofer";
+"L_Out_FL_M_T" = "FL-M&T";
+"L_Out_FL_M_WF" = "FL-M&WF";
+"L_Out_FL_Full" = "FL-Full";
+
+"L_Out_FR_Tweeter" = "FR-Tweeter";
+"L_Out_FR_Midrange" = "FR-Midrange";
+"L_Out_FR_Woofer" = "FR-Woofer";
+"L_Out_FR_M_T" = "FR-M&T";
+"L_Out_FR_M_WF" = "FR-M&WF";
+"L_Out_FR_Full" = "FR-Full";
+
+"L_Out_RL_Tweeter" = "RL-Tweeter";
+"L_Out_RL_Woofer" = "RL-Woofer";
+"L_Out_RL_Full" = "RL-Full";
+
+"L_Out_RR_Tweeter" = "RR-Tweeter";
+"L_Out_RR_Woofer" = "RR-Woofer";
+"L_Out_RR_Full" = "RR-Full";
+
+"L_Out_C_Tweeter" = "C-Tweeter";
+"L_Out_C_Woofer" = "C-Woofer";
+"L_Out_C_Full" = "C-Full";
+
+"L_Out_L_Subweeter" = "L-Subweeter";
+"L_Out_R_Subweeter" = "R-Subweeter";
+"L_Out_Subweeter" = "Subweeter";
+"L_Out_Front_Subweeter" = "Front-Subweeter";
+"L_Out_Rear_Subweeter" = "Rear-Subweeter";
+"L_Out_C_Front" = "CL-Full";
+"L_Out_C_Rear" = "CR-Full";
+
+"L_Out_SetValume" = "Set Volume";
+"L_Out_SetLeftIPSP" = "Set the left proportion of sound source";
+"L_Out_SetRightIPSP" = "Set the right proportion of sound source";
+"L_Out_Link" = "Link";
+"L_Out_UnLink" = "UnLink";
+"L_Out_Locked" = "Locked";
+"L_Out_Unlock" = "Unlock";
+"L_Out_Reset" = "Reset";
+
+"L_Out_Opt_Channel_Set" = "The output map emptied or restore default";
+"L_Out_Emptied" = "Emptied";
+"L_Out_Default" = "Default";
+
+"L_Out_Opt_Channel_Locked" = "Whether locking output map?";
+"L_Out_Opt_Channel_unlock" = "Whether unlocked output map?";
+"L_Out_Opt_Channel_cannotlock" = "All output map is empty, the output map could not be locked.";
+
+"L_Out_Set_LinkLR" = "Set link LR output!";
+"L_Out_Opt_Channel_Link" = "Need to synchronize the data transfer, please select sync mode";
+"L_Out_NoLinkLR" = "No link LR output!";
+"L_Out_GroupDel" = "Delete";
+"L_Out_GroupJoin" = "Join";
+"L_Out_FrontCoupling" = "Link F-LR";
+"L_Out_RearCoupling" = "Link R-LR";
+"L_Out_AllCoupling" = "Link F-All";
+"L_Out_SubCoupling" = "Link Sub-LR";
+"L_Out_LeftToRight" = "Copy from right to left";
+"L_Out_RightToLeft" = "Copy from left to right";
+"L_Out_LinkBase"    = "Which channel data should be applied?";
+"L_Out_LinkBaseCh1" = "CH1.Front Left be applied?";
+"L_Out_LinkBaseCh2" = "CH2.Front Right be applied?？";
+"L_Out_LinkBaseCh3" = "CH3.Rear Left be applied?";
+"L_Out_LinkBaseCh4" = "CH4.Rear Right be applied?";
+"L_Out_LinkBaseCh5" = "CH5.Center be applied?";
+"L_Out_LinkBaseCh6" = "CH6.Sub be applied?";
+"L_Out_LinkBaseCh5D" = "CH5.Left Sub be applied?";
+"L_Out_LinkBaseCh6D" = "CH6.Right Sub be applied?";
+"L_Out_Link_About" = "Note: first select the channel, and then create the link set.";
+"L_Out_OutChSel" = "Channel";
+"L_Out_OutGroupSel" = "Group";
+"L_Out_OutChAllTWOLinkTitle" = "Group Settings";
+"L_Out_SetLink" = "Settings Link";
+"L_out_Delaytitle"="Delay";
+//*******Mixer 分量*******//
+"L_Mixer_Mixer" = "Mixer";
+"L_Mixer_IN1" = "Hi.Level1";//Hi.Level
+"L_Mixer_IN2" = "Hi.Level2";
+"L_Mixer_IN3" = "Hi.Level3";
+"L_Mixer_IN4" = "Hi.Level4";
+"L_Mixer_IN5" = "Hi.Level5";
+"L_Mixer_IN6" = "Hi.Level6";
+"L_Mixer_IN7" = "Hi.Level7";
+"L_Mixer_IN8" = "Hi.Level8";
+"L_Mixer_IN9" = "AUX1";//Optical Coaxial Bluetooth
+"L_Mixer_IN10" = "AUX2";
+"L_Mixer_IN11" = "AUX3";
+"L_Mixer_IN12" = "AUX4";
+"L_Mixer_IN13" = "SPDIF-L";
+"L_Mixer_IN14" = "SPDIF-R";
+"L_Mixer_IN15" = "Bluetooth-L";
+"L_Mixer_IN16" = "Bluetooth-R";
+
+
+"L_Mixer_HI_1" = "Hi.Level1";//高電平
+"L_Mixer_HI_2" = "Hi.Level2";
+"L_Mixer_HI_3" = "Hi.Level3";
+"L_Mixer_HI_4" = "Hi.Level4";
+"L_Mixer_HI_5" = "Hi.Level5";
+"L_Mixer_HI_6" = "Hi.Level6";
+"L_Mixer_HI_7" = "Hi.Level7";
+"L_Mixer_HI_8" = "Hi.Level8";
+"L_Mixer_HI_9" = "Hi.Level9";
+"L_Mixer_HI_10" = "Hi.Level10";
+
+"L_Mixer_AUX_1" = "AUX1";
+"L_Mixer_AUX_2" = "AUX2";
+"L_Mixer_AUX_3" = "AUX3";
+"L_Mixer_AUX_4" = "AUX4";
+"L_Mixer_AUX_5" = "AUX5";
+"L_Mixer_AUX_6" = "AUX6";
+"L_Mixer_AUX_7" = "AUX7";
+"L_Mixer_AUX_8" = "AUX8";
+"L_Mixer_AUX_9" = "AUX9";
+"L_Mixer_AUX_10"= "AUX10";
+
+"L_Mixer_DI_1"  = "SPDIF-L";
+"L_Mixer_DI_2"  = "SPDIF-R";
+"L_Mixer_BLUE_1" = "Bluetooth-L";
+"L_Mixer_BLUE_2" = "Bluetooth-R";
+//*******Output 通道输出*******//
+"L_CH0"   = "CH0";
+"L_CH1"   = "CH1";
+"L_CH2"   = "CH2";
+"L_CH3"   = "CH3";
+"L_CH4"   = "CH4";
+"L_CH5"   = "CH5";
+"L_CH6"   = "CH6";
+"L_CH7"   = "CH7";
+"L_CH8"   = "CH8";
+"L_CH9"   = "CH9";
+"L_CH10"   = "CH10";
+"L_CH11"   = "CH11";
+"L_CH12"   = "CH12";
+"L_CH13"   = "CH13";
+"L_CH14"   = "CH14";
+"L_CH15"   = "CH15";
+"L_CH16"   = "CH16";
+
+
+
+
+//*******EQ 均衡器*******//
+"L_EQIndex_ID"   = "EQ";
+"L_EQIndex_Gain" = "dB";
+"L_EQIndex_BW"   = "Q";
+"L_EQIndex_Freq" = "Freq";
+"L_EQIndex_Reset"= "Work";
+
+"L_EQ_ResetEQ"   = "ResetEQ";
+"L_EQ_PEQ_MODE"  = "PEQ Mode";
+"L_EQ_GEQ_MODE"  = "GEQ Mode";
+"L_EQ_Bypass"    = "Bypass EQ";
+"L_EQ_Restore"   = "Restore EQ";
+"L_EQ_Prompting" = "Prompting";
+"L_EQ_ResetEQ_Msg" = "Whether the reset all EQ？";
+"L_EQ_ByPass_Msg"  = "whether ByPass All EQ?";
+"L_EQ_Restore_Msg" = "whether Restore All EQ?";
+
+
+
+///////
+"L_LoadSEff_Success" = "Successfully updated the current sound effect！";
+"L_LoadSEff_Fail" = "Update current sound effect failed ！";
+
+//<!-- =================NET UI =================  -->
+//<!-- =================FRAME Layout=================  -->
+"L_BBar_Home" = "Home";
+"L_BBar_Toning" = "Toning";
+"L_BBar_Forum" = "Forum";
+"L_BBar_Mine" = "Mine";
+
+"L_Home_MacSeff" = "Built in sound";
+"L_Home_ListMore" = "More";
+"L_Home_List1" = "Hot share";
+"L_Home_List2" = "Best-download lists";
+"L_Home_List3" = "China car DSP Forum";
+
+
+"L_TBarToning_Home" = "Home";
+"L_TBarToning_SoundField" = "Sound Field";
+"L_TBarToning_Subwoofer" = "Subwoofer";
+
+"L_Toning_DelayTypeMsg" = "Please select delay type！";
+"L_Toning_CarTypeMsg" = "Please select car type！";
+"L_Toning_DelayType" = "Delay Type";
+"L_Toning_CarType" = "Car Type";
+
+
+"L_Toning_Speaker" = "Speaker";
+"L_Toning_Zone" = "Zone";
+"L_Toning_Custom" = "Custom";
+"L_Toning_SCar" = "Small Car";
+"L_Toning_MCar" = "Mid Car";
+"L_Toning_LCar" = "Large Car";
+
+"L_Toning_HHigh" = "High";
+"L_Toning_HMid" = "Middle";
+"L_Toning_HLow" = "Low";
+
+"L_Mine_Login" = "Login";
+"L_Mine_LoginFast" = "Quick logon";
+"L_Mine_Essential_Information" = "Essential information";
+"L_Mine_Subscriptions" = "Subscriptions";
+"L_Mine_SEff" = "Sound effect";
+"L_Mine_BBS" = "BBS";
+"L_Mine_Comment" = "Comment";
+"L_Mine_Feedback" = "Feedback";
+"L_Mine_Device_management" = "Device management";
+"L_Mine_About" = "About";
+
+
+"L_Mine_InfoSignature" = "Signature";
+"L_Mine_InfoBaseData" = "Base Data";
+
+
+"L_Mine_AboutTVN" = "Advanced";
+"L_Mine_AboutTV" = "5.4.21.3";
+"L_Mine_AboutCheckV" = "Check the new version";
+"L_Mine_AboutTEL" = ":020&#8211;87282169";
+
+
+"L_SetHeadPic" = "Select Picture&#8230;";
+"L_Album" = "Album";
+"L_Photograph " = "Photograph";
+//<!-- =================NET=================  -->
+"L_net_down" = "Sound eff lib";
+"L_net_downed" = "Local EFF";
+"L_net_upload" = "Share";
+"L_share_seff" = "Share the current sound";
+"L_share_all_seff" = "Share all preset file";
+"L_load_seff" = "Update sound file";
+"L_net_regandload" = "Register/Loading";
+"L_net_CatType" = "CatType:";
+"L_net_MacType" = "MacType:";
+"L_net_EFF" = "Effect:";
+//<!-- ==================net_register================  -->
+"L_Register" = "Register";
+"L_Register_Name" = "Name";
+"L_Register_Password" = "Please enter your password&#8230;";
+"L_Register_Phone" = "Phone";
+"L_Register_Mailbox" = "Mailbox";
+"L_Register_CatType" = "Motorcycle type";
+"L_Register_CatBrand" = "Brand";
+"L_Register_MacType" = "Equipment model";
+"L_Register_Now" = "Register immediately";
+
+"L_Register_Head" = "Portrait";
+"L_Register_LName" = "Nickname";
+"L_Register_MAC" = "Model";
+"L_Register_SIGN" = "Personalized signature";
+
+
+"L_Register_SPassword" = "Password";
+"L_Register_Sinfo" = "Please enter the correct:";
+
+"L_ULSE_UploadSeffIng" = "Uploading&#8230;";
+"L_ULSE_SaveLocalSeff" = "Save file";
+"L_ULSE_UploadSeff" = "Sound effect upload";
+"L_ULSE_SE_Pic" = "Photograph";
+"L_ULSE_SE_Name" = "Name";
+"L_ULSE_File_Name" = "File name";
+"L_ULSE_UPToPrivate" = "Upload to private space";
+"L_ULSE_UPToShare" = "Share to Mak-er space";
+"L_ULSE_MAC_SET" = "Model setting";
+"L_ULSE_MaxInput200" = "Input up to 200 words";
+"L_ULSE_Succeed" = "Upload success！";
+"L_ULSE_Failed" = "Upload failed！";
+"L_ULSE_FeedbackSucceed" = "Feedback success！";
+"L_ULSE_FeedbackFailed" = "Feedback failed！";
+"L_ULSE_FileNameMsg" = "Please enter a file name！";
+"L_ULSE_CartTypeMsg" = "Please select the car type！";
+"L_ULSE_SAMENAME" = "Please enter another name, This machine already has this file！";
+
+"L_ULSE_Modify" = "Modify sound information";
+"L_ULSE_SaveAndUpload" = "Save and upload";
+//<!-- ==================net_loading================  -->
+"L_LoginSuccess" = "Login Success!";
+"L_LoginFailed" = "Login Failed!";
+"L_loading" = "load";
+"L_loading_forpd" = "Forget password?";
+"L_loading_Reg" = "Register";
+"L_loading_Name" = "Name/Phone/Mailbox";
+
+"L_loading_MSG_INamePW" = "Please enter the correct user name and password!";
+"L_loading_NoNet" = "No connected network!";
+
+
+"L_login_savemm" = "Remember password";
+"L_Login_auto" = "Auto Login";
+
+//<!-- ==================net_down================  -->
+"L_download" = "Download";
+"L_down_search_car" = "Search Car?";
+"L_car0" = "三菱";
+"L_car1" = "卡罗拉";
+"L_car2" = "长城";
+"L_car3" = "飞度";
+"L_car4" = "宝马";
+"L_car5" = "奥迪";
+"L_searchmore" = "Search more?";
+"L_Upload_person" = "Upload person";
+"L_Upload_time" = "Upload time：";
+"L_Details" = "Details";
+"L_DownMACType" = "Mac Type";
+"L_down_title_name" = "Name";
+"L_down_title_user" = "User";
+"L_down_title_time" = "Time";
+"L_down_title_Collect" = "Collect";
+"L_down_title_Favorite" = "Favorite";
+"L_down_title_Recently" = "Recently";
+"L_DialogDel" = "Delete";
+"L_DialogDelMsg" = "Confirm whether to delete selected files?";
+"L_OpenSeffFile" = "Scan local file";
+//<!-- ==================文件管理================  -->
+"L_action_settings" = "Settings";
+"L_root" = "Root dirctory";
+"L_title" = "File manager ";
+"L_delSuccess" = "Delete Success!";
+"L_delFailed" = "Delete Failed!";
+"L_del" = "Delete";
+"L_copy" = "Copy";
+"L_mod" = "Rename";
+"L_stick" = "Paste";
+"L_cancel" = "Cancel";
+"L_FileError" = "Please open the correct sound file!";
+"L_SaveMachine" = "Machine";
+"L_SaveLocal" = "Local";
+"L_ShareError" = "Share error!";
+"L_UpdateLocalFile" = "Local data has been updated!";
+//<!-- ==================SEFF 列表================  -->
+"L_TableSearch" = "Please enter keyword";
+"L_PSetValidName" = "Please enter a valid name";
+"L_seffitem_reorder" = "Reorder";
+"L_seffitem_multiselect" = "Multiselect";
+"L_seffitem_download" = "Download";
+"L_seffitem_apply" = "Apply";
+"L_seffitem_share" = "Share";
+"L_seffitem_favoriate" = "Favoriate";
+"L_seffitem_love" = "Love";
+"L_seffitem_delete" = "Delete";
+"L_seffitem_details" = "Details";
+"L_seffitem_new" = "New!";
+"L_seffitem_sellall" = "Check all";
+"L_seffitem_sellOpt" = "Cancle";
+"L_seffitem_haveSel" = "Selected";
+"L_SEFF_ScanInBackground" = "Scan And Update run in background!";
+"L_SEFF_WRONG_MAC" = "Models do not match！";
+"L_USE_SEFFMSG" = "Do yout want to use this SEFF!";
+"L_USE_MACSEFFMSG" = "Do you want to use this file? This operation overrides all the data on this machine";
+//<!-- 保存单组和整机音效  -->
+"L_SSM_Save_repeat"="The file name has already existed";
+"L_SSM_Save" = "Save sound file";
+"L_SSM_SaveSuccessMsg" = "Save success！";
+"L_SSM_FileName" = "File Name:";
+"L_SSM_Details" = "Details:";
+"L_SSM_FileNameMsg" = "Please enter a file name!";
+"L_SSM_Single" = "Single";
+"L_SSM_Machine" = "Machine";
+"L_SSM_SaveOpt" = "Save";
+"L_SSM_ShareOpt" = "Share";
+"L_SSM_ShareMSG" = "Would you like to share a single file or a whole file？";
+"L_SSM_CancelOpt" = "Cancel";
+"L_SSM_Title" = "Audio data update";
+"L_SSM_RecSEFFileMsg" = "Receive a sound file data, connect to the machine, there will be updated reminder！";
+"L_SSM_MSG" = "Receive a sound file data, Do you want to updated？";
+"L_SSM_ShareMacMSG" = "Share the whole machine sound effet, This may take several minutes.";
+"L_SSM_SaveMacMSG" = "Save the whole machine sound effet, This may take several minutes.";
+//<!-- 菜单选项  -->
+"L_Menu_Share" = "Share effect";
+"L_Menu_Save" = "Save effect";
+"L_Menu_Open" = "Local effect";
+"L_Menu_About" = "About";
+"L_Menu_Exit" = "Exit";
+
+"L_Statement" = "Disclaimer";
+"L_StatementShow" = "Always show";
+"L_StatementAccept" = "Accept";
+"L_StatementCON" = "        Do not operate this application or any handheld device while driving.This  application is not be used while driving.Only operate this application when outside the vehicle or when the vehicle gearshift is in \"park\". Always obey all traffic laws.";
+"L_DataErr" = "Data exception！";
+"L_DataErrResetMuc" = "The new data was abnormal, whether to restore the factory settings？";
+"L_SyncDataMsg"="Do you want to synchronize channel data?";
+
+"L_DelayLink_LR"  = "L&R Link";
+
+//DSP Play
+"getdevicestatus"="Be receiving the status of the voice box";
+"remind"="Prompt";
+"ok"="Confirm";
+"cancel"="Cancel";
+"usbisconnected"="USB equipment inserted has been detected.";
+"enterusbspeaker"="Enter the USB voice box";
+"rechargeonly"="Only charge";
+"devicewilldisconnect"="Selection of entry into the voice box will disconnect with the equipment.";
+"deviceinfo"="The information of the voice box ";
+"name"="Name";
+"version"="Version";
+"modify"="Modification";
+"connected"="Connected";
+"disconnected"="Disconnected";
+"disconnectdevice"="Disconnect bluetooth?";
+"connecting"="Connecting";
+"getalarmringlist"="Be receiving the list of ringtones";
+"connectdevicefirst"="Connect with the voice box firstly.";
+"enterradiomode"="Be entering into radio mode.";
+"entera2dpmode"="Be entering into bluetooth songs mode.";
+"entercardplaymode"="Be entering into songs-in-card play mode.";
+"enteruhostplaymode"="Be entering into USB drive play mode. ";
+"enteralarmclockmode"="Be entering into alarm clock mode.";
+"enterlineinmode"="Be entering into audio input mode. ";
+"entercardaudiorecordmode"="Be entering into card audio record mode.";
+"enteruhostaudiorecordmode"="Be entering into uhost audio record mode.";
+"enterusbspeakermode"="Be entering into usb speaker mode.";
+"entercardrecplaybackmode"="Be entering into playback mode of records in card.";
+"enteruhostrecplaybackmode"="Be entering into playback mode of records in  USB drive.";
+"enter***playbackmode"="Be entering into play mode of ***";
+"devicesearching"="Be searching for equipment.";
+"search"="Channel Search";
+"radioband"="Frequency Band";
+"eqsettings"="Sound Effect Settings";
+"changedevicename"="Amend the name of voice box";
+"chinaandus"="China/America";
+"japan"="Japane";
+"europe"="Europe";
+"a2dpplay"="Bluetooth Pushing";
+"cardplay"="Card Playback";
+"uhostplay"="USB Device Playback";
+"radio"="Radio";
+"alarmclock"="Alarm Clock";
+"linein"="Audio Input";
+"cardrecplayback"="Card Record Playback";
+"uhostrecplayback"="USB Drive Record Playback";
+"cardaudiorecord"="Card Audio Record";
+"uhostaudiorecord"="USB Drive Audio Record";
+"usbspeaker"="USB Speaker";
+"specialfolder"="Special Folder";
+"bluetoothconnection"="Bluetooth Connection";
+"nerver"="Once";
+"alarmname"="Description";
+"enteralarmname"="Please input the description of the alarm clock.";
+"repeat"="Repeat";
+"ringtype"="Ringtone type";
+"ringuhost"="UHost music";
+"ringcard"="Card music";
+"ringradio"="Radio channel";
+"ringinternal"="Built-in ringtone";
+"channel"="Channel";
+"alarmring"="Ringtone";
+"getalarmlist"="Be receiving the list of the alarm clock.";
+"off"="Close";
+"snooze"="Delay";
+"maxfouralarmentrysupport"="Can only set 4 alarm clocks at most.";
+"addalarmentry"="Add alarm clock";
+"searching"="Searching the channel…";
+"searchfirst"="Search the channel firstly.";
+"eqnormal"="Default";
+"eqjazz"="Jazz";
+"eqpop"="Pop";
+"eqclassic"="Classic";
+"eqsoft"="Soft";
+"eqdbb"="DBB";
+"eqrock"="Rock";
+"equser"="User";
+"musictotal**"="Total number of songs:**,";
+"getmusicnumber**"="the ** song is received.";
+"taptodismiss" = "Tap to hide this";
+"nomusicfound"="The words of the song haven't been found.";
+"unknown"="Unknown";
+"getlyric"="Be receiving the words of the song. ";
+"musictitle"="Title";
+"artist"="Singer";
+"album"="Album";
+"genre"="Style";
+"mimetype"="Format";
+"reloadplaylist"="Be uploading the list of these songs. ";
+"reloaddirlist"="Uploading music albums.";
+"musicnotsupport"="Doesn't support to play this type of songs.";
+"sunday" = "Su";
+"monday" = "Mo";
+"tuesday" = "Tu";
+"wednesday" = "We";
+"thursday" = "Th";
+"friday" = "Fr";
+"saturday" = "Sa";
+"alarmsetting" = "Alarm settings";
+"snoozecount" = "Snooze count:";
+"snoozeduration" = "Snooze duration:";
+"snoozeovertime" = "Snooze overtime:";
+"repeattimes" = "Times";
+"minutes" = "Minutes";
+"snoozedisable" = "Disable";
+"snoozecountalways" = "Always";
+"yes"="Yes";
+"no"="No";
+"ota_error_too_large"="Song file too large, please retry.";
+"ota_error_version_name_illegal"="Firmware version name illegal,please retry.";
+"ota_error_unknown"="Update error, please retry.";
+"ota_reset_dialog_title"="Reset Bluetooth Box";
+"ota_reset_dialog_message"="Uncompleted update detected,do you want to override last update?";
+"ota_cancel_dialog_title"="Cancel Update";
+"ota_cancel_dialog_message"="Cancel this update will need around 8s to clean the data, confirm to cancel?";
+"ota_reboot_dialog_title"="Reboot Bluetooth Box";
+"ota_reboot_dialog_message"="Firmware transfer complete,do you want to reboot to complete update ?(Costs about 40 seconds)";
+"ota_same_version"="Updating same version";
+"songs_unit"="songs";
+"L_unknownSong"="Unknown songs";
+"L_unknownArtist"="Unknown Artist";
+"L_UHostPlayMsg"="Change UHost when you click here！";
+"L_SyncDataMsg"="Do you want to synchronize channel data?";
+"L_UHostOut"="UHOST has been pulled out！";
+"L_notice_playmode_straight"="Play straightly";
+"L_notice_playmode_repeat"="Play repeatly";
+"L_notice_playmode_toggle"="Play togglely";
+"L_notice_playmode_repeatone"="Play repeatonely";

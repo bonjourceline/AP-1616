@@ -1,0 +1,667 @@
+/*
+ Localizable.strings
+ FL_DCP810
+ 
+ Created by chsdsp on 2017/3/9.
+ Copyright © 2017年 hmaudio. All rights reserved.
+ */
+//*******系統用語*******//
+"L_System_OK" = "確定";
+"L_System_Cancel" = "取消";
+"L_System_Save" = "保存";
+"L_System_Delete" = "删除";
+"L_System_Title" = "系統提示";
+"L_System_CMsg"  = "請連接設備！";
+"L_BLE_DeviceOpen" = "打開藍牙";
+"L_BLE_DeviceOpenSettings" = "請在設置中找到藍牙並打開";
+"L_BLE_DeviceSEL" = "請選擇藍牙設備";
+"L_BLE_DeviceScan" = "正在掃描附近設備...";
+"L_BLE_DeviceScanNULL" = "未搜索到設備，請檢查藍牙設置";
+"L_BLE_DeviceCantNotUSE" = "不可用的藍牙設備";
+"L_BLE_DeviceConTimeOut" = "藍牙連接超時，請選擇正確的藍牙設備進行連接";
+"L_BLE_DeviceConnectERR" = "連接失敗，請選擇正確的藍牙設備進行連接。";
+"L_DeviceVersionERR" = "版本錯誤，請連接正確的版本。";
+"L_BLE_Disconnect"="藍牙已斷開連接";
+"L_Data_Sync" = "數據同步中...";
+"L_Data_Save" = "保存中...";
+//连接状态
+"L_Connected" = "已连接";
+"L_Disconnected" = "未连接";
+"L_Connecting" = "连接中";
+//*******TopBar 顶部状态栏*******//
+"L_TopBar_Back" = "返回";
+//*******TopBar 顶部状态栏菜单关于*******//
+"L_Menu_ShareCurSEFF" = "分享當前音效";
+"L_Menu_ShareMACSEFF" = "分享整機音效";
+"L_Menu_SaveSEFF" = "保存音效";
+"L_Menu_LoadSEFF" = "加載音效文件";
+"L_Menu_About" = "關於";
+"L_Menu_Exit" = "退出";
+"L_Menu_Help" = "幫助";
+"L_Menu_Connect" = "連接設備";
+"L_Menu_Disconnect" = "斷開設備";
+"L_Menu_ClickOneMSG" = "單擊:調用音效模式";
+"L_Menu_ClickTwoMSG" = "雙擊:刪除音效模式";
+"L_Menu_ClickLongMSG" = "長按:保存音效模式";
+
+
+"L_Menu_About_device" = "設備：";
+"L_Menu_About_DevVersion" = "設備版本：";
+"L_Menu_About_SoftVersion" = "軟件版本：";
+"L_Menu_About_Copyright" = "版權：";
+
+//*******TabBar 底部状态栏*******//
+"L_TabBar_Delay" = "延時";
+"L_TabBar_XOver" = "濾波器";
+"L_TabBar_Output" = "通道";
+"L_TabBar_EQ" = "EQ";
+"L_TabBar_Mixer" = "混音";
+"L_TabBar_OutputPage" = "輸出";
+"L_TabBar_Input" = "輸入";
+
+
+//*******Master 主页*******//
+"L_Master_Master" = "主頁";
+"L_Master_Advance" = "高級設置";
+"L_Master_Encryption" = "加密設置";
+"L_Master_MasterVolumeText" = "主音量";
+"L_Master_SUBVolumeText" = "超低音量";
+"L_Master_SrcVolumeText" = "音源音量";
+"L_Master_Preset" = "音效";
+"L_Master_Preset1" = "音效1";
+"L_Master_Preset2" = "音效2";
+"L_Master_Preset3" = "音效3";
+"L_Master_Preset4" = "音效4";
+"L_Master_Preset5" = "音效5";
+"L_Master_Preset6" = "音效6";
+"L_Master_Preset7" = "音效7";
+"L_Master_Preset8" = "音效8";
+"L_Master_Preset9" = "音效9";
+"L_Master_Preset10" = "音效10";
+"L_Master_PresetOpt" = "音效選擇";
+"L_Master_PresetSaveMsg" = "本操作會將當前音效保存到討論組！";
+"L_Master_PresetDeleteMsg" = "本操作將會刪除此組數據！";
+"L_Master_PresetSave"   = "保存";
+"L_Master_PresetSaveMsg"= "請輸入音效名稱！";
+"L_Master_PresetRecall" = "調用";
+"L_Master_PresetDelete" = "删除";
+
+"L_Master_EN_Encryption" = "數據加密";
+"L_Master_EN_Deciphering" = "解密";
+"L_Master_EN_SetEncryption" = "請設置加密密碼";
+"L_Master_EN_SetDeciphering" = "請輸入解密密碼";
+"L_Master_EN_PasswordIncorrect" = "請輸入正確的密碼";
+"L_Master_EN_Password" = "密碼:";
+"L_Master_EN_HadEncryption" = "數據已加密";
+"L_Master_EN_EncryptionSet" = "數據加密設置";
+"L_Master_EN_EncryptionClean" = "清空數據";
+"L_Master_EN_SetEncryptionClean" = "清除加密數據";
+"L_Master_EN_EncryptionCleanSet" = "此操作將會清除當前級加密的數據，恢復默認的數據";
+"L_Master_EN_EncryptionSave" = "數據轉換中，請勿中斷";
+"L_Master_EN_DataProtection" = "數據保護";
+"L_Master_EN_Decrypt" = "解除密碼";
+"L_Master_EN_EnterMsg" = "請輸入6位密碼！";
+//音源
+"L_MixerInputSourceSelect" = "混音音源";
+"L_MainInputSource" = "主音源";
+"L_MainInputSourceVal" = "主音源音量:";
+
+
+
+"L_InputSourceSelect" = "主音源";
+"L_InputSource_High" = "高電平";
+"L_InputSource_AUX" = "AUX";
+"L_InputSource_Optical" = "光纖";
+"L_InputSource_Coaxial" = "同軸";
+"L_InputSource_Bluetooth" = "藍牙";
+"L_InputSource_Digtit" = "數字";
+
+
+"L_IMMToHSet" = "請輸入密碼進入高級設置";
+"L_MMError" = "密碼錯誤!";
+"L_FREQ_ALL" = "全頻模式";
+"L_FREQ_TWO" = "二分頻";
+"L_IMMToHSet" = "請輸入密碼進入高級設置";
+"L_MSUB_VAL" = "低音音量";
+"L_MSUB_SetCh" = "請先行設置低音通道";
+
+//*******Delay 延时*******//
+"L_Delay_SetOutputDelay" = "輸出延時設置";
+"L_Delay_SetDelay" = "延時";
+"L_Delay_CM" = "釐米";
+"L_Delay_MS" = "毫秒";
+"L_Delay_Inch" = "英寸";
+"L_Delay_Unit" = "單位:";
+
+//*******XOver 滤波器*******//
+"L_XOver_XOver"          = "分頻器";
+"L_XOver_HighPassFilter" = "高通濾波器";
+"L_XOver_LowPassFilter"  = "低通濾波器";
+"L_XOver_HighPass"  = "高通";
+"L_XOver_LowPass"   = "低通";
+"L_XOver_Type"      = "類型";
+"L_XOver_Frequency" = "頻率";
+"L_XOver_Slope"     = "斜率";
+"L_XOver_FrontLeft" = "前左";
+"L_XOver_FrontRight"= "前右";
+"L_XOver_RearLeft"  = "後左";
+"L_XOver_RearRight" = "後右";
+"L_XOver_Center"  = "中置";
+"L_XOver_Sub"     = "超低";
+"L_XOver_LeftSub" = "左超低";
+"L_XOver_RightSub"= "右超低";
+"L_XOver_SetFreq" = "設置頻率";
+"L_XOver_SetEQ"   = "設置Q值";
+"L_XOver_SetGain" = "設置增益";
+"L_XOver_Filter"  = "類型";
+"L_XOver_Oct"     = "斜率";
+"L_XOver_Freq"    = "頻率";
+"L_XOver_FilterLR"= "寧克-銳";
+"L_XOver_FilterB" = "貝塞爾";
+"L_XOver_FilterBW"= "巴特沃斯";
+"L_XOver_Otc6dB"  = "6dB/Oct";
+"L_XOver_Otc12dB" = "12dB/Oct";
+"L_XOver_Otc18dB" = "18dB/Oct";
+"L_XOver_Otc24dB" = "24dB/Oct";
+"L_XOver_Otc30dB" = "30dB/Oct";
+"L_XOver_Otc36dB" = "36dB/Oct";
+"L_XOver_Otc42dB" = "42dB/Oct";
+"L_XOver_Otc48dB" = "48dB/Oct";
+"L_XOver_OtcOFF"  = "關閉";
+//*******XOverOutput 滤波器+通道输出*******//
+"L_Out_TypeSet" = "通道設置";
+"L_Out_SignalOutput" = "信號輸出";
+"L_Out_OutputValText" = "通道音量";
+"L_Out_Output" = "通道";
+"L_Out_Polar_P" = "正相";
+"L_Out_Polar_N" = "反相";
+"L_Out_Type" = "設置通道輸出類型";
+"L_Out_NULL" = "空";
+"L_Out_F" = "前置";
+"L_Out_R" = "後置";
+"L_Out_C" = "中置";
+"L_Out_S" = "超低";
+"L_Out_Left" = "左";
+"L_Out_Right" = "右";
+"L_Out_Hi" = "高頻";
+"L_Out_Mid" = "低頻";
+"L_Out_All" = "全頻";
+"L_Out_FL_Tweeter" = "前置左高頻";
+"L_Out_FL_Midrange" = "前置左中頻";
+"L_Out_FL_Woofer" = "前置左低頻";
+"L_Out_FL_M_T" = "前置左中高頻";
+"L_Out_FL_M_WF" = "前置左中低頻";
+"L_Out_FL_Full" = "前置左全頻";
+
+"L_Out_FR_Tweeter" = "前置右高頻";
+"L_Out_FR_Midrange" = "前置右中頻";
+"L_Out_FR_Woofer" = "前置右低頻";
+"L_Out_FR_M_T" = "前置右中高頻";
+"L_Out_FR_M_WF" = "前置右中低頻";
+"L_Out_FR_Full" = "前置右全頻";
+
+"L_Out_RL_Tweeter" = "后置左高頻";
+"L_Out_RL_Woofer" = "后置左低頻";
+"L_Out_RL_Full" = "后置左全頻";
+
+"L_Out_RR_Tweeter" = "后置右高頻";
+"L_Out_RR_Woofer" = "后置右低頻";
+"L_Out_RR_Full" = "后置右全頻";
+
+"L_Out_C_Tweeter" = "中置高頻";
+"L_Out_C_Woofer" = "中置低頻";
+"L_Out_C_Full" = "中置全頻";
+
+"L_Out_L_Subweeter" = "左超低頻";
+"L_Out_R_Subweeter" = "右超低頻";
+"L_Out_Subweeter" = "超低頻";
+"L_Out_Front_Subweeter" = "前超低頻";
+"L_Out_Rear_Subweeter" = "后超低頻";
+"L_Out_C_Front" = "中置左全頻";
+"L_Out_C_Rear" = "中置右全頻";
+
+"L_Out_SetValume" = "設置音量";
+"L_Out_SetLeftIPSP" = "設置左輸入音源比例";
+"L_Out_SetRightIPSP" = "設置右輸入音源比例";
+"L_Out_Link" = "聯調";
+"L_Out_UnLink" = "已聯調";
+"L_Out_Locked" = "鎖定";
+"L_Out_Unlock" = "解鎖";
+"L_Out_Reset" = "重置";
+
+"L_Out_Opt_Channel_Set" = "輸出配置清空或恢復默認";
+"L_Out_Emptied" = "清空";
+"L_Out_Default" = "默認";
+
+"L_Out_Opt_Channel_Locked" = "是否鎖定輸出配置";
+"L_Out_Opt_Channel_unlock" = "是否解鎖輸出配置";
+"L_Out_Opt_Channel_cannotlock" = "所有輸出配置为空，不能鎖定輸出配置";
+"L_Out_Set_LinkLR" = "設置左右通道聯調";
+"L_Out_Opt_Channel_Link" = "聯調前需要同步左右通道的數據，請選擇同步方式";
+"L_Out_NoLinkLR" = "没有左右通道可以聯調!";
+"L_Out_GroupDel" = "删除";
+"L_Out_GroupJoin" = "加入";
+"L_Out_FrontCoupling" = "前聲場聯調";
+"L_Out_RearCoupling" = "后聲場聯調";
+"L_Out_AllCoupling" = "整车聯調";
+"L_Out_SubCoupling" = "超低聯調";
+"L_Out_LeftToRight" = "從左複製到右";
+"L_Out_RightToLeft" = "從右複製到左";
+"L_Out_LinkBase" = "選擇哪個通道為基準？";
+"L_Out_LinkBaseCh1" = "以CH1前左为基準？";
+"L_Out_LinkBaseCh2" = "以CH2前右为基準？";
+"L_Out_LinkBaseCh3" = "以CH3后左为基準？";
+"L_Out_LinkBaseCh4" = "以CH4后右为基準？";
+"L_Out_LinkBaseCh5" = "以CH5中置为基準？";
+"L_Out_LinkBaseCh6" = "以CH6超低为基準？";
+"L_Out_LinkBaseCh5D" = "以CH5左超低为基準？";
+"L_Out_LinkBaseCh6D" = "以CH6右超低为基準？";
+"L_Out_Link_About" = "說明：先選擇通道，再創建聯調組。";
+"L_Out_OutChSel" = "聯調通道";
+"L_Out_OutGroupSel" = "聯調組";
+"L_Out_OutChAllTWOLinkTitle" = "聯調設置";
+"L_Out_SetLink" = "設置聯調";
+"L_out_Delaytitle"="延時調節";
+//*******Mixer 分量*******//
+"L_Mixer_Mixer" = "混音";
+"L_Mixer_IN1" = "高電平1";//高電平
+"L_Mixer_IN2" = "高電平2";
+"L_Mixer_IN3" = "高電平3";
+"L_Mixer_IN4" = "高電平4";
+"L_Mixer_IN5" = "高電平5";
+"L_Mixer_IN6" = "高電平6";
+"L_Mixer_IN7" = "高電平7";
+"L_Mixer_IN8" = "高電平8";
+"L_Mixer_IN9" = "AUX1";//光纖"同軸
+"L_Mixer_IN10" = "AUX2";
+"L_Mixer_IN11" = "AUX3";
+"L_Mixer_IN12" = "AUX4";
+"L_Mixer_IN13" = "數字左";
+"L_Mixer_IN14" = "數字右";
+"L_Mixer_IN15" = "數牙左";
+"L_Mixer_IN16" = "數牙右";
+
+"L_Mixer_HI_1" = "高電平1";//高電平
+"L_Mixer_HI_2" = "高電平2";
+"L_Mixer_HI_3" = "高電平3";
+"L_Mixer_HI_4" = "高電平4";
+"L_Mixer_HI_5" = "高電平5";
+"L_Mixer_HI_6" = "高電平6";
+"L_Mixer_HI_7" = "高電平7";
+"L_Mixer_HI_8" = "高電平8";
+"L_Mixer_HI_9" = "高電平9";
+"L_Mixer_HI_10" = "高電平10";
+
+"L_Mixer_AUX_1" = "AUX1";
+"L_Mixer_AUX_2" = "AUX2";
+"L_Mixer_AUX_3" = "AUX3";
+"L_Mixer_AUX_4" = "AUX4";
+"L_Mixer_AUX_5" = "AUX5";
+"L_Mixer_AUX_6" = "AUX6";
+"L_Mixer_AUX_7" = "AUX7";
+"L_Mixer_AUX_8" = "AUX8";
+"L_Mixer_AUX_9" = "AUX9";
+"L_Mixer_AUX_10"= "AUX10";
+
+"L_Mixer_DI_1"  = "數字左";
+"L_Mixer_DI_2"  = "數字右";
+"L_Mixer_BLUE_1" = "數牙左";
+"L_Mixer_BLUE_2" = "數牙右";
+//*******Output 通道输出*******//
+"L_CH0"   = "CH0";
+"L_CH1"   = "CH1";
+"L_CH2"   = "CH2";
+"L_CH3"   = "CH3";
+"L_CH4"   = "CH4";
+"L_CH5"   = "CH5";
+"L_CH6"   = "CH6";
+"L_CH7"   = "CH7";
+"L_CH8"   = "CH8";
+"L_CH9"   = "CH9";
+"L_CH10"   = "CH10";
+"L_CH11"   = "CH11";
+"L_CH12"   = "CH12";
+"L_CH13"   = "CH13";
+"L_CH14"   = "CH14";
+"L_CH15"   = "CH15";
+"L_CH16"   = "CH16";
+
+//*******EQ 均衡器*******//
+"L_EQIndex_ID"   = "EQ";
+"L_EQIndex_Gain" = "增益";
+"L_EQIndex_BW"   = "Q值";
+"L_EQIndex_Freq" = "频率";
+"L_EQIndex_Reset"= "直通";
+
+"L_EQ_ResetEQ"   = "重置均衡";
+"L_EQ_PEQ_MODE"  = "参量均衡";
+"L_EQ_GEQ_MODE"  = "图示均衡";
+"L_EQ_Bypass"    = "直通均衡";
+"L_EQ_Restore"   = "恢复均衡";
+"L_EQ_Prompting" = "提示";
+"L_EQ_ResetEQ_Msg" = "是否重置所有均衡?";
+"L_EQ_ByPass_Msg"  = "是否直通所有均衡?";
+"L_EQ_Restore_Msg" = "是否恢复所有均衡?";
+
+
+//////
+
+"L_LoadSEff_Success" = "成功更新當前音效！";
+"L_LoadSEff_Fail" = "更新當前音效失敗！";
+//<!-- =================NET=================  -->
+"L_chs_name" = "廣州市車厘子電子科技有限公司";
+"L_chs_tel" = "020&#8211;87282169";
+"L_chs_contacts" = "Mr Qing";
+"L_chs_web" = "www.chschs.com";
+"L_chs_weixin" = "CHSAUDIO";
+"L_chs_qq" = "QQ123456";
+"L_chs_briefing_en" = "The company was founded in 2013, is a focus on car DSP audio research and development program integrated company.";
+"L_chs_briefing_zh" = "公司成立于2013年，是一家專注于車載DSP音頻研究開發的方案集成公司。";
+"L_chs_brand" = "CHS";
+
+////<!-- =================NET UI =================  -->
+//<!-- =================FRAME Layout=================  -->
+"L_BBar_Home" = "首頁";
+"L_BBar_Toning" = "調音";
+"L_BBar_Forum" = "論壇";
+"L_BBar_Mine" = "我的";
+
+"L_Home_MacSeff" = "内置音效";
+"L_Home_ListMore" = "更多";
+"L_Home_List1" = "熱門分享";
+"L_Home_List2" = "排行榜";
+"L_Home_List3" = "中國車載DSP論壇";
+
+"L_TBarToning_Home" = "基本";
+"L_TBarToning_SoundField" = "聲場";
+"L_TBarToning_Subwoofer" = "低音炮";
+
+"L_Toning_DelayTypeMsg" = "請選擇延時類型！";
+"L_Toning_CarTypeMsg" = "請選擇車型！";
+"L_Toning_DelayType" = "延時類型設定";
+"L_Toning_CarType" = "車型設定";
+
+"L_Toning_Speaker" = "揚聲器";
+"L_Toning_Zone" = "聽音區";
+"L_Toning_Custom" = "自定義";
+"L_Toning_SCar" = "小型車";
+"L_Toning_MCar" = "中型車";
+"L_Toning_LCar" = "大型車";
+
+"L_Toning_HHigh" = "高";
+"L_Toning_HMid" = "中";
+"L_Toning_HLow" = "低";
+
+
+"L_Mine_Login" = "點擊登錄";
+"L_Mine_LoginFast" = "1秒登錄，專享個性化服務";
+"L_Mine_Essential_Information" = "基本信息";
+"L_Mine_Subscriptions" = "我的訂閱";
+"L_Mine_SEff" = "我的音效";
+"L_Mine_BBS" = "我的帖子";
+"L_Mine_Comment" = "我的評論";
+"L_Mine_Feedback" = "意見反饋";
+"L_Mine_Device_management" = "設備管理";
+"L_Mine_About" = "關於";
+
+
+"L_Mine_InfoSignature" = "個性簽名";
+"L_Mine_InfoBaseData" = "基本資料";
+
+
+"L_Mine_AboutTVN" = "高級用戶版";
+"L_Mine_AboutTV" = "5.4.21.3";
+"L_Mine_AboutCheckV" = "檢查新版本";
+"L_Mine_AboutTEL" = ":020&#8211;87282169";
+
+"L_SetHeadPic" = "選擇圖片&#8230;";
+"L_Album" = "相冊";
+"L_Photograph " = "拍照";
+//<!-- =================NET=================  -->
+"L_net_down" = "網絡音效";
+"L_net_downed" = "本地音效";
+"L_net_upload" = "分享";
+"L_share_seff" = "分享當前音效";
+"L_share_all_seff" = "分享整機音效";
+"L_load_seff" = "加載音效文件";
+"L_net_regandload" = "註冊/登陸";
+"L_net_CatType" = "車型:";
+"L_net_MacType" = "設備型號:";
+"L_net_EFF" = "音效:";
+//<!-- ==================net_register================  -->
+"L_Register" = "註冊";
+"L_Register_Name" = "用戶名";
+"L_Register_Password" = "請輸入密碼";
+"L_Register_Phone" = "手機號";
+"L_Register_Mailbox" = "郵箱";
+"L_Register_CatType" = "車型";
+"L_Register_CatBrand" = "車品牌";
+"L_Register_MacType" = "設備型號";
+
+"L_Register_Head" = "頭像";
+"L_Register_LName" = "昵稱";
+"L_Register_MAC" = "機型";
+"L_Register_SIGN" = "個性簽名";
+
+"L_Register_Now" = "立即註冊";
+"L_Register_SPassword" = "密碼";
+"L_Register_Sinfo" = "請輸入正確的:";
+
+"L_ULSE_UploadSeffIng" = "上傳中&#8230;";
+"L_ULSE_SaveLocalSeff" = "保存音效文件";
+"L_ULSE_UploadSeff" = "音效上傳";
+"L_ULSE_SE_Pic" = "音效圖";
+"L_ULSE_SE_Name" = "音效名";
+"L_ULSE_File_Name" = "文件名";
+"L_ULSE_UPToPrivate" = "上傳到私有空間";
+"L_ULSE_UPToShare" = "分享到創客空間";
+"L_ULSE_MAC_SET" = "型號設置";
+"L_ULSE_MaxInput200" = "最多輸入200個字";
+"L_ULSE_Succeed" = "上傳成功！";
+"L_ULSE_Failed" = "上傳失敗！";
+"L_ULSE_FeedbackSucceed" = "反饋成功！";
+"L_ULSE_FeedbackFailed" = "反饋失敗！";
+"L_ULSE_FileNameMsg" = "請輸入文件名！";
+"L_ULSE_CartTypeMsg" = "請重新選擇車型！";
+"L_ULSE_SAMENAME" = "請輸入另一個名字，本機已有此文件！";
+
+"L_ULSE_Modify" = "修改音效信息";
+"L_ULSE_SaveAndUpload" = "保存并上傳";
+//<!-- ==================net_loading================  -->
+"L_LoginSuccess" = "登錄成功!";
+"L_LoginFailed" = "登錄失敗!";
+"L_loading" = "登錄";
+"L_loading_forpd" = "忘記密碼?";
+"L_loading_Reg" = "註冊";
+"L_loading_Name" = "用戶名/手機號/郵箱";
+
+"L_loading_MSG_INamePW" = "請輸入正確的用戶名和密碼！";
+"L_loading_NoNet" = "沒有可以連接的網絡!";
+
+"L_login_savemm" = "記住密碼";
+"L_Login_auto" = "自動登錄";
+//<!-- ==================net_down================  -->
+"L_download" = "下載";
+"L_down_search_car" = "搜車型";
+"L_car0" = "三菱";
+"L_car1" = "卡罗拉";
+"L_car2" = "長城";
+"L_car3" = "飛度";
+"L_car4" = "寶馬";
+"L_car5" = "奥迪";
+"L_searchmore" = "更多";
+"L_Upload_person" = "上傳者：";
+"L_Upload_time" = "上傳時間：";
+"L_Details" = "詳情";
+"L_DownMACType" = "機型";
+"L_down_title_name" = "名稱";
+"L_down_title_user" = "作者";
+"L_down_title_time" = "時間";
+"L_down_title_Collect" = "收藏";
+"L_down_title_Favorite" = "喜歡";
+"L_down_title_Recently" = "最近";
+"L_OpenSeffFile" = "掃描本地文件";
+//<!-- ==================文件管理================  -->
+"L_action_settings" = "設置";
+"L_root" = "根目錄";
+"L_title" = "文件管理器";
+"L_delSuccess" = "刪除成功!";
+"L_delFailed" = "刪除失敗!";
+"L_del" = "刪除";
+"L_copy" = "複製";
+"L_mod" = "重命名";
+"L_stick" = "粘贴";
+"L_cancel" = "取消";
+"L_FileError" = "請打開正確的音效文件!";
+"L_SaveMachine" = "機器";
+"L_SaveLocal" = "本地";
+"L_ShareError" = "分享出錯!";
+"L_UpdateLocalFile" = "已更新本地數據!";
+//<!-- ==================SEFF 列表================  -->
+"L_TableSearch" = "請輸入關鍵字";
+"L_PSetValidName" = "請輸入有效名字";
+"L_seffitem_reorder" = "排序";
+"L_seffitem_multiselect" = "多選";
+"L_seffitem_download" = "下載";
+"L_seffitem_apply" = "應用";
+"L_seffitem_share" = "分享";
+"L_seffitem_favoriate" = "收藏";
+"L_seffitem_love" = "喜歡";
+"L_seffitem_delete" = "刪除";
+"L_seffitem_details" = "詳情";
+"L_seffitem_new" = "最新!";
+"L_seffitem_sellall" = "全選";
+"L_seffitem_sellOpt" = "取消";
+"L_seffitem_haveSel" = "已選";
+"L_SEFF_ScanInBackground" = "進入後臺掃描更新!";
+"L_SEFF_WRONG_MAC" = "機型不匹配！";
+"L_USE_SEFFMSG" = "確定是否使用當前音效!";
+"L_USE_MACSEFFMSG" = "是否使用此文件，本操作將會覆蓋本機所有數據！";
+//<!-- 保存单组和整机音效  -->
+"L_SSM_Save_repeat"="文件名已存在！";
+"L_SSM_Save" = "保存音效";
+"L_SSM_SaveSuccessMsg" = "保存成功！";
+"L_SSM_FileName" = "文件名稱:";
+"L_SSM_Detials" = "備註:";
+"L_SSM_FileNameMsg" = "請輸入文件名!";
+"L_SSM_Single" = "單組";
+"L_SSM_Machine" = "整機";
+"L_SSM_SaveOpt" = "保存";
+"L_SSM_ShareOpt" = "分享";
+"L_SSM_ShareMSG" = "請選擇分享單組文件還是整機文件？";
+"L_SSM_CancelOpt" = "取消";
+"L_SSM_Title" = "音效數據更新";
+"L_SSM_RecSEFFileMsg" = "接收到一个音效文件數據，連接機器後，會有更新提醒！";
+"L_SSM_MSG" = "接收到一個音效文件數據，是否更新使用？";
+"L_SSM_ShareMacMSG" = "分享整機音效，时间会稍长，是否分享？";
+"L_SSM_SaveMacMSG" = "保存整機音效，时间会稍长，是否保存？";
+//<!-- 菜单选项  -->
+"L_Menu_Share" = "分享音效";
+"L_Menu_Save" = "保存音效";
+"L_Menu_Open" = "本地音效";
+"L_Menu_About" = "關於";
+"L_Menu_Exit" = "退出";
+
+"L_Statement" = "免責申明";
+"L_StatementShow" = "總是顯示";
+"L_StatementAccept" = "接受";
+"L_StatementCON" = "        請勿在駕駛過程中操作本應用或任何手持設備。本應用并不合適在駕駛過程中使用。僅在車輛外或車輛變速器科處於“停車檔”時使用本應用。請始終遵守所有交通法律。";
+"L_DataErr" = "數據異常！";
+"L_DataErrResetMuc" = "讀取的新數據出現異常，是否恢復出廠設置？";
+"L_SyncDataMsg"="是否同步通道數據？";
+
+"L_DelayLink_LR"  = "左右聯調";
+
+//DSP Play
+"getdevicestatus"="正在獲取音箱狀態";
+"remind"="提示";
+"ok"="確定";
+"cancel"="取消";
+"usbisconnected"="檢測到USB設備插入";
+"enterusbspeaker"="進入USB音箱";
+"rechargeonly"="僅充電";
+"devicewilldisconnect"="選擇進入音箱，將會與設備斷開連接";
+"deviceinfo"="音箱信息";
+"name"="名稱";
+"version"="版本";
+"modify"="修改";
+"connected"="已連接";
+"disconnected"="未連接";
+"disconnectdevice"="斷開藍牙連接？";
+"connecting"="正在連接";
+"getalarmringlist"="正在獲取鈴聲列表";
+"connectdevicefirst"="請先連接音箱";
+"enterradiomode"="正在進入收音機模式";
+"entera2dpmode"="正在進入藍牙推歌模式";
+"entercardplaymode"="正在進入卡歌曲播放模式";
+"enteruhostplaymode"="正在進入U盤播放模式";
+"enteralarmclockmode"="正在進入鬧鐘模式";
+"enterlineinmode"="正在進入音頻輸入模式";
+"entercardrecplaybackmode"="增在進入卡錄音重播模式";
+"enteruhostrecplaybackmode"="正在進入U盤錄音重播模式";
+"enter***playbackmode"="正在進入***播放模式";
+"taptodismiss" = "轻触以隐藏该提示";
+"devicesearching"="正在搜索設備";
+"search"="搜台";
+"radioband"="頻帶";
+"eqsettings"="音效設置";
+"changedevicename"="修改音箱名稱";
+"chinaandus"="中/美";
+"japan"="日本";
+"europe"="歐洲";
+"a2dpplay"="藍牙推送";
+"cardplay"="卡歌曲播放";
+"uhostplay"="U盤歌曲播放";
+"radio"="收音機";
+"alarmclock"="鬧鐘";
+"linein"="音頻輸入";
+"cardrecplayback"="卡錄音重播";
+"uhostrecplayback"="U盤錄音重播";
+"specialfolder"="特殊目錄";
+"bluetoothconnection"="藍牙連接";
+"nerver"="僅一次";
+"alarmname"="描述";
+"enteralarmname"="請輸入鬧鐘描述內容";
+"repeat"="重複";
+"ringtype"="鈴聲類型";
+"ringinternal"="內置鈴聲";
+"channel"="頻道";
+"alarmring"="鬧鐘鈴聲";
+"getalarmlist"="正在獲取鬧鐘列表";
+"off"="關閉";
+"snooze"="延時";
+"maxfouralarmentrysupport"="最多只能設置4條鬧鐘";
+"addalarmentry"="添加鬧鐘";
+"searching"="搜台中…";
+"searchfirst"="請先搜台";
+"eqnormal"="默認";
+"eqjazz"="爵士";
+"eqpop"="流行";
+"eqclassic"="經典";
+"eqsoft"="柔和";
+"eqdbb"="重低音";
+"eqrock"="搖滾";
+"equser"="用戶音效";
+"musictotal**"="歌曲總數:**,";
+"getmusicnumber**"="正在獲取第**首。";
+"nomusicfound"="未檢測到歌曲";
+"unknown"="未知";
+"getlyric"="正在獲取歌詞";
+"musictitle"="標題";
+"artist"="歌手";
+"album"="專輯";
+"genre"="風格";
+"mimetype"="格式";
+"reloadplaylist"="正在載入歌曲列表";
+"reloaddirlist" = "正在載入歌曲目录列表";
+"musicnotsupport"="不支援該類型歌曲播放";
+"songs_unit"="首";
+"L_unknownSong"="未知歌曲";
+"L_unknownArtist"="未知作者";
+"L_UHostPlayMsg"="點擊切換点击切换U盤播放！";
+"L_SyncDataMsg"="是否同步通道數據？";
+"L_UHostOut"="U盤已拔出！";
+"L_notice_playmode_straight"="顺序播放";
+"L_notice_playmode_repeat"="循環播放";
+"L_notice_playmode_toggle"="隨機播放";
+"L_notice_playmode_repeatone"="單曲循环";
