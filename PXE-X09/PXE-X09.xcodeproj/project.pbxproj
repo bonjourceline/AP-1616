@@ -145,8 +145,6 @@
 		AABFD3CE2024187D0089A5E9 /* MixerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD3CB2024187D0089A5E9 /* MixerViewController.xib */; };
 		AABFD3D2202418A40089A5E9 /* EQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD3D0202418A40089A5E9 /* EQViewController.m */; };
 		AABFD3D3202418A40089A5E9 /* EQViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD3D1202418A40089A5E9 /* EQViewController.xib */; };
-		AABFD3D7202419060089A5E9 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD3D4202419060089A5E9 /* MainPageViewController.m */; };
-		AABFD3D8202419060089A5E9 /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD3D5202419060089A5E9 /* MainPageViewController.xib */; };
 		AABFD3E4202419250089A5E9 /* DataCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD3DB202419240089A5E9 /* DataCommunication.m */; };
 		AABFD3E5202419250089A5E9 /* DataProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD3DC202419240089A5E9 /* DataProgressHUD.m */; };
 		AABFD3E6202419250089A5E9 /* MacDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD3E2202419250089A5E9 /* MacDefine.m */; };
@@ -486,9 +484,6 @@
 		AABFD3CF202418A40089A5E9 /* EQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EQViewController.h; sourceTree = "<group>"; };
 		AABFD3D0202418A40089A5E9 /* EQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EQViewController.m; sourceTree = "<group>"; };
 		AABFD3D1202418A40089A5E9 /* EQViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EQViewController.xib; sourceTree = "<group>"; };
-		AABFD3D4202419060089A5E9 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
-		AABFD3D5202419060089A5E9 /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
-		AABFD3D6202419060089A5E9 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		AABFD3D9202419240089A5E9 /* DataStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStruct.h; path = DataStruct/DataStruct.h; sourceTree = "<group>"; };
 		AABFD3DA202419240089A5E9 /* DataProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataProgressHUD.h; path = DataStruct/DataProgressHUD.h; sourceTree = "<group>"; };
 		AABFD3DB202419240089A5E9 /* DataCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataCommunication.m; path = DataStruct/DataCommunication.m; sourceTree = "<group>"; };
@@ -961,7 +956,6 @@
 				146898D01E7A98FA001D0868 /* UI_Welcome */,
 				14AF61341E5DC922007CB350 /* UI_TopBar */,
 				1459BFCE1E5C42280085FFA6 /* UI_OptFunctions */,
-				1459BFCB1E5C42070085FFA6 /* UI_Master */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -982,16 +976,6 @@
 				AABFD3E2202419250089A5E9 /* MacDefine.m */,
 			);
 			name = DataStruct;
-			sourceTree = "<group>";
-		};
-		1459BFCB1E5C42070085FFA6 /* UI_Master */ = {
-			isa = PBXGroup;
-			children = (
-				AABFD3D6202419060089A5E9 /* MainPageViewController.h */,
-				AABFD3D4202419060089A5E9 /* MainPageViewController.m */,
-				AABFD3D5202419060089A5E9 /* MainPageViewController.xib */,
-			);
-			path = UI_Master;
 			sourceTree = "<group>";
 		};
 		1459BFCE1E5C42280085FFA6 /* UI_OptFunctions */ = {
@@ -1794,7 +1778,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B44ACD1E69786E00D524C6 /* MBProgressHUD.bundle in Resources */,
-				AABFD3D8202419060089A5E9 /* MainPageViewController.xib in Resources */,
 				AABFD47B20243A140089A5E9 /* XOverViewController.xib in Resources */,
 				AA7B8C6120720D1D0055B37C /* DelayTableViewCell.xib in Resources */,
 				1459BFA61E5C3F840085FFA6 /* LaunchScreen.storyboard in Resources */,
@@ -2003,7 +1986,6 @@
 				AABFD3BA202417260089A5E9 /* TopBarView.m in Sources */,
 				AABFD464202438760089A5E9 /* NormalButton.m in Sources */,
 				14DE4B421EC49E2000418248 /* QIZAllEffectTableViewController.m in Sources */,
-				AABFD3D7202419060089A5E9 /* MainPageViewController.m in Sources */,
 				AABFD41C202435FD0089A5E9 /* InputChannelSel.m in Sources */,
 				AABFD443202437E00089A5E9 /* IndexButton.m in Sources */,
 				AABFD453202438130089A5E9 /* EQItemFr.m in Sources */,

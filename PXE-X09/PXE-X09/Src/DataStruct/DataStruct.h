@@ -122,9 +122,9 @@ typedef short int         uint16;
 //#define	IN_NAME_ID		35
 //#define	IN_ID_MAX		35
 
-#define	IN_MISC_ID		9
+#define	IN_MISC_ID		10
 #define	IN_XOVER_ID		10
-#define	IN_NOISEGATE_ID	11
+#define	IN_NOISEGATE_ID	12
 #define	IN_LIMIT_ID		12
 #define	IN_NAME_ID		13
 #define	IN_ID_MAX		13
@@ -205,18 +205,18 @@ struct	EFFect_Struct
 
 struct	input_Struct	//音乐输入  共288字节
 {
-    struct	EQ_Struct	EQ[31];		//音乐31EQ
+    struct	EQ_Struct	EQ[10];		//音乐31EQ
     
-    //杂项 ID = 31--9
-    uint8	feedback;	//保留
+    //杂项 ID = 31--10
+    uint8	mute;	//保留
     uint8	polar;      //极极，0－－同相，1－－反相
-    uint8	eq_mode;	//EQ 模式 PEQ/GEQ
-    uint8	mute;		//静音2011-6-2  改 zhihui
-    uint16	delay;		//延时
-    uint16	Valume;		//输入音量 0~600
+    uint16	gain;	//EQ 模式 PEQ/GEQ
+    uint16	delay;		//静音2011-6-2  改 zhihui
+    uint8	eq_mode;		//延时
+    uint8	none2;		//输入音量 0~600
     
     
-    //高低通 ID = 32-10
+    //高低通 ID = 32-11
     uint16	h_freq;		//高通频率，20~20K，stp:1hz,发送实际频率值，如201HZ就发201
     uint8	h_filter;	//保留	高通类型值，0－－LR,1－－BESSEL,2－－BUTTERWORTH
     uint8	h_level;	//保留	高通斜率值，0－－6db,1－－18db,2－－24db
@@ -224,21 +224,21 @@ struct	input_Struct	//音乐输入  共288字节
     uint8	l_filter;	//保留	低通类型
     uint8	l_level;	//保留	低通斜率值
     
-    //噪声门 ID = 33-11
+    //噪声门 ID = 33-12
     uint8	noisegate_t; //保留  阀值，-120dbu~+10dbu,stp:1dbu,实际发送0~130
     uint8	noisegate_a; //保留  只有阀值可调，    起动时间，0.3ms ~ 100ms
     uint16	noisegate_k; //保留  只有阀值可调		保持时间,
     uint16	noisegate_r; //保留  只有阀值可调		释放时间,2X,4X,6X,8X,16X,32X
     uint16	noise_config;//保留  0--enable, 1--disable,当为disable时，阀值取 -120dbu(只由MCU及PC控制，DSP不用)
     
-    //压限器 ID = 34-12
-    uint16	lim_t;		//限幅电平 -30dbu~+20dbu，stp:0.1,实际发送值0~500
-    uint8	lim_a;
-    uint8	lim_r;
-    uint8	cliplim;
-    uint8   lim_rate;
-    uint8	lim_mode;
-    uint8   comp_swi;
+//    //压限器 ID = 34-12
+//    uint16    lim_t;        //限幅电平 -30dbu~+20dbu，stp:0.1,实际发送值0~500
+//    uint8    lim_a;
+//    uint8    lim_r;
+//    uint8    cliplim;
+//    uint8   lim_rate;
+//    uint8    lim_mode;
+//    uint8   comp_swi;
     //通道名 ID = 35-13
     uint8	name[8];
 };

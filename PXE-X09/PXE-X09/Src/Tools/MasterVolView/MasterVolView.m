@@ -95,7 +95,7 @@
     self.VolSlider.userInteractionEnabled=NO;
     self.hidden=YES;
     if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-        [self.VolSlider setValue:RecStructData.IN_CH[0].Valume];
+//        [self.VolSlider setValue:RecStructData.IN_CH[0].Valume];
     }else{
         [self.VolSlider setValue:RecStructData.System.main_vol];
         

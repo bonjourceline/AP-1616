@@ -801,7 +801,7 @@
     int val = [sender GetProgress];//(int)sender.value;//
     if(boolMasterSub){
         if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            RecStructData.IN_CH[0].Valume = val;
+//            RecStructData.IN_CH[0].Valume = val;
         }else{
             RecStructData.System.main_vol = val;
             
@@ -859,10 +859,10 @@
     int vol=0;
     if(boolMasterSub){
         if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            if(--RecStructData.IN_CH[0].Valume < 0){
-                RecStructData.IN_CH[0].Valume = 0;
-            }
-            vol = RecStructData.IN_CH[0].Valume;
+//            if(--RecStructData.IN_CH[0].Valume < 0){
+//                RecStructData.IN_CH[0].Valume = 0;
+//            }
+//            vol = RecStructData.IN_CH[0].Valume;
         }else{
             if(--RecStructData.System.main_vol < 0){
                 RecStructData.System.main_vol = 0;
@@ -896,10 +896,10 @@
     int vol=0;
     if(boolMasterSub){
         if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            if(++RecStructData.IN_CH[0].Valume > Master_Volume_MAX){
-                RecStructData.IN_CH[0].Valume = Master_Volume_MAX;
-            }
-            vol = RecStructData.IN_CH[0].Valume;
+//            if(++RecStructData.IN_CH[0].Valume > Master_Volume_MAX){
+//                RecStructData.IN_CH[0].Valume = Master_Volume_MAX;
+//            }
+//            vol = RecStructData.IN_CH[0].Valume;
         }else{
             if(++RecStructData.System.main_vol > Master_Volume_MAX){
                 RecStructData.System.main_vol = Master_Volume_MAX;
@@ -957,10 +957,7 @@
         [self.SB_MasterVolume setMaxProgress:Master_Volume_MAX];
         //        [self.SB_MasterVolume setMaximumValue:Master_Volume_MAX];
         if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            [self.SB_MasterVolume setProgress:RecStructData.IN_CH[0].Valume];
-            //            self.SB_MasterVolume.value = RecStructData.IN_CH[0].Valume;
-            val = RecStructData.IN_CH[0].Valume;
-        }else{
+         }else{
             [self.SB_MasterVolume setProgress:RecStructData.System.main_vol];
             //            self.SB_MasterVolume.value = RecStructData.System.main_vol;
             val = RecStructData.System.main_vol;

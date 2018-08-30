@@ -33,7 +33,7 @@
 #define COM_WITH_BLE		1
 #define COM_WITH_WIFT		2
 ///////////////////////////////
-#define IN_CH_EQ_MAX		9
+#define IN_CH_EQ_MAX		10
 #define OUT_CH_EQ_MAX		31
 #define EFF_CH_EQ_MAX		8
 #define MAX_SEFFGroupName_Size		13 
@@ -180,7 +180,7 @@
 
 /*名数据块的长度*/
 //  112; //0x70  DataStruct_Iutput:EQ8X9+40=112
-#define IN_LEN		(IN_CH_EQ_MAX*8+40)
+#define IN_LEN		(IN_CH_EQ_MAX*8+32)
 //  296; //0xA8  DataStruct_Output:EQ8X31+48=296
 #define OUT_LEN		(OUT_CH_EQ_MAX*8+48)
 //  96;  //0x60  DataStruct_EFFect:EQ8X8+32=96
