@@ -17,6 +17,6 @@
 @property (nonatomic, strong) NSArray *sound_delay_field; //50个字节
 @property (nonatomic, strong) NSArray *system_data;  //8个字节
 @property (nonatomic, strong) NSArray *system_group_name; //16个字节
-@property (nonatomic, strong) NSArray *system_spk_type; //16个字节
+@property (nonatomic, strong) NSArray *system_spk_type; //48个字节
 
 @end

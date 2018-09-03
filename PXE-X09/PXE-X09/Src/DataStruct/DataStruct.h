@@ -335,49 +335,38 @@ struct	SoundFieldStruct
     uint8	SoundDelayField[50];
 };
 
-struct	System_Struct
+//写数据：分3个小包写入，type=9
+struct	System_Struct  //系统数据共64字节
 {
-    //PC_SOURCE_SET
-    uint8   input_source; //输入源(之前系统中的输入源)  高  低  AUX  蓝牙  光纤
-    uint8   aux_mode;     //低电平模式 有3种 0:4个AUX   1:..................
-    uint8   device_mode;  //本字节第二位0x02 代表有数字音源输入，字节第一位0x01代表有蓝牙输入，否则没有该模块，PC不能切换至此音源
-    uint8    Hi_src_vol;     //高电平音源等级20-60（40）
-    uint8    Blue_src_vol;   //蓝牙音源等级20-60（40）
-    uint8    Aux_src_vol;    //低电平音源等级20-60（40）
-    uint8    none1;    //保留
-    uint8    none2;       //保留
+    //PC_SOURCE_SET   共8字节 ch id=2
+    uint8   input_source;      //输入音源选择 光纤 同轴 蓝牙 高电平 AUX ----0xff关闭
+    uint8   mixer_source;      //混音音源 同上        ----0xff关闭
+    uint8   InSwitch[5];       //5种输入方式选择 光纤 同轴 蓝牙 高电平 AUX   0表示未选择   1表示选择
+    uint8    none1;            //高电平音源等级20-60（40）
     
-    //SYSTEM_DATA
-    uint16  main_vol;       //输出总音量(之前输入结构中的总音量)  -60~0dB
-    uint8   alldelay;       //DSP纯延时 0~100 0.01s~1s
-    uint8   noisegate_t;    //噪声门  -120dbu~+10dbu,stp:1dbu,实际发送0~130
-    uint8   AutoSource;     //自动音源开关  0关  1开
-    uint8   AutoSourcedB;   //自动音源检测的信号阀值 -120dB~0dB
-    uint8   MainvolMuteFlg;	//静音临时标志，这个标志关机不保存，注意特别处理
-    uint8   none6;
+//    uint8    Blue_src_vol;   //蓝牙音源等级20-60（40）
+//    uint8    Aux_src_vol;    //低电平音源等级20-60（40）
+//    uint8    none1;    //保留
+//    uint8    none2;       //保留
     
-    //所接喇叭类型 共25种 0~24表示
-    //SYSTEM_SPK_TYPEA
-    uint8	  out1_spk_type;
-    uint8	  out2_spk_type;
-    uint8	  out3_spk_type;
-    uint8	  out4_spk_type;
-    uint8	  out5_spk_type;
-    uint8	  out6_spk_type;
-    uint8	  out7_spk_type;
-    uint8	  out8_spk_type;
-    //SYSTEM_SPK_TYPEB
-    uint8	  out9_spk_type;
-    uint8	  out10_spk_type;
-    uint8	  out11_spk_type;
-    uint8	  out12_spk_type;
-    uint8	  out13_spk_type;
-    uint8	  out14_spk_type;
-    uint8	  out15_spk_type;
-    uint8	  out16_spk_type;
+    //SYSTEM_DATA   共8字节 ch id=5
+    uint16  main_vol;          //输出总音量 PC端实际发送0~35，按照阿尔派标准设计，由DSP处理
+    uint8   high_mode;         //高电平模式      0:自定义  1:前主动3分频后主动2分频-----等等
+    uint8   aux_mode;          //AXU电平模式  0:自定义  1:立体声   2:四声道  3:六声道
+    uint8   out_mode;          //输出模式 0:自定义  1:前主动3分频后主动2分频   2:前主动2分频后被动+超低 ------等等
+    uint8   mixer_SourcedB;    //混音时主音源的衰减量
+    uint8   MainvolMuteFlg;    //静音临时标志，这个标志关机不保存，注意特别处理
+    uint8   theme;             //场景主题
+    
+   //SYSTEM_SPK_TYPE  //共48字节 ch_id=6
+    uint8   none[8];                //保留
+    uint8   high_Low_Set[8];        //8个高&低电平选择继电器设置值  0低电平   1高电平
+    uint8   in_spk_type[16];        //16路模拟输入的类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
+    uint8      out_spk_type[16];      //16路模拟输出的喇叭类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
     
     
-    uint8   input_source_temp;
+    
+    uint8 input_source_temp;
 };
 
 struct MData {

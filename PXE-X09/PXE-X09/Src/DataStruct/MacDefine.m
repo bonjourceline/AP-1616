@@ -123,7 +123,7 @@ uint16 DELAY_SETTINGS_MAX = 960;//960 20，384 8 ，240 5 ，259 5.396
 
 //------------------------   输入通道  ---------------------
 /*机型的Input通道数及机型的Input通道的EQ数量,主音量在MUSIC(DataStructInput)中,只使用一路*/
-uint8 Input_CH_MAX = 1;
+uint8 Input_CH_MAX = 16;
 uint8 Input_CH_Volume_MAX = 60;
 
 //------------------------   输出通道  ---------------------
@@ -132,8 +132,8 @@ uint8 Input_CH_Volume_MAX = 60;
 uint16 Output_Volume_MAX  = 600;
 uint16 Output_Volume_Step = 10;//有的最大为600，60.0db
 //输出通道数
-uint8 Output_CH_MAX = 12;// 6 8 10 12 ：通信用
-uint8 Output_CH_MAX_USE = 12;// 6 8 10 12:界面用
+uint8 Output_CH_MAX = 16;// 6 8 10 12 ：通信用
+uint8 Output_CH_MAX_USE = 16;// 6 8 10 12:界面用
 int ChannelTypeDefault[16]={3,9,2,8,1,7,15,18,14,17,21,24,0,0,0,0};//通道类型设置
 
 //--------------------------XOVER定义------------------------
@@ -236,9 +236,9 @@ uint16 IN_EQ_Gain_MAX  = 240;
 uint16 EQ_Freq_MAX = 240;
 uint16 EQ_BW_MAX = 295;
 
-uint8 IN_CH_MAX       = 11;//Json 要同步
+uint8 IN_CH_MAX       = 16;//Json 要同步
 uint8 IN_CH_VolumeMAX = 40;
-uint8 IN_CH_EQ_MAX_USE= 4;
+uint8 IN_CH_EQ_MAX_USE= 10;
 
 BOOL  BOOL_USE_INS = false;
 uint8 INS_CH_MAX       = 11;

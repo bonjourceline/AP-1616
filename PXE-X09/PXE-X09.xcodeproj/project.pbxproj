@@ -60,7 +60,6 @@
 		1426FE781EC2A47000423E45 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1426FE771EC2A47000423E45 /* libsqlite3.tbd */; };
 		142CD7141E6CF1C900612933 /* KGModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 142CD7131E6CF1C900612933 /* KGModal.m */; };
 		144DD0C31ED98DA300825849 /* OptFunPage_TBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 144DD0C01ED98DA300825849 /* OptFunPage_TBC.m */; };
-		144DD0C41ED98DA300825849 /* OptFunPage_TBC_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 144DD0C21ED98DA300825849 /* OptFunPage_TBC_VC.m */; };
 		144DD0C91ED98E3A00825849 /* MixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 144DD0C71ED98E3A00825849 /* MixViewController.m */; };
 		144DD0CA1ED98E3A00825849 /* MixViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 144DD0C81ED98E3A00825849 /* MixViewController.xib */; };
 		1459BF951E5C3F840085FFA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1459BF941E5C3F840085FFA6 /* main.m */; };
@@ -72,7 +71,6 @@
 		146287F21F2B0B90001092B8 /* SliderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 146287F11F2B0B90001092B8 /* SliderButton.m */; };
 		146287F61F2B0BBF001092B8 /* DelayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 146287F51F2B0BBF001092B8 /* DelayItem.m */; };
 		146287FC1F2B1221001092B8 /* Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 146287FB1F2B1221001092B8 /* Slider.m */; };
-		146764B31F46B9F7009A1E1E /* OptFunPage_CTbar_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 146764B11F46B9F7009A1E1E /* OptFunPage_CTbar_VC.m */; };
 		146898CF1E7A95ED001D0868 /* ADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 146898CE1E7A95ED001D0868 /* ADView.m */; };
 		146898D41E7A9917001D0868 /* SplanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146898D31E7A9917001D0868 /* SplanViewController.m */; };
 		146898E81E7ACFFD001D0868 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 146898E71E7ACFFD001D0868 /* PopoverView.m */; };
@@ -116,7 +114,6 @@
 		14DE4B471EC49E2000418248 /* QIZSearchEffectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4B401EC49E2000418248 /* QIZSearchEffectTableViewController.m */; };
 		14DE4B4A1EC49ED300418248 /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4B491EC49ED300418248 /* IconButton.m */; };
 		14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CCDE1EF8D42800887903 /* IZValueSelectorView.m */; };
-		14EE14541F4D330A00589B60 /* OptFunPage_TBC_M_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE14521F4D330A00589B60 /* OptFunPage_TBC_M_VC.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
 		AA21D0131FC57872005EC4E9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00F1FC57872005EC4E9 /* MainViewController.m */; };
 		AA21D0141FC57872005EC4E9 /* rootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D0111FC57872005EC4E9 /* rootViewController.m */; };
@@ -195,8 +192,6 @@
 		AABFD475202439E70089A5E9 /* OutputViewController_FRS.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD471202439E60089A5E9 /* OutputViewController_FRS.m */; };
 		AABFD476202439E70089A5E9 /* OutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD473202439E70089A5E9 /* OutputViewController.m */; };
 		AABFD477202439E70089A5E9 /* OutputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD474202439E70089A5E9 /* OutputViewController.xib */; };
-		AABFD47B20243A140089A5E9 /* XOverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD47820243A140089A5E9 /* XOverViewController.xib */; };
-		AABFD47C20243A140089A5E9 /* XOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD47920243A140089A5E9 /* XOverViewController.m */; };
 		AABFD47F20243AA60089A5E9 /* OutputPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD47E20243AA60089A5E9 /* OutputPageViewController.m */; };
 		AABFD48520243AD40089A5E9 /* DelayViewController_FRS.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD48020243AD40089A5E9 /* DelayViewController_FRS.m */; };
 		AABFD48620243AD40089A5E9 /* DelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD48120243AD40089A5E9 /* DelayViewController.m */; };
@@ -311,8 +306,6 @@
 		142CD7131E6CF1C900612933 /* KGModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGModal.m; sourceTree = "<group>"; };
 		144DD0BF1ED98DA300825849 /* OptFunPage_TBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptFunPage_TBC.h; sourceTree = "<group>"; };
 		144DD0C01ED98DA300825849 /* OptFunPage_TBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptFunPage_TBC.m; sourceTree = "<group>"; };
-		144DD0C11ED98DA300825849 /* OptFunPage_TBC_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptFunPage_TBC_VC.h; sourceTree = "<group>"; };
-		144DD0C21ED98DA300825849 /* OptFunPage_TBC_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptFunPage_TBC_VC.m; sourceTree = "<group>"; };
 		144DD0C61ED98E3A00825849 /* MixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixViewController.h; sourceTree = "<group>"; };
 		144DD0C71ED98E3A00825849 /* MixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixViewController.m; sourceTree = "<group>"; };
 		144DD0C81ED98E3A00825849 /* MixViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MixViewController.xib; sourceTree = "<group>"; };
@@ -333,8 +326,6 @@
 		146287F51F2B0BBF001092B8 /* DelayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayItem.m; sourceTree = "<group>"; };
 		146287FA1F2B1221001092B8 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slider.h; sourceTree = "<group>"; };
 		146287FB1F2B1221001092B8 /* Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slider.m; sourceTree = "<group>"; };
-		146764B11F46B9F7009A1E1E /* OptFunPage_CTbar_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptFunPage_CTbar_VC.m; sourceTree = "<group>"; };
-		146764B21F46B9F7009A1E1E /* OptFunPage_CTbar_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptFunPage_CTbar_VC.h; sourceTree = "<group>"; };
 		146898CD1E7A95ED001D0868 /* ADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADView.h; sourceTree = "<group>"; };
 		146898CE1E7A95ED001D0868 /* ADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADView.m; sourceTree = "<group>"; };
 		146898D21E7A9917001D0868 /* SplanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplanViewController.h; sourceTree = "<group>"; };
@@ -428,8 +419,6 @@
 		14DE4B491EC49ED300418248 /* IconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconButton.m; sourceTree = "<group>"; };
 		14E8CCDD1EF8D42800887903 /* IZValueSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IZValueSelectorView.h; sourceTree = "<group>"; };
 		14E8CCDE1EF8D42800887903 /* IZValueSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IZValueSelectorView.m; sourceTree = "<group>"; };
-		14EE14521F4D330A00589B60 /* OptFunPage_TBC_M_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptFunPage_TBC_M_VC.m; sourceTree = "<group>"; };
-		14EE14531F4D330A00589B60 /* OptFunPage_TBC_M_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptFunPage_TBC_M_VC.h; sourceTree = "<group>"; };
 		52C7DE915FC1D30E53988540 /* libPods-PXE-X09.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PXE-X09.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
@@ -587,9 +576,6 @@
 		AABFD472202439E60089A5E9 /* OutputViewController_FRS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OutputViewController_FRS.h; path = UI_Output/OutputViewController_FRS.h; sourceTree = "<group>"; };
 		AABFD473202439E70089A5E9 /* OutputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OutputViewController.m; path = UI_Output/OutputViewController.m; sourceTree = "<group>"; };
 		AABFD474202439E70089A5E9 /* OutputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OutputViewController.xib; path = UI_Output/OutputViewController.xib; sourceTree = "<group>"; };
-		AABFD47820243A140089A5E9 /* XOverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XOverViewController.xib; sourceTree = "<group>"; };
-		AABFD47920243A140089A5E9 /* XOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XOverViewController.m; sourceTree = "<group>"; };
-		AABFD47A20243A140089A5E9 /* XOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XOverViewController.h; sourceTree = "<group>"; };
 		AABFD47D20243AA60089A5E9 /* OutputPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputPageViewController.h; sourceTree = "<group>"; };
 		AABFD47E20243AA60089A5E9 /* OutputPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputPageViewController.m; sourceTree = "<group>"; };
 		AABFD48020243AD40089A5E9 /* DelayViewController_FRS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DelayViewController_FRS.m; path = UI_Delay/DelayViewController_FRS.m; sourceTree = "<group>"; };
@@ -886,14 +872,8 @@
 		144DD0BE1ED98DA300825849 /* OptFunPage */ = {
 			isa = PBXGroup;
 			children = (
-				14EE14521F4D330A00589B60 /* OptFunPage_TBC_M_VC.m */,
-				14EE14531F4D330A00589B60 /* OptFunPage_TBC_M_VC.h */,
-				146764B11F46B9F7009A1E1E /* OptFunPage_CTbar_VC.m */,
-				146764B21F46B9F7009A1E1E /* OptFunPage_CTbar_VC.h */,
 				144DD0BF1ED98DA300825849 /* OptFunPage_TBC.h */,
 				144DD0C01ED98DA300825849 /* OptFunPage_TBC.m */,
-				144DD0C11ED98DA300825849 /* OptFunPage_TBC_VC.h */,
-				144DD0C21ED98DA300825849 /* OptFunPage_TBC_VC.m */,
 			);
 			path = OptFunPage;
 			sourceTree = "<group>";
@@ -1014,9 +994,6 @@
 		1459BFD01E5C424F0085FFA6 /* UI_XOver */ = {
 			isa = PBXGroup;
 			children = (
-				AABFD47A20243A140089A5E9 /* XOverViewController.h */,
-				AABFD47920243A140089A5E9 /* XOverViewController.m */,
-				AABFD47820243A140089A5E9 /* XOverViewController.xib */,
 			);
 			path = UI_XOver;
 			sourceTree = "<group>";
@@ -1778,7 +1755,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B44ACD1E69786E00D524C6 /* MBProgressHUD.bundle in Resources */,
-				AABFD47B20243A140089A5E9 /* XOverViewController.xib in Resources */,
 				AA7B8C6120720D1D0055B37C /* DelayTableViewCell.xib in Resources */,
 				1459BFA61E5C3F840085FFA6 /* LaunchScreen.storyboard in Resources */,
 				AABFD3C1202417BB0089A5E9 /* InputViewController.xib in Resources */,
@@ -1856,11 +1832,9 @@
 				AABFD3FC2024197E0089A5E9 /* BabyCentralManager.m in Sources */,
 				1423323C1EC1CC5200E3FCC4 /* FMResultSet.m in Sources */,
 				AA3056EC202455AD0085672C /* MasterVolView.m in Sources */,
-				AABFD47C20243A140089A5E9 /* XOverViewController.m in Sources */,
 				142332B91EC1DC0800E3FCC4 /* MusicGroupModel.m in Sources */,
 				AABFD48520243AD40089A5E9 /* DelayViewController_FRS.m in Sources */,
 				AABFD43B202437690089A5E9 /* ChannelLineBar.m in Sources */,
-				144DD0C41ED98DA300825849 /* OptFunPage_TBC_VC.m in Sources */,
 				AABFD467202438930089A5E9 /* LANG.m in Sources */,
 				AABFD40B202434080089A5E9 /* UIImage+Color.m in Sources */,
 				AABFD3BB202417260089A5E9 /* BottomBar.m in Sources */,
@@ -1872,7 +1846,6 @@
 				146287FC1F2B1221001092B8 /* Slider.m in Sources */,
 				142332B71EC1DC0800E3FCC4 /* DataInfoModel.m in Sources */,
 				AABFD40C202434080089A5E9 /* UIImage+Gif.m in Sources */,
-				146764B31F46B9F7009A1E1E /* OptFunPage_CTbar_VC.m in Sources */,
 				14B44ACA1E69786E00D524C6 /* View+MASAdditions.m in Sources */,
 				1423327D1EC1CE0500E3FCC4 /* JSONHTTPClient.m in Sources */,
 				14B44A9D1E69776D00D524C6 /* WMProgressView.m in Sources */,
@@ -1888,7 +1861,6 @@
 				AA321A261FE0B8CF0065BD3C /* DeviceUtils.m in Sources */,
 				144DD0C91ED98E3A00825849 /* MixViewController.m in Sources */,
 				142332B41EC1DC0800E3FCC4 /* AllGroupFileModel.m in Sources */,
-				14EE14541F4D330A00589B60 /* OptFunPage_TBC_M_VC.m in Sources */,
 				14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */,
 				142332991EC1DB7900E3FCC4 /* MJExtensionConst.m in Sources */,
 				AABFD46E202439A90089A5E9 /* XOverOutputViewController.m in Sources */,

@@ -348,35 +348,35 @@
             break;
     }
     
-    if (RecStructData.System.input_source!=2) {
-    switch (RecStructData.System.Blue_src_vol) {
-        case 1://高电平
-            if(index <=7){
-                [item setMixerItemDisable:true];
-            }
-            break;
-        case 3://AUX
-            if((index <= 11)&&(index >= 8)){
-                [item setMixerItemDisable:true];
-            }
-            break;
-            
-        case 0://数字
-            if((index <= 13)&&(index >= 12)){
-                [item setMixerItemDisable:true];
-            }
-            break;
-        case 2://蓝牙
+//    if (RecStructData.System.input_source!=2) {
+//    switch (RecStructData.System.Blue_src_vol) {
+//        case 1://高电平
+//            if(index <=7){
+//                [item setMixerItemDisable:true];
+//            }
+//            break;
+//        case 3://AUX
+//            if((index <= 11)&&(index >= 8)){
+//                [item setMixerItemDisable:true];
+//            }
+//            break;
+//            
+//        case 0://数字
 //            if((index <= 13)&&(index >= 12)){
-            if((index <= 15)&&(index >= 14)){
-                [item setMixerItemDisable:true];
-            }
-            break;
-            
-        default:
-            break;
-    }
-    }
+//                [item setMixerItemDisable:true];
+//            }
+//            break;
+//        case 2://蓝牙
+////            if((index <= 13)&&(index >= 12)){
+//            if((index <= 15)&&(index >= 14)){
+//                [item setMixerItemDisable:true];
+//            }
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//    }
 }
 
 

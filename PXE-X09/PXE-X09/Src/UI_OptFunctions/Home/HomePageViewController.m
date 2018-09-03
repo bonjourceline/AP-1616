@@ -382,17 +382,17 @@
 - (void)SB_InSrcVol_Val_Change:(UISlider *)sender{
     int val = (int)sender.value;
     switch (RecStructData.System.input_source) {
-        case 1:
-            RecStructData.System.Hi_src_vol = val;
-            break;
-        case 2:
-            RecStructData.System.Blue_src_vol = val;
-            break;
-        case 3:
-            RecStructData.System.Aux_src_vol = val;
-            break;
-        default:
-            break;
+//        case 1:
+//            RecStructData.System.Hi_src_vol = val;
+//            break;
+//        case 2:
+//            RecStructData.System.Blue_src_vol = val;
+//            break;
+//        case 3:
+//            RecStructData.System.Aux_src_vol = val;
+//            break;
+//        default:
+//            break;
     }
     self.LabInSrcVol.text=[NSString stringWithFormat:@"%d",val];
 }
@@ -464,13 +464,13 @@
     alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_MixerInputSourceSelect"]message:[LANG DPLocalizedString:@""]preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:0] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        RecStructData.System.Blue_src_vol = 1;
+//        RecStructData.System.Blue_src_vol = 1;
         [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:0] forState:UIControlStateNormal];
         [self dealWithMixersource];
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        RecStructData.System.Blue_src_vol = 3;
+//        RecStructData.System.Blue_src_vol = 3;
         [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:1] forState:UIControlStateNormal];
         [self dealWithMixersource];
         
@@ -479,7 +479,7 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        RecStructData.System.Blue_src_vol = 2;
+//        RecStructData.System.Blue_src_vol = 2;
         [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:2] forState:UIControlStateNormal];
         [self dealWithMixersource];
         
@@ -493,7 +493,7 @@
     //    }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:4] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        RecStructData.System.Blue_src_vol = 6;
+//        RecStructData.System.Blue_src_vol = 6;
         [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:4] forState:UIControlStateNormal];
         [self dealWithMixersource];
         
@@ -507,36 +507,7 @@
 
 #pragma mark---筛选主音源和混音源
 -(void)selectMixerSourceAndInputSource{
-    if (RecStructData.System.input_source==RecStructData.System.Blue_src_vol) {
-        [self.Btn_MixerInputSource setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    }else{
-        [self.Btn_MixerInputSource setTitleColor:SetColor(UI_Master_InputSourceBtnTextColor) forState:UIControlStateNormal];
-    }
-    //主音源为蓝牙时
-    if (RecStructData.System.input_source ==2) {
-        self.Btn_MixerInputSource.userInteractionEnabled=NO;
-        [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_XOver_OtcOFF"] forState:UIControlStateNormal];
-        [self.Btn_MixerInputSource setTitleColor:SetColor(UI_Master_InputSourceBtnTextColor) forState:UIControlStateNormal];
-    }else{
-        self.Btn_MixerInputSource.userInteractionEnabled=YES;
-        switch (RecStructData.System.Blue_src_vol) {
-            case 1:
-                [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_High"] forState:UIControlStateNormal] ;
-                break;
-            case 3:
-                [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_AUX"] forState:UIControlStateNormal] ;
-                break;
-                
-            case 2:
-                [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-                break;
-            case 6:
-                [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_XOver_OtcOFF"] forState:UIControlStateNormal] ;
-                break;
-            default:
-                break;
-        }
-    }
+    
     
     
 }
@@ -581,15 +552,9 @@
 
 //低音音量
 - (void)SB_SubVol_Val_Change:(UISlider *)sender{
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
+    for (int i=0; i<8; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
     
     Boolean hsub=false;
     
@@ -998,23 +963,9 @@
 
 
 - (int)checkBassChannel{
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]= RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]= RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10]= RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11]= RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12]= RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13]= RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14]= RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15]= RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
     
     int n=0;
     int ch[]={0,0,0,0,0,0};
@@ -1028,24 +979,26 @@
 }
 
 - (int)getSpkTypeBassVolume{
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]= RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]= RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10]= RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11]= RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12]= RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13]= RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14]= RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15]= RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
+//    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
+//    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
+//    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
+//    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
+//    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
+//    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
+//    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
+//    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
+//
+//    ChannelNumBuf[8]= RecStructData.System.out9_spk_type;
+//    ChannelNumBuf[9]= RecStructData.System.out10_spk_type;
+//    ChannelNumBuf[10]= RecStructData.System.out11_spk_type;
+//    ChannelNumBuf[11]= RecStructData.System.out12_spk_type;
+//    ChannelNumBuf[12]= RecStructData.System.out13_spk_type;
+//    ChannelNumBuf[13]= RecStructData.System.out14_spk_type;
+//    ChannelNumBuf[14]= RecStructData.System.out15_spk_type;
+//    ChannelNumBuf[15]= RecStructData.System.out16_spk_type;
     
     int n=0;
     int ch[]={0,0,0,0,0,0};
@@ -1076,24 +1029,10 @@
 
 - (void)setSpkTypeBassVolume:(int)val{
     
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]= RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]= RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10]= RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11]= RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12]= RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13]= RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14]= RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15]= RecStructData.System.out16_spk_type;
-    
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
+
     int n=0;
     int ch[]={0,0,0,0,0,0};
     for(int i=0;i<Output_CH_MAX_USE;i++){
@@ -1712,29 +1651,29 @@
 }
 
 -(void) FlashMixerInputSource{
-    switch (RecStructData.System.Blue_src_vol) {
-        case 1:
-            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_High"] forState:UIControlStateNormal] ;
-            break;
-        case 3:
-            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_AUX"] forState:UIControlStateNormal] ;
-            break;
-            //        case 0:
-            //            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Digtit"] forState:UIControlStateNormal] ;
-            //            break;
-            //        case 4:
-            //            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Coaxial"] forState:UIControlStateNormal] ;
-            //            break;
-        case 2:
-            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-            break;
-        case 6:
-            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_XOver_OtcOFF"] forState:UIControlStateNormal] ;
-            break;
-        default:
-            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-            break;
-    }
+//    switch (RecStructData.System.Blue_src_vol) {
+//        case 1:
+//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_High"] forState:UIControlStateNormal] ;
+//            break;
+//        case 3:
+//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_AUX"] forState:UIControlStateNormal] ;
+//            break;
+//            //        case 0:
+//            //            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Digtit"] forState:UIControlStateNormal] ;
+//            //            break;
+//            //        case 4:
+//            //            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Coaxial"] forState:UIControlStateNormal] ;
+//            //            break;
+//        case 2:
+//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
+//            break;
+//        case 6:
+//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_XOver_OtcOFF"] forState:UIControlStateNormal] ;
+//            break;
+//        default:
+//            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
+//            break;
+//    }
     [self selectMixerSourceAndInputSource];
     
 }
@@ -2210,15 +2149,9 @@
 }
 #pragma mark---------------更新UI界面
 - (void)flashBassVolume{
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
+    for (int i=0; i<8; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
     
     int n=0;
     int ch[]={0,0,0,0,0,0};
@@ -2394,19 +2327,19 @@
 }
 - (void)flashInputsourceVolume{
     int val = 0;
-    switch (RecStructData.System.input_source) {
-        case 1:
-            val = RecStructData.System.Hi_src_vol;
-            break;
-        case 2:
-            val = RecStructData.System.Blue_src_vol;
-            break;
-        case 3:
-            val = RecStructData.System.Aux_src_vol;
-            break;
-        default:
-            break;
-    }
+//    switch (RecStructData.System.input_source) {
+//        case 1:
+//            val = RecStructData.System.Hi_src_vol;
+//            break;
+//        case 2:
+//            val = RecStructData.System.Blue_src_vol;
+//            break;
+//        case 3:
+//            val = RecStructData.System.Aux_src_vol;
+//            break;
+//        default:
+//            break;
+//    }
     self.LabInSrcVol.text=[NSString stringWithFormat:@"%d",val];
     self.SB_InSrcVol.value = val;
     
@@ -2524,23 +2457,10 @@
 - (int) GetChannelNum:(int)channel{
     
     //更新列表
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]  = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]  = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
+
     
     for(int i=0;i<16;i++){
         if(ChannelNumBuf[i]<0){

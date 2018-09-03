@@ -189,7 +189,7 @@
 #define INS_LEN		((INS_CH_EQ_MAX_USE*8+16)*INS_CH_MAX)
 #define INS_S_LEN		(INS_CH_EQ_MAX_USE*8+16)
 
-#define SYSTEM_LEN	32
+#define SYSTEM_LEN	    64
 extern uint8     Define_MAC;
 extern bool COM_BLE_DEVICECONNECTED;
 extern bool continueSendState;

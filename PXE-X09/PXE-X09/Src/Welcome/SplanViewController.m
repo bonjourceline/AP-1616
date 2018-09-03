@@ -7,8 +7,7 @@
 #import "MainViewController.h"
 #import "AppDelegate.h"
 #import <AFNetworking.h>
-#import "OptFunPage_TBC_VC.h"
-#import "OptFunPage_CTbar_VC.h"
+
 #import "DeviceUtils.h"
 
 

@@ -251,7 +251,7 @@
                     }
                 }
             }else{
-                [self FillRecDataStruct:MUSIC withChannelID:0];
+                [self FillRecDataStruct:MUSIC withChannelID:RecFrameData.ChannelID];
             }
             
             
@@ -334,23 +334,13 @@
                     break;
                     
                 case PC_SOURCE_SET:
-                    RecStructData.System.input_source = RecFrameData.DataBuf[10]; // 输入源(之前系统中的输入源)
-                    // 高 1
-                    // 低
-                    // AUX 3
-                    // 蓝牙  2
-                    // 光纤
-                    RecStructData.System.aux_mode = RecFrameData.DataBuf[11]; // 低电平模式
-                    // 有3种
-                    // 0:4个AUX
-                    // 1:..................
-                    RecStructData.System.device_mode = RecFrameData.DataBuf[12];  // 本字节第二位0x02
-                    // 代表有数字音源输入，字节第一位0x01代表有蓝牙输入，否则没有该模块，PC不能切换至此音源
-                    RecStructData.System.Hi_src_vol   = RecFrameData.DataBuf[13];// 保留
-                    RecStructData.System.Blue_src_vol = RecFrameData.DataBuf[14];// 保留
-                    RecStructData.System.Aux_src_vol  = RecFrameData.DataBuf[15];// 保留
-                    RecStructData.System.none1  = RecFrameData.DataBuf[16];// 保留
-                    RecStructData.System.none2     = RecFrameData.DataBuf[17];// 保留
+                    RecStructData.System.input_source = RecFrameData.DataBuf[10];
+                    RecStructData.System.mixer_source = RecFrameData.DataBuf[11]; // 低电平模式
+                    for (int i=0; i<5; i++) {
+                        RecStructData.System.InSwitch[i]=RecFrameData.DataBuf[12+i];
+                    }
+                    RecStructData.System.none1=RecFrameData.DataBuf[17];
+                   
                     break;
                     
                 case MCU_BUSY:
@@ -359,64 +349,35 @@
                     
                 case SYSTEM_DATA:
                     RecStructData.System.main_vol = RecFrameData.DataBuf[10]
-                    + RecStructData.DataBuf[11] * 256;  // 输出总音量(之前输入结构中的总音量)
-                    // -60~0dB
-                    RecStructData.System.alldelay = RecFrameData.DataBuf[12]; // DSP纯延时
-                    // 0~100
-                    // 0.01s~1s
-                    RecStructData.System.noisegate_t = RecFrameData.DataBuf[13];// 噪声门
-                    // -120dbu~+10dbu,stp:1dbu,实际发送0~130
-                    RecStructData.System.AutoSource = RecFrameData.DataBuf[14];    // 自动音源开关
-                    // 0关
-                    // 1开
-                    RecStructData.System.AutoSourcedB = RecFrameData.DataBuf[15];  // 自动音源检测的信号阀值
-                    // -120dB~0dB
-                    RecStructData.System.MainvolMuteFlg = RecFrameData.DataBuf[16];// 静音临时标志，这个标志关机不保存，注意特别处理
-                    RecStructData.System.none6 = RecFrameData.DataBuf[17];// 保留
+                    + RecStructData.DataBuf[11] * 256;
+                    RecStructData.System.high_mode = RecFrameData.DataBuf[12];
+
+                    RecStructData.System.aux_mode = RecFrameData.DataBuf[13];
+                    RecStructData.System.out_mode = RecFrameData.DataBuf[14];
+                    RecStructData.System.mixer_SourcedB = RecFrameData.DataBuf[15];
+                    RecStructData.System.MainvolMuteFlg = RecFrameData.DataBuf[16];
+                    RecStructData.System.theme = RecFrameData.DataBuf[17];// 保留
                     
                     [[NSNotificationCenter defaultCenter]postNotificationName:MyNotification_updateVol object:nil];
                     
                     
                     break;
                 case SYSTEM_SPK_TYPE:
-                    for(int i=0;i<8;i++){
-                        if(RecFrameData.DataBuf[10+i] > 24){
-                            RecFrameData.DataBuf[10+i] = 0;
-                        }
-                        
-                        if(RecFrameData.DataBuf[10+i] < 0){
-                            RecFrameData.DataBuf[10+i]=0;
-                        }
-                        //ChannelNumBuf[i] = RecStructData.DataBuf[10+i];
+                    for (int i=0; i<8; i++) {
+                        RecStructData.System.none[i]=RecFrameData.DataBuf[10+i];
                     }
-                    RecStructData.System.out1_spk_type=RecFrameData.DataBuf[10];
-                    RecStructData.System.out2_spk_type=RecFrameData.DataBuf[11];
-                    RecStructData.System.out3_spk_type=RecFrameData.DataBuf[12];
-                    RecStructData.System.out4_spk_type=RecFrameData.DataBuf[13];
-                    RecStructData.System.out5_spk_type=RecFrameData.DataBuf[14];
-                    RecStructData.System.out6_spk_type=RecFrameData.DataBuf[15];
-                    RecStructData.System.out7_spk_type=RecFrameData.DataBuf[16];
-                    RecStructData.System.out8_spk_type=RecFrameData.DataBuf[17];
+                    for (int i=0; i<8; i++) {
+                        RecStructData.System.high_Low_Set[i]=RecFrameData.DataBuf[18+i];
+                    }
+                    for (int i=0; i<16; i++) {
+                        RecStructData.System.in_spk_type[i]=RecFrameData.DataBuf[26+i];
+                    }
+                    for (int i=0; i<16; i++) {
+                        RecStructData.System.out_spk_type[i]=RecFrameData.DataBuf[42+i];
+                    }
                     break;
                 case SYSTEM_SPK_TYPEB:
-                    for(int i=0;i<8;i++){
-                        //                        if(RecFrameData.DataBuf[10+i]>24){
-                        //                            RecFrameData.DataBuf[10+i]=0;
-                        //                        }
-                        //
-                        //                        if(RecFrameData.DataBuf[10+i] < 0){
-                        //                            RecFrameData.DataBuf[10+i]=0;
-                        //                        }
-                        //ChannelNumBuf[8+i]=RecStructData.DataBuf[10+i];
-                    }
-                    RecStructData.System.out9_spk_type =RecFrameData.DataBuf[10];
-                    RecStructData.System.out10_spk_type=RecFrameData.DataBuf[11];
-                    RecStructData.System.out11_spk_type=RecFrameData.DataBuf[12];
-                    RecStructData.System.out12_spk_type=RecFrameData.DataBuf[13];
-                    RecStructData.System.out13_spk_type=RecFrameData.DataBuf[14];
-                    RecStructData.System.out14_spk_type=RecFrameData.DataBuf[15];
-                    RecStructData.System.out15_spk_type=RecFrameData.DataBuf[16];
-                    RecStructData.System.out16_spk_type=RecFrameData.DataBuf[17];
+           
                     break;
                 case LED_DATA:
                     if(RecStructData.System.input_source_temp != RecFrameData.DataBuf[10 + 14]){
@@ -681,32 +642,44 @@
                             FrameDataBuf[14+i] = SendFrameData.Buf[i];
                         }
                     }else{
-                        switch (SendFrameData.DataID) {
-                            case IN_MISC_ID:
-                                FrameDataBuf[14] = (SendStructData.IN_CH[0].mute & 0xff);
-                                FrameDataBuf[15] = (SendStructData.IN_CH[0].polar & 0xff);
-                                FrameDataBuf[16] = (SendStructData.IN_CH[0].gain & 0xff);
-                                FrameDataBuf[17] = ((SendStructData.IN_CH[0].gain >> 8) & 0xff);
-                                FrameDataBuf[18] = (SendStructData.IN_CH[0].delay & 0xff);
-                                FrameDataBuf[19] = ((SendStructData.IN_CH[0].delay >> 8) & 0xff);
-                                FrameDataBuf[20] = (SendStructData.IN_CH[0].eq_mode & 0xff);
-                                FrameDataBuf[21] = (SendStructData.IN_CH[0].none2 & 0xff);
-                                
-                                break;
-                            case IN_NOISEGATE_ID:
-                                FrameDataBuf[14] = (SendStructData.IN_CH[0].noisegate_t & 0xff);
-                                FrameDataBuf[15] = (SendStructData.IN_CH[0].noisegate_a & 0xff);
-                                FrameDataBuf[16] = (SendStructData.IN_CH[0].noisegate_k & 0xff);
-                                FrameDataBuf[17] = ((SendStructData.IN_CH[0].noisegate_k >> 8) & 0xff);
-                                FrameDataBuf[18] = (SendStructData.IN_CH[0].noisegate_r & 0xff);
-                                FrameDataBuf[19] = ((SendStructData.IN_CH[0].noisegate_r >> 8) & 0xff);
-                                FrameDataBuf[20] = (SendStructData.IN_CH[0].noise_config & 0xff);
-                                FrameDataBuf[21] = ((SendStructData.IN_CH[0].noise_config >> 8) & 0xff);
-                                
-                                break;
-                            default:
-                                break;
+                        if(SendFrameData.DataID<10){
+                            FrameDataBuf[14] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].freq & 0xff);
+                            FrameDataBuf[15] = ((SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].freq >> 8) & 0xff);
+                            FrameDataBuf[16] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].level & 0xff);
+                            FrameDataBuf[17] = ((SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].level >> 8) & 0xff);
+                            FrameDataBuf[18] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].bw & 0xff);
+                            FrameDataBuf[19] = ((SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].bw >> 8) & 0xff);
+                            FrameDataBuf[20] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].shf_db & 0xff);
+                            FrameDataBuf[21] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].type & 0xff);
+                        }else{
+                            switch (SendFrameData.DataID) {
+                                case IN_MISC_ID:
+                                    FrameDataBuf[14] = (SendStructData.IN_CH[SendFrameData.ChannelID].mute & 0xff);
+                                    FrameDataBuf[15] = (SendStructData.IN_CH[SendFrameData.ChannelID].polar & 0xff);
+                                    FrameDataBuf[16] = (SendStructData.IN_CH[SendFrameData.ChannelID].gain & 0xff);
+                                    FrameDataBuf[17] = ((SendStructData.IN_CH[SendFrameData.ChannelID].gain >> 8) & 0xff);
+                                    FrameDataBuf[18] = (SendStructData.IN_CH[SendFrameData.ChannelID].delay & 0xff);
+                                    FrameDataBuf[19] = ((SendStructData.IN_CH[SendFrameData.ChannelID].delay >> 8) & 0xff);
+                                    FrameDataBuf[20] = (SendStructData.IN_CH[SendFrameData.ChannelID].eq_mode & 0xff);
+                                    FrameDataBuf[21] = (SendStructData.IN_CH[SendFrameData.ChannelID].none2 & 0xff);
+                                    
+                                    break;
+                                case IN_NOISEGATE_ID:
+                                    FrameDataBuf[14] = (SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_t & 0xff);
+                                    FrameDataBuf[15] = (SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_a & 0xff);
+                                    FrameDataBuf[16] = (SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_k & 0xff);
+                                    FrameDataBuf[17] = ((SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_k >> 8) & 0xff);
+                                    FrameDataBuf[18] = (SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_r & 0xff);
+                                    FrameDataBuf[19] = ((SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_r >> 8) & 0xff);
+                                    FrameDataBuf[20] = (SendStructData.IN_CH[SendFrameData.ChannelID].noise_config & 0xff);
+                                    FrameDataBuf[21] = ((SendStructData.IN_CH[SendFrameData.ChannelID].noise_config >> 8) & 0xff);
+                                    
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
+                        
                     }
                 }
             }
@@ -887,17 +860,17 @@
                     // AUX
                     // 蓝牙
                     // 光纤
-                    FrameDataBuf[15] = (SendStructData.System.aux_mode & 0xff); // 低电平模式
+                    FrameDataBuf[15] = (SendStructData.System.mixer_source & 0xff); // 低电平模式
                     // 有3种
                     // 0:4个AUX
                     // 1:..................
-                    FrameDataBuf[16] = (SendStructData.System.device_mode & 0xff); // 本字节第二位0x02
+                    FrameDataBuf[16] = (SendStructData.System.InSwitch[0] & 0xff); // 本字节第二位0x02
                     // 代表有数字音源输入，字节第一位0x01代表有蓝牙输入，否则没有该模块，PC不能切换至此音源
-                    FrameDataBuf[17] = (SendStructData.System.Hi_src_vol & 0xff);
-                    FrameDataBuf[18] = (SendStructData.System.Blue_src_vol & 0xff);
-                    FrameDataBuf[19] = (SendStructData.System.Aux_src_vol & 0xff);
-                    FrameDataBuf[20] = (SendStructData.System.none1 & 0xff);
-                    FrameDataBuf[21] = (SendStructData.System.none2 & 0xff);
+                    FrameDataBuf[17] = (SendStructData.System.InSwitch[1] & 0xff);
+                    FrameDataBuf[18] = (SendStructData.System.InSwitch[2] & 0xff);
+                    FrameDataBuf[19] = (SendStructData.System.InSwitch[3] & 0xff);
+                    FrameDataBuf[20] = (SendStructData.System.InSwitch[4] & 0xff);
+                    FrameDataBuf[21] = (SendStructData.System.none1 & 0xff);
                     
                     
                     //System.out.println("##17:"+(int)FrameDataBuf[17]+",18:"+(int)FrameDataBuf[18]+",19:"+(int)FrameDataBuf[19]);
@@ -911,39 +884,38 @@
                     FrameDataBuf[15] = ((SendStructData.System.main_vol >> 8) & 0xff); // 输出总音量(之前输入结构中的总音量)
                     // -60~0dB
                     // 高字节
-                    FrameDataBuf[16] = (SendStructData.System.alldelay & 0xff);   // DSP纯延时
-                    // 0~100
-                    // 0.01s~1s
-                    FrameDataBuf[17] = (SendStructData.System.noisegate_t & 0xff);// 噪声门
-                    // -120dbu~+10dbu,stp:1dbu,实际发送0~130
-                    FrameDataBuf[18] = (SendStructData.System.AutoSource & 0xff); // 自动音源开关
-                    // 0关
-                    // 1开
-                    FrameDataBuf[19] = (SendStructData.System.AutoSourcedB & 0xff);  // 自动音源检测的信号阀值
-                    // -120dB~0dB
+                    FrameDataBuf[16] = (SendStructData.System.high_mode & 0xff);
+                    FrameDataBuf[17] = (SendStructData.System.aux_mode & 0xff);
+                    FrameDataBuf[18] = (SendStructData.System.out_mode & 0xff);
+                    FrameDataBuf[19] = (SendStructData.System.mixer_SourcedB & 0xff);
                     FrameDataBuf[20] = (SendStructData.System.MainvolMuteFlg & 0xff);// 静音临时标志，这个标志关机不保存，注意特别处理
-                    FrameDataBuf[21] = (SendStructData.System.none6 & 0xff);
-                    //System.out.println("##14:"+(int)FrameDataBuf[14]);
+                    FrameDataBuf[21] = (SendStructData.System.theme & 0xff);
+                    
                     break;
                 case SYSTEM_SPK_TYPE:
-                    FrameDataBuf[14] =  (SendStructData.System.out1_spk_type & 0xff);
-                    FrameDataBuf[15] =  (SendStructData.System.out2_spk_type & 0xff);
-                    FrameDataBuf[16] =  (SendStructData.System.out3_spk_type & 0xff);
-                    FrameDataBuf[17] =  (SendStructData.System.out4_spk_type & 0xff);
-                    FrameDataBuf[18] =  (SendStructData.System.out5_spk_type & 0xff);
-                    FrameDataBuf[19] =  (SendStructData.System.out6_spk_type & 0xff);
-                    FrameDataBuf[20] =  (SendStructData.System.out7_spk_type & 0xff);
-                    FrameDataBuf[21] =  (SendStructData.System.out8_spk_type & 0xff);
+                    for (int i=0; i<8; i++) {
+                        FrameDataBuf[14+i]=(SendStructData.System.none[i]& 0xff);
+                    }
+                    for (int i=0; i<8; i++) {
+                        FrameDataBuf[12+i]=(SendStructData.System.high_Low_Set[i]& 0xff);
+                    }
+                    for (int i=0; i<16; i++) {
+                         FrameDataBuf[20+i]=(SendStructData.System.in_spk_type[i]& 0xff);
+                    }
+                    for (int i=0; i<16; i++) {
+                         FrameDataBuf[36+i]=(SendStructData.System.out_spk_type[i]& 0xff);
+                    }
+                  
                     break;
                 case SYSTEM_SPK_TYPEB:
-                    FrameDataBuf[14] =  (SendStructData.System.out9_spk_type & 0xff);
-                    FrameDataBuf[15] =  (SendStructData.System.out10_spk_type & 0xff);
-                    FrameDataBuf[16] =  (SendStructData.System.out11_spk_type & 0xff);
-                    FrameDataBuf[17] =  (SendStructData.System.out12_spk_type & 0xff);
-                    FrameDataBuf[18] =  (SendStructData.System.out13_spk_type & 0xff);
-                    FrameDataBuf[19] =  (SendStructData.System.out14_spk_type & 0xff);
-                    FrameDataBuf[20] =  (SendStructData.System.out15_spk_type & 0xff);
-                    FrameDataBuf[21] =  (SendStructData.System.out16_spk_type & 0xff);
+//                    FrameDataBuf[14] =  (SendStructData.System.out9_spk_type & 0xff);
+//                    FrameDataBuf[15] =  (SendStructData.System.out10_spk_type & 0xff);
+//                    FrameDataBuf[16] =  (SendStructData.System.out11_spk_type & 0xff);
+//                    FrameDataBuf[17] =  (SendStructData.System.out12_spk_type & 0xff);
+//                    FrameDataBuf[18] =  (SendStructData.System.out13_spk_type & 0xff);
+//                    FrameDataBuf[19] =  (SendStructData.System.out14_spk_type & 0xff);
+//                    FrameDataBuf[20] =  (SendStructData.System.out15_spk_type & 0xff);
+//                    FrameDataBuf[21] =  (SendStructData.System.out16_spk_type & 0xff);
                     
                     break;
                 case SOUND_FIELD_INFO:
@@ -1007,21 +979,19 @@
     
     // 比较音源数据
     if (SendStructData.System.input_source != RecStructData.System.input_source
-        || SendStructData.System.aux_mode != RecStructData.System.aux_mode
-        || SendStructData.System.device_mode != RecStructData.System.device_mode
-        || SendStructData.System.Hi_src_vol != RecStructData.System.Hi_src_vol
-        || SendStructData.System.Blue_src_vol != RecStructData.System.Blue_src_vol
-        || SendStructData.System.Aux_src_vol != RecStructData.System.Aux_src_vol
-        || SendStructData.System.none1 != RecStructData.System.none1
-        || SendStructData.System.none2 != RecStructData.System.none2) {
+        || SendStructData.System.mixer_source != RecStructData.System.mixer_source
+        || SendStructData.System.InSwitch[0] != RecStructData.System.InSwitch[0]
+        || SendStructData.System.InSwitch[1] != RecStructData.System.InSwitch[1]
+        || SendStructData.System.InSwitch[2] != RecStructData.System.InSwitch[2]
+        || SendStructData.System.InSwitch[3] != RecStructData.System.InSwitch[3]
+        || SendStructData.System.InSwitch[4] != RecStructData.System.InSwitch[4]
+        || SendStructData.System.none1 != RecStructData.System.none1) {
         SendStructData.System.input_source = RecStructData.System.input_source;
-        SendStructData.System.aux_mode = RecStructData.System.aux_mode;
-        SendStructData.System.device_mode = RecStructData.System.device_mode;
-        SendStructData.System.Hi_src_vol = RecStructData.System.Hi_src_vol;
-        SendStructData.System.Blue_src_vol = RecStructData.System.Blue_src_vol;
-        SendStructData.System.Aux_src_vol = RecStructData.System.Aux_src_vol;
+        SendStructData.System.mixer_source = RecStructData.System.mixer_source;
+        for (int i=0; i<5; i++) {
+            SendStructData.System.InSwitch[i]=RecStructData.System.InSwitch[i];
+        }
         SendStructData.System.none1 = RecStructData.System.none1;
-        SendStructData.System.none2 = RecStructData.System.none2;
         
         if (uptodevice == true) {
             SendFrameData.FrameType = WRITE_CMD;
@@ -1043,19 +1013,19 @@
     // 比较系统配置数据
     if (SendStructData.System.main_vol != RecStructData.System.main_vol ||
         //680通过系统设置控制总音量，461通过Input.2.MUSIC.控制总音量
-        SendStructData.System.alldelay != RecStructData.System.alldelay
-        || SendStructData.System.noisegate_t != RecStructData.System.noisegate_t
-        || SendStructData.System.AutoSource != RecStructData.System.AutoSource
-        || SendStructData.System.AutoSourcedB != RecStructData.System.AutoSourcedB
+        SendStructData.System.high_mode != RecStructData.System.high_mode
+        || SendStructData.System.aux_mode != RecStructData.System.aux_mode
+        || SendStructData.System.out_mode != RecStructData.System.out_mode
+        || SendStructData.System.mixer_SourcedB != RecStructData.System.mixer_SourcedB
         || SendStructData.System.MainvolMuteFlg != RecStructData.System.MainvolMuteFlg
-        || SendStructData.System.none6 != RecStructData.System.none6) {
+        || SendStructData.System.theme != RecStructData.System.theme) {
         SendStructData.System.main_vol = RecStructData.System.main_vol;
-        SendStructData.System.alldelay = RecStructData.System.alldelay;
-        SendStructData.System.noisegate_t = RecStructData.System.noisegate_t;
-        SendStructData.System.AutoSource = RecStructData.System.AutoSource;
-        SendStructData.System.AutoSourcedB = RecStructData.System.AutoSourcedB;
+        SendStructData.System.high_mode = RecStructData.System.high_mode;
+        SendStructData.System.aux_mode = RecStructData.System.aux_mode;
+        SendStructData.System.out_mode = RecStructData.System.out_mode;
+        SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB;
         SendStructData.System.MainvolMuteFlg = RecStructData.System.MainvolMuteFlg;
-        SendStructData.System.none6 = RecStructData.System.none6;
+        SendStructData.System.theme = RecStructData.System.theme;
         
         if (uptodevice == true) {
             SendFrameData.FrameType = WRITE_CMD;
@@ -1073,24 +1043,33 @@
         }
     }
     // 比较系统通道输出类型配置数据
-    if (   SendStructData.System.out1_spk_type != RecStructData.System.out1_spk_type
-        || SendStructData.System.out2_spk_type != RecStructData.System.out2_spk_type
-        || SendStructData.System.out3_spk_type != RecStructData.System.out3_spk_type
-        || SendStructData.System.out4_spk_type != RecStructData.System.out4_spk_type
-        || SendStructData.System.out5_spk_type != RecStructData.System.out5_spk_type
-        || SendStructData.System.out6_spk_type != RecStructData.System.out6_spk_type
-        || SendStructData.System.out7_spk_type != RecStructData.System.out7_spk_type
-        || SendStructData.System.out8_spk_type != RecStructData.System.out8_spk_type) {
-        
-        SendStructData.System.out1_spk_type = RecStructData.System.out1_spk_type;
-        SendStructData.System.out2_spk_type = RecStructData.System.out2_spk_type;
-        SendStructData.System.out3_spk_type = RecStructData.System.out3_spk_type;
-        SendStructData.System.out4_spk_type = RecStructData.System.out4_spk_type;
-        SendStructData.System.out5_spk_type = RecStructData.System.out5_spk_type;
-        SendStructData.System.out6_spk_type = RecStructData.System.out6_spk_type;
-        SendStructData.System.out7_spk_type = RecStructData.System.out7_spk_type;
-        SendStructData.System.out8_spk_type = RecStructData.System.out8_spk_type;
-        
+    BOOL sendSystemId6=NO;
+    for (int i=0; i<8; i++) {
+        if ((SendStructData.System.none[i])!=(RecStructData.System.none[i])) {
+            SendStructData.System.none[i]=RecStructData.System.none[i];
+            sendSystemId6=YES;
+        }
+    }
+    for (int i=0; i<8; i++) {
+        if ((SendStructData.System.high_Low_Set[i])!=(RecStructData.System.high_Low_Set[i])) {
+            SendStructData.System.high_Low_Set[i]=RecStructData.System.high_Low_Set[i];
+            sendSystemId6=YES;
+        }
+    }
+    for (int i=0; i<16; i++) {
+        if ((SendStructData.System.in_spk_type[i])!=(RecStructData.System.in_spk_type[i])) {
+            SendStructData.System.in_spk_type[i]=RecStructData.System.in_spk_type[i];
+            sendSystemId6=YES;
+        }
+    }
+    for (int i=0; i<16; i++) {
+        if ((SendStructData.System.out_spk_type[i])!=(RecStructData.System.out_spk_type[i])) {
+            SendStructData.System.out_spk_type[i]=RecStructData.System.out_spk_type[i];
+            sendSystemId6=YES;
+        }
+    }
+    if (sendSystemId6) {
+
         if (uptodevice == true) {
             SendFrameData.FrameType = WRITE_CMD;
             SendFrameData.DeviceID = 0x01;
@@ -1100,46 +1079,46 @@
             SendFrameData.DataID = 0x00;
             SendFrameData.PCFadeInFadeOutFlg = 0x00;
             SendFrameData.PcCustom = 0x00;
-            SendFrameData.DataLen = 8;
+            SendFrameData.DataLen = 48;
             
             U0SendFrameFlg = YES;
             [self SendDataToDevice:FALSE];
         }
     }
     // 比较系统通道输出类型配置数据
-    if (   SendStructData.System.out9_spk_type != RecStructData.System.out9_spk_type
-        || SendStructData.System.out10_spk_type != RecStructData.System.out10_spk_type
-        || SendStructData.System.out11_spk_type != RecStructData.System.out11_spk_type
-        || SendStructData.System.out12_spk_type != RecStructData.System.out12_spk_type
-        || SendStructData.System.out13_spk_type != RecStructData.System.out13_spk_type
-        || SendStructData.System.out14_spk_type != RecStructData.System.out14_spk_type
-        || SendStructData.System.out15_spk_type != RecStructData.System.out15_spk_type
-        || SendStructData.System.out16_spk_type != RecStructData.System.out16_spk_type) {
-        
-        SendStructData.System.out9_spk_type = RecStructData.System.out9_spk_type;
-        SendStructData.System.out10_spk_type = RecStructData.System.out10_spk_type;
-        SendStructData.System.out11_spk_type = RecStructData.System.out11_spk_type;
-        SendStructData.System.out12_spk_type = RecStructData.System.out12_spk_type;
-        SendStructData.System.out13_spk_type = RecStructData.System.out13_spk_type;
-        SendStructData.System.out14_spk_type = RecStructData.System.out14_spk_type;
-        SendStructData.System.out15_spk_type = RecStructData.System.out15_spk_type;
-        SendStructData.System.out16_spk_type = RecStructData.System.out16_spk_type;
-        
-        if (uptodevice == true) {
-            SendFrameData.FrameType = WRITE_CMD;
-            SendFrameData.DeviceID = 0x01;
-            SendFrameData.UserID = 0x00;
-            SendFrameData.DataType = SYSTEM;
-            SendFrameData.ChannelID = SYSTEM_SPK_TYPEB;
-            SendFrameData.DataID = 0x00;
-            SendFrameData.PCFadeInFadeOutFlg = 0x00;
-            SendFrameData.PcCustom = 0x00;
-            SendFrameData.DataLen = 8;
-            
-            U0SendFrameFlg = YES;
-            [self SendDataToDevice:FALSE];
-        }
-    }
+//    if (   SendStructData.System.out9_spk_type != RecStructData.System.out9_spk_type
+//        || SendStructData.System.out10_spk_type != RecStructData.System.out10_spk_type
+//        || SendStructData.System.out11_spk_type != RecStructData.System.out11_spk_type
+//        || SendStructData.System.out12_spk_type != RecStructData.System.out12_spk_type
+//        || SendStructData.System.out13_spk_type != RecStructData.System.out13_spk_type
+//        || SendStructData.System.out14_spk_type != RecStructData.System.out14_spk_type
+//        || SendStructData.System.out15_spk_type != RecStructData.System.out15_spk_type
+//        || SendStructData.System.out16_spk_type != RecStructData.System.out16_spk_type) {
+//
+//        SendStructData.System.out9_spk_type = RecStructData.System.out9_spk_type;
+//        SendStructData.System.out10_spk_type = RecStructData.System.out10_spk_type;
+//        SendStructData.System.out11_spk_type = RecStructData.System.out11_spk_type;
+//        SendStructData.System.out12_spk_type = RecStructData.System.out12_spk_type;
+//        SendStructData.System.out13_spk_type = RecStructData.System.out13_spk_type;
+//        SendStructData.System.out14_spk_type = RecStructData.System.out14_spk_type;
+//        SendStructData.System.out15_spk_type = RecStructData.System.out15_spk_type;
+//        SendStructData.System.out16_spk_type = RecStructData.System.out16_spk_type;
+//
+//        if (uptodevice == true) {
+//            SendFrameData.FrameType = WRITE_CMD;
+//            SendFrameData.DeviceID = 0x01;
+//            SendFrameData.UserID = 0x00;
+//            SendFrameData.DataType = SYSTEM;
+//            SendFrameData.ChannelID = SYSTEM_SPK_TYPEB;
+//            SendFrameData.DataID = 0x00;
+//            SendFrameData.PCFadeInFadeOutFlg = 0x00;
+//            SendFrameData.PcCustom = 0x00;
+//            SendFrameData.DataLen = 8;
+//
+//            U0SendFrameFlg = YES;
+//            [self SendDataToDevice:FALSE];
+//        }
+//    }
     /**************************   input page   *******************************/
     for(int i=0;i<INS_CH_MAX;i++){
         //---id = 0        杂项
@@ -1254,7 +1233,7 @@
                 SendFrameData.DeviceID = 0x01;
                 SendFrameData.UserID = 0x00;
                 SendFrameData.DataType = MUSIC;
-                SendFrameData.ChannelID = 0x02;//MUSIC 固定2
+                SendFrameData.ChannelID = i;//MUSIC 固定2
                 SendFrameData.DataID = IN_MISC_ID;
                 SendFrameData.PCFadeInFadeOutFlg = 0x00;//
                 SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
@@ -1289,7 +1268,7 @@
                 SendFrameData.DeviceID = 0x01;
                 SendFrameData.UserID = 0x00;
                 SendFrameData.DataType = MUSIC;
-                SendFrameData.ChannelID = 0x02;//MUSIC 固定2
+                SendFrameData.ChannelID = i;//MUSIC 固定2
                 SendFrameData.DataID = IN_NOISEGATE_ID;
                 SendFrameData.PCFadeInFadeOutFlg = 0x00;
                 SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
@@ -1297,6 +1276,34 @@
                 
                 U0SendFrameFlg = YES;
                 [self SendDataToDevice:FALSE];
+            }
+        }
+        for(int j=0;j<IN_CH_EQ_MAX_USE;j++){
+            if((SendStructData.IN_CH[i].EQ[j].freq != RecStructData.IN_CH[i].EQ[j].freq) ||
+               (SendStructData.IN_CH[i].EQ[j].level   != RecStructData.IN_CH[i].EQ[j].level) ||
+               (SendStructData.IN_CH[i].EQ[j].bw      != RecStructData.IN_CH[i].EQ[j].bw) ||
+               (SendStructData.IN_CH[i].EQ[j].shf_db  != RecStructData.IN_CH[i].EQ[j].shf_db) ||
+               (SendStructData.IN_CH[i].EQ[j].type    != RecStructData.IN_CH[i].EQ[j].type)){
+
+                SendStructData.IN_CH[i].EQ[j].freq  = RecStructData.IN_CH[i].EQ[j].freq;
+                SendStructData.IN_CH[i].EQ[j].level = RecStructData.IN_CH[i].EQ[j].level;
+                SendStructData.IN_CH[i].EQ[j].bw    = RecStructData.IN_CH[i].EQ[j].bw;
+                SendStructData.IN_CH[i].EQ[j].shf_db= RecStructData.IN_CH[i].EQ[j].shf_db;
+                SendStructData.IN_CH[i].EQ[j].type  = RecStructData.IN_CH[i].EQ[j].type;
+                if (uptodevice == true) {
+                    SendFrameData.FrameType = WRITE_CMD;
+                    SendFrameData.DeviceID = 0x01;
+                    SendFrameData.UserID = 0x00;
+                    SendFrameData.DataType = MUSIC;
+                    SendFrameData.ChannelID = i;
+                    SendFrameData.DataID = j;
+                    SendFrameData.PCFadeInFadeOutFlg = 0x00;
+                    SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
+                    SendFrameData.DataLen = 8;
+
+                    U0SendFrameFlg = YES;
+                    [self SendDataToDevice:FALSE];
+                }
             }
         }
     }
@@ -1636,19 +1643,31 @@
         SendFrameData.DataLen = 0x00;
         [self SendDataToDevice:FALSE];
     }else{
-        if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            /*增加读取Input数据，获取音量 0x77*/
+        for(int i=0;i<Input_CH_MAX;i++){
             SendFrameData.FrameType = READ_CMD;
             SendFrameData.DeviceID = 0x01;
             SendFrameData.UserID = 0x00;
             SendFrameData.DataType = MUSIC;
-            SendFrameData.ChannelID = 0x02;//MUSIC 固定2
-            SendFrameData.DataID = 0x77;//IN_MISC_ID;
+            SendFrameData.ChannelID = i;
+            SendFrameData.DataID = 0x77;//读当前组的数据
             SendFrameData.PCFadeInFadeOutFlg = 0x00;//
             SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
             SendFrameData.DataLen = 8;//IN_LEN;
             [self SendDataToDevice:FALSE];
         }
+//        if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
+//            /*增加读取Input数据，获取音量 0x77*/
+//            SendFrameData.FrameType = READ_CMD;
+//            SendFrameData.DeviceID = 0x01;
+//            SendFrameData.UserID = 0x00;
+//            SendFrameData.DataType = MUSIC;
+//            SendFrameData.ChannelID = 0x02;//MUSIC 固定2
+//            SendFrameData.DataID = 0x77;//IN_MISC_ID;
+//            SendFrameData.PCFadeInFadeOutFlg = 0x00;//
+//            SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
+//            SendFrameData.DataLen = 8;//IN_LEN;
+//            [self SendDataToDevice:FALSE];
+//        }
     }
     /*读取音量*/
     if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_SYSTEM){
@@ -1675,21 +1694,7 @@
     SendFrameData.PcCustom = 0x00;
     SendFrameData.DataLen = 0x00;
     [self SendDataToDevice:FALSE];
-    
-    
-    /*读取通道输出类型配置*/
-    if(BOOL_SYSTEM_SPK_TYPEB){
-        SendFrameData.FrameType = READ_CMD;
-        SendFrameData.DeviceID = 0x01;
-        SendFrameData.UserID = 0x00;
-        SendFrameData.DataType = SYSTEM;
-        SendFrameData.ChannelID = SYSTEM_SPK_TYPEB;
-        SendFrameData.DataID = 0x00;
-        SendFrameData.PCFadeInFadeOutFlg = 0x00;
-        SendFrameData.PcCustom = 0x00;
-        SendFrameData.DataLen = 0x00;
-        [self SendDataToDevice:FALSE];
-    }
+
     
     //增加读取全部通道的输出数据 Recovery
     //    if(CurPage != UI_Page_Home){
@@ -1705,6 +1710,7 @@
         SendFrameData.DataLen = 8;//IN_LEN;
         [self SendDataToDevice:FALSE];
     }
+    
     //    }
     
     
@@ -2513,14 +2519,12 @@
     }
     
     SendStructData.System.input_source = RecStructData.System.input_source;
-    SendStructData.System.aux_mode = RecStructData.System.aux_mode;
-    SendStructData.System.device_mode = RecStructData.System.device_mode;
-    SendStructData.System.Hi_src_vol = RecStructData.System.Hi_src_vol;
-    SendStructData.System.Blue_src_vol = RecStructData.System.Blue_src_vol;
-    SendStructData.System.Aux_src_vol = RecStructData.System.Aux_src_vol;
-    SendStructData.System.none1 = RecStructData.System.none1;
-    SendStructData.System.none2 = RecStructData.System.none2;
+    SendStructData.System.mixer_source = RecStructData.System.mixer_source;
+    for (int i=0; i<5; i++) {
+        SendStructData.System.InSwitch[i]=RecStructData.System.InSwitch[i];
+    }
     
+    SendStructData.System.none1 = RecStructData.System.none1;
     
     SendFrameData.FrameType = WRITE_CMD;
     SendFrameData.DeviceID = 0x01;
@@ -2542,12 +2546,12 @@
     BOOL_SeffOpt=true;
     //插入静音包
     SendStructData.System.main_vol = 0;
-    SendStructData.System.alldelay = RecStructData.System.alldelay;
-    SendStructData.System.noisegate_t = RecStructData.System.noisegate_t;
-    SendStructData.System.AutoSource = RecStructData.System.AutoSource;
-    SendStructData.System.AutoSourcedB = RecStructData.System.AutoSourcedB;
+    SendStructData.System.high_mode = RecStructData.System.high_mode;
+    SendStructData.System.aux_mode = RecStructData.System.aux_mode;
+    SendStructData.System.out_mode = RecStructData.System.out_mode;
+    SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB;
     SendStructData.System.MainvolMuteFlg = 0;
-    SendStructData.System.none6 = RecStructData.System.none6;
+    SendStructData.System.theme = RecStructData.System.theme;
     
     SendFrameData.FrameType = WRITE_CMD;
     SendFrameData.DeviceID = 0x01;
@@ -2608,12 +2612,12 @@
     
     //插入静音包
     SendStructData.System.main_vol = RecStructData.System.main_vol;
-    SendStructData.System.alldelay = RecStructData.System.alldelay;
-    SendStructData.System.noisegate_t = RecStructData.System.noisegate_t;
-    SendStructData.System.AutoSource = RecStructData.System.AutoSource;
-    SendStructData.System.AutoSourcedB = RecStructData.System.AutoSourcedB;
+    SendStructData.System.high_mode = RecStructData.System.high_mode;
+    SendStructData.System.aux_mode = RecStructData.System.aux_mode;
+    SendStructData.System.out_mode = RecStructData.System.out_mode;
+    SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB;
     SendStructData.System.MainvolMuteFlg = RecStructData.System.MainvolMuteFlg;
-    SendStructData.System.none6 = RecStructData.System.none6;
+    SendStructData.System.theme = RecStructData.System.theme;
     
     SendFrameData.FrameType = WRITE_CMD;
     SendFrameData.DeviceID = 0x01;
@@ -2804,9 +2808,9 @@
 }
 
 - (void)syncMCUSystemData{
-//    if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
+    if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
         return;
-//    }
+    }
 
     SendFrameData.FrameType = WRITE_CMD;
     SendFrameData.DeviceID = 0x01;
@@ -2838,20 +2842,20 @@
     SendFrameData.DataID = 0x00;
     SendFrameData.PCFadeInFadeOutFlg = 0x00;
     SendFrameData.PcCustom = 0x00;
-    SendFrameData.DataLen = 8;
+    SendFrameData.DataLen = 48;
     [self SendDataToDevice:FALSE];
     
     
-    SendFrameData.FrameType = WRITE_CMD;
-    SendFrameData.DeviceID = 0x01;
-    SendFrameData.UserID = 0x00;
-    SendFrameData.DataType = SYSTEM;
-    SendFrameData.ChannelID = SYSTEM_SPK_TYPEB;
-    SendFrameData.DataID = 0x00;
-    SendFrameData.PCFadeInFadeOutFlg = 0x00;
-    SendFrameData.PcCustom = 0x00;
-    SendFrameData.DataLen = 8;
-    [self SendDataToDevice:FALSE];
+//    SendFrameData.FrameType = WRITE_CMD;
+//    SendFrameData.DeviceID = 0x01;
+//    SendFrameData.UserID = 0x00;
+//    SendFrameData.DataType = SYSTEM;
+//    SendFrameData.ChannelID = SYSTEM_SPK_TYPEB;
+//    SendFrameData.DataID = 0x00;
+//    SendFrameData.PCFadeInFadeOutFlg = 0x00;
+//    SendFrameData.PcCustom = 0x00;
+//    SendFrameData.DataLen = 8;
+//    [self SendDataToDevice:FALSE];
     
 }
 
@@ -2894,13 +2898,13 @@
 
 - (void)saveMCUSEFFData{
     //插入静音包
-    SendStructData.System.main_vol = 0;
-    SendStructData.System.alldelay = RecStructData.System.alldelay;
-    SendStructData.System.noisegate_t = RecStructData.System.noisegate_t;
-    SendStructData.System.AutoSource = RecStructData.System.AutoSource;
-    SendStructData.System.AutoSourcedB = RecStructData.System.AutoSourcedB;
+    SendStructData.System.main_vol =0;
+    SendStructData.System.high_mode = RecStructData.System.high_mode;
+    SendStructData.System.aux_mode = RecStructData.System.aux_mode;
+    SendStructData.System.out_mode = RecStructData.System.out_mode;
+    SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB;
     SendStructData.System.MainvolMuteFlg = 0;
-    SendStructData.System.none6 = RecStructData.System.none6;
+    SendStructData.System.theme = RecStructData.System.theme;
     
     SendFrameData.FrameType = WRITE_CMD;
     SendFrameData.DeviceID = 0x01;
@@ -3037,12 +3041,12 @@
     
     //插入静音包
     SendStructData.System.main_vol = RecStructData.System.main_vol;
-    SendStructData.System.alldelay = RecStructData.System.alldelay;
-    SendStructData.System.noisegate_t = RecStructData.System.noisegate_t;
-    SendStructData.System.AutoSource = RecStructData.System.AutoSource;
-    SendStructData.System.AutoSourcedB = RecStructData.System.AutoSourcedB;
+    SendStructData.System.high_mode = RecStructData.System.high_mode;
+    SendStructData.System.aux_mode = RecStructData.System.aux_mode;
+    SendStructData.System.out_mode = RecStructData.System.out_mode;
+    SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB;
     SendStructData.System.MainvolMuteFlg = RecStructData.System.MainvolMuteFlg;
-    SendStructData.System.none6 = RecStructData.System.none6;
+    SendStructData.System.theme = RecStructData.System.theme;
     
     SendFrameData.FrameType = WRITE_CMD;
     SendFrameData.DeviceID = 0x01;
@@ -3065,23 +3069,9 @@
 
 //根據通道類型設置濾波器頻率
 void setXOverFreqWithOutputSpkType(int channel){
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]  = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]  = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
     //根据名字设置Xover频率
     //高频
     for(int i=0;i<6;i++){
@@ -3160,27 +3150,7 @@ void setXOverFreqWithOutputSpkType(int channel){
 }
 void setMixerVolWithOutputSpk(int chsel){
     int spk_type=0;
-    switch (chsel) {
-        case 0: spk_type = RecStructData.System.out1_spk_type;break;
-        case 1: spk_type = RecStructData.System.out2_spk_type;break;
-        case 2: spk_type = RecStructData.System.out3_spk_type;break;
-        case 3: spk_type = RecStructData.System.out4_spk_type;break;
-        case 4: spk_type = RecStructData.System.out5_spk_type;break;
-        case 5: spk_type = RecStructData.System.out6_spk_type;break;
-        case 6: spk_type = RecStructData.System.out7_spk_type;break;
-        case 7: spk_type = RecStructData.System.out8_spk_type;break;
-            
-        case 8: spk_type = RecStructData.System.out9_spk_type;break;
-        case 9: spk_type = RecStructData.System.out10_spk_type;break;
-        case 10: spk_type = RecStructData.System.out11_spk_type;break;
-        case 11: spk_type = RecStructData.System.out12_spk_type;break;
-        case 12: spk_type = RecStructData.System.out13_spk_type;break;
-        case 13: spk_type = RecStructData.System.out14_spk_type;break;
-        case 14: spk_type = RecStructData.System.out15_spk_type;break;
-        case 15: spk_type = RecStructData.System.out16_spk_type;break;
-        default:
-            break;
-    }
+    spk_type=RecStructData.System.out_spk_type[chsel];
     
     switch (spk_type) {
         case 0://空
@@ -4556,39 +4526,36 @@ void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initD
         
     }else if(DataStruchID==SYSTEM){
         RecStructData.System.input_source = initData[initDataCnt];
-        RecStructData.System.aux_mode = initData[++initDataCnt];
-        RecStructData.System.device_mode = initData[++initDataCnt];
-        RecStructData.System.Hi_src_vol = initData[++initDataCnt];
-        RecStructData.System.Blue_src_vol = initData[++initDataCnt];
-        RecStructData.System.Aux_src_vol = initData[++initDataCnt];
+        RecStructData.System.mixer_source = initData[++initDataCnt];
+        RecStructData.System.InSwitch[0] = initData[++initDataCnt];
+        RecStructData.System.InSwitch[1] = initData[++initDataCnt];
+        RecStructData.System.InSwitch[2] = initData[++initDataCnt];
+        RecStructData.System.InSwitch[3] = initData[++initDataCnt];
+        RecStructData.System.InSwitch[4] = initData[++initDataCnt];
         RecStructData.System.none1 = initData[++initDataCnt];
-        RecStructData.System.none2 = initData[++initDataCnt];
         
         RecStructData.System.main_vol = initData[++initDataCnt];
         RecStructData.System.main_vol+=initData[++initDataCnt]*256;
-        RecStructData.System.alldelay = initData[++initDataCnt];
-        RecStructData.System.noisegate_t = initData[++initDataCnt];
-        RecStructData.System.AutoSource = initData[++initDataCnt];
-        RecStructData.System.AutoSourcedB = initData[++initDataCnt];
+        RecStructData.System.high_mode = initData[++initDataCnt];
+        RecStructData.System.aux_mode = initData[++initDataCnt];
+        RecStructData.System.out_mode = initData[++initDataCnt];
+        RecStructData.System.mixer_SourcedB = initData[++initDataCnt];
         RecStructData.System.MainvolMuteFlg = initData[++initDataCnt];
-        RecStructData.System.none6 = initData[++initDataCnt];
+        RecStructData.System.theme = initData[++initDataCnt];
         
-        RecStructData.System.out1_spk_type = initData[++initDataCnt];
-        RecStructData.System.out2_spk_type = initData[++initDataCnt];
-        RecStructData.System.out3_spk_type = initData[++initDataCnt];
-        RecStructData.System.out4_spk_type = initData[++initDataCnt];
-        RecStructData.System.out5_spk_type = initData[++initDataCnt];
-        RecStructData.System.out6_spk_type = initData[++initDataCnt];
-        RecStructData.System.out7_spk_type = initData[++initDataCnt];
-        RecStructData.System.out8_spk_type = initData[++initDataCnt];
-        RecStructData.System.out9_spk_type = initData[++initDataCnt];
-        RecStructData.System.out10_spk_type = initData[++initDataCnt];
-        RecStructData.System.out11_spk_type = initData[++initDataCnt];
-        RecStructData.System.out12_spk_type = initData[++initDataCnt];
-        RecStructData.System.out13_spk_type = initData[++initDataCnt];
-        RecStructData.System.out14_spk_type = initData[++initDataCnt];
-        RecStructData.System.out15_spk_type = initData[++initDataCnt];
-        RecStructData.System.out16_spk_type = initData[++initDataCnt];
+        for (int i=0; i<8; i++) {
+            RecStructData.System.none[i]=initData[++initDataCnt];
+        }
+        for (int i=0; i<8; i++) {
+            RecStructData.System.high_Low_Set[i]=initData[++initDataCnt];
+        }
+        for (int i=0; i<16; i++) {
+            RecStructData.System.in_spk_type[i]=initData[++initDataCnt];
+        }
+        for (int i=0; i<16; i++) {
+            RecStructData.System.out_spk_type[i]=initData[++initDataCnt];
+        }
+        
     }
 }
 
@@ -4876,86 +4843,26 @@ void SendDelayDatabySystemChannel(){
     
 }
 void setOutputSpkType(int type,int ch){
-    switch (ch) {
-        case 0: RecStructData.System.out1_spk_type = type; break;
-        case 1: RecStructData.System.out2_spk_type = type; break;
-        case 2: RecStructData.System.out3_spk_type = type; break;
-            
-        case 3: RecStructData.System.out4_spk_type = type; break;
-        case 4: RecStructData.System.out5_spk_type = type; break;
-        case 5: RecStructData.System.out6_spk_type = type; break;
-            
-        case 6: RecStructData.System.out7_spk_type = type; break;
-        case 7: RecStructData.System.out8_spk_type = type; break;
-        case 8: RecStructData.System.out9_spk_type = type; break;
-            
-        case 9: RecStructData.System.out10_spk_type = type; break;
-        case 10: RecStructData.System.out11_spk_type = type; break;
-        case 11: RecStructData.System.out12_spk_type = type; break;
-            
-        case 12: RecStructData.System.out13_spk_type = type; break;
-        case 13: RecStructData.System.out14_spk_type = type; break;
-        case 14: RecStructData.System.out15_spk_type = type; break;
-            
-        case 15: RecStructData.System.out16_spk_type = type; break;
-        default:
-            break;
-    }
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]  = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]  = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+    ChannelNumBuf[ch]= RecStructData.System.out_spk_type[ch]=type;
+
 }
 #pragma mark -----------//初始化系统结构数据
 void initSystemDataStruct(){
-    SendStructData.System.input_source = RecStructData.System.input_source = 2;
-    SendStructData.System.aux_mode = RecStructData.System.aux_mode = 0;
-    SendStructData.System.device_mode = RecStructData.System.device_mode = 0;
-    SendStructData.System.Hi_src_vol = RecStructData.System.Hi_src_vol = 0;
-    SendStructData.System.Blue_src_vol = RecStructData.System.Blue_src_vol = 0;
-    SendStructData.System.Aux_src_vol = RecStructData.System.Aux_src_vol = 0;
-    SendStructData.System.none1 = RecStructData.System.none1 = 0;
-    SendStructData.System.none2 = RecStructData.System.none2 = 0;
+    SendStructData.System.input_source = RecStructData.System.input_source=2;
+    SendStructData.System.mixer_source = RecStructData.System.mixer_source=0;
+    for (int i=0; i<5; i++) {
+        SendStructData.System.InSwitch[i]=RecStructData.System.InSwitch[i]=0;
+    }
+    SendStructData.System.none1 = RecStructData.System.none1=0;
     
-    SendStructData.System.main_vol = RecStructData.System.main_vol = 38;
-    SendStructData.System.alldelay = RecStructData.System.alldelay = 0;
-    SendStructData.System.noisegate_t = RecStructData.System.noisegate_t = 0;
-    SendStructData.System.AutoSource = RecStructData.System.AutoSource = 0;
-    SendStructData.System.AutoSourcedB = RecStructData.System.AutoSourcedB = 0;
-    SendStructData.System.MainvolMuteFlg = RecStructData.System.MainvolMuteFlg = 0;
-    SendStructData.System.none6 = RecStructData.System.none6 = 0;
+    SendStructData.System.main_vol = RecStructData.System.main_vol=38;
+    SendStructData.System.high_mode = RecStructData.System.high_mode=0;
+    SendStructData.System.aux_mode = RecStructData.System.aux_mode=0;
+    SendStructData.System.out_mode = RecStructData.System.out_mode=0;
+    SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB=0;
+    SendStructData.System.MainvolMuteFlg = RecStructData.System.MainvolMuteFlg=0;
+    SendStructData.System.theme = RecStructData.System.theme=0;
     
-    SendStructData.System.out1_spk_type = RecStructData.System.out1_spk_type;
-    SendStructData.System.out2_spk_type = RecStructData.System.out2_spk_type;
-    SendStructData.System.out3_spk_type = RecStructData.System.out3_spk_type;
-    SendStructData.System.out4_spk_type = RecStructData.System.out4_spk_type;
-    SendStructData.System.out5_spk_type = RecStructData.System.out5_spk_type;
-    SendStructData.System.out6_spk_type = RecStructData.System.out6_spk_type;
-    SendStructData.System.out7_spk_type = RecStructData.System.out7_spk_type;
-    SendStructData.System.out8_spk_type = RecStructData.System.out8_spk_type;
-    
-    SendStructData.System.out9_spk_type = RecStructData.System.out9_spk_type;
-    SendStructData.System.out10_spk_type = RecStructData.System.out10_spk_type;
-    SendStructData.System.out11_spk_type = RecStructData.System.out11_spk_type;
-    SendStructData.System.out12_spk_type = RecStructData.System.out12_spk_type;
-    SendStructData.System.out13_spk_type = RecStructData.System.out13_spk_type;
-    SendStructData.System.out14_spk_type = RecStructData.System.out14_spk_type;
-    SendStructData.System.out15_spk_type = RecStructData.System.out15_spk_type;
-    SendStructData.System.out16_spk_type = RecStructData.System.out16_spk_type;
     
 }
 #pragma mark-----数据初始化
@@ -5054,24 +4961,6 @@ void setOutputSpkTypeDefault(){
         setOutputSpkType(ChannelTypeDefault[i],i);
     }
     
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    ChannelNumBuf[8] = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9] = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
-    
     for(int i=0;i<Output_CH_MAX;i++){
         //设置默认输出滤波器
         RecStructData.OUT_CH[i].h_filter=DefaultStructData.OUT_CH[i].h_filter;
@@ -5154,20 +5043,10 @@ void setOutputSpkTypeDefault(){
     
 }
 void setOutputSpkTypeClean(){
-    RecStructData.System.out1_spk_type=0;
-    RecStructData.System.out2_spk_type=0;
-    RecStructData.System.out3_spk_type=0;
-    RecStructData.System.out4_spk_type=0;
-    RecStructData.System.out5_spk_type=0;
-    RecStructData.System.out6_spk_type=0;
-    RecStructData.System.out7_spk_type=0;
-    RecStructData.System.out8_spk_type=0;
-    
-    RecStructData.System.out9_spk_type=0;
-    RecStructData.System.out10_spk_type=0;
-    RecStructData.System.out11_spk_type=0;
-    RecStructData.System.out12_spk_type=0;
-    
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i]=0;
+    }
+
     for(int i=0;i<Output_CH_MAX;i++){
         RecStructData.OUT_CH[i].IN1_Vol = 0;
         RecStructData.OUT_CH[i].IN2_Vol = 0;
@@ -5308,7 +5187,7 @@ void initJsonMacData(){
         //NSLog(@"A system_data[%d] = %d",j,(uint8)[[system_data objectAtIndex:j] unsignedCharValue]);
         JsonSinData.Jsys[8+j]=(uint8)[[system_data objectAtIndex:j] unsignedCharValue];
     }
-    //system_data
+    //system_spk_type
     NSArray *system_spk_type = [[[jsonDict objectForKey:@"data"] objectForKey:@"system"] objectForKey:@"system_spk_type"];
     NSLog(@"A system_spk_type =%lu",(unsigned long)system_spk_type.count);
     for(int j=0;j<system_spk_type.count;j++){
@@ -5463,7 +5342,7 @@ void initJsonMacData(){
                     FillRecDataStructFromArray(OUTPUT, i, JsonMacData.Data[0].JOUT.OutputJ[i]);
                 }
                 //SYSTEM
-//                FillRecDataStructFromArray(SYSTEM, 0, JsonSinData.Jsys);
+                FillRecDataStructFromArray(SYSTEM, 0, JsonSinData.Jsys);
                 [self ComparedToSendData:false];
                 //USER NAme
                 for(int i=0;i<=MAX_USE_GROUP;i++){
@@ -5593,7 +5472,7 @@ void initJsonMacData(){
             FillRecDataStructFromArray(OUTPUT, i, JsonMacData.Data[0].JOUT.OutputJ[i]);
         }
         //SYSTEM
-//        FillRecDataStructFromArray(SYSTEM, 0, JsonSinData.Jsys);
+        FillRecDataStructFromArray(SYSTEM, 0, JsonSinData.Jsys);
         [self ComparedToSendData:false];
         //USER NAme
         for(int i=0;i<=MAX_USE_GROUP;i++){

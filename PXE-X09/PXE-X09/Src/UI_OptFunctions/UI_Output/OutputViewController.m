@@ -322,71 +322,22 @@
 }
 
 - (void)setOutputSpkType:(int)type{
-    switch (output_channel_sel) {
-        case 0: RecStructData.System.out1_spk_type = type; break;
-        case 1: RecStructData.System.out2_spk_type = type; break;
-        case 2: RecStructData.System.out3_spk_type = type; break;
-            
-        case 3: RecStructData.System.out4_spk_type = type; break;
-        case 4: RecStructData.System.out5_spk_type = type; break;
-        case 5: RecStructData.System.out6_spk_type = type; break;
-            
-        case 6: RecStructData.System.out7_spk_type = type; break;
-        case 7: RecStructData.System.out8_spk_type = type; break;
-        case 8: RecStructData.System.out9_spk_type = type; break;
-            
-        case 9: RecStructData.System.out10_spk_type = type; break;
-        case 10: RecStructData.System.out11_spk_type = type; break;
-        case 11: RecStructData.System.out12_spk_type = type; break;
-            
-        case 12: RecStructData.System.out13_spk_type = type; break;
-        case 13: RecStructData.System.out14_spk_type = type; break;
-        case 14: RecStructData.System.out15_spk_type = type; break;
-            
-        case 15: RecStructData.System.out16_spk_type = type; break;
-        default:
-            break;
+
+    RecStructData.System.out_spk_type[output_channel_sel]=type;
+
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
     }
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]  = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]  = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+
 }
 
 - (int) getChannelNum:(int)channel{
     //int ChannelNumBuf[16];
     
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8] = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9] = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
+
     
     for(int i=0;i<16;i++){
         if(ChannelNumBuf[i]<0){
@@ -491,23 +442,10 @@
 - (void)checkLock{
     BOOL lock=false;
 
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]  = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]  = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
+
     
     for(int i=0;i<Output_CH_MAX;i++){
         if(ChannelNumBuf[i]!=0){
@@ -568,36 +506,10 @@
 #pragma 功能函数
 
 - (void)setOutputSpkTypeDefault{
-    RecStructData.System.out1_spk_type=6;
-    RecStructData.System.out2_spk_type=12;
-    RecStructData.System.out3_spk_type=15;
-    RecStructData.System.out4_spk_type=18;
-    RecStructData.System.out5_spk_type=0;
-    RecStructData.System.out6_spk_type=0;
-    RecStructData.System.out7_spk_type=22;
-    RecStructData.System.out8_spk_type=23;
-    
-    RecStructData.System.out9_spk_type=0;
-    RecStructData.System.out10_spk_type=0;
-    
-    
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    ChannelNumBuf[8] = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9] = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
-    
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i]=ChannelTypeDefault[i];
+    }
+
     for(int i=0;i<Output_CH_MAX;i++){
         //设置默认输出滤波器
         RecStructData.OUT_CH[i].h_filter=1;
@@ -685,17 +597,9 @@
     [self FlashOutputSpkType];
 }
 - (void)setOutputSpkTypeClean{
-    RecStructData.System.out1_spk_type=0;
-    RecStructData.System.out2_spk_type=0;
-    RecStructData.System.out3_spk_type=0;
-    RecStructData.System.out4_spk_type=0;
-    RecStructData.System.out5_spk_type=0;
-    RecStructData.System.out6_spk_type=0;
-    RecStructData.System.out7_spk_type=0;
-    RecStructData.System.out8_spk_type=0;
-    
-    RecStructData.System.out9_spk_type=0;
-    RecStructData.System.out10_spk_type=0;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i]=0;
+    }
     
     
     for(int i=0;i<Output_CH_MAX;i++){
@@ -823,23 +727,9 @@
 - (int) GetChannelNum:(int)channel{
     
     //更新列表
-    ChannelNumBuf[0]= RecStructData.System.out1_spk_type;
-    ChannelNumBuf[1]= RecStructData.System.out2_spk_type;
-    ChannelNumBuf[2]= RecStructData.System.out3_spk_type;
-    ChannelNumBuf[3]= RecStructData.System.out4_spk_type;
-    ChannelNumBuf[4]= RecStructData.System.out5_spk_type;
-    ChannelNumBuf[5]= RecStructData.System.out6_spk_type;
-    ChannelNumBuf[6]= RecStructData.System.out7_spk_type;
-    ChannelNumBuf[7]= RecStructData.System.out8_spk_type;
-    
-    ChannelNumBuf[8]  = RecStructData.System.out9_spk_type;
-    ChannelNumBuf[9]  = RecStructData.System.out10_spk_type;
-    ChannelNumBuf[10] = RecStructData.System.out11_spk_type;
-    ChannelNumBuf[11] = RecStructData.System.out12_spk_type;
-    ChannelNumBuf[12] = RecStructData.System.out13_spk_type;
-    ChannelNumBuf[13] = RecStructData.System.out14_spk_type;
-    ChannelNumBuf[14] = RecStructData.System.out15_spk_type;
-    ChannelNumBuf[15] = RecStructData.System.out16_spk_type;
+    for (int i=0; i<16; i++) {
+        ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
+    }
     
     for(int i=0;i<16;i++){
         if(ChannelNumBuf[i]<0){

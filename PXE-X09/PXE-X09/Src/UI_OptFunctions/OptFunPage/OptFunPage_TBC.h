@@ -10,7 +10,6 @@
 #import "MixerViewController.h"
 #import "OutputPageViewController.h"
 #import "EQViewController.h"
-#import "XOverViewController.h"
 #import "DelayViewController.h"
 #import "OutputViewController.h"
 #import "XOverOutputViewController.h"
@@ -34,7 +33,7 @@
 //@property (nonatomic,strong) CDelayViewController *mCDelayPage;
 @property (nonatomic,strong) DelayViewController_FRS *mDelayPage_FRS;
 @property (nonatomic,strong) DelayViewController *mDelayPage;
-@property (nonatomic,strong) XOverViewController *mXOverPage;
+
 @property (nonatomic,strong) XOverOutputFRSViewController *mXOverOutputFRS;
 @property (nonatomic,strong) OutputViewController *mOutputPage;
 @property (nonatomic,strong) OutputViewController_FRS *mOutputPage_FRS;

@@ -191,13 +191,13 @@
     //PC_SOURCE_SET
     NSMutableArray *arraySystemTemp = [NSMutableArray array];
     SystemBuf[0] = RecStructData.System.input_source;
-    SystemBuf[1] = RecStructData.System.aux_mode;
-    SystemBuf[2] = RecStructData.System.device_mode;
-    SystemBuf[3] = RecStructData.System.Hi_src_vol;
-    SystemBuf[4] = RecStructData.System.Blue_src_vol;
-    SystemBuf[5] = RecStructData.System.Aux_src_vol;
-    SystemBuf[6] = RecStructData.System.none1;
-    SystemBuf[7] = RecStructData.System.none2;
+    SystemBuf[1] = RecStructData.System.mixer_source;
+    SystemBuf[2] = RecStructData.System.InSwitch[0];
+    SystemBuf[3] = RecStructData.System.InSwitch[1];
+    SystemBuf[4] = RecStructData.System.InSwitch[2];
+    SystemBuf[5] = RecStructData.System.InSwitch[3];
+    SystemBuf[6] = RecStructData.System.InSwitch[4];
+    SystemBuf[7] = RecStructData.System.none1;
     for (int i=0; i<8; i++) {
         [arraySystemTemp addObject:[NSNumber numberWithUnsignedInteger:SystemBuf[i]]];
     }
@@ -207,12 +207,12 @@
     NSMutableArray *system_data = [NSMutableArray array];//8
     SystemBuf[0] = RecStructData.System.main_vol;
     SystemBuf[1] = (RecStructData.System.main_vol >> 8) & 0xff;
-    SystemBuf[2] = RecStructData.System.alldelay;
-    SystemBuf[3] = RecStructData.System.noisegate_t;
-    SystemBuf[4] = RecStructData.System.AutoSource;
-    SystemBuf[5] = RecStructData.System.AutoSourcedB;
+    SystemBuf[2] = RecStructData.System.high_mode;
+    SystemBuf[3] = RecStructData.System.aux_mode;
+    SystemBuf[4] = RecStructData.System.out_mode;
+    SystemBuf[5] = RecStructData.System.mixer_SourcedB;
     SystemBuf[6] = RecStructData.System.MainvolMuteFlg;
-    SystemBuf[7] = RecStructData.System.none6;
+    SystemBuf[7] = RecStructData.System.theme;
     
     for (int i=0; i<8; i++) {
         [system_data addObject:[NSNumber numberWithUnsignedInteger:SystemBuf[i]]];
@@ -220,25 +220,22 @@
     fileModel.data.system.system_data = system_data;
     
     //system_spk_type
-    NSMutableArray *system_spk_type = [NSMutableArray array]; //8
-    SystemBuf[0] = RecStructData.System.out1_spk_type;
-    SystemBuf[1] = RecStructData.System.out2_spk_type;
-    SystemBuf[2] = RecStructData.System.out3_spk_type;
-    SystemBuf[3] = RecStructData.System.out4_spk_type;
-    SystemBuf[4] = RecStructData.System.out5_spk_type;
-    SystemBuf[5] = RecStructData.System.out6_spk_type;
-    SystemBuf[6] = RecStructData.System.out7_spk_type;
-    SystemBuf[7] = RecStructData.System.out8_spk_type;
-    SystemBuf[8] = RecStructData.System.out9_spk_type;
-    SystemBuf[9] = RecStructData.System.out10_spk_type;
-    SystemBuf[10] = RecStructData.System.out11_spk_type;
-    SystemBuf[11] = RecStructData.System.out12_spk_type;
-    SystemBuf[12] = RecStructData.System.out13_spk_type;
-    SystemBuf[13] = RecStructData.System.out14_spk_type;
-    SystemBuf[14] = RecStructData.System.out15_spk_type;
-    SystemBuf[15] = RecStructData.System.out16_spk_type;
-
+    NSMutableArray *system_spk_type = [NSMutableArray array]; //48
+    
+    for (int i=0; i<8; i++) {
+        SystemBuf[i]=RecStructData.System.none[i];
+    }
+    for (int i=0; i<8; i++) {
+        SystemBuf[i+8]=RecStructData.System.high_Low_Set[i];
+    }
     for (int i=0; i<16; i++) {
+        SystemBuf[i+16]=RecStructData.System.high_Low_Set[i];
+    }
+    for (int i=0; i<16; i++) {
+        SystemBuf[i+32]=RecStructData.System.out_spk_type[i];
+    }
+
+    for (int i=0; i<48; i++) {
         [system_spk_type addObject:[NSNumber numberWithUnsignedInteger:SystemBuf[i]]];
     }
     fileModel.data.system.system_spk_type = system_spk_type;
@@ -391,13 +388,13 @@
     //PC_SOURCE_SET
     NSMutableArray *arraySystemTemp = [NSMutableArray array];
     SystemBuf[0] = RecStructData.System.input_source;
-    SystemBuf[1] = RecStructData.System.aux_mode;
-    SystemBuf[2] = RecStructData.System.device_mode;
-    SystemBuf[3] = RecStructData.System.Hi_src_vol;
-    SystemBuf[4] = RecStructData.System.Blue_src_vol;
-    SystemBuf[5] = RecStructData.System.Aux_src_vol;
-    SystemBuf[6] = RecStructData.System.none1;
-    SystemBuf[7] = RecStructData.System.none2;
+    SystemBuf[1] = RecStructData.System.mixer_source;
+    SystemBuf[2] = RecStructData.System.InSwitch[0];
+    SystemBuf[3] = RecStructData.System.InSwitch[1];
+    SystemBuf[4] = RecStructData.System.InSwitch[2];
+    SystemBuf[5] = RecStructData.System.InSwitch[3];
+    SystemBuf[6] = RecStructData.System.InSwitch[4];
+    SystemBuf[7] = RecStructData.System.none1;
     for (int i=0; i<8; i++) {
         [arraySystemTemp addObject:[NSNumber numberWithUnsignedInteger:SystemBuf[i]]];
     }
@@ -407,12 +404,12 @@
     NSMutableArray *system_data = [NSMutableArray array];//8
     SystemBuf[0] = RecStructData.System.main_vol;
     SystemBuf[1] = (RecStructData.System.main_vol >> 8) & 0xff;
-    SystemBuf[2] = RecStructData.System.alldelay;
-    SystemBuf[3] = RecStructData.System.noisegate_t;
-    SystemBuf[4] = RecStructData.System.AutoSource;
-    SystemBuf[5] = RecStructData.System.AutoSourcedB;
+    SystemBuf[2] = RecStructData.System.high_mode;
+    SystemBuf[3] = RecStructData.System.aux_mode;
+    SystemBuf[4] = RecStructData.System.out_mode;
+    SystemBuf[5] = RecStructData.System.mixer_SourcedB;
     SystemBuf[6] = RecStructData.System.MainvolMuteFlg;
-    SystemBuf[7] = RecStructData.System.none6;
+    SystemBuf[7] = RecStructData.System.theme;
     
     for (int i=0; i<8; i++) {
         [system_data addObject:[NSNumber numberWithUnsignedInteger:SystemBuf[i]]];
@@ -421,24 +418,21 @@
     
     //system_spk_type
     NSMutableArray *system_spk_type = [NSMutableArray array]; //8
-    SystemBuf[0] = RecStructData.System.out1_spk_type;
-    SystemBuf[1] = RecStructData.System.out2_spk_type;
-    SystemBuf[2] = RecStructData.System.out3_spk_type;
-    SystemBuf[3] = RecStructData.System.out4_spk_type;
-    SystemBuf[4] = RecStructData.System.out5_spk_type;
-    SystemBuf[5] = RecStructData.System.out6_spk_type;
-    SystemBuf[6] = RecStructData.System.out7_spk_type;
-    SystemBuf[7] = RecStructData.System.out8_spk_type;
-    SystemBuf[8] = RecStructData.System.out9_spk_type;
-    SystemBuf[9] = RecStructData.System.out10_spk_type;
-    SystemBuf[10] = RecStructData.System.out11_spk_type;
-    SystemBuf[11] = RecStructData.System.out12_spk_type;
-    SystemBuf[12] = RecStructData.System.out13_spk_type;
-    SystemBuf[13] = RecStructData.System.out14_spk_type;
-    SystemBuf[14] = RecStructData.System.out15_spk_type;
-    SystemBuf[15] = RecStructData.System.out16_spk_type;
-    
+    for (int i=0; i<8; i++) {
+        SystemBuf[i]=RecStructData.System.none[i];
+    }
+    for (int i=0; i<8; i++) {
+        SystemBuf[i+8]=RecStructData.System.high_Low_Set[i];
+    }
     for (int i=0; i<16; i++) {
+        SystemBuf[i+16]=RecStructData.System.high_Low_Set[i];
+    }
+    for (int i=0; i<16; i++) {
+         SystemBuf[i+32]=RecStructData.System.out_spk_type[i];
+    }
+    
+    
+    for (int i=0; i<48; i++) {
         [system_spk_type addObject:[NSNumber numberWithUnsignedInteger:SystemBuf[i]]];
     }
     allFileModel.system.system_spk_type = system_spk_type;

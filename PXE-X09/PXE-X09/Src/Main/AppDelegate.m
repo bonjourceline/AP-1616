@@ -15,7 +15,7 @@
 #import <sys/utsname.h>
 #import "MacDefine.h"
 #import "SEFFFile.h"
-#import "OptFunPage_TBC_VC.h"
+
 #import "DataProgressHUD.h"
 
 

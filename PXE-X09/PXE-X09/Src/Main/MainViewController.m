@@ -11,18 +11,14 @@
 #import "HomePageViewController.h"
 #import "MacDefine.h"
 #import "DataCommunication.h"
-#import "OptFunPage_TBC_VC.h"
-#import "OptFunPage_CTbar_VC.h"
-#import "OptFunPage_TBC_M_VC.h"
+#import "OptFunPage_TBC.h"
 #import "AppDelegate.h"
 @interface MainViewController (){
     
 }
 
 //@property (nonatomic,strong) MainPageViewController *mMainPage;
-@property (nonatomic,strong) OptFunPage_CTbar_VC *mFunsC;
-@property (nonatomic,strong) OptFunPage_TBC_VC *mFuns;
-@property (nonatomic,strong) OptFunPage_TBC_M_VC *mFunM;
+
 
 - (void)initView;//初始化主界面UI
 
