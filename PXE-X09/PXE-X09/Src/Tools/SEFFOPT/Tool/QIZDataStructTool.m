@@ -222,9 +222,19 @@
     //system_spk_type
     NSMutableArray *system_spk_type = [NSMutableArray array]; //48
     
-    for (int i=0; i<8; i++) {
-        SystemBuf[i]=RecStructData.System.none[i];
-    }
+//    for (int i=0; i<8; i++) {
+//        SystemBuf[i]=RecStructData.System.none[i];
+//    }
+    SystemBuf[0]=RecStructData.System.HiInputChNum;
+    SystemBuf[1]=RecStructData.System.AuxInputChNum;
+    SystemBuf[2]=RecStructData.System.OutputChNum;
+    SystemBuf[3]=RecStructData.System.IsRTA_outch;
+    SystemBuf[4]=RecStructData.System.InSignelThreshold;
+    SystemBuf[5]=RecStructData.System.OffTime;
+    SystemBuf[6]=RecStructData.System.none[0];
+    SystemBuf[7]=RecStructData.System.none[1];
+    
+    
     for (int i=0; i<8; i++) {
         SystemBuf[i+8]=RecStructData.System.high_Low_Set[i];
     }
@@ -418,9 +428,18 @@
     
     //system_spk_type
     NSMutableArray *system_spk_type = [NSMutableArray array]; //8
-    for (int i=0; i<8; i++) {
-        SystemBuf[i]=RecStructData.System.none[i];
-    }
+//    for (int i=0; i<8; i++) {
+//        SystemBuf[i]=RecStructData.System.none[i];
+//    }
+    SystemBuf[0]=RecStructData.System.HiInputChNum;
+    SystemBuf[1]=RecStructData.System.AuxInputChNum;
+    SystemBuf[2]=RecStructData.System.OutputChNum;
+    SystemBuf[3]=RecStructData.System.IsRTA_outch;
+    SystemBuf[4]=RecStructData.System.InSignelThreshold;
+    SystemBuf[5]=RecStructData.System.OffTime;
+    SystemBuf[6]=RecStructData.System.none[0];
+    SystemBuf[7]=RecStructData.System.none[1];
+    
     for (int i=0; i<8; i++) {
         SystemBuf[i+8]=RecStructData.System.high_Low_Set[i];
     }

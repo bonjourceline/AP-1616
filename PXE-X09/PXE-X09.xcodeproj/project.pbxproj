@@ -81,7 +81,6 @@
 		14B44A9D1E69776D00D524C6 /* WMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B449311E69776C00D524C6 /* WMProgressView.m */; };
 		14B44A9E1E69776D00D524C6 /* WMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B449331E69776C00D524C6 /* WMScrollView.m */; };
 		14B44A9F1E69776D00D524C6 /* WMPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B449361E69776C00D524C6 /* WMPageController.m */; };
-		14B44AC11E69786E00D524C6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14B44AA11E69786E00D524C6 /* Info.plist */; };
 		14B44AC21E69786E00D524C6 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B44AA31E69786E00D524C6 /* MASCompositeConstraint.m */; };
 		14B44AC31E69786E00D524C6 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B44AA61E69786E00D524C6 /* MASConstraint.m */; };
 		14B44AC41E69786E00D524C6 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B44AA81E69786E00D524C6 /* MASConstraintMaker.m */; };
@@ -124,11 +123,16 @@
 		AA3056EB202455AD0085672C /* MasterVolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3056E8202455AC0085672C /* MasterVolView.xib */; };
 		AA3056EC202455AD0085672C /* MasterVolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3056EA202455AC0085672C /* MasterVolView.m */; };
 		AA321A261FE0B8CF0065BD3C /* DeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AA321A251FE0B8CF0065BD3C /* DeviceUtils.m */; };
+		AA5F640A214F53C300FFD50C /* DelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F6407214F53C200FFD50C /* DelayViewController.m */; };
+		AA5F640B214F53C300FFD50C /* DelayViewController_FRS.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F6408214F53C300FFD50C /* DelayViewController_FRS.m */; };
+		AA5F640C214F53C300FFD50C /* DelayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA5F6409214F53C300FFD50C /* DelayViewController.xib */; };
+		AA5F6413214F53CA00FFD50C /* DelayCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F640F214F53CA00FFD50C /* DelayCollectionViewCell.m */; };
+		AA5F6414214F53CA00FFD50C /* DelayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F6411214F53CA00FFD50C /* DelayTableViewCell.m */; };
+		AA5F6415214F53CA00FFD50C /* DelayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA5F6412214F53CA00FFD50C /* DelayTableViewCell.xib */; };
+		AA5F6419214F552300FFD50C /* SourceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F6418214F552300FFD50C /* SourceSettingController.m */; };
+		AA5F641C214F5E7500FFD50C /* SourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F641B214F5E7500FFD50C /* SourceItem.m */; };
 		AA6CCB121FB97AC5004DBB20 /* MixerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CCB111FB97AC5004DBB20 /* MixerTableViewCell.m */; };
 		AA6D0C8B1FDE1A86000735FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA6D0C8A1FDE1A86000735FD /* Assets.xcassets */; };
-		AA7B8C5F20720D1D0055B37C /* DelayCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B8C5B20720D1D0055B37C /* DelayCollectionViewCell.m */; };
-		AA7B8C6020720D1D0055B37C /* DelayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B8C5D20720D1D0055B37C /* DelayTableViewCell.m */; };
-		AA7B8C6120720D1D0055B37C /* DelayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7B8C5E20720D1D0055B37C /* DelayTableViewCell.xib */; };
 		AA7B8C6420720D240055B37C /* DelayViewController_Ch.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B8C6320720D240055B37C /* DelayViewController_Ch.m */; };
 		AA7B8C6C20735D1A0055B37C /* MixCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B8C6B20735D1A0055B37C /* MixCollectionViewCell.m */; };
 		AA7B8C7020739FE50055B37C /* AnyLink.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B8C6F20739FE50055B37C /* AnyLink.m */; };
@@ -193,9 +197,6 @@
 		AABFD476202439E70089A5E9 /* OutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD473202439E70089A5E9 /* OutputViewController.m */; };
 		AABFD477202439E70089A5E9 /* OutputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD474202439E70089A5E9 /* OutputViewController.xib */; };
 		AABFD47F20243AA60089A5E9 /* OutputPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD47E20243AA60089A5E9 /* OutputPageViewController.m */; };
-		AABFD48520243AD40089A5E9 /* DelayViewController_FRS.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD48020243AD40089A5E9 /* DelayViewController_FRS.m */; };
-		AABFD48620243AD40089A5E9 /* DelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD48120243AD40089A5E9 /* DelayViewController.m */; };
-		AABFD48720243AD40089A5E9 /* DelayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AABFD48320243AD40089A5E9 /* DelayViewController.xib */; };
 		D3CB6134EF932D8645C6E04F /* libPods-PXE-X09.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C7DE915FC1D30E53988540 /* libPods-PXE-X09.a */; };
 /* End PBXBuildFile section */
 
@@ -442,14 +443,23 @@
 		AA321A241FE0B8CF0065BD3C /* DeviceUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceUtils.h; sourceTree = "<group>"; };
 		AA321A251FE0B8CF0065BD3C /* DeviceUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceUtils.m; sourceTree = "<group>"; };
 		AA5717701F94876200DBA7D3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		AA5F6405214F53C200FFD50C /* DelayViewController_FRS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayViewController_FRS.h; sourceTree = "<group>"; };
+		AA5F6406214F53C200FFD50C /* DelayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayViewController.h; sourceTree = "<group>"; };
+		AA5F6407214F53C200FFD50C /* DelayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayViewController.m; sourceTree = "<group>"; };
+		AA5F6408214F53C300FFD50C /* DelayViewController_FRS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayViewController_FRS.m; sourceTree = "<group>"; };
+		AA5F6409214F53C300FFD50C /* DelayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DelayViewController.xib; sourceTree = "<group>"; };
+		AA5F640E214F53CA00FFD50C /* DelayCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayCollectionViewCell.h; sourceTree = "<group>"; };
+		AA5F640F214F53CA00FFD50C /* DelayCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayCollectionViewCell.m; sourceTree = "<group>"; };
+		AA5F6410214F53CA00FFD50C /* DelayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayTableViewCell.h; sourceTree = "<group>"; };
+		AA5F6411214F53CA00FFD50C /* DelayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayTableViewCell.m; sourceTree = "<group>"; };
+		AA5F6412214F53CA00FFD50C /* DelayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DelayTableViewCell.xib; sourceTree = "<group>"; };
+		AA5F6417214F552300FFD50C /* SourceSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceSettingController.h; sourceTree = "<group>"; };
+		AA5F6418214F552300FFD50C /* SourceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceSettingController.m; sourceTree = "<group>"; };
+		AA5F641A214F5E7500FFD50C /* SourceItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceItem.h; sourceTree = "<group>"; };
+		AA5F641B214F5E7500FFD50C /* SourceItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceItem.m; sourceTree = "<group>"; };
 		AA6CCB101FB97AC5004DBB20 /* MixerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixerTableViewCell.h; sourceTree = "<group>"; };
 		AA6CCB111FB97AC5004DBB20 /* MixerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixerTableViewCell.m; sourceTree = "<group>"; };
 		AA6D0C8A1FDE1A86000735FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA7B8C5A20720D1D0055B37C /* DelayCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayCollectionViewCell.h; sourceTree = "<group>"; };
-		AA7B8C5B20720D1D0055B37C /* DelayCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayCollectionViewCell.m; sourceTree = "<group>"; };
-		AA7B8C5C20720D1D0055B37C /* DelayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayTableViewCell.h; sourceTree = "<group>"; };
-		AA7B8C5D20720D1D0055B37C /* DelayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayTableViewCell.m; sourceTree = "<group>"; };
-		AA7B8C5E20720D1D0055B37C /* DelayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DelayTableViewCell.xib; sourceTree = "<group>"; };
 		AA7B8C6220720D240055B37C /* DelayViewController_Ch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayViewController_Ch.h; sourceTree = "<group>"; };
 		AA7B8C6320720D240055B37C /* DelayViewController_Ch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayViewController_Ch.m; sourceTree = "<group>"; };
 		AA7B8C6A20735D1A0055B37C /* MixCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixCollectionViewCell.h; sourceTree = "<group>"; };
@@ -578,11 +588,6 @@
 		AABFD474202439E70089A5E9 /* OutputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OutputViewController.xib; path = UI_Output/OutputViewController.xib; sourceTree = "<group>"; };
 		AABFD47D20243AA60089A5E9 /* OutputPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputPageViewController.h; sourceTree = "<group>"; };
 		AABFD47E20243AA60089A5E9 /* OutputPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputPageViewController.m; sourceTree = "<group>"; };
-		AABFD48020243AD40089A5E9 /* DelayViewController_FRS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DelayViewController_FRS.m; path = UI_Delay/DelayViewController_FRS.m; sourceTree = "<group>"; };
-		AABFD48120243AD40089A5E9 /* DelayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DelayViewController.m; path = UI_Delay/DelayViewController.m; sourceTree = "<group>"; };
-		AABFD48220243AD40089A5E9 /* DelayViewController_FRS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DelayViewController_FRS.h; path = UI_Delay/DelayViewController_FRS.h; sourceTree = "<group>"; };
-		AABFD48320243AD40089A5E9 /* DelayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DelayViewController.xib; path = UI_Delay/DelayViewController.xib; sourceTree = "<group>"; };
-		AABFD48420243AD40089A5E9 /* DelayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DelayViewController.h; path = UI_Delay/DelayViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -933,6 +938,7 @@
 		1459BFC91E5C41E50085FFA6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AA5F6416214F54E300FFD50C /* UI_SourceSetting */,
 				146898D01E7A98FA001D0868 /* UI_Welcome */,
 				14AF61341E5DC922007CB350 /* UI_TopBar */,
 				1459BFCE1E5C42280085FFA6 /* UI_OptFunctions */,
@@ -979,16 +985,16 @@
 		1459BFCF1E5C423B0085FFA6 /* UI_Delay */ = {
 			isa = PBXGroup;
 			children = (
+				AA5F640D214F53CA00FFD50C /* DelayTableViewCell */,
+				AA5F6405214F53C200FFD50C /* DelayViewController_FRS.h */,
+				AA5F6408214F53C300FFD50C /* DelayViewController_FRS.m */,
+				AA5F6406214F53C200FFD50C /* DelayViewController.h */,
+				AA5F6407214F53C200FFD50C /* DelayViewController.m */,
+				AA5F6409214F53C300FFD50C /* DelayViewController.xib */,
 				AA7B8C6220720D240055B37C /* DelayViewController_Ch.h */,
 				AA7B8C6320720D240055B37C /* DelayViewController_Ch.m */,
-				AA7B8C5920720D1D0055B37C /* DelayTableViewCell */,
-				AABFD48220243AD40089A5E9 /* DelayViewController_FRS.h */,
-				AABFD48020243AD40089A5E9 /* DelayViewController_FRS.m */,
-				AABFD48420243AD40089A5E9 /* DelayViewController.h */,
-				AABFD48120243AD40089A5E9 /* DelayViewController.m */,
-				AABFD48320243AD40089A5E9 /* DelayViewController.xib */,
 			);
-			name = UI_Delay;
+			path = UI_Delay;
 			sourceTree = "<group>";
 		};
 		1459BFD01E5C424F0085FFA6 /* UI_XOver */ = {
@@ -1623,6 +1629,30 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		AA5F640D214F53CA00FFD50C /* DelayTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				AA5F640E214F53CA00FFD50C /* DelayCollectionViewCell.h */,
+				AA5F640F214F53CA00FFD50C /* DelayCollectionViewCell.m */,
+				AA5F6410214F53CA00FFD50C /* DelayTableViewCell.h */,
+				AA5F6411214F53CA00FFD50C /* DelayTableViewCell.m */,
+				AA5F6412214F53CA00FFD50C /* DelayTableViewCell.xib */,
+			);
+			path = DelayTableViewCell;
+			sourceTree = "<group>";
+		};
+		AA5F6416214F54E300FFD50C /* UI_SourceSetting */ = {
+			isa = PBXGroup;
+			children = (
+				AA5F6417214F552300FFD50C /* SourceSettingController.h */,
+				AA5F6418214F552300FFD50C /* SourceSettingController.m */,
+				AA5F641A214F5E7500FFD50C /* SourceItem.h */,
+				AA5F641B214F5E7500FFD50C /* SourceItem.m */,
+			);
+			name = UI_SourceSetting;
+			path = UI_OptFunctions/UI_SourceSetting;
+			sourceTree = "<group>";
+		};
 		AA700CA31FCBC08C003EC362 /* VolumeManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1632,18 +1662,6 @@
 				AABFD411202435110089A5E9 /* UIApplication+VolumeControl.m */,
 			);
 			path = VolumeManager;
-			sourceTree = "<group>";
-		};
-		AA7B8C5920720D1D0055B37C /* DelayTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				AA7B8C5A20720D1D0055B37C /* DelayCollectionViewCell.h */,
-				AA7B8C5B20720D1D0055B37C /* DelayCollectionViewCell.m */,
-				AA7B8C5C20720D1D0055B37C /* DelayTableViewCell.h */,
-				AA7B8C5D20720D1D0055B37C /* DelayTableViewCell.m */,
-				AA7B8C5E20720D1D0055B37C /* DelayTableViewCell.xib */,
-			);
-			path = DelayTableViewCell;
 			sourceTree = "<group>";
 		};
 		AA7B8C6920735CDC0055B37C /* MixCollectionCell */ = {
@@ -1755,20 +1773,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B44ACD1E69786E00D524C6 /* MBProgressHUD.bundle in Resources */,
-				AA7B8C6120720D1D0055B37C /* DelayTableViewCell.xib in Resources */,
 				1459BFA61E5C3F840085FFA6 /* LaunchScreen.storyboard in Resources */,
 				AABFD3C1202417BB0089A5E9 /* InputViewController.xib in Resources */,
 				142332811EC1CE0500E3FCC4 /* LICENSE_jsonmodel.txt in Resources */,
 				14CCB0FA1EF41B3200ABDC5E /* HomePageViewController.xib in Resources */,
 				AABFD3D3202418A40089A5E9 /* EQViewController.xib in Resources */,
+				AA5F640C214F53C300FFD50C /* DelayViewController.xib in Resources */,
 				144DD0CA1ED98E3A00825849 /* MixViewController.xib in Resources */,
 				AABFD3CE2024187D0089A5E9 /* MixerViewController.xib in Resources */,
+				AA5F6415214F53CA00FFD50C /* DelayTableViewCell.xib in Resources */,
 				14CF98811E66CC370001FAB9 /* Localizable.strings in Resources */,
-				AABFD48720243AD40089A5E9 /* DelayViewController.xib in Resources */,
 				AABFD477202439E70089A5E9 /* OutputViewController.xib in Resources */,
 				AABFD46D202439A90089A5E9 /* XOverOutputViewController.xib in Resources */,
 				AA6D0C8B1FDE1A86000735FD /* Assets.xcassets in Resources */,
-				14B44AC11E69786E00D524C6 /* Info.plist in Resources */,
 				AA3056EB202455AD0085672C /* MasterVolView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1822,6 +1839,7 @@
 				142332B61EC1DC0800E3FCC4 /* ClientModel.m in Sources */,
 				142CD7141E6CF1C900612933 /* KGModal.m in Sources */,
 				AA3056E52024556A0085672C /* AdModel.m in Sources */,
+				AA5F641C214F5E7500FFD50C /* SourceItem.m in Sources */,
 				14B44A9B1E69776D00D524C6 /* WMMenuItem.m in Sources */,
 				14DE4B411EC49E2000418248 /* LocalEffectTableViewCell.m in Sources */,
 				1423327F1EC1CE0500E3FCC4 /* JSONKeyMapper.m in Sources */,
@@ -1833,7 +1851,7 @@
 				1423323C1EC1CC5200E3FCC4 /* FMResultSet.m in Sources */,
 				AA3056EC202455AD0085672C /* MasterVolView.m in Sources */,
 				142332B91EC1DC0800E3FCC4 /* MusicGroupModel.m in Sources */,
-				AABFD48520243AD40089A5E9 /* DelayViewController_FRS.m in Sources */,
+				AA5F640B214F53C300FFD50C /* DelayViewController_FRS.m in Sources */,
 				AABFD43B202437690089A5E9 /* ChannelLineBar.m in Sources */,
 				AABFD467202438930089A5E9 /* LANG.m in Sources */,
 				AABFD40B202434080089A5E9 /* UIImage+Color.m in Sources */,
@@ -1860,6 +1878,7 @@
 				145FB52C1EB8343F00DA91A9 /* XOverItem.m in Sources */,
 				AA321A261FE0B8CF0065BD3C /* DeviceUtils.m in Sources */,
 				144DD0C91ED98E3A00825849 /* MixViewController.m in Sources */,
+				AA5F640A214F53C300FFD50C /* DelayViewController.m in Sources */,
 				142332B41EC1DC0800E3FCC4 /* AllGroupFileModel.m in Sources */,
 				14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */,
 				142332991EC1DB7900E3FCC4 /* MJExtensionConst.m in Sources */,
@@ -1893,6 +1912,7 @@
 				14B44AC51E69786E00D524C6 /* MASLayoutConstraint.m in Sources */,
 				AA21D0141FC57872005EC4E9 /* rootViewController.m in Sources */,
 				142332531EC1CD5100E3FCC4 /* ChsData.m in Sources */,
+				AA5F6419214F552300FFD50C /* SourceSettingController.m in Sources */,
 				1423329C1EC1DB7900E3FCC4 /* MJPropertyKey.m in Sources */,
 				14B44AC21E69786E00D524C6 /* MASCompositeConstraint.m in Sources */,
 				14B44A9C1E69776D00D524C6 /* WMMenuView.m in Sources */,
@@ -1903,7 +1923,6 @@
 				142332281EC1CBBA00E3FCC4 /* QIZDatabaseTool.m in Sources */,
 				141732C01EBCA398002481B9 /* ExpandCell.m in Sources */,
 				146898CF1E7A95ED001D0868 /* ADView.m in Sources */,
-				AA7B8C6020720D1D0055B37C /* DelayTableViewCell.m in Sources */,
 				AA3056E62024556A0085672C /* AdvertisementView.m in Sources */,
 				142332B51EC1DC0800E3FCC4 /* ChsModel.m in Sources */,
 				AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */,
@@ -1925,12 +1944,11 @@
 				AABFD451202438130089A5E9 /* EQItem.m in Sources */,
 				AABFD3FA2024197E0089A5E9 /* BabyBluetooth.m in Sources */,
 				AABFD4582024383C0089A5E9 /* Dimens.m in Sources */,
-				AABFD48620243AD40089A5E9 /* DelayViewController.m in Sources */,
+				AA5F6413214F53CA00FFD50C /* DelayCollectionViewCell.m in Sources */,
 				AABFD3E5202419250089A5E9 /* DataProgressHUD.m in Sources */,
 				AABFD3FB2024197E0089A5E9 /* BabyCallback.m in Sources */,
 				14C84F271EF175A600FF6165 /* DelaySettingTwo.m in Sources */,
 				142332791EC1CE0500E3FCC4 /* JSONModelClassProperty.m in Sources */,
-				AA7B8C5F20720D1D0055B37C /* DelayCollectionViewCell.m in Sources */,
 				AABFD476202439E70089A5E9 /* OutputViewController.m in Sources */,
 				1423323A1EC1CC5200E3FCC4 /* FMDatabasePool.m in Sources */,
 				14B44ACC1E69786E00D524C6 /* MBProgressHUD+MJ.m in Sources */,
@@ -1943,6 +1961,7 @@
 				142332771EC1CE0500E3FCC4 /* JSONModel.m in Sources */,
 				AA3056E72024556A0085672C /* DetailViewController.m in Sources */,
 				14C84F361EF1776300FF6165 /* SEffOptView.m in Sources */,
+				AA5F6414214F53CA00FFD50C /* DelayTableViewCell.m in Sources */,
 				AABFD4222024364E0089A5E9 /* GainSBItem.m in Sources */,
 				AABFD461202438560089A5E9 /* TInstrumentView.m in Sources */,
 				14B44A9E1E69776D00D524C6 /* WMScrollView.m in Sources */,

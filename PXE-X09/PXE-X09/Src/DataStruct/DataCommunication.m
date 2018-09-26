@@ -363,9 +363,18 @@
                     
                     break;
                 case SYSTEM_SPK_TYPE:
-                    for (int i=0; i<8; i++) {
-                        RecStructData.System.none[i]=RecFrameData.DataBuf[10+i];
-                    }
+//                    for (int i=0; i<8; i++) {
+//                        RecStructData.System.none[i]=RecFrameData.DataBuf[10+i];
+//                    }
+                    RecStructData.System.HiInputChNum=RecFrameData.DataBuf[10];
+                    RecStructData.System.AuxInputChNum=RecFrameData.DataBuf[11];
+                    RecStructData.System.OutputChNum=RecFrameData.DataBuf[12];
+                    RecStructData.System.IsRTA_outch=RecFrameData.DataBuf[13];
+                    RecStructData.System.InSignelThreshold=RecFrameData.DataBuf[14];
+                    RecStructData.System.OffTime=RecFrameData.DataBuf[15];
+                    RecStructData.System.none[0]=RecFrameData.DataBuf[16];
+                    RecStructData.System.none[1]=RecFrameData.DataBuf[17];
+                    
                     for (int i=0; i<8; i++) {
                         RecStructData.System.high_Low_Set[i]=RecFrameData.DataBuf[18+i];
                     }
@@ -380,10 +389,11 @@
            
                     break;
                 case LED_DATA:
-                    if(RecStructData.System.input_source_temp != RecFrameData.DataBuf[10 + 14]){
-                        RecStructData.System.input_source_temp = RecFrameData.DataBuf[10 + 14];
+                    //数据共32字节，前31为RTA数据，后1个字节为当前最新信号源数据
+                    if(RecStructData.System.input_source_temp != RecFrameData.DataBuf[10 + 31]){
+                        RecStructData.System.input_source_temp = RecFrameData.DataBuf[10 + 31];
                         if(RecStructData.System.input_source_temp != RecStructData.System.input_source){
-                            NSLog(@"收到的音源为 %d",RecFrameData.DataBuf[10 + 14]);
+                            NSLog(@"收到的音源为 %d",RecFrameData.DataBuf[10 + 31]);
                             RecStructData.System.input_source = RecStructData.System.input_source_temp;
                             SendStructData.System.input_source=RecStructData.System.input_source;
                             //连接状态
@@ -642,7 +652,7 @@
                             FrameDataBuf[14+i] = SendFrameData.Buf[i];
                         }
                     }else{
-                        if(SendFrameData.DataID<10){
+                        if(SendFrameData.DataID<IN_EQMAX_ID){
                             FrameDataBuf[14] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].freq & 0xff);
                             FrameDataBuf[15] = ((SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].freq >> 8) & 0xff);
                             FrameDataBuf[16] = (SendStructData.IN_CH[SendFrameData.ChannelID].EQ[SendFrameData.DataID].level & 0xff);
@@ -661,8 +671,18 @@
                                     FrameDataBuf[18] = (SendStructData.IN_CH[SendFrameData.ChannelID].delay & 0xff);
                                     FrameDataBuf[19] = ((SendStructData.IN_CH[SendFrameData.ChannelID].delay >> 8) & 0xff);
                                     FrameDataBuf[20] = (SendStructData.IN_CH[SendFrameData.ChannelID].eq_mode & 0xff);
-                                    FrameDataBuf[21] = (SendStructData.IN_CH[SendFrameData.ChannelID].none2 & 0xff);
+                                    FrameDataBuf[21] = (SendStructData.IN_CH[SendFrameData.ChannelID].LinkFlag & 0xff);
                                     
+                                    break;
+                                case IN_XOVER_ID:
+                                    FrameDataBuf[14] = (SendStructData.IN_CH[SendFrameData.ChannelID].h_freq & 0xff);
+                                    FrameDataBuf[15] = ((SendStructData.IN_CH[SendFrameData.ChannelID].h_freq >>8) & 0xff);
+                                    FrameDataBuf[16] = (SendStructData.IN_CH[SendFrameData.ChannelID].h_filter & 0xff);
+                                    FrameDataBuf[17] = (SendStructData.IN_CH[SendFrameData.ChannelID].h_level & 0xff);
+                                    FrameDataBuf[18] = (SendStructData.IN_CH[SendFrameData.ChannelID].l_freq & 0xff);
+                                    FrameDataBuf[19] = ((SendStructData.IN_CH[SendFrameData.ChannelID].l_freq >> 8) & 0xff);
+                                    FrameDataBuf[20] = (SendStructData.IN_CH[SendFrameData.ChannelID].l_filter & 0xff);
+                                    FrameDataBuf[21] = (SendStructData.IN_CH[SendFrameData.ChannelID].l_level & 0xff);
                                     break;
                                 case IN_NOISEGATE_ID:
                                     FrameDataBuf[14] = (SendStructData.IN_CH[SendFrameData.ChannelID].noisegate_t & 0xff);
@@ -674,6 +694,11 @@
                                     FrameDataBuf[20] = (SendStructData.IN_CH[SendFrameData.ChannelID].noise_config & 0xff);
                                     FrameDataBuf[21] = ((SendStructData.IN_CH[SendFrameData.ChannelID].noise_config >> 8) & 0xff);
                                     
+                                    break;
+                                case IN_NAME_ID:
+                                    for (int i=0; i<8; i++) {
+                                    FrameDataBuf[14+i]=SendStructData.IN_CH[SendFrameData.ChannelID].name[i];
+                                    }
                                     break;
                                 default:
                                     break;
@@ -745,7 +770,7 @@
                         FrameDataBuf[18] = (SendStructData.OUT_CH[SendFrameData.ChannelID].delay & 0xff);
                         FrameDataBuf[19] = ((SendStructData.OUT_CH[SendFrameData.ChannelID].delay >> 8) & 0xff);
                         FrameDataBuf[20] = (SendStructData.OUT_CH[SendFrameData.ChannelID].eq_mode & 0xff);
-                        FrameDataBuf[21] = (SendStructData.OUT_CH[SendFrameData.ChannelID].spk_type & 0xff);
+                        FrameDataBuf[21] = (SendStructData.OUT_CH[SendFrameData.ChannelID].LinkFlag & 0xff);
                         if(BOOL_EncryptionFlag){//加密
                             for(int i=0;i<8;i++){
                                 FrameDataBuf[14+i] = (FrameDataBuf[14+i]^Encrypt_DATA);
@@ -893,16 +918,24 @@
                     
                     break;
                 case SYSTEM_SPK_TYPE:
+//                    for (int i=0; i<8; i++) {
+//                        FrameDataBuf[14+i]=(SendStructData.System.none[i]& 0xff);
+//                    }
+                    FrameDataBuf[14] = SendStructData.System.HiInputChNum;
+                    FrameDataBuf[15] = SendStructData.System.AuxInputChNum;
+                    FrameDataBuf[16] = SendStructData.System.OutputChNum;
+                    FrameDataBuf[17] = SendStructData.System.IsRTA_outch;
+                    FrameDataBuf[18] = SendStructData.System.InSignelThreshold;
+                    FrameDataBuf[19] = SendStructData.System.OffTime;
+                    FrameDataBuf[20] = SendStructData.System.none[0];
+                    FrameDataBuf[21] = SendStructData.System.none[1];
                     for (int i=0; i<8; i++) {
-                        FrameDataBuf[14+i]=(SendStructData.System.none[i]& 0xff);
-                    }
-                    for (int i=0; i<8; i++) {
-                        FrameDataBuf[12+i]=(SendStructData.System.high_Low_Set[i]& 0xff);
+                        FrameDataBuf[22+i]=(SendStructData.System.high_Low_Set[i]& 0xff);
                     }
                     for (int i=0; i<16; i++) {
-                         FrameDataBuf[20+i]=(SendStructData.System.in_spk_type[i]& 0xff);
+                         FrameDataBuf[30+i]=(SendStructData.System.in_spk_type[i]& 0xff);
                     }
-                    for (int i=0; i<16; i++) {
+                    for (int i=0; i<46; i++) {
                          FrameDataBuf[36+i]=(SendStructData.System.out_spk_type[i]& 0xff);
                     }
                   
@@ -925,7 +958,7 @@
                     break;
                 case GROUP_NAME:
                     for(int j=0;j<16;j++){
-                        FrameDataBuf[14+j] = RecStructData.USER[SendFrameData.UserID].name[j];
+                        FrameDataBuf[14+j] = SendStructData.USER[SendFrameData.UserID].name[j];
                     }
                     break;
                 case SYSTEM_TRANSMITTAL://数据传输标志
@@ -1044,12 +1077,27 @@
     }
     // 比较系统通道输出类型配置数据
     BOOL sendSystemId6=NO;
-    for (int i=0; i<8; i++) {
-        if ((SendStructData.System.none[i])!=(RecStructData.System.none[i])) {
-            SendStructData.System.none[i]=RecStructData.System.none[i];
+    
+    if (SendStructData.System.HiInputChNum !=RecStructData.System.HiInputChNum||
+        SendStructData.System.AuxInputChNum !=RecStructData.System.AuxInputChNum||
+        SendStructData.System.OutputChNum != RecStructData.System.OutputChNum||
+        SendStructData.System.IsRTA_outch !=RecStructData.System.IsRTA_outch||
+        SendStructData.System.InSignelThreshold !=RecStructData.System.InSignelThreshold||
+        SendStructData.System.OffTime != RecStructData.System.OffTime||
+        SendStructData.System.none[0] != RecStructData.System.none[0]||
+        SendStructData.System.none[1] != RecStructData.System.none[1]) {
+           SendStructData.System.HiInputChNum =RecStructData.System.HiInputChNum;
+           SendStructData.System.AuxInputChNum =RecStructData.System.AuxInputChNum;
+           SendStructData.System.OutputChNum = RecStructData.System.OutputChNum;
+           SendStructData.System.IsRTA_outch =RecStructData.System.IsRTA_outch;
+           SendStructData.System.InSignelThreshold =RecStructData.System.InSignelThreshold;
+           SendStructData.System.OffTime = RecStructData.System.OffTime;
+           SendStructData.System.none[0] = RecStructData.System.none[0];
+           SendStructData.System.none[1] = RecStructData.System.none[1];
+            
             sendSystemId6=YES;
         }
-    }
+    
     for (int i=0; i<8; i++) {
         if ((SendStructData.System.high_Low_Set[i])!=(RecStructData.System.high_Low_Set[i])) {
             SendStructData.System.high_Low_Set[i]=RecStructData.System.high_Low_Set[i];
@@ -1120,6 +1168,7 @@
 //        }
 //    }
     /**************************   input page   *******************************/
+    if(BOOL_USE_INS){
     for(int i=0;i<INS_CH_MAX;i++){
         //---id = 0        杂项
         if (SendStructData.INS_CH[i].feedback != RecStructData.INS_CH[i].feedback
@@ -1210,7 +1259,7 @@
             }
         }
     }
-    
+    }
     /* 比较MUSIC InputData数据  主要是总音量,静音,这里只有1通道 */
     for(int i=0;i<Input_CH_MAX;i++){
         //---id = 10        杂项
@@ -1219,14 +1268,14 @@
             || SendStructData.IN_CH[i].gain  != RecStructData.IN_CH[i].gain
             || SendStructData.IN_CH[i].delay     != RecStructData.IN_CH[i].delay
             || SendStructData.IN_CH[i].eq_mode    != RecStructData.IN_CH[i].eq_mode
-            || SendStructData.IN_CH[i].none2    != RecStructData.IN_CH[i].none2) {
+            || SendStructData.IN_CH[i].LinkFlag    != RecStructData.IN_CH[i].LinkFlag) {
             
             SendStructData.IN_CH[i].mute  = RecStructData.IN_CH[i].mute;
             SendStructData.IN_CH[i].polar     = RecStructData.IN_CH[i].polar;
             SendStructData.IN_CH[i].gain   = RecStructData.IN_CH[i].gain;
             SendStructData.IN_CH[i].delay      = RecStructData.IN_CH[i].delay;
             SendStructData.IN_CH[i].eq_mode     = RecStructData.IN_CH[i].eq_mode;
-            SendStructData.IN_CH[i].none2    = RecStructData.IN_CH[i].none2;
+            SendStructData.IN_CH[i].LinkFlag    = RecStructData.IN_CH[i].LinkFlag;
             
             if (uptodevice == true) {
                 SendFrameData.FrameType = WRITE_CMD;
@@ -1245,6 +1294,33 @@
                  if(DEBUG) System.out.println("##mute:"+SendStructData.IN_CH[0].mute);
                  if(DEBUG) System.out.println("##delay:"+SendStructData.IN_CH[0].delay);
                  if(DEBUG) System.out.println("##Valume:"+SendStructData.IN_CH[0].Valume);*/
+                
+                U0SendFrameFlg = YES;
+                [self SendDataToDevice:FALSE];
+            }
+        }
+        if(SendStructData.IN_CH[i].h_freq    != RecStructData.IN_CH[i].h_freq
+           || SendStructData.IN_CH[i].h_filter    != RecStructData.IN_CH[i].h_filter
+           || SendStructData.IN_CH[i].h_level  != RecStructData.IN_CH[i].h_level
+           || SendStructData.IN_CH[i].l_freq     != RecStructData.IN_CH[i].l_freq
+           || SendStructData.IN_CH[i].l_filter    != RecStructData.IN_CH[i].l_filter
+           || SendStructData.IN_CH[i].l_level    != RecStructData.IN_CH[i].l_level){
+            SendStructData.IN_CH[i].h_freq    = RecStructData.IN_CH[i].h_freq;
+            SendStructData.IN_CH[i].h_filter  = RecStructData.IN_CH[i].h_filter;
+            SendStructData.IN_CH[i].h_level   = RecStructData.IN_CH[i].h_level;
+            SendStructData.IN_CH[i].l_freq    = RecStructData.IN_CH[i].l_freq;
+            SendStructData.IN_CH[i].l_filter  = RecStructData.IN_CH[i].l_filter;
+            SendStructData.IN_CH[i].l_level   = RecStructData.IN_CH[i].l_level;
+            if (uptodevice == true) {
+                SendFrameData.FrameType = WRITE_CMD;
+                SendFrameData.DeviceID = 0x01;
+                SendFrameData.UserID = 0x00;
+                SendFrameData.DataType = MUSIC;
+                SendFrameData.ChannelID = i;//MUSIC 固定2
+                SendFrameData.DataID = IN_XOVER_ID;
+                SendFrameData.PCFadeInFadeOutFlg = 0x00;
+                SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
+                SendFrameData.DataLen = 8;
                 
                 U0SendFrameFlg = YES;
                 [self SendDataToDevice:FALSE];
@@ -1386,14 +1462,14 @@
            (SendStructData.OUT_CH[i].gain != RecStructData.OUT_CH[i].gain) ||
            (SendStructData.OUT_CH[i].delay!= RecStructData.OUT_CH[i].delay)||
            (SendStructData.OUT_CH[i].eq_mode!= RecStructData.OUT_CH[i].eq_mode)||
-           (SendStructData.OUT_CH[i].spk_type != RecStructData.OUT_CH[i].spk_type)){
+           (SendStructData.OUT_CH[i].LinkFlag != RecStructData.OUT_CH[i].LinkFlag)){
             
             SendStructData.OUT_CH[i].mute  = RecStructData.OUT_CH[i].mute;
             SendStructData.OUT_CH[i].polar = RecStructData.OUT_CH[i].polar;
             SendStructData.OUT_CH[i].gain  = RecStructData.OUT_CH[i].gain;
             SendStructData.OUT_CH[i].delay = RecStructData.OUT_CH[i].delay;
             SendStructData.OUT_CH[i].eq_mode = RecStructData.OUT_CH[i].eq_mode;
-            SendStructData.OUT_CH[i].spk_type  = RecStructData.OUT_CH[i].spk_type;
+            SendStructData.OUT_CH[i].LinkFlag  = RecStructData.OUT_CH[i].LinkFlag;
             if (uptodevice == true) {
                 SendFrameData.FrameType = WRITE_CMD;
                 SendFrameData.DeviceID = 0x01;
@@ -1878,7 +1954,7 @@
             SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].delay & 0xff);
             SendFrameData.Buf[++ChCnt]=((RecStructData.IN_CH[ChannelID].delay >> 8) & 0xff);
             SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].eq_mode & 0xff);
-            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].none2 & 0xff);
+            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].LinkFlag & 0xff);
             //高低通 ,ID = 11
             SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].h_freq & 0xff);
             SendFrameData.Buf[++ChCnt]=((RecStructData.IN_CH[ChannelID].h_freq >> 8) & 0xff);
@@ -1932,7 +2008,7 @@
         SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].delay & 0xff);
         SendFrameData.Buf[++ChCnt]=((RecStructData.OUT_CH[ChannelID].delay >> 8) & 0xff);
         SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].eq_mode & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].spk_type & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].LinkFlag & 0xff);
         //高低通 ,ID = 32    (xover限MIC)
         SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].h_freq & 0xff);
         SendFrameData.Buf[++ChCnt]=((RecStructData.OUT_CH[ChannelID].h_freq >> 8) & 0xff);
@@ -2092,7 +2168,7 @@
             RecStructData.IN_CH[ChannelID].delay   = RecFrameData.DataBuf[++initDataCnt];
             RecStructData.IN_CH[ChannelID].delay   +=RecFrameData.DataBuf[++initDataCnt]*256;
             RecStructData.IN_CH[ChannelID].eq_mode  = RecFrameData.DataBuf[++initDataCnt];
-            RecStructData.IN_CH[ChannelID].none2     = RecFrameData.DataBuf[++initDataCnt];
+            RecStructData.IN_CH[ChannelID].LinkFlag     = RecFrameData.DataBuf[++initDataCnt];
             //高低通 ,ID = 11
             RecStructData.IN_CH[ChannelID].h_freq   = RecFrameData.DataBuf[++initDataCnt];
             RecStructData.IN_CH[ChannelID].h_freq   +=RecFrameData.DataBuf[++initDataCnt]*256;
@@ -2166,7 +2242,7 @@
         RecStructData.OUT_CH[ChannelID].delay = RecFrameData.DataBuf[++initDataCnt];
         RecStructData.OUT_CH[ChannelID].delay +=RecFrameData.DataBuf[++initDataCnt]*256;
         RecStructData.OUT_CH[ChannelID].eq_mode = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].spk_type = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].LinkFlag = RecFrameData.DataBuf[++initDataCnt];
         //检测数据是否异常
         if((RecStructData.OUT_CH[ChannelID].gain < 0)
            ||(RecStructData.OUT_CH[ChannelID].gain > Output_Volume_MAX)){
@@ -2578,17 +2654,16 @@
         SendFrameData.DataLen = 0x00;
         [self SendDataToDevice:FALSE];
     }else{
-        if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            /*增加读取Input数据，获取音量 0x77*/
+        for(int i=0;i<Input_CH_MAX;i++){
             SendFrameData.FrameType = READ_CMD;
             SendFrameData.DeviceID = 0x01;
-            SendFrameData.UserID = mGroup;
+            SendFrameData.UserID = 0x00;
             SendFrameData.DataType = MUSIC;
-            SendFrameData.ChannelID = 0x02;//MUSIC 固定2
-            SendFrameData.DataID = 0x77;
+            SendFrameData.ChannelID = i;
+            SendFrameData.DataID = 0x77;//读当前组的数据
             SendFrameData.PCFadeInFadeOutFlg = 0x00;//
             SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
-            SendFrameData.DataLen = 0;
+            SendFrameData.DataLen = 8;//IN_LEN;
             [self SendDataToDevice:FALSE];
         }
     }
@@ -2723,21 +2798,18 @@
         [self SendDataToDevice:FALSE];
         
     }else{
-        if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-            /*保存 Musec Input数据，保存音量*/
-            if(mGroup !=0 ){
-                SendFrameData.FrameType = WRITE_CMD;
-                SendFrameData.DeviceID  = 0x01;
-                SendFrameData.UserID    =  mGroup;
-                SendFrameData.DataType  = MUSIC;
-                SendFrameData.ChannelID = 0x02;//MUSIC 固定2
-                SendFrameData.DataID = 0x00;//DataStruct.IN_MISC_ID;
-                SendFrameData.PCFadeInFadeOutFlg = 0x00;//
-                SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
-                SendFrameData.DataLen = IN_LEN;//DataStruct.IN_LEN;
-                [self FillSedDataStructCH:MUSIC DataWithCh:0];
-                [self SendDataToDevice:FALSE];
-            }
+        for (uint8 i = 0; i < Input_CH_MAX; i++) {
+            SendFrameData.FrameType = WRITE_CMD;
+            SendFrameData.DeviceID = 0x01;
+            SendFrameData.UserID = mGroup;
+            SendFrameData.DataType = MUSIC;
+            SendFrameData.ChannelID = i;
+            SendFrameData.DataID = 0x00;//IN_MISC_ID;
+            SendFrameData.PCFadeInFadeOutFlg = 0x00;//
+            SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
+            SendFrameData.DataLen = IN_LEN;//IN_LEN;
+            [self FillSedDataStructCH:MUSIC DataWithCh:i];
+            [self SendDataToDevice:false];
         }
     }
     
@@ -4294,7 +4366,7 @@ void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initD
             RecStructData.IN_CH[ChannelID].delay    = initData[++initDataCnt];
             RecStructData.IN_CH[ChannelID].delay    +=initData[++initDataCnt]*256;
             RecStructData.IN_CH[ChannelID].eq_mode  = initData[++initDataCnt];
-            RecStructData.IN_CH[ChannelID].none2 = initData[++initDataCnt];
+            RecStructData.IN_CH[ChannelID].LinkFlag = initData[++initDataCnt];
             //高低通 ,ID = 11
             RecStructData.IN_CH[ChannelID].h_freq   = initData[++initDataCnt];
             RecStructData.IN_CH[ChannelID].h_freq   +=initData[++initDataCnt]*256;
@@ -4364,7 +4436,7 @@ void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initD
         RecStructData.OUT_CH[ChannelID].delay    = initData[++initDataCnt];
         RecStructData.OUT_CH[ChannelID].delay    +=initData[++initDataCnt]*256;
         RecStructData.OUT_CH[ChannelID].eq_mode  = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].spk_type = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].LinkFlag = initData[++initDataCnt];
         //检测数据是否异常
         if((RecStructData.OUT_CH[ChannelID].gain < 0)
            ||(RecStructData.OUT_CH[ChannelID].gain > Output_Volume_MAX)){
@@ -4543,9 +4615,18 @@ void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initD
         RecStructData.System.MainvolMuteFlg = initData[++initDataCnt];
         RecStructData.System.theme = initData[++initDataCnt];
         
-        for (int i=0; i<8; i++) {
-            RecStructData.System.none[i]=initData[++initDataCnt];
-        }
+//        for (int i=0; i<8; i++) {
+//            RecStructData.System.none[i]=initData[++initDataCnt];
+//        }
+        RecStructData.System.HiInputChNum=initData[++initDataCnt];
+        RecStructData.System.AuxInputChNum=initData[++initDataCnt];
+        RecStructData.System.OutputChNum=initData[++initDataCnt];
+        RecStructData.System.IsRTA_outch=initData[++initDataCnt];
+        RecStructData.System.InSignelThreshold=initData[++initDataCnt];
+        RecStructData.System.OffTime=initData[++initDataCnt];
+        RecStructData.System.none[0]=initData[++initDataCnt];
+        RecStructData.System.none[1]=initData[++initDataCnt];
+        
         for (int i=0; i<8; i++) {
             RecStructData.System.high_Low_Set[i]=initData[++initDataCnt];
         }
@@ -4691,7 +4772,7 @@ void FillSedDataStructCHBuf(int DataStruchID, int ChannelID) {
             ChannelBuf[++ChCnt]= (RecStructData.IN_CH[ChannelID].delay & 0xff);
             ChannelBuf[++ChCnt]=((RecStructData.IN_CH[ChannelID].delay >> 8) & 0xff);
             ChannelBuf[++ChCnt]= (RecStructData.IN_CH[ChannelID].eq_mode & 0xff);
-            ChannelBuf[++ChCnt]= (RecStructData.IN_CH[ChannelID].none2 & 0xff);
+            ChannelBuf[++ChCnt]= (RecStructData.IN_CH[ChannelID].LinkFlag & 0xff);
             //高低通 ,ID = 11
             ChannelBuf[++ChCnt]= (RecStructData.IN_CH[ChannelID].h_freq & 0xff);
             ChannelBuf[++ChCnt]=((RecStructData.IN_CH[ChannelID].h_freq >> 8) & 0xff);
@@ -4738,7 +4819,7 @@ void FillSedDataStructCHBuf(int DataStruchID, int ChannelID) {
         ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].delay & 0xff);
         ChannelBuf[++ChCnt]=((RecStructData.OUT_CH[ChannelID].delay >> 8) & 0xff);
         ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].eq_mode & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].spk_type & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].LinkFlag & 0xff);
         //高低通 ,ID = 32    (xover限MIC)
         ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].h_freq & 0xff);
         ChannelBuf[++ChCnt]=((RecStructData.OUT_CH[ChannelID].h_freq >> 8) & 0xff);

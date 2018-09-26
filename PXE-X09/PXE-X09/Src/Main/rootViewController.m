@@ -35,10 +35,10 @@
 //    self.view.backgroundColor=[UIColor yellowColor];
     UIImageView *bgImage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
     [bgImage setImage:[UIImage imageNamed:@"rootbg"]];
-//    [self.view addSubview:bgImage];
-//    [self.view insertSubview:bgImage atIndex:0];
+    [self.view addSubview:bgImage];
+    [self.view insertSubview:bgImage atIndex:0];
 //    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"rootbg"]]];
-    self.view.backgroundColor=SetColor(UI_MasterBackgroundColor);
+//    self.view.backgroundColor=SetColor(UI_MasterBackgroundColor);
         self.mToolbar = [[TopBarView alloc ]init];
     if (KScreenHeight==812) {
         self.mToolbar.frame=CGRectMake(0, 44, KScreenWidth, [Dimens GDimens:44]);

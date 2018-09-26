@@ -122,10 +122,10 @@ typedef short int         uint16;
 //#define	IN_NAME_ID		35
 //#define	IN_ID_MAX		35
 
+#define  IN_EQMAX_ID        10
 #define	IN_MISC_ID		10
-#define	IN_XOVER_ID		10
+#define	IN_XOVER_ID		11
 #define	IN_NOISEGATE_ID	12
-#define	IN_LIMIT_ID		12
 #define	IN_NAME_ID		13
 #define	IN_ID_MAX		13
 
@@ -213,7 +213,7 @@ struct	input_Struct	//音乐输入  共288字节
     uint16	gain;	//EQ 模式 PEQ/GEQ
     uint16	delay;		//静音2011-6-2  改 zhihui
     uint8	eq_mode;		//延时
-    uint8	none2;		//输入音量 0~600
+    uint8	LinkFlag;		//联调标志
     
     
     //高低通 ID = 32-11
@@ -276,7 +276,7 @@ struct	output_Struct			//输出共296字节
     uint16	gain;		 //输出音量 0~600
     uint16	delay;		 //延时, 0~60Ms (0~475  stp:0.021ms   476~526 str:1ms) 发送数据范围 0~526
     uint8 	eq_mode;	 //EQ 模式 PEQ/GEQ
-    uint8	spk_type;	 //所接喇叭类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)  注意：此值用系统结构中的喇叭类型代替，不随用户组数据改变
+    uint8	LinkFlag;	 //所接喇叭类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)  注意：此值用系统结构中的喇叭类型代替，不随用户组数据改变
     
     //高低通 ID = 32
     uint16	h_freq;		//高通频率，20~20K，stp:1hz,发送实际频率值，如201HZ就发201
@@ -359,7 +359,14 @@ struct	System_Struct  //系统数据共64字节
     uint8   theme;             //场景主题
     
    //SYSTEM_SPK_TYPE  //共48字节 ch_id=6
-    uint8   none[8];                //保留
+    uint8   HiInputChNum;    //输入高电平通道数量（偶数倍，最大16，高+Aux最大等于16）
+    uint8   AuxInputChNum;   //输入Aux通道数量（偶数倍，最大16，高+Aux最大等于16）
+    uint8   OutputChNum;     //输入通道数量 最大16
+    uint8   IsRTA_outch;     //定义RTA显示的是哪一个输出的通道0~15
+    uint8   InSignelThreshold; //输入LED灯显示以及混音信号有效值阈值-120dBu~0dBu 数值0~120高级设置
+    uint8   OffTime;         //关机延迟时间 （需要硬件支持，暂时保留）
+    uint8   none[2];                //保留
+    
     uint8   high_Low_Set[8];        //8个高&低电平选择继电器设置值  0低电平   1高电平
     uint8   in_spk_type[16];        //16路模拟输入的类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
     uint8      out_spk_type[16];      //16路模拟输出的喇叭类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
