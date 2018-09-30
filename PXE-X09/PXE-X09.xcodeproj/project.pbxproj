@@ -113,6 +113,8 @@
 		14DE4B471EC49E2000418248 /* QIZSearchEffectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4B401EC49E2000418248 /* QIZSearchEffectTableViewController.m */; };
 		14DE4B4A1EC49ED300418248 /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4B491EC49ED300418248 /* IconButton.m */; };
 		14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CCDE1EF8D42800887903 /* IZValueSelectorView.m */; };
+		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
+		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
 		AA21D0131FC57872005EC4E9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00F1FC57872005EC4E9 /* MainViewController.m */; };
 		AA21D0141FC57872005EC4E9 /* rootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D0111FC57872005EC4E9 /* rootViewController.m */; };
@@ -131,6 +133,10 @@
 		AA5F6415214F53CA00FFD50C /* DelayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA5F6412214F53CA00FFD50C /* DelayTableViewCell.xib */; };
 		AA5F6419214F552300FFD50C /* SourceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F6418214F552300FFD50C /* SourceSettingController.m */; };
 		AA5F641C214F5E7500FFD50C /* SourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5F641B214F5E7500FFD50C /* SourceItem.m */; };
+		AA61218A215CB9F6006F5F02 /* SourceRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA612189215CB9F6006F5F02 /* SourceRootViewController.m */; };
+		AA612190215CCA4D006F5F02 /* HiAuxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA61218F215CCA4D006F5F02 /* HiAuxViewController.m */; };
+		AA62E8FB215F18FD0023F225 /* InputSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA62E8FA215F18FD0023F225 /* InputSetViewController.m */; };
+		AA62E8FF215F194D0023F225 /* OutSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA62E8FE215F194D0023F225 /* OutSetViewController.m */; };
 		AA6CCB121FB97AC5004DBB20 /* MixerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CCB111FB97AC5004DBB20 /* MixerTableViewCell.m */; };
 		AA6D0C8B1FDE1A86000735FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA6D0C8A1FDE1A86000735FD /* Assets.xcassets */; };
 		AA7B8C6420720D240055B37C /* DelayViewController_Ch.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B8C6320720D240055B37C /* DelayViewController_Ch.m */; };
@@ -423,6 +429,10 @@
 		52C7DE915FC1D30E53988540 /* libPods-PXE-X09.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PXE-X09.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
+		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
+		AA045133215DBD7D004675FD /* HiAuxItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HiAuxItem.m; sourceTree = "<group>"; };
+		AA045139215E284A004675FD /* OutModeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutModeViewController.h; sourceTree = "<group>"; };
+		AA04513A215E284A004675FD /* OutModeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutModeViewController.m; sourceTree = "<group>"; };
 		AA21D00C1FC57872005EC4E9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AA21D00D1FC57872005EC4E9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AA21D00E1FC57872005EC4E9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -457,6 +467,14 @@
 		AA5F6418214F552300FFD50C /* SourceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceSettingController.m; sourceTree = "<group>"; };
 		AA5F641A214F5E7500FFD50C /* SourceItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceItem.h; sourceTree = "<group>"; };
 		AA5F641B214F5E7500FFD50C /* SourceItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceItem.m; sourceTree = "<group>"; };
+		AA612188215CB9F6006F5F02 /* SourceRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceRootViewController.h; sourceTree = "<group>"; };
+		AA612189215CB9F6006F5F02 /* SourceRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceRootViewController.m; sourceTree = "<group>"; };
+		AA61218E215CCA4D006F5F02 /* HiAuxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxViewController.h; sourceTree = "<group>"; };
+		AA61218F215CCA4D006F5F02 /* HiAuxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HiAuxViewController.m; sourceTree = "<group>"; };
+		AA62E8F9215F18FD0023F225 /* InputSetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputSetViewController.h; sourceTree = "<group>"; };
+		AA62E8FA215F18FD0023F225 /* InputSetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputSetViewController.m; sourceTree = "<group>"; };
+		AA62E8FD215F194D0023F225 /* OutSetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutSetViewController.h; sourceTree = "<group>"; };
+		AA62E8FE215F194D0023F225 /* OutSetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutSetViewController.m; sourceTree = "<group>"; };
 		AA6CCB101FB97AC5004DBB20 /* MixerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixerTableViewCell.h; sourceTree = "<group>"; };
 		AA6CCB111FB97AC5004DBB20 /* MixerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixerTableViewCell.m; sourceTree = "<group>"; };
 		AA6D0C8A1FDE1A86000735FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -938,6 +956,8 @@
 		1459BFC91E5C41E50085FFA6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				14CCB0F51EF41B3200ABDC5E /* Home */,
+				AA62E8FC215F19040023F225 /* InputOutSetting */,
 				AA5F6416214F54E300FFD50C /* UI_SourceSetting */,
 				146898D01E7A98FA001D0868 /* UI_Welcome */,
 				14AF61341E5DC922007CB350 /* UI_TopBar */,
@@ -967,7 +987,6 @@
 		1459BFCE1E5C42280085FFA6 /* UI_OptFunctions */ = {
 			isa = PBXGroup;
 			children = (
-				14CCB0F51EF41B3200ABDC5E /* Home */,
 				144DD0C51ED98E3A00825849 /* CFMixer */,
 				144DD0BE1ED98DA300825849 /* OptFunPage */,
 				14E452D01E8AA1F20078A4AE /* UI_Input */,
@@ -1575,6 +1594,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AA045138215E1138004675FD /* items */ = {
+			isa = PBXGroup;
+			children = (
+				AA045132215DBD7D004675FD /* HiAuxItem.h */,
+				AA045133215DBD7D004675FD /* HiAuxItem.m */,
+				AA5F641A214F5E7500FFD50C /* SourceItem.h */,
+				AA5F641B214F5E7500FFD50C /* SourceItem.m */,
+			);
+			path = items;
+			sourceTree = "<group>";
+		};
 		AA21D00A1FC57808005EC4E9 /* MasterVolView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1594,6 +1624,8 @@
 				AA21D00F1FC57872005EC4E9 /* MainViewController.m */,
 				AA21D0101FC57872005EC4E9 /* rootViewController.h */,
 				AA21D0111FC57872005EC4E9 /* rootViewController.m */,
+				AA612188215CB9F6006F5F02 /* SourceRootViewController.h */,
+				AA612189215CB9F6006F5F02 /* SourceRootViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1644,13 +1676,27 @@
 		AA5F6416214F54E300FFD50C /* UI_SourceSetting */ = {
 			isa = PBXGroup;
 			children = (
+				AA045138215E1138004675FD /* items */,
 				AA5F6417214F552300FFD50C /* SourceSettingController.h */,
 				AA5F6418214F552300FFD50C /* SourceSettingController.m */,
-				AA5F641A214F5E7500FFD50C /* SourceItem.h */,
-				AA5F641B214F5E7500FFD50C /* SourceItem.m */,
+				AA61218E215CCA4D006F5F02 /* HiAuxViewController.h */,
+				AA61218F215CCA4D006F5F02 /* HiAuxViewController.m */,
+				AA045139215E284A004675FD /* OutModeViewController.h */,
+				AA04513A215E284A004675FD /* OutModeViewController.m */,
 			);
 			name = UI_SourceSetting;
 			path = UI_OptFunctions/UI_SourceSetting;
+			sourceTree = "<group>";
+		};
+		AA62E8FC215F19040023F225 /* InputOutSetting */ = {
+			isa = PBXGroup;
+			children = (
+				AA62E8F9215F18FD0023F225 /* InputSetViewController.h */,
+				AA62E8FA215F18FD0023F225 /* InputSetViewController.m */,
+				AA62E8FD215F194D0023F225 /* OutSetViewController.h */,
+				AA62E8FE215F194D0023F225 /* OutSetViewController.m */,
+			);
+			path = InputOutSetting;
 			sourceTree = "<group>";
 		};
 		AA700CA31FCBC08C003EC362 /* VolumeManager */ = {
@@ -1896,6 +1942,7 @@
 				14C84F1F1EF171BB00FF6165 /* PIMG.m in Sources */,
 				AABFD41F202436300089A5E9 /* SeekBarChannel.m in Sources */,
 				AABFD460202438560089A5E9 /* VolumeCircleIMLine.m in Sources */,
+				AA612190215CCA4D006F5F02 /* HiAuxViewController.m in Sources */,
 				14DE4B441EC49E2000418248 /* QIZLatelyTableViewController.m in Sources */,
 				14DE4B4A1EC49ED300418248 /* IconButton.m in Sources */,
 				142332A01EC1DB7900E3FCC4 /* NSObject+MJKeyValue.m in Sources */,
@@ -1907,6 +1954,7 @@
 				14B44AC81E69786E00D524C6 /* NSArray+MASAdditions.m in Sources */,
 				1423329E1EC1DB7900E3FCC4 /* NSObject+MJClass.m in Sources */,
 				AABFD431202437120089A5E9 /* OutputItemChPMV_L.m in Sources */,
+				AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */,
 				142332561EC1CD5100E3FCC4 /* FileJsonData.m in Sources */,
 				142332391EC1CC5200E3FCC4 /* FMDatabaseAdditions.m in Sources */,
 				14B44AC51E69786E00D524C6 /* MASLayoutConstraint.m in Sources */,
@@ -1932,6 +1980,7 @@
 				AABFD47F20243AA60089A5E9 /* OutputPageViewController.m in Sources */,
 				AABFD3FF2024197E0089A5E9 /* BabyRhythm.m in Sources */,
 				1423322B1EC1CBBA00E3FCC4 /* Tools.m in Sources */,
+				AA04513B215E284A004675FD /* OutModeViewController.m in Sources */,
 				AABFD475202439E70089A5E9 /* OutputViewController_FRS.m in Sources */,
 				AA2F88CA1FBD89C10083AE24 /* channelCollectionViewCell.m in Sources */,
 				142332A11EC1DB7900E3FCC4 /* NSObject+MJProperty.m in Sources */,
@@ -1971,6 +2020,7 @@
 				14DE4B451EC49E2000418248 /* QIZLikeTableViewController.m in Sources */,
 				AABFD4022024197E0089A5E9 /* BLEManager.m in Sources */,
 				AABFD4012024197E0089A5E9 /* BabyToy.m in Sources */,
+				AA62E8FF215F194D0023F225 /* OutSetViewController.m in Sources */,
 				14C84F261EF175A600FF6165 /* DelaySettingFour.m in Sources */,
 				AA6CCB121FB97AC5004DBB20 /* MixerTableViewCell.m in Sources */,
 				AABFD40E202434080089A5E9 /* UIImage+Rotate.m in Sources */,
@@ -1979,6 +2029,7 @@
 				14DE4B421EC49E2000418248 /* QIZAllEffectTableViewController.m in Sources */,
 				AABFD41C202435FD0089A5E9 /* InputChannelSel.m in Sources */,
 				AABFD443202437E00089A5E9 /* IndexButton.m in Sources */,
+				AA62E8FB215F18FD0023F225 /* InputSetViewController.m in Sources */,
 				AABFD453202438130089A5E9 /* EQItemFr.m in Sources */,
 				14B4498A1E69776C00D524C6 /* KxMenu.m in Sources */,
 				AABFD3D2202418A40089A5E9 /* EQViewController.m in Sources */,
@@ -1990,6 +2041,7 @@
 				AABFD3B9202417260089A5E9 /* SimpleTopBar.m in Sources */,
 				AABFD3CD2024187D0089A5E9 /* MixerViewController.m in Sources */,
 				1423323B1EC1CC5200E3FCC4 /* FMDatabaseQueue.m in Sources */,
+				AA61218A215CB9F6006F5F02 /* SourceRootViewController.m in Sources */,
 				144DD0C31ED98DA300825849 /* OptFunPage_TBC.m in Sources */,
 				14C84F351EF1776300FF6165 /* ViewText.m in Sources */,
 			);

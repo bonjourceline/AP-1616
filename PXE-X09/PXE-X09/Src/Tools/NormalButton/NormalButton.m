@@ -115,7 +115,7 @@
         [self.layer setBorderWidth:borderWidth];   //边框宽度
         [self.layer setBorderColor:SetColor(BorderNormalColor).CGColor]; //边框颜色
         //        [self setImage:[UIImage imageNamed:@"use_group_normal"] forState:UIControlStateNormal];
-        [self setBackgroundImage:[UIImage imageNamed:@"use_group_normal"] forState:UIControlStateNormal];
+//        [self setBackgroundImage:[UIImage imageNamed:@"use_group_normal"] forState:UIControlStateNormal];
         self.backgroundColor = SetColor(normalColor);
     }else if(UIB_Type==5){//空心加图片
         [self.layer setMasksToBounds:YES];

@@ -108,7 +108,7 @@
 
 "L_InputSourceSelect" = "主音源";
 "L_InputSource_High" = "高电平";
-"L_InputSource_AUX" = "AUX";
+"L_InputSource_AUX" = "低电平";
 "L_InputSource_Optical" = "光纤";
 "L_InputSource_Coaxial" = "同轴";
 "L_InputSource_Bluetooth" = "蓝牙";

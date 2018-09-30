@@ -41,7 +41,7 @@
 //音效按键
 #define UserPresetSize   90
 #define UserPresetWidth  80
-#define UserPresetHeight 80
+#define UserPresetHeight 30
 #define UserPresetMarginCenter 120
 #define UserPresetMarginTopL1  20
 #define UserPresetMarginTopL2  150
@@ -54,19 +54,19 @@
 #define MasterMuteHeight 60
 //音量滑动条大小
 #define MasterVolume_SB_Size    210
-#define MasterVolume_SB_Width   290
-#define MasterVolume_SB_Height  40
+#define MasterVolume_SB_Width   250
+#define MasterVolume_SB_Height  60
 
 #define MasterVolume_EQSB_Width   140
 #define MasterVolume_EQSB_Height  160
 //音量值按键大小
-#define Master_Lab_Volume_Size  60
+#define Master_Lab_Volume_Size  50
 //音量文本按键大小
 #define Master_Lab_Volume_Text_Width  80
 #define Master_Lab_Volume_Text_Height 30
 //普通按键大小
-#define MasterBtn_Width  90
-#define MasterBtn_Height 30
+#define MasterBtn_Width  100
+#define MasterBtn_Height 35
 //高级设置按键大小
 #define MasterBtnAdvanceSet_Width  260
 #define MasterBtnAdvanceSet_Height 45

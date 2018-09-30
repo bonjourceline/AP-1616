@@ -9,6 +9,7 @@
 #import "DeviceUtils.h"
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
+#define kAppFirstLoadKey @"kAppFirstLoadKey"
 @implementation DeviceUtils
 /*
  * 系统版本号
@@ -140,5 +141,24 @@
 + (NSString *)identifier{
     
     return [[[UIDevice currentDevice]identifierForVendor]UUIDString];
+}
++(BOOL)isFisrtStarApp{
+    //获得单例
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //读取次数（用户上一次启动app的次数）
+    NSString *number = [userDefaults objectForKey:kAppFirstLoadKey];
+    //判断是否有值
+    if (number!=nil) {
+        return NO;
+    }else{
+        NSLog(@"用户是第一次启动");
+        return YES;
+    }
+}
++(void)setFirstStart{
+    //获得单例
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"1" forKey:kAppFirstLoadKey];
+    [userDefaults synchronize];
 }
 @end

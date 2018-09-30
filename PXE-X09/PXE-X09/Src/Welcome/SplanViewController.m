@@ -6,9 +6,9 @@
 #import "ADView.h"
 #import "MainViewController.h"
 #import "AppDelegate.h"
-#import <AFNetworking.h>
+#import "Define_Dimens.h"
 
-#import "DeviceUtils.h"
+
 
 
 #define kDeclareShowKey @"kDeclareShowKey"
@@ -26,11 +26,11 @@
     self.view.backgroundColor  = [UIColor clearColor];
     if ([self isFisrtStarApp] == YES) {
         //[self showGuide];
-        [self gotoMainPage];
-//        [self goFoward];
+        //[self gotoMainPage];
+        [self goFoward];
     }else{
-//        [self goFoward];
-        [self gotoMainPage];
+        [self goFoward];
+        //[self gotoMainPage];
     }
     
 }
@@ -78,8 +78,7 @@
         _declareView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
         _declareView.center = self.view.center;
         //背景设置
-//        [_declareView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"rootbg"]]];
-        [_declareView setBackgroundColor:SetColor(UI_MasterBackgroundColor)];
+        [_declareView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"rootbg"]]];
         [self.view addSubview:_declareView];
         
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth-[Dimens GDimens:90], [Dimens GDimens:50])];
@@ -97,7 +96,7 @@
         
         
         
-        _textShow = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth-[Dimens GDimens:50], [Dimens GDimens:500])];
+        _textShow = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth-[Dimens GDimens:50], KScreenHeight-[Dimens GDimens:250])];
         _textShow.font = [UIFont systemFontOfSize:20];
         _textShow.backgroundColor = [UIColor blackColor];
         _textShow.textColor = [UIColor whiteColor];
@@ -134,6 +133,27 @@
         
         [_declareView addSubview:_textShow];
         
+        
+        _alwaysShowBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_alwaysShowBtn1 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        _alwaysShowBtn1.frame = CGRectMake(_textShow.frame.origin.x,CGRectGetMaxY(_textShow.frame)+[Dimens GDimens:30],[Dimens GDimens:20],[Dimens GDimens:20]);
+        //    [_alwaysShowBtn1 setTitle:@"OK" forState:UIControlStateNormal];
+        [_alwaysShowBtn1 setBackgroundImage:[UIImage imageNamed:@"always_check"] forState:UIControlStateNormal];
+        [_alwaysShowBtn1 addTarget:self action:@selector(alwaysShow) forControlEvents:UIControlEventTouchUpInside];
+        [_declareView addSubview:_alwaysShowBtn1];
+        
+        _alwaysShowBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_alwaysShowBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _alwaysShowBtn2.backgroundColor = [UIColor clearColor];
+        _alwaysShowBtn2.frame = CGRectMake(_textShow.frame.origin.x+[Dimens GDimens:30],CGRectGetMaxY(_textShow.frame)+[Dimens GDimens:30],[Dimens GDimens:180],[Dimens GDimens:20]);
+        [_alwaysShowBtn2 setTitle:[LANG DPLocalizedString:@"L_StatementShow"] forState:UIControlStateNormal];
+        _alwaysShowBtn2.titleLabel.font = [UIFont systemFontOfSize:16];
+        _alwaysShowBtn2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _alwaysShowBtn2.titleLabel.textAlignment = NSTextAlignmentLeft;
+        
+        [_alwaysShowBtn2 addTarget:self action:@selector(alwaysShow) forControlEvents:UIControlEventTouchUpInside];
+        [_declareView addSubview:_alwaysShowBtn2];
+        
         _acceptBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _acceptBtn.backgroundColor = [UIColor colorWithRed:0x42/255.0 green:0x97/255.0 blue:0xff/255.0 alpha:1.0];
         [_acceptBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -141,7 +161,7 @@
         
         _acceptBtn.center = self.view.center;
         tempRect = _acceptBtn.frame;
-        tempRect.origin.y = self.view.frame.size.height-[Dimens GDimens:90];
+        tempRect.origin.y = CGRectGetMaxY(_alwaysShowBtn2.frame)+[Dimens GDimens:20];
         _acceptBtn.frame = tempRect;
         
         [_acceptBtn.layer setCornerRadius:5.0];
@@ -151,27 +171,6 @@
         _acceptBtn.titleLabel.font = [UIFont systemFontOfSize:20];
         [_acceptBtn addTarget:self action:@selector(accept) forControlEvents:UIControlEventTouchUpInside];
         [_declareView addSubview:_acceptBtn];
-        
-        _alwaysShowBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_alwaysShowBtn1 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        _alwaysShowBtn1.frame = CGRectMake(_textShow.frame.origin.x,self.view.frame.size.height-[Dimens GDimens:120],[Dimens GDimens:20],[Dimens GDimens:20]);
-        //    [_alwaysShowBtn1 setTitle:@"OK" forState:UIControlStateNormal];
-        [_alwaysShowBtn1 setBackgroundImage:[UIImage imageNamed:@"always_check"] forState:UIControlStateNormal];
-        [_alwaysShowBtn1 addTarget:self action:@selector(alwaysShow) forControlEvents:UIControlEventTouchUpInside];
-        [_declareView addSubview:_alwaysShowBtn1];
-        
-        _alwaysShowBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_alwaysShowBtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _alwaysShowBtn2.backgroundColor = [UIColor clearColor];
-        _alwaysShowBtn2.frame = CGRectMake(_textShow.frame.origin.x+[Dimens GDimens:30],self.view.frame.size.height-[Dimens GDimens:120],[Dimens GDimens:180],[Dimens GDimens:20]);
-        [_alwaysShowBtn2 setTitle:[LANG DPLocalizedString:@"L_StatementShow"] forState:UIControlStateNormal];
-        _alwaysShowBtn2.titleLabel.font = [UIFont systemFontOfSize:16];
-        _alwaysShowBtn2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        _alwaysShowBtn2.titleLabel.textAlignment = NSTextAlignmentLeft;
-
-        [_alwaysShowBtn2 addTarget:self action:@selector(alwaysShow) forControlEvents:UIControlEventTouchUpInside];
-        [_declareView addSubview:_alwaysShowBtn2];
-        
     }
     else{
         [self accept];
@@ -205,9 +204,9 @@
 
 - (void)gotoMainPage{
     MainViewController *vc = [[MainViewController alloc] init];
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.window.rootViewController = vc;
-
+    
 }
 
 -(BOOL)isFisrtStarApp{
@@ -230,7 +229,6 @@
         NSLog(@"用户是第一次启动");
         [userDefaults setObject:@"1" forKey:kAppFirstLoadKey];
         [userDefaults synchronize];
-//        [self sendNetData];
         return YES;
     }
 }

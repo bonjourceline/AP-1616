@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SourceSettingController : UIViewController
+#import "SourceRootViewController.h"
+@interface SourceSettingController :SourceRootViewController
 
 @end

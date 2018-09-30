@@ -10,45 +10,75 @@
 #import "MacDefine.h"
 #import "Masonry.h"
 #import "SourceItem.h"
+#import "DeviceUtils.h"
+#import "HiAuxViewController.h"
 #define SourceItemTag 123
 @interface SourceSettingController ()
 @property(nonatomic,strong)NSArray *NameArray;
 @property(nonatomic,strong)NSArray *ImageArray;
+@property(nonatomic,strong)UIButton *Btn_Back;
 @end
 
 @implementation SourceSettingController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self creatBgTypeView];
+    [self.passBtn setTitle:[LANG DPLocalizedString:@"跳过"] forState:UIControlStateNormal];
     [self creatView];
     // Do any additional setup after loading the view.
 }
--(void)creatBgTypeView{
-    UIImageView *bgImage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
-    [bgImage setImage:[UIImage imageNamed:@"rootbg"]];
-    [self.view addSubview:bgImage];
-    [self.view insertSubview:bgImage atIndex:0];
-}
+
 -(void)creatView{
     
     for (int i=0; i<5; i++) {
-        SourceItem *item=[[SourceItem alloc]init];
-        item.SoucreTitle.text=self.NameArray[i];
-        [item.logoImage setImage:self.ImageArray[i]];
+        SourceItem *item=[[SourceItem alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navBar.frame)+[Dimens GDimens:100*i], KScreenWidth, [Dimens GDimens:100])];
+        item.SoucreTitle.text=[LANG DPLocalizedString:self.NameArray[i]];
+        [item.logoImage setImage:[UIImage imageNamed:self.ImageArray[i]]];
+        [item setTag:i+SourceItemTag];
+        item.selectBlock = ^(BOOL isSelected, NSInteger itemTag) {
+             RecStructData.System.InSwitch[itemTag-SourceItemTag]=isSelected;
+            if (isSelected&&(itemTag<(2+SourceItemTag))) {
+                if (itemTag==0+SourceItemTag) {
+                    RecStructData.System.InSwitch[1]=0;
+                }else if (itemTag==1+SourceItemTag){
+                    RecStructData.System.InSwitch[0]=0;
+                }
+                [self flashSourceItem];
+            }
+           
+        };
         [self.view addSubview:item];
         
+    }
+    [self flashSourceItem];
+ 
+}
+-(void)toNextView{
+    if (RecStructData.System.InSwitch[3]==0&&RecStructData.System.InSwitch[4]==0) {
+       
+    }else{
+        HiAuxViewController *vc=[[HiAuxViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+-(void)toPassView{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)flashSourceItem{
+    for (int i=0; i<5; i++) {
+        SourceItem *item=(SourceItem *)[self.view viewWithTag:i+SourceItemTag];
+        [item flashSelect:RecStructData.System.InSwitch[i]];
     }
 }
 -(NSArray *)NameArray{
     if (!_NameArray) {
-        _NameArray=@[@"",@"",@"",@"",@""];
+        _NameArray=@[@"L_InputSource_Optical",@"L_InputSource_Coaxial",@"L_InputSource_Bluetooth",@"L_InputSource_High",@"L_InputSource_AUX"];
     }
     return _NameArray;
 }
 -(NSArray *)ImageArray{
     if (!_ImageArray) {
-        _ImageArray=@[@"",@"",@"",@"",@""];
+        _ImageArray=@[@"Source_Optical",@"Source_Coaxial",@"Source_Blue",@"Source_High",@"Source_Aux"];
     }
     return _ImageArray;
 }

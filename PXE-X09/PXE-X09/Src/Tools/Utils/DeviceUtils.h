@@ -19,5 +19,6 @@
 + (NSString *) deviceModel ;
 
 + (NSString *)identifier;
-
++ (BOOL)isFisrtStarApp;
++(void)setFirstStart;
 @end

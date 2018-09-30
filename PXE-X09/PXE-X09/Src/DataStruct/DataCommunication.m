@@ -389,7 +389,7 @@
            
                     break;
                 case LED_DATA:
-                    //数据共32字节，前31为RTA数据，后1个字节为当前最新信号源数据
+                    //数据共52字节，前31为RTA数据，中间20为信号 76~127属于有信号 小于76灯灭  后1个字节为当前最新信号源数据 光纤同轴各一个 蓝牙两个
                     if(RecStructData.System.input_source_temp != RecFrameData.DataBuf[10 + 31]){
                         RecStructData.System.input_source_temp = RecFrameData.DataBuf[10 + 31];
                         if(RecStructData.System.input_source_temp != RecStructData.System.input_source){
@@ -4943,7 +4943,9 @@ void initSystemDataStruct(){
     SendStructData.System.mixer_SourcedB = RecStructData.System.mixer_SourcedB=0;
     SendStructData.System.MainvolMuteFlg = RecStructData.System.MainvolMuteFlg=0;
     SendStructData.System.theme = RecStructData.System.theme=0;
-    
+    for (int i=0; i<5; i++) {
+         SendStructData.System.InSwitch[i] = RecStructData.System.InSwitch[i]=1;
+    }
     
 }
 #pragma mark-----数据初始化

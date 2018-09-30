@@ -40,14 +40,14 @@
 //    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"rootbg"]]];
 //    self.view.backgroundColor=SetColor(UI_MasterBackgroundColor);
         self.mToolbar = [[TopBarView alloc ]init];
-    if (KScreenHeight==812) {
+    if (KScreenHeight>=812) {
         self.mToolbar.frame=CGRectMake(0, 44, KScreenWidth, [Dimens GDimens:44]);
     }else{
          self.mToolbar.frame = CGRectMake(0, 20, KScreenWidth, [Dimens GDimens:44] );
     }
     
         [self.view addSubview:self.mToolbar];
-        [self.mToolbar setLogoShow:false];
+    [self.mToolbar setLogoShow:true];
 //        [self.mToolbar setTitle:[LANG DPLocalizedString:@"L_Master_Master"]];
     
         //代理

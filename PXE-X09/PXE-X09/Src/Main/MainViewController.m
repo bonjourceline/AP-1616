@@ -68,50 +68,24 @@
 //        [self addChildViewController:homeVC];
 //        [self.view addSubview:homeVC.view];
     }else{
-//        self.mFunsC = [[OptFunPage_CTbar_VC alloc] init];
-//        [self addChildViewController:self.mFunsC];
-//        [self.view addSubview:self.mFunsC.view];
-        if ([self isFisrtStarApp]) {
-            SourceSettingController *vc=[[SourceSettingController alloc]init];
-            delegate.window.rootViewController=vc;
-        }else{
+
+//        if ([self isFisrtStarApp]) {
+//
+//            SourceSettingController *vc=[[SourceSettingController alloc]init];
+//            UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:vc];
+//            nav.navigationBar.hidden=YES;
+//            delegate.window.rootViewController=
+//            nav;
+//        }else{
+        
             OptFunPage_TBC *rootVC=[[OptFunPage_TBC alloc]init];
             delegate.window.rootViewController=rootVC;
-        }
-        
-//        OptFunPage_TBC_M_VC *optVC = [[OptFunPage_TBC_M_VC alloc] init];
-//        delegate.window.rootViewController=optVC;
-//        [self addChildViewController:self.mFunM];
-//        [self.view addSubview:self.mFunM.view];
+//        }
 
-        
     }
 
 }
--(BOOL)isFisrtStarApp{
-    //获得单例
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    //读取次数（用户上一次启动app的次数）
-    NSString *number = [userDefaults objectForKey:kAppFirstLoadKey];
-    //判断是否有值
-    if (number!=nil) {
-        //能够取到值，则不是第一次启动
-        NSInteger starNumer = [number integerValue];
-        //用上一次的次数+1次
-        NSString *str = [NSString stringWithFormat:@"%lu",(long)++starNumer];
-        //存的是用户这一次启动的次数
-        [userDefaults setObject:str forKey:kAppFirstLoadKey];
-        [userDefaults synchronize];
-        return NO;
-    }else{
-        //不能取到值，则是第一次启动
-        NSLog(@"用户是第一次启动");
-        [userDefaults setObject:@"1" forKey:kAppFirstLoadKey];
-        [userDefaults synchronize];
-        //        [self sendNetData];
-        return YES;
-    }
-}
+
 //消息通知
 - (void)UpdateMasterViewUI:(id)sender{
 //    U0SynDataSucessFlg = true;

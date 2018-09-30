@@ -27,8 +27,8 @@
 
 #define UI_SystemLableColorNormal (0xFFffffff)//主颜色（平常状态）
 #define UI_SystemLableColorPress (0xFFffffff)//主颜色（选中状态）
-#define UI_SystemBtnColorNormal (0xFF7e7e7e)//主颜色（平常状态）
-#define UI_SystemBtnColorPress  (0xFFe2ae4e)//主颜色（选中状态）
+#define UI_SystemBtnColorNormal (0xFF424e57)//主颜色（平常状态）
+#define UI_SystemBtnColorPress  (0xFF2ea1ff)//主颜色（选中状态）
 
 //*********顶部状态栏
 #define UI_ToolbarBackgroundColor (0xFFf5f5f5) //顶部状态栏颜色
@@ -44,7 +44,7 @@
 #define UI_SimpleTopbarBackgroundColor (0xFF333333) //顶部状态栏颜色
 //*********底部状态栏
 #define UI_TabbarTextColorNormal (0xFFffffff) //顶部状态栏颜色
-#define UI_TabbarTextColorPress  (0xFFe2ae4e) //顶部状态栏标题颜色
+#define UI_TabbarTextColorPress  (0xFF2da3ff) //顶部状态栏标题颜色
 #define UI_TabbarBgColor  (0xFF262626) //顶部状态栏标题颜色
 
 //AutoLink
@@ -79,8 +79,8 @@
 //*********主页
 //主音量Seekbar
 #define UI_Master_SB_Volume_BG (0xFF323231)//背景色
-#define UI_Master_SB_Volume_Press  (0xFFe2ae4e) //音效选中颜色
-#define UI_Master_SB_Volume_Normal (0xFF16191a) //音效常态颜色
+#define UI_Master_SB_Volume_Press  (0xFF309ef4) //音效选中颜色
+#define UI_Master_SB_Volume_Normal (0x0016191a) //音效常态颜色
 #define UI_Master_SB_Volume_Point (0x00ffab00) //音效常态颜色
 #define UI_Master_SB_ColorCirInside (0xFF212f3b) //音效常态颜色
 
