@@ -18,7 +18,8 @@
 @interface HomePageViewController (){
     
 }
-//@property(nonatomic,strong)musicListViewController *musicListVC;
+@property(nonatomic,strong)NSArray *SourceArray;
+@property(nonatomic,strong)NSArray *SourceImages;
 
 @end
 
@@ -295,46 +296,22 @@
 
 
 - (void)showInputSourceOptDialog{
-    NSArray *titles = @[
-                        [LANG DPLocalizedString:@"L_InputSource_High"],
-                        [LANG DPLocalizedString:@"L_InputSource_AUX"],
-                        [LANG DPLocalizedString:@"L_InputSource_Bluetooth"],
-                        [LANG DPLocalizedString:@"L_InputSource_Digtit"]
-                        ];
     UIAlertController *alert;
     alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_InputSourceSelect"]message:[LANG DPLocalizedString:@"L_MainInputSource"]preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:0] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        RecStructData.System.input_source = 1;
-        [self.Btn_InputSource setTitle:[titles objectAtIndex:0] forState:UIControlStateNormal];
-        [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_hi_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        [self dealWithInputsource];
-    }]];
+    for (int i=0; i<self.SourceArray.count; i++) {
+        [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:i]] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            RecStructData.System.input_source=i;
+            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:i]] forState:UIControlStateNormal];
+            NSString *imageStr=self.SourceImages[i];
+            UIImage *image=[UIImage imageNamed:imageStr];
+            [self.Btn_InputSource setImage:image forState:UIControlStateNormal];
+            
+            [self dealWithInputsource];
+        }]];
+    }
+   
     
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        RecStructData.System.input_source = 3;
-        [self.Btn_InputSource setTitle:[titles objectAtIndex:1] forState:UIControlStateNormal];
-         [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_aux_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        [self dealWithInputsource];
-        
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        RecStructData.System.input_source = 2;
-        [self.Btn_InputSource setTitle:[titles objectAtIndex:2] forState:UIControlStateNormal];
-        [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_bluetooth_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        [self dealWithInputsource];
-        
-    }]];
-    
-    //    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //        RecStructData.System.input_source = 0;
-    //        [self.Btn_InputSource setTitle:[titles objectAtIndex:3] forState:UIControlStateNormal];
-    //        [self dealWithInputsource];
-    //
-    //    }]];
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
     }]];
@@ -477,51 +454,19 @@
 
 
 - (void)showMixerSourceOptDialog{
-    NSArray *titles = @[
-                        [LANG DPLocalizedString:@"L_InputSource_High"],
-                        [LANG DPLocalizedString:@"L_InputSource_AUX"],
-                        [LANG DPLocalizedString:@"L_InputSource_Bluetooth"],
-                        [LANG DPLocalizedString:@"L_InputSource_Digtit"],
-                        [LANG DPLocalizedString:@"L_XOver_OtcOFF"]
-                        ];
+
     UIAlertController *alert;
     alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_MixerInputSourceSelect"]message:[LANG DPLocalizedString:@""]preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:0] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        RecStructData.System.Blue_src_vol = 1;
-        [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:0] forState:UIControlStateNormal];
-        [self dealWithMixersource];
-    }]];
+    for (int i=0; i<self.SourceArray.count; i++) {
+        [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:i]] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:i]] forState:UIControlStateNormal];
+            RecStructData.System.mixer_source=i;
+            
+//            [self dealWithMixersource];
+        }]];
+    }
     
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        RecStructData.System.Blue_src_vol = 3;
-        [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:1] forState:UIControlStateNormal];
-        [self dealWithMixersource];
-        
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-//        RecStructData.System.Blue_src_vol = 2;
-        [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:2] forState:UIControlStateNormal];
-        [self dealWithMixersource];
-        
-    }]];
-    
-    //    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //        RecStructData.System.Blue_src_vol = 0;
-    //        [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:3] forState:UIControlStateNormal];
-    //        [self dealWithMixersource];
-    //
-    //    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:[titles objectAtIndex:4] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        RecStructData.System.Blue_src_vol = 6;
-        [self.Btn_MixerInputSource setTitle:[titles objectAtIndex:4] forState:UIControlStateNormal];
-        [self dealWithMixersource];
-        
-    }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
@@ -682,10 +627,10 @@
     [self.Lab_MasterVolumeText setTextColor:SetColor(UI_Master_VolumeTextColor)];
     self.Lab_MasterVolumeText.text = [LANG DPLocalizedString:@"L_Master_MasterVolumeText"];
     self.Lab_MasterVolumeText.adjustsFontSizeToFitWidth = true;
-    self.Lab_MasterVolumeText.font = [UIFont systemFontOfSize:20];
+    self.Lab_MasterVolumeText.font = [UIFont systemFontOfSize:18];
     self.Lab_MasterVolumeText.textAlignment = NSTextAlignmentCenter;
     [self.Lab_MasterVolumeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_centerY).offset([Dimens GDimens:60+MasterVolume_SB_Width/2+10]);
+        make.top.equalTo(self.view.mas_centerY).offset([Dimens GDimens:60+MasterVolume_SB_Width/2+20]);
         make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:100], [Dimens GDimens:MasterBtn_Height]));
     }];
@@ -720,7 +665,41 @@
     UIView *line=[[UIView alloc]init];
     line.backgroundColor=SetColor(UI_SystemBtnColorNormal);
     [self.view addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.SB_MasterVolume.mas_centerY);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.Btn_InputSource.mas_left);
+        make.height.mas_equalTo(1);
+    }];
     UIView *line1=[[UIView alloc]init];
+    line1.backgroundColor=SetColor(UI_SystemBtnColorNormal);
+    [self.view addSubview:line1];
+    [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(line.mas_centerY);
+        make.left.equalTo(self.Btn_InputSource.mas_right);
+        make.right.equalTo(self.view.mas_centerX).offset([Dimens GDimens:-30]);
+         make.height.mas_equalTo(1);
+    }];
+    
+    UIView *line2=[[UIView alloc]init];
+    line2.backgroundColor=SetColor(UI_SystemBtnColorNormal);
+    [self.view addSubview:line2];
+    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(line.mas_centerY);
+        make.left.equalTo(self.view.mas_centerX).offset([Dimens GDimens:60]);
+        make.right.equalTo(self.Btn_MasterMute.mas_left);
+        make.height.mas_equalTo(1);
+    }];
+    
+    UIView *line3=[[UIView alloc]init];
+    line3.backgroundColor=SetColor(UI_SystemBtnColorNormal);
+    [self.view addSubview:line3];
+    [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(line.mas_centerY);
+        make.left.equalTo(self.Btn_MasterMute.mas_right);
+        make.right.equalTo(self.view.mas_right);
+        make.height.mas_equalTo(1);
+    }];
 //    self.Btn_MasterMute.hidden=YES;
     
     
@@ -1543,61 +1522,30 @@
         [self.Btn_MasterMute setPress];
     }
 }
-
+-(NSArray *)SourceArray{
+    if (!_SourceArray) {
+        _SourceArray=@[@"L_InputSource_Optical",@"L_InputSource_Coaxial",@"L_InputSource_Bluetooth",@"L_InputSource_High",@"L_InputSource_AUX"];
+    }
+    return _SourceArray;
+}
+-(NSArray *)SourceImages{
+    if (!_SourceImages) {
+        _SourceImages=@[@"icon_optical",@"icon_coaxial",@"icon_bluetooth_default",@"icon_hi_default",@"icon_aux_default"];
+    }
+    return _SourceImages;
+}
 -(void) FlashMixerInputSource{
-//    switch (RecStructData.System.Blue_src_vol) {
-//        case 1:
-//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_High"] forState:UIControlStateNormal] ;
-//            break;
-//        case 3:
-//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_AUX"] forState:UIControlStateNormal] ;
-//            break;
-//            //        case 0:
-//            //            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Digtit"] forState:UIControlStateNormal] ;
-//            //            break;
-//            //        case 4:
-//            //            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Coaxial"] forState:UIControlStateNormal] ;
-//            //            break;
-//        case 2:
-//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-//            break;
-//        case 6:
-//            [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"L_XOver_OtcOFF"] forState:UIControlStateNormal] ;
-//            break;
-//        default:
-//            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-//            break;
-//    }
-    [self selectMixerSourceAndInputSource];
+    
+    [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:RecStructData.System.mixer_source]] forState:UIControlStateNormal];
+
     
 }
 
 -(void) FlashInputSource{
-    switch (RecStructData.System.input_source) {
-        case 1:
-            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_High"] forState:UIControlStateNormal] ;
-             [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_hi_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-            break;
-        case 3:
-            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_AUX"] forState:UIControlStateNormal] ;
-             [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_aux_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-            break;
-            //        case 0:
-            //            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Digtit"] forState:UIControlStateNormal] ;
-            //            //[self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Optical"] forState:UIControlStateNormal] ;
-            //            break;
-        case 4:
-            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Coaxial"] forState:UIControlStateNormal] ;
-            break;
-        case 2:
-            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-             [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_bluetooth_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-            break;
-        default:
-            [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"L_InputSource_Bluetooth"] forState:UIControlStateNormal] ;
-             [self.Btn_InputSource setImage:[[UIImage imageNamed:@"icon_bluetooth_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-            break;
-    }
+    
+    [self.Btn_InputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:RecStructData.System.input_source]] forState:UIControlStateNormal];
+    [self.Btn_InputSource setImage:[UIImage imageNamed:self.SourceImages[RecStructData.System.input_source]] forState:UIControlStateNormal];
+
     [self selectMixerSourceAndInputSource];
     
 }

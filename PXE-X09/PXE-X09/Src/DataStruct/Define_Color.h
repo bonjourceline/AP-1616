@@ -28,7 +28,7 @@
 #define UI_SystemLableColorNormal (0xFFffffff)//主颜色（平常状态）
 #define UI_SystemLableColorPress (0xFFffffff)//主颜色（选中状态）
 #define UI_SystemBtnColorNormal (0xFF424e57)//主颜色（平常状态）
-#define UI_SystemBtnColorPress  (0xFF2ea1ff)//主颜色（选中状态）
+#define UI_SystemBtnColorPress  (0xFF379af0)//主颜色（选中状态）
 
 //*********顶部状态栏
 #define UI_ToolbarBackgroundColor (0xFFf5f5f5) //顶部状态栏颜色

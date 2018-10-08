@@ -113,6 +113,9 @@
 		14DE4B471EC49E2000418248 /* QIZSearchEffectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4B401EC49E2000418248 /* QIZSearchEffectTableViewController.m */; };
 		14DE4B4A1EC49ED300418248 /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4B491EC49ED300418248 /* IconButton.m */; };
 		14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CCDE1EF8D42800887903 /* IZValueSelectorView.m */; };
+		722395CD2167846800AA5086 /* SingleChItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395CC2167846800AA5086 /* SingleChItem.m */; };
+		722395D12168BBD800AA5086 /* SingleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395CF2168BBD800AA5086 /* SingleTableViewCell.m */; };
+		722395D22168BBD800AA5086 /* SingleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722395D02168BBD800AA5086 /* SingleTableViewCell.xib */; };
 		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
 		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
@@ -427,6 +430,11 @@
 		14E8CCDD1EF8D42800887903 /* IZValueSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IZValueSelectorView.h; sourceTree = "<group>"; };
 		14E8CCDE1EF8D42800887903 /* IZValueSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IZValueSelectorView.m; sourceTree = "<group>"; };
 		52C7DE915FC1D30E53988540 /* libPods-PXE-X09.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PXE-X09.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		722395CB2167846800AA5086 /* SingleChItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleChItem.h; sourceTree = "<group>"; };
+		722395CC2167846800AA5086 /* SingleChItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleChItem.m; sourceTree = "<group>"; };
+		722395CE2168BBD800AA5086 /* SingleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleTableViewCell.h; sourceTree = "<group>"; };
+		722395CF2168BBD800AA5086 /* SingleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleTableViewCell.m; sourceTree = "<group>"; };
+		722395D02168BBD800AA5086 /* SingleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleTableViewCell.xib; sourceTree = "<group>"; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
 		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
@@ -1594,6 +1602,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		722395D32168BBDF00AA5086 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				722395CB2167846800AA5086 /* SingleChItem.h */,
+				722395CC2167846800AA5086 /* SingleChItem.m */,
+				722395CE2168BBD800AA5086 /* SingleTableViewCell.h */,
+				722395CF2168BBD800AA5086 /* SingleTableViewCell.m */,
+				722395D02168BBD800AA5086 /* SingleTableViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		AA045138215E1138004675FD /* items */ = {
 			isa = PBXGroup;
 			children = (
@@ -1691,6 +1711,7 @@
 		AA62E8FC215F19040023F225 /* InputOutSetting */ = {
 			isa = PBXGroup;
 			children = (
+				722395D32168BBDF00AA5086 /* cell */,
 				AA62E8F9215F18FD0023F225 /* InputSetViewController.h */,
 				AA62E8FA215F18FD0023F225 /* InputSetViewController.m */,
 				AA62E8FD215F194D0023F225 /* OutSetViewController.h */,
@@ -1831,6 +1852,7 @@
 				14CF98811E66CC370001FAB9 /* Localizable.strings in Resources */,
 				AABFD477202439E70089A5E9 /* OutputViewController.xib in Resources */,
 				AABFD46D202439A90089A5E9 /* XOverOutputViewController.xib in Resources */,
+				722395D22168BBD800AA5086 /* SingleTableViewCell.xib in Resources */,
 				AA6D0C8B1FDE1A86000735FD /* Assets.xcassets in Resources */,
 				AA3056EB202455AD0085672C /* MasterVolView.xib in Resources */,
 			);
@@ -1934,6 +1956,7 @@
 				AABFD42E202437120089A5E9 /* OutputItemFRS.m in Sources */,
 				AABFD454202438130089A5E9 /* EQView.m in Sources */,
 				AABFD440202437BF0089A5E9 /* MixerItem.m in Sources */,
+				722395CD2167846800AA5086 /* SingleChItem.m in Sources */,
 				142332551EC1CD5100E3FCC4 /* DataInfoData.m in Sources */,
 				14DE4B431EC49E2000418248 /* QIZCollectionTableViewController.m in Sources */,
 				1423327C1EC1CE0500E3FCC4 /* JSONAPI.m in Sources */,
@@ -1988,6 +2011,7 @@
 				142332591EC1CD5100E3FCC4 /* SEFFFile.m in Sources */,
 				AABFD46F202439A90089A5E9 /* XOverOutputFRSViewController.m in Sources */,
 				1459BFA11E5C3F840085FFA6 /* MT_IOS.xcdatamodeld in Sources */,
+				722395D12168BBD800AA5086 /* SingleTableViewCell.m in Sources */,
 				142332291EC1CBBA00E3FCC4 /* QIZDataStructTool.m in Sources */,
 				1423327B1EC1CE0500E3FCC4 /* NSArray+JSONModel.m in Sources */,
 				AABFD451202438130089A5E9 /* EQItem.m in Sources */,
