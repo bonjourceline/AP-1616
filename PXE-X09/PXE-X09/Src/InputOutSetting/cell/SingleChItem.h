@@ -8,12 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import "NormalButton.h"
+#import "VolumeCircleIMLine.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SingleChItem : UIControl
 @property (nonatomic,strong)UIImageView *sourceImage;
 @property (nonatomic,strong)UILabel *chName;
-@property (nonatomic,strong)NormalButton *
+@property (nonatomic,strong)NormalButton *spkBtn;
+@property (nonatomic,strong)NormalButton *eqBtn;
+@property (nonatomic,strong)VolumeCircleIMLine *sbVol;
+@property (nonatomic,strong)UIButton *volBtn;
+@property (nonatomic,strong)NormalButton *muteBtn;
+@property (nonatomic,strong)UIView *flgView;
+@property (nonatomic,strong)UIView *lineTop;
+@property (nonatomic,strong)UIView *lineBottom;
+
+@property (nonatomic,strong)NSArray *ImageArray;
+-(void)setChannelIndex:(int)index;
+-(void)flashView;
 @end
 
 NS_ASSUME_NONNULL_END

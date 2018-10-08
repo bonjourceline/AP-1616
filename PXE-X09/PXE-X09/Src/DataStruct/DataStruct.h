@@ -208,11 +208,11 @@ struct	input_Struct	//音乐输入  共288字节
     struct	EQ_Struct	EQ[10];		//音乐31EQ
     
     //杂项 ID = 31--10
-    uint8	mute;	//保留
+    uint8	mute;	//保留 0静音 1非静音
     uint8	polar;      //极极，0－－同相，1－－反相
-    uint16	gain;	//EQ 模式 PEQ/GEQ
-    uint16	delay;		//静音2011-6-2  改 zhihui
-    uint8	eq_mode;		//延时
+    uint16	gain;	// 音量 0~600 -60~0dB
+    uint16	delay;		//延时
+    uint8	eq_mode;		//eq模式 PEQ/GEQ
     uint8	LinkFlag;		//联调标志
     
     
@@ -221,8 +221,8 @@ struct	input_Struct	//音乐输入  共288字节
     uint8	h_filter;	//保留	高通类型值，0－－LR,1－－BESSEL,2－－BUTTERWORTH
     uint8	h_level;	//保留	高通斜率值，0－－6db,1－－18db,2－－24db
     uint16	l_freq;		//低通频率
-    uint8	l_filter;	//保留	低通类型
-    uint8	l_level;	//保留	低通斜率值
+    uint8	l_filter;	//低通类型
+    uint8	l_level;	//低通斜率值
     
     //噪声门 ID = 33-12
     uint8	noisegate_t; //保留  阀值，-120dbu~+10dbu,stp:1dbu,实际发送0~130

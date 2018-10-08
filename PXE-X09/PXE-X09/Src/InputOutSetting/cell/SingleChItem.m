@@ -7,24 +7,190 @@
 //
 
 #import "SingleChItem.h"
+#import "Masonry.h"
+#define borderNormal (0xFF313c45)
+#define bgNormal (0xFF27323d)
+#define bgPress (0xFF1d262e)
+#define btnMargin 120
+@implementation SingleChItem{
+    int chIndex;
+}
 
-@implementation SingleChItem
 - (instancetype)init{
     if (self = [super init]) {
         [self setup];
     }
     return self;
 }
-
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        
-        [self setup];
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame{
+//    if (self = [super initWithFrame:frame]) {
+//
+//        [self setup];
+//    }
+//    return self;
+//}
 -(void)setup{
+    self.backgroundColor=[UIColor clearColor];
     
+    self.sourceImage=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Source_Optical"]];
+    self.sourceImage.contentMode=UIViewContentModeScaleAspectFit;
+    
+    self.chName=[[UILabel alloc]init];
+    self.chName.font=[UIFont systemFontOfSize:12];
+    self.chName.adjustsFontSizeToFitWidth=YES;
+    self.chName.text=@"光纤";
+    self.chName.textColor=SetColor(0xFF789ab0);
+    UIStackView *stackView=[[UIStackView alloc]init];
+    stackView.alignment=UIStackViewAlignmentCenter;
+    stackView.axis=UILayoutConstraintAxisVertical;
+    [stackView addArrangedSubview:self.sourceImage];
+    [stackView addArrangedSubview:self.chName];
+    [self addSubview:stackView];
+    [stackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.left.equalTo(self.mas_left).offset([Dimens GDimens:0]);
+        make.width.mas_equalTo([Dimens GDimens:65]);
+    }];
+    self.flgView=[[UIView alloc]init];
+    [self addSubview:self.flgView];
+    self.flgView.backgroundColor=[UIColor greenColor];
+    self.flgView.layer.cornerRadius=2.5;
+    self.flgView.layer.masksToBounds=YES;
+    [self.flgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(stackView.mas_centerY);
+        make.left.equalTo(stackView.mas_right);
+        make.size.mas_equalTo(CGSizeMake(5, 5));
+    }];
+    //线
+    UIView *line=[[UIView alloc]init];
+    line.backgroundColor=SetColor(borderNormal);
+    [self addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.left.equalTo(self.flgView.mas_right).offset([Dimens GDimens:5]);
+        make.right.equalTo(self.mas_right);
+        make.height.mas_equalTo(1);
+    }];
+    self.lineTop=[[UIView alloc]init];
+    [self addSubview:self.lineTop];
+    self.lineTop.backgroundColor=SetColor(borderNormal);
+    [self.lineTop mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_centerY);
+        make.right.equalTo(self.mas_right);
+        make.width.mas_equalTo(1);
+    }];
+    self.lineBottom=[[UIView alloc]init];
+    [self addSubview:self.lineBottom];
+    self.lineBottom.backgroundColor=SetColor(borderNormal);
+    [self.lineBottom                                                 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_centerY);
+        make.bottom.equalTo(self.mas_bottom);
+        make.right.equalTo(self.mas_right);
+        make.width.mas_equalTo(1);
+    }];
+    self.spkBtn=[[NormalButton alloc]init];
+    [self.spkBtn
+     initViewBroder:0
+     withBorderWidth:1
+     withNormalColor:bgNormal
+     withPressColor:bgNormal
+     withBorderNormalColor:borderNormal
+     withBorderPressColor:borderNormal
+     withTextNormalColor:(0xFFffffff)
+     withTextPressColor:(0xFFffffff) withType:4];
+    [self.spkBtn setTitle:@"前左高音" forState:UIControlStateNormal];
+    self.spkBtn.titleLabel.font=[UIFont systemFontOfSize:12];
+    self.spkBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
+    [self addSubview:self.spkBtn];
+    [self.spkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(line.mas_left).offset([Dimens GDimens:30+20]);
+        make.centerY.equalTo(self.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:60], [Dimens GDimens:30]));
+    }];
+    self.eqBtn=[[NormalButton alloc]init];
+    [self.eqBtn
+     initViewBroder:0
+     withBorderWidth:1
+     withNormalColor:bgNormal
+     withPressColor:bgPress
+     withBorderNormalColor:borderNormal
+     withBorderPressColor:borderNormal
+     withTextNormalColor:(0xFFffffff)
+     withTextPressColor:(0xFFffffff) withType:4];
+    [self.eqBtn setImage:[UIImage imageNamed:@"eq_normal"] forState:UIControlStateNormal];
+    [self addSubview:self.eqBtn];
+    [self.eqBtn setBackgroundImage:[UIImage imageNamed:@"eq_normal"] forState:UIControlStateNormal];
+    [self.eqBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.spkBtn.mas_centerX).offset([Dimens GDimens:85]);
+        make.centerY.equalTo(self.mas_centerY);
+        make.size.mas_equalTo(self.spkBtn);
+    }];
+    
+    self.sbVol=[[VolumeCircleIMLine alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:45], [Dimens GDimens:45])];
+    [self addSubview:self.sbVol];
+    [self.sbVol setMaxProgress:Input_CH_Volume_MAX];
+    [self.sbVol mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.centerY.equalTo(self.mas_centerY);
+        make.centerX.equalTo(self.eqBtn.mas_centerX).offset([Dimens GDimens:80]);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:45]));
+    }];
+    self.volBtn=[[UIButton alloc]init];
+    [self addSubview:self.volBtn];
+    [self.volBtn setTitle:@"20" forState:UIControlStateNormal];
+    [self.volBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.volBtn.titleLabel.font=[UIFont systemFontOfSize:17];
+    self.volBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
+    [self.volBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.centerX.equalTo(self.eqBtn.mas_centerX).offset([Dimens GDimens:80]);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:45]));
+    }];
+    self.muteBtn=[[NormalButton alloc]init];
+//    [self.muteBtn initViewBroder:0
+//                 withBorderWidth:2
+//                 withNormalColor:bgNormal
+//                  withPressColor:bgPress
+//           withBorderNormalColor:UI_Master_SB_Volume_Normal
+//            withBorderPressColor:(0xFF000000)
+//             withTextNormalColor:bgNormal
+//              withTextPressColor:bgNormal withType:4];
+    [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_normal"] forState:UIControlStateNormal];
+    [self.muteBtn addTarget:self action:@selector(clickMute:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.muteBtn];
+    [self.muteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.centerX.equalTo(self.volBtn.mas_centerX).offset([Dimens GDimens:75]);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:45]));
+    }];
+}
+#pragma mark--------点击事件
+-(void)clickMute:(NormalButton *)btn{
+    if(RecStructData.IN_CH[chIndex].mute==0){
+        RecStructData.IN_CH[chIndex].mute=1;
+        [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_normal"] forState:UIControlStateNormal];
+    }else{
+         RecStructData.IN_CH[chIndex].mute=0;
+        [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_press"] forState:UIControlStateNormal];
+    }
+}
+-(void)setChannelIndex:(int)index{
+    chIndex=index;
+}
+-(void)flashView{
+    if (RecStructData.IN_CH[chIndex].mute==0) {
+         [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_press"] forState:UIControlStateNormal];
+    }else{
+        [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_normal"] forState:UIControlStateNormal];
+    }
+    [self.sbVol setProgress:RecStructData.IN_CH[chIndex].gain/Output_Volume_Step];
+    [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.IN_CH[chIndex].gain/Output_Volume_Step] forState:UIControlStateNormal];
+}
+-(NSArray *)ImageArray{
+    if (!_ImageArray) {
+        _ImageArray=@[@"Source_Optical",@"Source_Coaxial",@"Source_Blue",@"Source_High",@"Source_Aux"];
+    }
+    return _ImageArray;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SingleTableViewCell : UITableViewCell
 @property(nonatomic,strong)SingleChItem *item;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -78,9 +78,9 @@
 
 //*********主页
 //主音量Seekbar
-#define UI_Master_SB_Volume_BG (0xFF323231)//背景色
-#define UI_Master_SB_Volume_Press  (0xFF309ef4) //音效选中颜色
-#define UI_Master_SB_Volume_Normal (0x0016191a) //音效常态颜色
+#define UI_Master_SB_Volume_BG (0xFF27323d)//背景色
+#define UI_Master_SB_Volume_Press  (0xFF35a2ff) //音效选中颜色
+#define UI_Master_SB_Volume_Normal (0xFF3b4853) //音效常态颜色
 #define UI_Master_SB_Volume_Point (0x00ffab00) //音效常态颜色
 #define UI_Master_SB_ColorCirInside (0xFF212f3b) //音效常态颜色
 

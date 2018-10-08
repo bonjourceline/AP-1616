@@ -8,8 +8,11 @@
 
 #import "OutSetViewController.h"
 
-@interface OutSetViewController ()
-
+@interface OutSetViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    UIButton *outputTypeBtn;
+}
+@property(nonatomic,strong)UITableView *outputTableView;
 @end
 
 @implementation OutSetViewController
@@ -17,9 +20,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mToolbar.lab_Title.text=[LANG DPLocalizedString:@"L_TabBar_OutputPage"];
+    [self creatTopView];
     // Do any additional setup after loading the view.
 }
-
+-(void)creatTopView{
+    
+}
+-(void)creatTableView{
+    
+}
 /*
 #pragma mark - Navigation
 

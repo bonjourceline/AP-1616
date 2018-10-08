@@ -124,7 +124,7 @@ uint16 DELAY_SETTINGS_MAX = 960;//960 20，384 8 ，240 5 ，259 5.396
 //------------------------   输入通道  ---------------------
 /*机型的Input通道数及机型的Input通道的EQ数量,主音量在MUSIC(DataStructInput)中,只使用一路*/
 uint8 Input_CH_MAX = 16;
-uint8 Input_CH_Volume_MAX = 60;
+uint16 Input_CH_Volume_MAX = 600;
 
 //------------------------   输出通道  ---------------------
 /*机型的输出通道数及机型的输出通道的EQ数量*/
@@ -241,7 +241,7 @@ uint8 IN_CH_VolumeMAX = 40;
 uint8 IN_CH_EQ_MAX_USE= 10;
 
 BOOL  BOOL_USE_INS = false;
-uint8 INS_CH_MAX       = 11;
+uint8 INS_CH_MAX       = 16;
 uint8 INS_CH_VolumeMAX = 40;
 uint8 INS_CH_EQ_MAX    = 31;
 uint8 INS_CH_EQ_MAX_USE= 4;

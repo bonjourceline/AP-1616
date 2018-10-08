@@ -65,7 +65,7 @@
     self.SBStyle = VCSS_LINE_Thumb;
     Progress = 170;//当前数值
     MaxProgress   = 660;//最大数值
-    ProgressWidth = 4; //seekbara 线宽
+    ProgressWidth = 1.5; //seekbara 线宽
     
     Draw_AngleStart = M_PI*3/4;//起始角度
     Draw_AngleEnd   = M_PI*9/4;  //结束角度
@@ -228,13 +228,13 @@
         CGContextDrawPath(context, kCGPathStroke);
         
         //Thumb
-        CGPoint Point = [self pointFromAngle:(180+SB_AngleStart + (SB_AngleMax-Progress*SB_AngleStep)) withRadius:ArcRadius];
-        CGRect imageRect = CGRectMake(Point.x-[Dimens GDimens:20]/2,
-                                      Point.y-[Dimens GDimens:20]/2,
-                                      [Dimens GDimens:20],
-                                      [Dimens GDimens:20]);
-        CGContextDrawImage(context, imageRect, [UIImage imageNamed:@"chs_thumb_normal"].CGImage);
-        CGContextDrawPath(context, kCGPathStroke);
+//        CGPoint Point = [self pointFromAngle:(180+SB_AngleStart + (SB_AngleMax-Progress*SB_AngleStep)) withRadius:ArcRadius];
+//        CGRect imageRect = CGRectMake(Point.x-[Dimens GDimens:20]/2,
+//                                      Point.y-[Dimens GDimens:20]/2,
+//                                      [Dimens GDimens:20],
+//                                      [Dimens GDimens:20]);
+//        CGContextDrawImage(context, imageRect, [UIImage imageNamed:@"chs_thumb_normal"].CGImage);
+//        CGContextDrawPath(context, kCGPathStroke);
     }
     
     

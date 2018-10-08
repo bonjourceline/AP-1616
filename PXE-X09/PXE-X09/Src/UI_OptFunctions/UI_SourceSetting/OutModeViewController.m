@@ -25,6 +25,7 @@
     [super viewDidLoad];
     self.tiltleLab.text=[LANG DPLocalizedString:@"输出方式选择"];
     outModes=@[@"主动2分频",@"主动3分频",@"主动4分频",@"主动3分频+超低",@"主动2分频+超低",@"自定义"];
+    [self.nextBtn setTitle:[LANG DPLocalizedString:@"进入调音"] forState:UIControlStateNormal];
     [self creatOutModeView];
     [self flashOutItem];
     // Do any additional setup after loading the view.
@@ -70,7 +71,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)toNextView{
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark------------刷新
 -(void)flashOutItem{

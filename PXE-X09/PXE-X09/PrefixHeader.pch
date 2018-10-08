@@ -35,6 +35,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 #import "LANG.h"
 #import "Define_NSNotification.h"
 #import "Define_Dimens.h"
+#import "MacDefine.h"
 
 #define KNmusicMesArrive @"KNmusicMesArrive" //当前音乐数据返回
 #define KNmusiclistArrive @"KNmusiclistArrive"//音乐列表数据返回
