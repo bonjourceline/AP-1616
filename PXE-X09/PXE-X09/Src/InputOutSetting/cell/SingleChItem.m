@@ -11,7 +11,6 @@
 #define borderNormal (0xFF313c45)
 #define bgNormal (0xFF27323d)
 #define bgPress (0xFF1d262e)
-#define btnMargin 120
 @implementation SingleChItem{
     int chIndex;
 }
@@ -183,7 +182,7 @@
     }else{
         [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_normal"] forState:UIControlStateNormal];
     }
-    [self.sbVol setProgress:RecStructData.IN_CH[chIndex].gain/Output_Volume_Step];
+    [self.sbVol setProgress:RecStructData.IN_CH[chIndex].gain];
     [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.IN_CH[chIndex].gain/Output_Volume_Step] forState:UIControlStateNormal];
 }
 -(NSArray *)ImageArray{

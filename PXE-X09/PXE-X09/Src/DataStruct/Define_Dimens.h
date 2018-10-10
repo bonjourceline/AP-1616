@@ -53,7 +53,7 @@
 #define MasterMuteWidth  90
 #define MasterMuteHeight 60
 //音量滑动条大小
-#define MasterVolume_SB_Size    210
+#define MasterVolume_SB_Size    250
 #define MasterVolume_SB_Width   250
 #define MasterVolume_SB_Height  60
 
@@ -100,8 +100,8 @@
 #define OutputPageOut_SB_Size  200
 
 #define EQViewHeight  160
-#define EQItemHeight  320
-#define EQItemWidth   80
+#define EQItemHeight  310
+#define EQItemWidth   60
 #define EQItem_BTN_HEIGHT 25
 
 //MixerItem
@@ -117,9 +117,9 @@
 #define ChannelBtnListHeight  40
 #define ChannelBtnListWidth  80
 //EQ
-#define EQBtnHeight  30
+#define EQBtnHeight 25
 #define EQBtnMarginSide  15
-#define EQBtnWidth   100
+#define EQBtnWidth   90
 
 //Delay
 #define DelayBtnHeight  30

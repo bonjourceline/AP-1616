@@ -65,7 +65,8 @@ MBProgressHUDDelegate>
 @property (nonatomic,strong) NormalButton *Btn_EQReset;
 @property (nonatomic,strong) NormalButton *Btn_EQByPass;
 @property (nonatomic,strong) NormalButton *Btn_EQPG_MD;
-@property (nonatomic, nonatomic) UIScrollView *SVEQ;
+@property (nonatomic, strong) UIScrollView *SVEQ;
+@property (nonatomic,strong)UILabel *channelLab;
 @property (nonatomic,strong) ChannelBtn * channelBtn;
 @property (nonatomic,strong) ChannelBar * channelBar;
 //@property (nonatomic,strong)  IZValueSelectorView *selectorHorizontal;

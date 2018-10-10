@@ -120,7 +120,7 @@
 #define UI_DelayBtn_Press   (0xFF2ea9ff)
 #define UI_DelayBtn_Normal  (0xFF7e7e7e)
 #define UI_DelayBtn_PressIN   (0x24e2ae4e)
-#define UI_DelayBtn_NormalIN  (0x004f5052)
+#define UI_DelayBtn_NormalIN  (0xFF20272e)
 #define UI_DelayBtnText_Press   (0xFF5c3e10)
 #define UI_DelayBtnText_Normal  (0xFFffffff)
 
@@ -134,18 +134,18 @@
 
 
 //EQView
-#define Color_EQView_Frame    (0xFFacacac) //EQ边框颜色
-#define Color_EQView_Text     (0xFFacacac) //EQ文本颜色
-#define Color_EQView_MidLine  (0xFF828282) //EQ中线颜色
-#define Color_EQView_EQLine   (0xFFe2ae4e) //EQ曲线颜色
+#define Color_EQView_Frame    (0xFF8f9eae) //EQ边框颜色
+#define Color_EQView_Text     (0xFF8f9eae) //EQ文本颜色
+#define Color_EQView_MidLine  (0xFF8f9eae) //EQ中线颜色
+#define Color_EQView_EQLine   (0xFF369bff) //EQ曲线颜色
 #define Color_EQChannelLis_bg (0xFF4b4b4b) //背景色
 #define Color_Channellis_line (0xFF343434) //
 #define Color_EQItemNormal    (0xFFffffff) //EQ边框颜色
-#define Color_EQItemPress     (0xFFe2ae4e) //EQ文本颜色
+#define Color_EQItemPress     (0xFF369bff) //EQ文本颜色
 #define Color_EQItemDisable   (0xFFaaaaaa) //EQ中线颜色
-#define Color_EQItemSBProgress     (0xFFe2ae4e) //EQSlider颜色
-#define Color_EQItemSBProgressBg   (0xFF000000) //EQSlider颜色
-#define Color_EQIndexNormal   (0xFFacacac) //
+#define Color_EQItemSBProgress     (0xFF369bff) //EQSlider颜色
+#define Color_EQItemSBProgressBg   (0xFF28323c) //EQSlider颜色
+#define Color_EQIndexNormal   (0xFF8f9eae) //
 
 
 #define UI_EQSB_VolGain_P_Color (0xFFff0000) //音效常态颜色

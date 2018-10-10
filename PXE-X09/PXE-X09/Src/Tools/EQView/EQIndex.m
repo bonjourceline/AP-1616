@@ -69,21 +69,37 @@
         make.top.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
-    //Gain(db)
-    self.Lab_Gain = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
-    [self addSubview:self.Lab_Gain];
-    [self.Lab_Gain setBackgroundColor:[UIColor clearColor]];
-    [self.Lab_Gain setTextColor:ColorNormal];
-    self.Lab_Gain.text=[LANG DPLocalizedString:@"L_EQIndex_Gain"];
-    self.Lab_Gain.textAlignment = NSTextAlignmentCenter;
-    self.Lab_Gain.adjustsFontSizeToFitWidth = true;
-    self.Lab_Gain.font = [UIFont systemFontOfSize:EQindexTextSize];
-    [self.Lab_Gain mas_makeConstraints:^(MASConstraintMaker *make) {
+    //Freq
+    self.Lab_Freq = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
+    [self addSubview:self.Lab_Freq];
+    [self.Lab_Freq setBackgroundColor:[UIColor clearColor]];
+    [self.Lab_Freq setTextColor:ColorNormal];
+    self.Lab_Freq.text=[LANG DPLocalizedString:@"L_EQIndex_Freq"];
+    self.Lab_Freq.textAlignment = NSTextAlignmentCenter;
+    self.Lab_Freq.adjustsFontSizeToFitWidth = true;
+    self.Lab_Freq.font = [UIFont systemFontOfSize:EQindexTextSize];
+    [self.Lab_Freq mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.Lab_ID.mas_bottom).offset(0);
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
    
+    //
+    //BW(q)
+    self.Lab_BW = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
+    [self addSubview:self.Lab_BW];
+    [self.Lab_BW setBackgroundColor:[UIColor clearColor]];
+    [self.Lab_BW setTextColor:ColorNormal];
+    self.Lab_BW.text=[LANG DPLocalizedString:@"L_EQIndex_BW"];
+    self.Lab_BW.textAlignment = NSTextAlignmentCenter;
+    self.Lab_BW.adjustsFontSizeToFitWidth = true;
+    self.Lab_BW.font = [UIFont systemFontOfSize:EQindexTextSize];
+    [self.Lab_BW mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.top.equalTo(self.Lab_Freq.mas_bottom).offset(0);
+        make.centerX.equalTo(self.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
+    }];
+    
     //
     self.Lab_GainMax = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
     [self addSubview:self.Lab_GainMax];
@@ -98,11 +114,11 @@
     self.Lab_GainMax.adjustsFontSizeToFitWidth = true;
     self.Lab_GainMax.font = [UIFont systemFontOfSize:EQindexTextSize];
     [self.Lab_GainMax mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.Lab_Gain.mas_bottom).offset(0);
+        make.top.equalTo(self.Lab_BW.mas_bottom).offset(0);
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
-//    self.Lab_GainMax.hidden=YES;
+    self.Lab_GainMax.hidden=YES;
     //
     self.Lab_GainZero = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
     [self addSubview:self.Lab_GainZero];
@@ -117,7 +133,7 @@
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, SBHeight));
     }];
-//    self.Lab_GainZero.hidden=YES;
+    self.Lab_GainZero.hidden=YES;
     
     self.Lab_GainMin = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
     [self addSubview:self.Lab_GainMin];
@@ -136,23 +152,24 @@
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
-//    self.Lab_GainMin.hidden=YES;
+    self.Lab_GainMin.hidden=YES;
     
-   
-    //Freq
-    self.Lab_Freq = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
-    [self addSubview:self.Lab_Freq];
-    [self.Lab_Freq setBackgroundColor:[UIColor clearColor]];
-    [self.Lab_Freq setTextColor:ColorNormal];
-    self.Lab_Freq.text=[LANG DPLocalizedString:@"L_EQIndex_Freq"];
-    self.Lab_Freq.textAlignment = NSTextAlignmentCenter;
-    self.Lab_Freq.adjustsFontSizeToFitWidth = true;
-    self.Lab_Freq.font = [UIFont systemFontOfSize:EQindexTextSize];
-    [self.Lab_Freq mas_makeConstraints:^(MASConstraintMaker *make) {
+    //Gain(db)
+    self.Lab_Gain = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
+    [self addSubview:self.Lab_Gain];
+    [self.Lab_Gain setBackgroundColor:[UIColor clearColor]];
+    [self.Lab_Gain setTextColor:ColorNormal];
+    self.Lab_Gain.text=[LANG DPLocalizedString:@"L_EQIndex_Gain"];
+    self.Lab_Gain.textAlignment = NSTextAlignmentCenter;
+    self.Lab_Gain.adjustsFontSizeToFitWidth = true;
+    self.Lab_Gain.font = [UIFont systemFontOfSize:EQindexTextSize];
+    [self.Lab_Gain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.Lab_GainMin.mas_bottom).offset(0);
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
+        
     }];
+  
     //Reset
     self.Lab_Reset = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
     [self addSubview:self.Lab_Reset];
@@ -167,21 +184,7 @@
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
-    //
-    //BW(q)
-    self.Lab_BW = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIND_Width, BtnHeight)];
-    [self addSubview:self.Lab_BW];
-    [self.Lab_BW setBackgroundColor:[UIColor clearColor]];
-    [self.Lab_BW setTextColor:ColorNormal];
-    self.Lab_BW.text=[LANG DPLocalizedString:@"L_EQIndex_BW"];
-    self.Lab_BW.textAlignment = NSTextAlignmentCenter;
-    self.Lab_BW.adjustsFontSizeToFitWidth = true;
-    self.Lab_BW.font = [UIFont systemFontOfSize:EQindexTextSize];
-    [self.Lab_BW mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.Lab_Reset.mas_top).offset(0);
-        make.centerX.equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
-    }];
+    self.Lab_Reset.hidden=YES;
    
     
    

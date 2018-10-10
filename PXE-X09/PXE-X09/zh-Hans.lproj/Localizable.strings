@@ -169,8 +169,8 @@
 "L_Out_SignalOutput" = "信号输出";
 "L_Out_OutputValText" = "通道音量";
 "L_Out_Output" = "通道";
-"L_Out_Polar_P" = "正相";
-"L_Out_Polar_N" = "反相";
+"L_Out_Polar_P" = "正";
+"L_Out_Polar_N" = "反";
 "L_Out_Type" = "设置通道输出类型";
 "L_Out_NULL" = "空";
 "L_Out_F" = "前置";
@@ -182,39 +182,40 @@
 "L_Out_Hi" = "高频";
 "L_Out_Mid" = "低频";
 "L_Out_All" = "全频";
-"L_Out_FL_Tweeter" = "前置左高频";
-"L_Out_FL_Midrange" = "前置左中频";
-"L_Out_FL_Woofer" = "前置左低频";
-"L_Out_FL_M_T" = "前置左中高频";
-"L_Out_FL_M_WF" = "前置左中低频";
-"L_Out_FL_Full" = "前置左全频";
+"L_Out_FL_Tweeter" = "前左高频";
+"L_Out_FL_Midrange" = "前左中频";
+"L_Out_FL_Woofer" = "前左低频";
+"L_Out_FL_M_T" = "前左中高";
+"L_Out_FL_M_WF" = "前左中低";
+"L_Out_FL_Full" = "前左全频";
 
-"L_Out_FR_Tweeter" = "前置右高频";
-"L_Out_FR_Midrange" = "前置右中频";
-"L_Out_FR_Woofer" = "前置右低频";
-"L_Out_FR_M_T" = "前置右中高频";
-"L_Out_FR_M_WF" = "前置右中低频";
-"L_Out_FR_Full" = "前置右全频";
+"L_Out_FR_Tweeter" = "前右高频";
+"L_Out_FR_Midrange" = "前右中频";
+"L_Out_FR_Woofer" = "前右低频";
+"L_Out_FR_M_T" = "前右中高";
+"L_Out_FR_M_WF" = "前右中低";
+"L_Out_FR_Full" = "前右全频";
 
-"L_Out_RL_Tweeter" = "后置左高频";
-"L_Out_RL_Woofer" = "后置左低频";
-"L_Out_RL_Full" = "后置左全频";
+"L_Out_RL_Tweeter" = "后左高频";
+"L_Out_RL_Woofer" = "后左低频";
+"L_Out_RL_Full" = "后左全频";
 
-"L_Out_RR_Tweeter" = "后置右高频";
-"L_Out_RR_Woofer" = "后置右低频";
-"L_Out_RR_Full" = "后置右全频";
+"L_Out_RR_Tweeter" = "后右高频";
+"L_Out_RR_Woofer" = "后右低频";
+"L_Out_RR_Full" = "后右全频";
 
 "L_Out_C_Tweeter" = "中置高频";
 "L_Out_C_Woofer" = "中置低频";
 "L_Out_C_Full" = "中置全频";
 
-"L_Out_L_Subweeter" = "左超低频";
-"L_Out_R_Subweeter" = "右超低频";
-"L_Out_Subweeter" = "超低频";
-"L_Out_Front_Subweeter" = "前超低频";
-"L_Out_Rear_Subweeter" = "后超低频";
-"L_Out_C_Front" = "中置左全频";
-"L_Out_C_Rear" = "中置右全频";
+"L_Out_L_Subweeter" = "左超低";
+"L_Out_R_Subweeter" = "右超低";
+"L_Out_Subweeter" = "超低";
+
+"L_Out_Front_Subweeter" = "后左中频";
+"L_Out_Rear_Subweeter" = "后右中频";
+"L_Out_C_Front" = "左环绕";
+"L_Out_C_Rear" = "右环绕";
 
 "L_Out_SetValume" = "设置音量";
 "L_Out_SetLeftIPSP" = "设置左输入音源比例";

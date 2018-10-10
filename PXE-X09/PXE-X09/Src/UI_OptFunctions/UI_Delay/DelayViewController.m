@@ -771,7 +771,7 @@
 /******* 延时时间转换  *******/
 - (NSString*) CountDelayCM:(int)num{
     int m_nTemp=75;
-    float Time = (float) (num/48.0); //当Delay〈476时STEP是0.021MS；
+    float Time = (float) (num/96.0); //当Delay〈476时STEP是0.021MS；
     float LMT = (float) (((m_nTemp-50)*0.6+331.0)/1000.0*Time);
     LMT = LMT*100;
     
@@ -787,7 +787,7 @@
     return [NSString stringWithFormat:@"%d",(int)ri];
 }
 - (NSString*) CountDelayMs:(int)num{
-    int fr = num*10000/48;
+    int fr = num*10000/96;
     int ir = fr%10;
     int ri = 0;
     if(ir>=5){
@@ -803,7 +803,7 @@
         base=(float) 331.4;
     }
     int m_nTemp=75;
-    float Time = (float) (num/48.0); //当Delay〈476时STEP是0.021MS；
+    float Time = (float) (num/96.0); //当Delay〈476时STEP是0.021MS；
     float LMT = (float) (((m_nTemp-50)*0.6+base)/1000.0*Time);
     
     float LFT = (float) (LMT*3.2808*12.0);

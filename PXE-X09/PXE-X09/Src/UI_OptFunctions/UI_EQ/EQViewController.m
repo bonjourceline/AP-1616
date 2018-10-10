@@ -8,10 +8,11 @@
 
 #import "EQViewController.h"
 #import "MyChannelCView.h"
-
+#import "XoveritemView.h"
 @interface EQViewController ()
 @property(nonatomic,strong)MyChannelCView *channelColletionView;
-
+@property(nonatomic,strong)XoveritemView *h_Xover;
+@property(nonatomic,strong)XoveritemView *l_Xover;
 @end
 
 @implementation EQViewController
@@ -21,10 +22,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    self.mToolbar.lab_Title.text=@"EQ";
-    
-//    self.mToolbar.backgroundColor=[UIColor yellowColor];
+  [self.mToolbar setLogoShow:false];
     //添加通知观察者
     //接收noticeScanBLE通知
     //获取通知中心单例对象
@@ -88,35 +86,90 @@
 #pragma mark -------------------- initChannelList
 
 - (void)initChannelList{
-
-    self.channelColletionView=[[MyChannelCView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, [Dimens GDimens:ChannelBtnListHeight])];
-    __weak typeof(self) weakself=self;
-    self.channelColletionView.backgroundColor=SetColor(Color_EQChannelLis_bg);
-    self.channelColletionView.selectedIndex = ^(int row) {
-        //选择后的回调
-        [weakself FlashPageUI_];
-    };
-    [self.view addSubview:self.channelColletionView];
-    [self.channelColletionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:15]);
-                make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
-                make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:ChannelBtnListHeight]));
+    self.channelLab =[[UILabel alloc]init];
+    [self.view addSubview:self.channelLab];
+    self.channelLab.textAlignment=NSTextAlignmentCenter;
+    self.channelLab.textColor=[UIColor whiteColor];
+    self.channelLab.text=[NSString stringWithFormat:@"输入%d",output_channel_sel];
+    self.channelLab.font=[UIFont systemFontOfSize:15];
+    [self.channelLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:10]);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:120], [Dimens GDimens:ChannelBtnListHeight]));
+        
+    }];
+    UIButton *lastBtn=[[UIButton alloc]init];
+    [self.view addSubview:lastBtn];
+    [lastBtn addTarget:self action:@selector(lastCh) forControlEvents:UIControlEventTouchUpInside];
+    [lastBtn setImage:[UIImage imageNamed:@"last_icon"] forState:UIControlStateNormal];
+    [lastBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.channelLab.mas_centerY);
+        make.right.equalTo(self.channelLab.mas_left);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:40], [Dimens GDimens:40]));
     }];
     
+    UIButton *nextBtn=[[UIButton alloc]init];
+    [self.view addSubview:nextBtn];
+    [nextBtn addTarget:self action:@selector(nextCh) forControlEvents:UIControlEventTouchUpInside];
+    [nextBtn setImage:[UIImage imageNamed:@"next_icon"] forState:UIControlStateNormal];
+    [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.channelLab.mas_centerY);
+        make.left.equalTo(self.channelLab.mas_right);
+        make.size.mas_equalTo(lastBtn);
+    }];
+//    self.channelColletionView=[[MyChannelCView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, [Dimens GDimens:ChannelBtnListHeight])];
+//    __weak typeof(self) weakself=self;
+//    self.channelColletionView.backgroundColor=SetColor(Color_EQChannelLis_bg);
+//    self.channelColletionView.selectedIndex = ^(int row) {
+//        //选择后的回调
+//        [weakself FlashPageUI_];
+//    };
+//    [self.view addSubview:self.channelColletionView];
+//    [self.channelColletionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:15]);
+//                make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
+//                make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:ChannelBtnListHeight]));
+//    }];
+    
+};
+-(void)nextCh{
+    int nextIndex=output_channel_sel;
+    if (++nextIndex>=Output_CH_MAX_USE) {
+        
+    }else{
+        output_channel_sel=nextIndex;
+        [self FlashPageUI];
+    }
 }
-
+-(void)lastCh{
+    int lastIndex=output_channel_sel;
+    if (--lastIndex<0) {
+        
+    }else{
+        output_channel_sel=lastIndex;
+        [self FlashPageUI];
+    }
+}
 #pragma mark --------页面初始化
 - (void)initView{
     [self initChannelList];
 //    [self initChannelBar];
+    UIImageView *eqImageView=[[UIImageView alloc]init];
+    [self.view addSubview:eqImageView];
+    [eqImageView setImage:[UIImage imageNamed:@"eq_bg"]];
+    [eqImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(self.channelLab.mas_bottom).offset([Dimens GDimens:0]);
+        make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:EQViewHeight]));
+    }];
     //EQ 曲线图
     self.EQV_INS = [[EQView alloc]initWithFrame:CGRectMake(0, [Dimens GDimens:UI_StartWithTopBar+20], KScreenWidth-[Dimens GDimens:8], [Dimens GDimens:EQViewHeight])];
     [self.view addSubview:self.EQV_INS];
-    self.EQV_INS.layer.borderColor=[UIColor blackColor].CGColor;
-    self.EQV_INS.layer.borderWidth=0.5;
+//    self.EQV_INS.layer.borderColor=[UIColor blackColor].CGColor;
+//    self.EQV_INS.layer.borderWidth=0.5;
     [self.EQV_INS mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(self.channelColletionView.mas_bottom).offset([Dimens GDimens:10]);
+        make.top.equalTo(self.channelLab.mas_bottom).offset([Dimens GDimens:0]);
         make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:EQViewHeight]));
     }];
     [self.EQV_INS SetEQData:RecStructData.OUT_CH[0]];
@@ -128,7 +181,7 @@
     [self.EQindex mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.top.mas_equalTo(self.EQV_INS.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:EQItemWidth], [Dimens GDimens:EQItemHeight]));
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:EQItemWidth], [Dimens GDimens:EQItemHeight-20]));
     }];
     
     //初始化scrollview
@@ -140,7 +193,7 @@
     [self.view addSubview:self.Btn_EQReset];
     //    [self.Btn_EQReset initView:3 withBorderWidth:0 withNormalColor:UI_EQSet_Btn_Normal withPressColor:UI_EQSet_Btn_Press withType:1];
     //    [self.Btn_EQReset setTextColorWithNormalColor:UI_EQSet_BtnText_Normal withPressColor:UI_EQSet_BtnText_Press];
-    [self.Btn_EQReset initViewBroder:3
+    [self.Btn_EQReset initViewBroder:0
                           withBorderWidth:0
                           withNormalColor:UI_DelayBtn_NormalIN
                            withPressColor:UI_DelayBtn_PressIN
@@ -148,20 +201,20 @@
                      withBorderPressColor:UI_EQSet_Btn_Press
                       withTextNormalColor:UI_EQSet_BtnText_Normal
                        withTextPressColor:UI_EQSet_BtnText_Press
-                                 withType:5];
+                                 withType:4];
     self.Btn_EQReset.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.Btn_EQReset addTarget:self action:@selector(Btn_EQReset_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.Btn_EQReset setTitle:[LANG DPLocalizedString:@"L_EQ_ResetEQ"] forState:UIControlStateNormal] ;
     [self.Btn_EQReset setNormal];
     [self.Btn_EQReset mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.SVEQ.mas_bottom).offset([Dimens GDimens:20]);
+        make.top.equalTo(self.SVEQ.mas_bottom).offset([Dimens GDimens:5]);
         make.leftMargin.mas_equalTo([Dimens GDimens:EQBtnMarginSide]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:EQBtnWidth], [Dimens GDimens:EQBtnHeight]));
     }];
     //直通与恢复
     self.Btn_EQByPass = [[NormalButton alloc]init];
     [self.view addSubview:self.Btn_EQByPass];
-    [self.Btn_EQByPass initViewBroder:3
+    [self.Btn_EQByPass initViewBroder:0
                       withBorderWidth:0
                       withNormalColor:UI_DelayBtn_NormalIN
                        withPressColor:UI_DelayBtn_PressIN
@@ -169,7 +222,7 @@
                  withBorderPressColor:UI_EQSet_Btn_Press
                   withTextNormalColor:UI_EQSet_BtnText_Normal
                    withTextPressColor:UI_EQSet_BtnText_Press
-                             withType:5];
+                             withType:4];
     self.Btn_EQByPass.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.Btn_EQByPass addTarget:self action:@selector(Btn_EQByPass_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.Btn_EQByPass setTitle:[LANG DPLocalizedString:@"L_EQ_Bypass"] forState:UIControlStateNormal] ;
@@ -234,9 +287,29 @@
     //        make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:ChannelBtnHeight]));
     //    }];
     //    [self.channelBtn addTarget:self action:@selector(ChannelChange:) forControlEvents:UIControlEventValueChanged];
+    [self creatXoverView];
     
 }
-#pragma 滑动事件
+-(void)creatXoverView{
+    self.h_Xover=[[XoveritemView alloc]init];
+    [self.h_Xover setXoverType:H_Type];
+    [self.view addSubview:self.h_Xover];
+    [self.h_Xover mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.Btn_EQReset.mas_bottom).offset([Dimens GDimens:10]);
+        make.left.equalTo(self.view.mas_left).offset([Dimens GDimens:5]);
+        make.size.mas_equalTo(CGSizeMake(KScreenWidth/2-[Dimens GDimens:10], [Dimens GDimens:110]));
+    }];
+    self.l_Xover=[[XoveritemView alloc]init];
+    [self.l_Xover setXoverType:L_Type];
+    [self.view addSubview:self.l_Xover];
+    [self.l_Xover mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.h_Xover.mas_top);
+        make.right.equalTo(self.view.mas_right).offset([Dimens GDimens:-8]);
+        make.size.mas_equalTo(self.h_Xover);
+    }];
+}
+
+#pragma mark---------滑动事件
 - (void) initSVEQ{
     eqIndex = 0;
     self.SVEQ = [[UIScrollView alloc]init];
@@ -244,7 +317,7 @@
     [self.SVEQ mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.EQindex.mas_right).offset(0);
         make.centerY.mas_equalTo(self.EQindex.mas_centerY).offset(0);
-        make.size.mas_equalTo(CGSizeMake(KScreenWidth-[Dimens GDimens:EQItemWidth], [Dimens GDimens:EQItemHeight]));
+        make.size.mas_equalTo(CGSizeMake(KScreenWidth-[Dimens GDimens:EQItemWidth], [Dimens GDimens:EQItemHeight-20]));
     }];
     self.SVEQ.backgroundColor = [UIColor clearColor];
     // 是否支持滑动最顶端
@@ -1209,7 +1282,10 @@
 
 - (void)FlashPageUI_{
     //更新控件选择位置
-    [self.channelColletionView MyChannelReload];
+    [self.h_Xover flashXover];
+    [self.l_Xover flashXover];
+//    [self.channelColletionView MyChannelReload];
+    self.channelLab.text=[NSString stringWithFormat:@"输入%d",output_channel_sel+1];
     EQItem *find_btn;
     [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
     [self setEQItemSelColorClean];

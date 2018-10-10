@@ -173,8 +173,8 @@
 "L_Out_SignalOutput" = "信號輸出";
 "L_Out_OutputValText" = "通道音量";
 "L_Out_Output" = "通道";
-"L_Out_Polar_P" = "正相";
-"L_Out_Polar_N" = "反相";
+"L_Out_Polar_P" = "正";
+"L_Out_Polar_N" = "反";
 "L_Out_Type" = "設置通道輸出類型";
 "L_Out_NULL" = "空";
 "L_Out_F" = "前置";

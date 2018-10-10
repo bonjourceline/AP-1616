@@ -4,7 +4,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "2436h",
-      "filename" : "1125.png",
+      "filename" : "iPhone_Portrait_iOS_8_Retina_HD_5.5_1242×2208@3x-1.png",
       "minimum-system-version" : "11.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -13,7 +13,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "1242.png",
+      "filename" : "iPhone_Portrait_iOS_8_Retina_HD_5.5_1242×2208@3x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -22,7 +22,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "750.png",
+      "filename" : "iPhone_Portrait_iOS_8_Retina_HD_4.7_750×1334@2x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -30,7 +30,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "640+960.png",
+      "filename" : "iPhone_Portrait_iOS_7_8_640×960@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -39,7 +39,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "640+1136.png",
+      "filename" : "iPhone_Portrait_iOS_7_8_Retina_4_640x1136@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -47,21 +47,21 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "320.png",
+      "filename" : "iPhone_Portrait_iOS_5_6_320×480@1x.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "640+960-1.png",
+      "filename" : "iPhone_Portrait_iOS_5_6_640×960@2x.png",
       "extent" : "full-screen",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "640+1136-1.png",
+      "filename" : "iPhone_Portrait_iOS_5_6_Retina_4_640x1136@2x.png",
       "extent" : "full-screen",
       "subtype" : "retina4",
       "scale" : "2x"

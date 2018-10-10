@@ -82,9 +82,9 @@
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
-    
+    self.Btn_Reset.hidden=YES;
     //SB Gain
-    self.SB_Gain = [[UISlider alloc]initWithFrame:CGRectMake(-(SBHeight -WIND_Width)/2, BtnHeight*2+(SBHeight -WIND_Width)/2, SBHeight, WIND_Width)];
+    self.SB_Gain = [[UISlider alloc]initWithFrame:CGRectMake(-(SBHeight -WIND_Width)/2, BtnHeight*3+(SBHeight -WIND_Width)/2, SBHeight, WIND_Width)];
     [self addSubview:self.SB_Gain];
     self.SB_Gain.minimumTrackTintColor = ColorSBProgress; //滑轮左边颜色如果设置了左边的图片就不会显示
     self.SB_Gain.maximumTrackTintColor = ColorSBProgressBg; //滑轮右边颜色如果设置了右边的图片就不会显
@@ -101,20 +101,7 @@
     self.SB_Gain.transform = trans;
 
    
-    //BW
-    self.Btn_BW = [[UIButton alloc]init];
-    [self addSubview:self.Btn_BW];
     
-    [self.Btn_BW setBackgroundColor:[UIColor clearColor]];
-    [self.Btn_BW setTitleColor:ColorNormal forState:UIControlStateNormal];
-    [self.Btn_BW setTitle:@"BW" forState:UIControlStateNormal] ;
-    self.Btn_BW.titleLabel.adjustsFontSizeToFitWidth = true;
-    self.Btn_BW.titleLabel.font = [UIFont systemFontOfSize:EQItemTextSize];
-    [self.Btn_BW mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.Btn_Reset.mas_top).offset(0);
-        make.centerX.equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
-    }];
     //Freq
     self.Btn_Freq = [[UIButton alloc]init];
     [self addSubview:self.Btn_Freq];
@@ -125,11 +112,25 @@
     self.Btn_Freq.titleLabel.adjustsFontSizeToFitWidth = true;
     self.Btn_Freq.titleLabel.font = [UIFont systemFontOfSize:EQItemTextSize];
     [self.Btn_Freq mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.Btn_BW.mas_top).offset(0);
+        make.top.equalTo(self.Lab_ID.mas_bottom).offset(0);
+        make.centerX.equalTo(self.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
+    
+    }];
+    //BW
+    self.Btn_BW = [[UIButton alloc]init];
+    [self addSubview:self.Btn_BW];
+    
+    [self.Btn_BW setBackgroundColor:[UIColor clearColor]];
+    [self.Btn_BW setTitleColor:ColorNormal forState:UIControlStateNormal];
+    [self.Btn_BW setTitle:@"BW" forState:UIControlStateNormal] ;
+    self.Btn_BW.titleLabel.adjustsFontSizeToFitWidth = true;
+    self.Btn_BW.titleLabel.font = [UIFont systemFontOfSize:EQItemTextSize];
+    [self.Btn_BW mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.Btn_Freq.mas_bottom);
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
     }];
-   
     //Gain
     self.Btn_Gain = [[UIButton alloc]init];
     [self addSubview:self.Btn_Gain];
@@ -139,9 +140,10 @@
     self.Btn_Gain.titleLabel.adjustsFontSizeToFitWidth = true;
     self.Btn_Gain.titleLabel.font = [UIFont systemFontOfSize:EQItemTextSize];
     [self.Btn_Gain mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.Lab_ID.mas_bottom).offset(0);
+        make.bottom.equalTo(self.Btn_Reset.mas_top).offset(0);
         make.centerX.equalTo(self.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(WIND_Width, BtnHeight));
+       
     }];
 }
 
