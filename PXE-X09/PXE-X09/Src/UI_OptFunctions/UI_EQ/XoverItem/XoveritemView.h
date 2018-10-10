@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NormalButton.h"
+#import "ASValueTrackingSlider.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, XoverType) {
     H_Type=1,
@@ -20,6 +21,10 @@ typedef NS_ENUM(NSInteger, XoverType) {
 @property(nonatomic,strong)NormalButton *freqBtn;
 -(void)setXoverType:(XoverType)xoverType;
 -(void)flashXover;
+
+@property (strong, nonatomic) ASValueTrackingSlider *sliderFreq;
+@property (strong, nonatomic) UIButton *btnFreqMinus;
+@property (strong, nonatomic) UIButton *btnFreqAdd;
 @end
 
 NS_ASSUME_NONNULL_END

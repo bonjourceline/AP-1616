@@ -22,8 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)UIView *flgView;
 @property (nonatomic,strong)UIView *lineTop;
 @property (nonatomic,strong)UIView *lineBottom;
-
 @property (nonatomic,strong)NSArray *ImageArray;
+@property (nonatomic,strong)void (^eqblock)(int index);
+@property (nonatomic,strong)void (^reloadblock)(void);
 -(void)setChannelIndex:(int)index;
 -(void)flashView;
 @end

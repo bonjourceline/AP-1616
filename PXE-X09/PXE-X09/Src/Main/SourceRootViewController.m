@@ -45,6 +45,7 @@
         make.centerY.equalTo(self.navBar.mas_centerY);
         make.centerX.equalTo(self.navBar.mas_centerX);
     }];
+    self.Btn_Back=[[UIButton alloc]init];
     [self.Btn_Back addTarget:self action:@selector(ClickEventOfBack) forControlEvents:UIControlEventTouchUpInside];
     [self.Btn_Back setImage:[[UIImage imageNamed:@"topbar_back"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     //    [self.Btn_Back setTitle:[LANG DPLocalizedString:@"L_TopBar_Back"] forState:UIControlStateNormal];
@@ -55,7 +56,7 @@
     self.Btn_Back.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.Btn_Back.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     self.Btn_Back.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:self.Btn_Back];
+    [self.navBar addSubview:self.Btn_Back];
     [self.Btn_Back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.navBar.mas_left).offset([Dimens GDimens:10]);
         make.centerY.equalTo(self.navBar.mas_centerY);

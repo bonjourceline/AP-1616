@@ -132,7 +132,17 @@
     }
     [cell.item setChannelIndex:(int)indexPath.row];
     [cell.item flashView];
+    cell.item.eqblock = ^(int index) {
+        [self openEqVc];
+    };
+    cell.item.reloadblock = ^{
+        [self.inputView reloadData];
+    };
     return cell;
+}
+#pragma mark--------弹窗
+-(void)openEqVc{
+    
 }
 #pragma mark-----------输入方式
 -(void)goToSourceSetting{

@@ -16,7 +16,7 @@
 @interface SourceSettingController ()
 @property(nonatomic,strong)NSArray *NameArray;
 @property(nonatomic,strong)NSArray *ImageArray;
-@property(nonatomic,strong)UIButton *Btn_Back;
+
 @end
 
 @implementation SourceSettingController

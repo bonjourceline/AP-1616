@@ -7,12 +7,16 @@
 //
 
 #import "XoveritemView.h"
+#import "KGModal.h"
 #define btnBorderColor (0xFF212932)
 #define btnTextColor (0xFFffffff)
 @implementation XoveritemView{
     XoverType type;
     NSMutableArray *Filter_List;
     NSMutableArray *AllLevel;
+    //主音量计数定时器 减
+    NSTimer *_pVolFreqMinusTimer;
+    NSTimer *_pVolFreqAddTimer;
 }
 - (instancetype)init{
     if (self = [super init]) {
@@ -103,6 +107,7 @@
     self.filterBtn.titleLabel.font=[UIFont systemFontOfSize:11];
     self.filterBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
     [self addSubview:self.filterBtn];
+    [self.filterBtn addTarget:self action:@selector(clickFilter:) forControlEvents:UIControlEventTouchUpInside];
     [self.filterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(bgView.mas_bottom).offset(-[Dimens GDimens:10]);
         make.left.equalTo(bgView.mas_left).offset([Dimens GDimens:5]);
@@ -131,6 +136,7 @@
              withTextNormalColor:btnTextColor
               withTextPressColor:btnTextColor
                         withType:0];
+    [self.freqBtn addTarget:self action:@selector(clickFreq:) forControlEvents:UIControlEventTouchUpInside];
     self.freqBtn.titleLabel.font=[UIFont systemFontOfSize:11];
     self.freqBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
     [self.freqBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -206,6 +212,363 @@
    
 }
 #pragma mark-------弹窗
+-(void)clickFilter:(NormalButton *)sender{
+    if(BOOL_FilterHide6DB_OCT){
+        if(RecStructData.OUT_CH[output_channel_sel].h_level == 0){
+            return;
+        }
+    }
+    //    [sender setPress];
+    [self showFilterOptDialog];
+}
+-(void)clickFreq:(NormalButton *)sender{
+    [self showFreqDialog];
+}
+-(void)clickLevel:(NormalButton *)sender{
+//    [self showLevelOptDialog];
+}
+
+
+#pragma mark -------------------- 弹出选择 Filter
+- (void)showFilterOptDialog{
+    UIAlertController *alert;
+    if(type==H_Type){
+        alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_XOver_HighPassFilter"]message:[LANG DPLocalizedString:@"L_XOver_Type"]preferredStyle:UIAlertControllerStyleAlert];
+    }else{
+        alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_XOver_LowPassFilter"]message:[LANG DPLocalizedString:@"L_XOver_Type"]preferredStyle:UIAlertControllerStyleAlert];
+    }
+    for (int i=0; i<Filter_List.count; i++) {
+        [alert addAction:[UIAlertAction actionWithTitle:[Filter_List objectAtIndex:i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self dialogSetFilter:i];
+        }]];
+    }
+
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
+        //        [B_Buf setNormal];
+    }]];
+    
+    [self.viewController presentViewController:alert animated:YES completion:nil];
+}
+- (UIViewController *)viewController {
+    UIResponder *responder = self;
+    while (![responder isKindOfClass:[UIViewController class]]) {
+        responder = [responder nextResponder];
+        if (nil == responder) {
+            break;
+        }
+    }
+    return (UIViewController *)responder;
+}
+- (void)dialogSetFilter:(int)val{
+    if (val<Filter_List.count) {
+        RecStructData.OUT_CH[output_channel_sel].h_filter = val;
+        [self.filterBtn setTitle:[Filter_List objectAtIndex:val] forState:UIControlStateNormal];
+    }
+}
+#pragma mark -------------------- 弹出选择 Freq
+
+-(void)showFreqDialog{
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 130)];
+    
+    
+    UILabel *labelTitle = [[UILabel alloc] init];
+    labelTitle.textColor = [UIColor whiteColor];
+    labelTitle.frame = CGRectMake(0, 0, 280, 30);
+    labelTitle.text = [LANG DPLocalizedString:@"L_XOver_SetFreq"];
+    labelTitle.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:labelTitle];
+    
+    _btnFreqMinus = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _btnFreqMinus.frame = CGRectMake(10, 100, 30, 30);
+    _btnFreqMinus.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:21];
+    //[_btnFreqMinus setTitle:@"-" forState:UIControlStateNormal];
+    [_btnFreqMinus setBackgroundImage:[UIImage imageNamed:@"chs_val_sub_normal"] forState:UIControlStateNormal];
+    [_btnFreqMinus setBackgroundImage:[UIImage imageNamed:@"chs_val_sub_press"] forState:UIControlStateHighlighted];
+    _btnFreqMinus.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_btnFreqMinus addTarget:self action:@selector(DialogFreqSet_Sub) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:_btnFreqMinus];
+    
+    
+    CGRect sliderRect = CGRectInset(contentView.bounds, 366, 19);
+    sliderRect.origin.y = 20;
+    sliderRect.size.height = 20;
+    _sliderFreq = [[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(10, 63, 260, 20)];
+    //    __weak __typeof(self) weakSelf = self;
+    //    _sliderFreq.dataSource = weakSelf;
+    _sliderFreq.minimumValue = 0;
+    _sliderFreq.maximumValue = 240;
+    if(type==H_Type){
+        _sliderFreq.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
+    }else{
+        _sliderFreq.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
+    }
+    
+    [_sliderFreq addTarget:self action:@selector(SBDialogFreqSet) forControlEvents:UIControlEventValueChanged];
+    
+    /*
+     UIImage *stetchTrack1 = [UIImage imageNamed:@"skslider1.png"];
+     UIImage *stetchTrack2 = [[UIImage imageNamed:@"skslider2.png"]
+     stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
+     [_slider setThumbImage: [UIImage imageNamed:@"skbit1.png"] forState:UIControlStateNormal];
+     [_slider setMinimumTrackImage:stetchTrack2 forState:UIControlStateNormal];
+     [_slider setMaximumTrackImage:stetchTrack1 forState:UIControlStateNormal];
+     */
+    [contentView addSubview:_sliderFreq];
+    
+    
+    
+    _btnFreqAdd = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _btnFreqAdd.frame = CGRectMake(240, 100, 30, 30);
+    //    [btnFreqAdd setBackgroundImage:[UIImage imageNamed:@"channel_pol_add.png"] forState:UIControlStateNormal];
+    _btnFreqAdd.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:21];
+    //[_btnFreqAdd setTitle:@"+" forState:UIControlStateNormal];
+    [_btnFreqAdd setBackgroundImage:[UIImage imageNamed:@"chs_val_inc_normal"] forState:UIControlStateNormal];
+    [_btnFreqAdd setBackgroundImage:[UIImage imageNamed:@"chs_val_inc_press"] forState:UIControlStateHighlighted];
+    _btnFreqAdd.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_btnFreqAdd addTarget:self action:@selector(DialogFreqSet_Inc) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:_btnFreqAdd];
+    //长按
+    UILongPressGestureRecognizer *longPressFreqVolMinus = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(Btn_FreqVolumeSUB_LongPress:)];
+    longPressFreqVolMinus.minimumPressDuration = 0.5; //定义按的时间
+    [_btnFreqMinus addGestureRecognizer:longPressFreqVolMinus];
+    
+    UILongPressGestureRecognizer *longPressFreqVolAdd = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(Btn_FreqVolumeAdd_LongPress:)];
+    longPressFreqVolAdd.minimumPressDuration = 0.5; //定义按的时间
+    [_btnFreqAdd addGestureRecognizer:longPressFreqVolAdd];
+    
+    
+    
+    
+    
+    NormalButton *btnOK = [NormalButton buttonWithType:UIButtonTypeRoundedRect];
+    btnOK.frame = CGRectMake(110, 100, 60, 25);
+    [btnOK initView:3 withBorderWidth:0 withNormalColor:UI_MainStyleColorNormal withPressColor:UI_MainStyleColorPress withType:1];//设置参数
+    [btnOK setTitleColor:SetColor(0xffffffff) forState:UIControlStateNormal];
+    //[btnOK setTitleColor:SetColor(UI_SystemBtnColorNormal) forState:UIControlStateNormal];//常态
+    [btnOK setTitleColor:SetColor(UI_SystemBtnColorPress) forState:UIControlStateHighlighted];//选中
+    //    [btnOK addTarget:self action:@selector(Btn_NormalButtom_PressStatus:) forControlEvents:UIControlEventTouchDown];
+    //    [btnOK addTarget:self action:@selector(Btn_NormalButtom_NormalStatus:) forControlEvents:UIControlEventTouchDragOutside];
+    [btnOK setTitle:[LANG DPLocalizedString:@"L_System_OK"] forState:UIControlStateNormal];
+    btnOK.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [btnOK addTarget:self action:@selector(dialogExit) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:btnOK];
+    
+    [[KGModal sharedInstance] setOKButton:btnOK];
+    [[KGModal sharedInstance] setModalBackgroundColor:SetColor(0xff303030)];
+    [[KGModal sharedInstance] showWithContentView:contentView andAnimated:YES];
+    [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeNone;
+}
+- (void)SBDialogFreqSet{
+    int sliderValue = (int)(_sliderFreq.value);
+    _sliderFreq.showValue=[NSString stringWithFormat:@"%dHz",(int)FREQ241[sliderValue]];
+    if(type==H_Type){
+        RecStructData.OUT_CH[output_channel_sel].h_freq = FREQ241[sliderValue];
+        
+        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
+           RecStructData.OUT_CH[output_channel_sel].l_freq){
+            
+            RecStructData.OUT_CH[output_channel_sel].h_freq =
+            RecStructData.OUT_CH[output_channel_sel].l_freq;
+        }
+//        if(BOOL_SET_SpkType){
+//            int fr=[self getChannelNum:output_channel_sel];
+//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+//                if(RecStructData.OUT_CH[output_channel_sel].h_freq <1000){
+//                    //                    RecStructData.OUT_CH[output_channel_sel].h_freq = 1000;
+//                }
+//            }
+//        }
+        _sliderFreq.value = [self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        
+        
+        
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        
+//        [self flashLinkSyncData:UI_HFreq];
+    }else{
+        RecStructData.OUT_CH[output_channel_sel].l_freq = FREQ241[sliderValue];
+        
+        
+        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
+           RecStructData.OUT_CH[output_channel_sel].l_freq){
+            
+            RecStructData.OUT_CH[output_channel_sel].l_freq =
+            RecStructData.OUT_CH[output_channel_sel].h_freq;
+        }
+//        if(BOOL_SET_SpkType){
+//            int fr=[self getChannelNum:output_channel_sel];
+//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+//                if(RecStructData.OUT_CH[output_channel_sel].l_freq <1000){
+//                    //                    RecStructData.OUT_CH[output_channel_sel].l_freq = 1000;
+//                }
+//            }
+//        }
+        _sliderFreq.value = [self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        
+        
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        
+//        [self flashLinkSyncData:UI_LFreq];
+    }
+    
+}
+- (void)DialogFreqSet_Sub{
+    if(type==H_Type){
+        if(--RecStructData.OUT_CH[output_channel_sel].h_freq < 20){
+            RecStructData.OUT_CH[output_channel_sel].h_freq = 20;
+        }
+        
+        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
+           RecStructData.OUT_CH[output_channel_sel].l_freq){
+            
+            RecStructData.OUT_CH[output_channel_sel].h_freq =
+            RecStructData.OUT_CH[output_channel_sel].l_freq;
+        }
+//        if(BOOL_SET_SpkType){
+//            int fr=[self getChannelNum:output_channel_sel];
+//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+//                if(RecStructData.OUT_CH[output_channel_sel].h_freq <1000){
+//                    //                    RecStructData.OUT_CH[output_channel_sel].h_freq = 1000;
+//                }
+//            }
+//        }
+        
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        
+//        [self flashLinkSyncData:UI_HFreq];
+    }else{
+        if(--RecStructData.OUT_CH[output_channel_sel].l_freq < 20){
+            RecStructData.OUT_CH[output_channel_sel].l_freq = 20;
+        }
+        
+        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
+           RecStructData.OUT_CH[output_channel_sel].l_freq){
+            
+            RecStructData.OUT_CH[output_channel_sel].l_freq =
+            RecStructData.OUT_CH[output_channel_sel].h_freq;
+        }
+//        if(BOOL_SET_SpkType){
+//            int fr=[self getChannelNum:output_channel_sel];
+//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+//                if(RecStructData.OUT_CH[output_channel_sel].l_freq <1000){
+//                    //                    RecStructData.OUT_CH[output_channel_sel].l_freq = 1000;
+//                }
+//            }
+//        }
+        
+        
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        
+//        [self flashLinkSyncData:UI_LFreq];
+    }
+}
+- (void)DialogFreqSet_Inc{
+    if(type==H_Type){
+        if(++RecStructData.OUT_CH[output_channel_sel].h_freq > 20000){
+            RecStructData.OUT_CH[output_channel_sel].h_freq = 20000;
+        }
+        
+        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
+           RecStructData.OUT_CH[output_channel_sel].l_freq){
+            
+            RecStructData.OUT_CH[output_channel_sel].h_freq =
+            RecStructData.OUT_CH[output_channel_sel].l_freq;
+        }
+//        if(BOOL_SET_SpkType){
+//            int fr=[self getChannelNum:output_channel_sel];
+//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+//                if(RecStructData.OUT_CH[output_channel_sel].h_freq <1000){
+//                    //                    RecStructData.OUT_CH[output_channel_sel].h_freq = 1000;
+//                }
+//            }
+//        }
+        
+        
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        
+//        [self flashLinkSyncData:UI_HFreq];
+    }else{
+        if(++RecStructData.OUT_CH[output_channel_sel].l_freq > 20000){
+            RecStructData.OUT_CH[output_channel_sel].l_freq = 20000;
+        }
+        
+        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
+           RecStructData.OUT_CH[output_channel_sel].l_freq){
+            
+            RecStructData.OUT_CH[output_channel_sel].l_freq =
+            RecStructData.OUT_CH[output_channel_sel].h_freq;
+        }
+//        if(BOOL_SET_SpkType){
+//            int fr=[self getChannelNum:output_channel_sel];
+//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+//                if(RecStructData.OUT_CH[output_channel_sel].l_freq <1000){
+//                    //                    RecStructData.OUT_CH[output_channel_sel].l_freq = 1000;
+//                }
+//            }
+//        }
+        
+        
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        
+//        [self flashLinkSyncData:UI_LFreq];
+    }
+}
+//长按操作
+-(void)Btn_FreqVolumeSUB_LongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        
+        _pVolFreqMinusTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(DialogFreqSet_Sub) userInfo:nil repeats:YES];
+        
+    }
+    else if([gestureRecognizer state] == UIGestureRecognizerStateEnded){
+        if(_pVolFreqMinusTimer.isValid){
+            [_pVolFreqMinusTimer invalidate];
+            _pVolFreqMinusTimer = nil;
+            NSLog(@"主音量减长按结束");
+        }
+    }
+    
+}
+
+-(void)Btn_FreqVolumeAdd_LongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        
+        _pVolFreqAddTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(DialogFreqSet_Inc) userInfo:nil repeats:YES];
+        
+    }else if([gestureRecognizer state] == UIGestureRecognizerStateEnded){
+        if(_pVolFreqAddTimer.isValid){
+            [_pVolFreqAddTimer invalidate];
+            _pVolFreqAddTimer = nil;
+            NSLog(@"主音量加长按结束");
+        }
+    }
+}
+- (int)getFreqIndexFromArray:(int)freq{
+    int i=0;
+    for(i=0;i<240;i++){
+        if((freq >= FREQ241[i])&&(freq <= FREQ241[i+1])){
+            break;
+        }
+    }
+    return i+1;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

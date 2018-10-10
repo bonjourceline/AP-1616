@@ -7,7 +7,6 @@
 //
 
 #import "SingleOutChItem.h"
-#import "Masonry.h"
 #import "VolSettingViewController.h"
 #import "OutDelayViewController.h"
 #define borderNormal (0xFF313c45)
@@ -286,7 +285,7 @@
     vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
     vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
     vc.dismissBlock = ^{
-        
+         self.reloadblock();
         [self flashView];
     };
     UIWindow *window=[UIApplication sharedApplication].keyWindow;
@@ -299,11 +298,13 @@
     vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
     vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
     vc.dismissBlock = ^{
-        
+        self.reloadblock();
         [self flashView];
     };
     UIWindow *window=[UIApplication sharedApplication].keyWindow;
-    [window.rootViewController presentViewController:vc animated:YES completion:nil];
+    [window.rootViewController presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 -(void)clickeEqBtn:(NormalButton *)btn{
     output_channel_sel=chIndex;

@@ -136,7 +136,7 @@
     auxlab.font=[UIFont systemFontOfSize:15];
     [self.view addSubview:auxlab];
     [auxlab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_centerY).offset([Dimens GDimens:-100]);
+        make.top.equalTo(self.view.mas_centerY).offset([Dimens GDimens:-50]);
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {

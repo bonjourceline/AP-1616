@@ -7,7 +7,8 @@
 //
 
 #import "SingleChItem.h"
-#import "Masonry.h"
+#import "VolSettingViewController.h"
+#import "OutDelayViewController.h"
 #define borderNormal (0xFF313c45)
 #define bgNormal (0xFF27323d)
 #define bgPress (0xFF1d262e)
@@ -118,6 +119,7 @@
      withTextNormalColor:(0xFFffffff)
      withTextPressColor:(0xFFffffff) withType:4];
     [self.eqBtn setImage:[UIImage imageNamed:@"eq_normal"] forState:UIControlStateNormal];
+    [self.eqBtn addTarget:self action:@selector(clickeEqBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.eqBtn];
     [self.eqBtn setBackgroundImage:[UIImage imageNamed:@"eq_normal"] forState:UIControlStateNormal];
     [self.eqBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -145,6 +147,8 @@
         make.centerX.equalTo(self.eqBtn.mas_centerX).offset([Dimens GDimens:80]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:45]));
     }];
+    [self.volBtn addTarget:self action:@selector(clickVol:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.muteBtn=[[NormalButton alloc]init];
 //    [self.muteBtn initViewBroder:0
 //                 withBorderWidth:2
@@ -172,6 +176,24 @@
          RecStructData.IN_CH[chIndex].mute=0;
         [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_press"] forState:UIControlStateNormal];
     }
+}
+-(void)clickVol:(UIButton *)btn{
+    input_channel_sel=chIndex;
+    VolSettingViewController *vc=[[VolSettingViewController alloc]init];
+    vc.chType=CH_INPUT;
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    vc.dismissBlock = ^{
+        self.reloadblock();
+        [self flashView];
+    };
+    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    [window.rootViewController presentViewController:vc animated:YES completion:nil];
+    
+}
+-(void)clickeEqBtn:(NormalButton *)btn{
+    input_channel_sel=chIndex;
+    self.eqblock(chIndex);
 }
 -(void)setChannelIndex:(int)index{
     chIndex=index;

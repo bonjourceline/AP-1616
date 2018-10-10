@@ -14,7 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UILabel *chTopLabel;
 @property(nonatomic,strong)UILabel *chLabel;
 @property(nonatomic,strong)void (^dismissBlock)(void);
-@property (nonatomic,strong)
+@property (nonatomic,strong)UILabel *mslLab;
+@property (nonatomic,strong)UILabel *cmLab;
+@property (nonatomic,strong)UISlider *delaySlider;
+
 @end
 
 NS_ASSUME_NONNULL_END

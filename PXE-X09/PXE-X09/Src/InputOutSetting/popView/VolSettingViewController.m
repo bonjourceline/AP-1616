@@ -281,13 +281,13 @@
             [self.polarBtn setTitle:[LANG DPLocalizedString:@"L_Out_Polar_N"] forState:UIControlStateNormal];
         }
     }else{
-        if(RecStructData.OUT_CH[input_channel_sel].polar != 0){
-            RecStructData.OUT_CH[input_channel_sel].polar = 0;
+        if(RecStructData.IN_CH[input_channel_sel].polar != 0){
+            RecStructData.IN_CH[input_channel_sel].polar = 0;
             //        [sender setNormal];
             [self.polarBtn setBackgroundImage:[UIImage imageNamed:@"polar_normal"] forState:UIControlStateNormal];
             [self.polarBtn setTitle:[LANG DPLocalizedString:@"L_Out_Polar_P"] forState:UIControlStateNormal] ;
         }else{
-            RecStructData.OUT_CH[input_channel_sel].polar = 1;
+            RecStructData.IN_CH[input_channel_sel].polar = 1;
             //        [sender setPress];
             [self.polarBtn setBackgroundImage:[UIImage imageNamed:@"polar_press"] forState:UIControlStateNormal];
             [self.polarBtn setTitle:[LANG DPLocalizedString:@"L_Out_Polar_N"] forState:UIControlStateNormal];
@@ -313,9 +313,9 @@
     }else if(self.chType==CH_INPUT){
         self.chTopLabel.text=[NSString stringWithFormat:@"输入%d音量",input_channel_sel+1];
         self.chLabel.text=[NSString stringWithFormat:@"输入%d",input_channel_sel+1];
-        [self.sbVol setProgress:RecStructData.OUT_CH[input_channel_sel].gain];
-        self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.OUT_CH[input_channel_sel].gain/Output_Volume_Step];
-        if (RecStructData.OUT_CH[input_channel_sel].polar==0) {
+        [self.sbVol setProgress:RecStructData.IN_CH[input_channel_sel].gain];
+        self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.IN_CH[input_channel_sel].gain/Output_Volume_Step];
+        if (RecStructData.IN_CH[input_channel_sel].polar==0) {
             [self.polarBtn setBackgroundImage:[UIImage imageNamed:@"polar_normal"] forState:UIControlStateNormal];
             [self.polarBtn setTitle:[LANG DPLocalizedString:@"L_Out_Polar_P"] forState:UIControlStateNormal] ;
         }else{

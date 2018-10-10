@@ -151,9 +151,10 @@
     cell.item.eqblock = ^(int index) {
         [self openEqVc];
     };
-//    cell.item.volblock = ^(int index) {
-//        [self showVolSettingView];
-//    };
+    cell.item.reloadblock = ^{
+        [self.outputTableView reloadData];
+    };
+
     
     return cell;
 }
@@ -164,9 +165,7 @@
 
     
 }
--(void)showVolSettingView{
-    
-}
+
 /*
 #pragma mark - Navigation
 
