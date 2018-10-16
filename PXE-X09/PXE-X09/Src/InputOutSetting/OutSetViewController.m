@@ -9,6 +9,7 @@
 #import "OutSetViewController.h"
 #import "SingleOutTableViewCell.h"
 #import "EQViewController.h"
+#import "OutModeViewController.h"
 #define btnWidth 60
 #define btnHeight 25
 
@@ -94,7 +95,8 @@
     }];
 }
 -(void)goToSourceSetting{
-    
+    OutModeViewController *vc=[[OutModeViewController alloc]init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 -(void)creatTableView{
     self.outputTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, [Dimens GDimens:525]) style:UITableViewStylePlain];
@@ -163,7 +165,6 @@
     EQViewController *vc=[[EQViewController alloc]init];
     [self presentViewController:vc animated:YES completion:nil];
 
-    
 }
 
 /*

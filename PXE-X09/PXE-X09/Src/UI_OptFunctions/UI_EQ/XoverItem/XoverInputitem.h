@@ -1,8 +1,8 @@
 //
-//  XoveritemView.h
+//  XoverInputitem.h
 //  PXE-X09
 //
-//  Created by celine on 2018/10/9.
+//  Created by celine on 2018/10/11.
 //  Copyright © 2018 dsp. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, XoverType) {
     L_Type,
     
 };
-@interface XoveritemView : UIControl
+@interface XoverInputitem : UIControl
 @property (nonatomic,strong)NormalButton *filterBtn;
 @property(nonatomic,strong)NormalButton *levelBtn;
 @property(nonatomic,strong)NormalButton *freqBtn;

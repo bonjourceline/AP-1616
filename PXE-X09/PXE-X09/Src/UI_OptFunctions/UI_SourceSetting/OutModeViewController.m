@@ -7,6 +7,7 @@
 //
 
 #import "OutModeViewController.h"
+#import "SetChNumViewController.h"
 #import "HiAuxItem.h"
 #define itemMargin 8
 #define itemWidth (KScreenWidth-[Dimens GDimens:itemMargin]*4)/3
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     self.tiltleLab.text=[LANG DPLocalizedString:@"输出方式选择"];
     outModes=@[@"主动2分频",@"主动3分频",@"主动4分频",@"主动3分频+超低",@"主动2分频+超低",@"自定义"];
+    self.passBtn.hidden=YES;
     [self.nextBtn setTitle:[LANG DPLocalizedString:@"进入调音"] forState:UIControlStateNormal];
     [self creatOutModeView];
     [self flashOutItem];
@@ -71,7 +73,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)toNextView{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (RecStructData.System.aux_mode==0) {
+        SetChNumViewController *vc=[[SetChNumViewController alloc]init];
+        vc.type=CHNUMTYPE_output;
+        vc.blackHome = ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self ClickEventOfBack];
+            
+        };
+        vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+        vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 #pragma mark------------刷新
 -(void)flashOutItem{

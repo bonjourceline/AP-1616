@@ -9,6 +9,7 @@
 #import "SingleChItem.h"
 #import "VolSettingViewController.h"
 #import "OutDelayViewController.h"
+#import "SpkViewController.h"
 #define borderNormal (0xFF313c45)
 #define bgNormal (0xFF27323d)
 #define bgPress (0xFF1d262e)
@@ -102,6 +103,8 @@
     [self.spkBtn setTitle:@"前左高音" forState:UIControlStateNormal];
     self.spkBtn.titleLabel.font=[UIFont systemFontOfSize:12];
     self.spkBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
+    [self.spkBtn addTarget:self action:@selector(clickSpk:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.spkBtn];
     [self addSubview:self.spkBtn];
     [self.spkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(line.mas_left).offset([Dimens GDimens:30+20]);
@@ -166,6 +169,7 @@
         make.centerX.equalTo(self.volBtn.mas_centerX).offset([Dimens GDimens:75]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:45]));
     }];
+    
 }
 #pragma mark--------点击事件
 -(void)clickMute:(NormalButton *)btn{
@@ -176,6 +180,18 @@
          RecStructData.IN_CH[chIndex].mute=0;
         [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_press"] forState:UIControlStateNormal];
     }
+}
+-(void)clickSpk:(UIButton *)btn{
+    input_channel_sel=chIndex;
+    SpkViewController *vc=[[SpkViewController alloc]init];
+    vc.myType=SPKTYPE_IN;
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    vc.dismissBlock = ^{
+        [self flashView];
+    };
+    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    [window.rootViewController presentViewController:vc animated:YES completion:nil];
 }
 -(void)clickVol:(UIButton *)btn{
     input_channel_sel=chIndex;
@@ -206,13 +222,61 @@
     }
     [self.sbVol setProgress:RecStructData.IN_CH[chIndex].gain];
     [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.IN_CH[chIndex].gain/Output_Volume_Step] forState:UIControlStateNormal];
+    [self.spkBtn setTitle:[self getOutputSpkTypeNameByIndex:RecStructData.System.in_spk_type[chIndex]] forState:UIControlStateNormal];
+}
+- (NSString*)getOutputSpkTypeNameByIndex:(int)index{
+    switch (index) {
+        case 0: return [LANG DPLocalizedString:@"L_Out_NULL"];
+            
+        case 1: return [LANG DPLocalizedString:@"L_Out_FL_Tweeter"];
+        case 2: return [LANG DPLocalizedString:@"L_Out_FL_Midrange"];
+        case 3: return [LANG DPLocalizedString:@"L_Out_FL_Woofer"];
+        case 4: return [LANG DPLocalizedString:@"L_Out_FL_M_T"];
+        case 5: return [LANG DPLocalizedString:@"L_Out_FL_M_WF"];
+        case 6: return [LANG DPLocalizedString:@"L_Out_FL_Full"];
+            
+        case 7: return [LANG DPLocalizedString:@"L_Out_FR_Tweeter"];
+        case 8: return [LANG DPLocalizedString:@"L_Out_FR_Midrange"];
+        case 9: return [LANG DPLocalizedString:@"L_Out_FR_Woofer"];
+        case 10: return [LANG DPLocalizedString:@"L_Out_FR_M_T"];
+        case 11: return [LANG DPLocalizedString:@"L_Out_FR_M_WF"];
+        case 12: return [LANG DPLocalizedString:@"L_Out_FR_Full"];
+            
+        case 13: return [LANG DPLocalizedString:@"L_Out_RL_Tweeter"];
+        case 14: return [LANG DPLocalizedString:@"L_Out_RL_Woofer"];
+        case 15: return [LANG DPLocalizedString:@"L_Out_RL_Full"];
+            
+        case 16: return [LANG DPLocalizedString:@"L_Out_RR_Tweeter"];
+        case 17: return [LANG DPLocalizedString:@"L_Out_RR_Woofer"];
+        case 18: return [LANG DPLocalizedString:@"L_Out_RR_Full"];
+            
+        case 19: return [LANG DPLocalizedString:@"L_Out_C_Tweeter"];
+        case 20: return [LANG DPLocalizedString:@"L_Out_C_Woofer"];
+        case 21: return [LANG DPLocalizedString:@"L_Out_C_Full"];
+            
+        case 22: return [LANG DPLocalizedString:@"L_Out_L_Subweeter"];
+        case 23: return [LANG DPLocalizedString:@"L_Out_R_Subweeter"];
+        case 24: return [LANG DPLocalizedString:@"L_Out_Subweeter"];
+            
+        case 25: return [LANG DPLocalizedString:@"L_Out_Front_Subweeter"];
+        case 26: return [LANG DPLocalizedString:@"L_Out_Rear_Subweeter"];
+        case 27: return [LANG DPLocalizedString:@"L_Out_C_Front"];
+        case 28: return [LANG DPLocalizedString:@"L_Out_C_Rear"];
+            
+        default: return [LANG DPLocalizedString:@"L_Out_NULL"];
+    }
 }
 -(NSArray *)ImageArray{
     if (!_ImageArray) {
-        _ImageArray=@[@"Source_Optical",@"Source_Coaxial",@"Source_Blue",@"Source_High",@"Source_Aux"];
+        _ImageArray=@[@"Source_Optical",
+                      @"Source_Coaxial",
+                      @"Source_Blue",
+                      @"Source_High",
+                      @"Source_Aux"];
     }
     return _ImageArray;
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

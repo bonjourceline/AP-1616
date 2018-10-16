@@ -1,16 +1,16 @@
 //
-//  XoveritemView.m
+//  XoverInputitem.m
 //  PXE-X09
 //
-//  Created by celine on 2018/10/9.
+//  Created by celine on 2018/10/11.
 //  Copyright © 2018 dsp. All rights reserved.
 //
 
-#import "XoveritemView.h"
+#import "XoverInputitem.h"
 #import "KGModal.h"
 #define btnBorderColor (0xFF212932)
 #define btnTextColor (0xFFffffff)
-@implementation XoveritemView{
+@implementation XoverInputitem{
     XoverType type;
     NSMutableArray *Filter_List;
     NSMutableArray *AllLevel;
@@ -65,7 +65,7 @@
         
     }];
     UIImageView *xoverImage=[[UIImageView alloc]init];
-//    xoverImage.contentMode=UIViewContentModeLeft;
+    //    xoverImage.contentMode=UIViewContentModeLeft;
     [self addSubview:xoverImage];
     [xoverImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(xoverLab.mas_top);
@@ -75,10 +75,10 @@
     }];
     if (type==H_Type) {
         xoverLab.text=[LANG DPLocalizedString:@"L_XOver_HighPass"];
-         [xoverImage setImage:[UIImage imageNamed:@"xover_left"]];
+        [xoverImage setImage:[UIImage imageNamed:@"xover_left"]];
     }else{
         xoverLab.text=[LANG DPLocalizedString:@"L_XOver_LowPass"];
-         [xoverImage setImage:[UIImage imageNamed:@"xover_right"]];
+        [xoverImage setImage:[UIImage imageNamed:@"xover_right"]];
     }
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(xoverLab.mas_centerY).offset([Dimens GDimens:5]);
@@ -87,7 +87,7 @@
         make.bottom.equalTo(self.mas_bottom);
     }];
     
-//类型
+    //类型
     UILabel *filterlab=[[UILabel alloc]init];
     [self addSubview:filterlab];
     filterlab.font=[UIFont systemFontOfSize:11];
@@ -171,9 +171,9 @@
     self.levelBtn.titleLabel.font=[UIFont systemFontOfSize:11];
     self.levelBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
     [self.levelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.centerY.equalTo(self.filterBtn.mas_centerY);
-       make.right.equalTo(bgView.mas_right).offset([Dimens GDimens:-5]);
-       make.size.mas_equalTo(self.filterBtn);
+        make.centerY.equalTo(self.filterBtn.mas_centerY);
+        make.right.equalTo(bgView.mas_right).offset([Dimens GDimens:-5]);
+        make.size.mas_equalTo(self.filterBtn);
     }];
     [levelLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.levelBtn.mas_top).offset([Dimens GDimens:-10]);
@@ -182,40 +182,42 @@
     [self flashXover];
 }
 -(void)flashXover{
-    if(RecStructData.OUT_CH[output_channel_sel].h_filter > 3 || RecStructData.OUT_CH[output_channel_sel].h_filter < 0){
-        RecStructData.OUT_CH[output_channel_sel].h_filter = 0;
+    if(RecStructData.IN_CH[input_channel_sel].h_filter > 3 || RecStructData.IN_CH[input_channel_sel].h_filter < 0){
+        RecStructData.IN_CH[input_channel_sel].h_filter = 0;
         
         
-        NSLog(@"flashXOver ERROR  RecStructData.OUT_CH[%d].h_filter=%d",output_channel_sel,RecStructData.OUT_CH[output_channel_sel].h_filter);
+        NSLog(@"flashXOver ERROR  RecStructData.IN_CH[%d].h_filter=%d",input_channel_sel,RecStructData.IN_CH[input_channel_sel].h_filter);
+        
     }
-    if(RecStructData.OUT_CH[output_channel_sel].l_filter > 3 || RecStructData.OUT_CH[output_channel_sel].l_filter < 0){
-        RecStructData.OUT_CH[output_channel_sel].l_filter = 0;
-        NSLog(@"flashXOver ERROR  RecStructData.OUT_CH[%d].l_filter=%d",output_channel_sel,RecStructData.OUT_CH[output_channel_sel].l_filter);
+    if(RecStructData.IN_CH[input_channel_sel].l_filter > 3 || RecStructData.IN_CH[input_channel_sel].l_filter < 0){
+        RecStructData.IN_CH[input_channel_sel].l_filter = 0;
+        NSLog(@"flashXOver ERROR  RecStructData.IN_CH[%d].l_filter=%d",input_channel_sel,RecStructData.IN_CH[input_channel_sel].l_filter);
     }
     
-    if(RecStructData.OUT_CH[output_channel_sel].h_level > XOVER_OCT_MAX || RecStructData.OUT_CH[output_channel_sel].h_level < 0){
-        RecStructData.OUT_CH[output_channel_sel].h_level = 0;
-        NSLog(@"flashXOver ERROR  RecStructData.OUT_CH[%d].h_level=%d",output_channel_sel,RecStructData.OUT_CH[output_channel_sel].h_level);
+    if(RecStructData.IN_CH[input_channel_sel].h_level > XOVER_OCT_MAX || RecStructData.IN_CH[input_channel_sel].h_level < 0){
+        RecStructData.IN_CH[input_channel_sel].h_level = 0;
+        NSLog(@"flashXOver ERROR  RecStructData.IN_CH[%d].h_level=%d",input_channel_sel,RecStructData.IN_CH[input_channel_sel].h_level);
     }
-    if(RecStructData.OUT_CH[output_channel_sel].l_level > XOVER_OCT_MAX || RecStructData.OUT_CH[output_channel_sel].l_level < 0){
-        RecStructData.OUT_CH[output_channel_sel].l_level = 0;
-        NSLog(@"flashXOver ERROR  RecStructData.OUT_CH[%d].l_level=%d",output_channel_sel,RecStructData.OUT_CH[output_channel_sel].l_level);
+    if(RecStructData.IN_CH[input_channel_sel].l_level > XOVER_OCT_MAX || RecStructData.IN_CH[input_channel_sel].l_level < 0){
+        RecStructData.IN_CH[input_channel_sel].l_level = 0;
+        NSLog(@"flashXOver ERROR  RecStructData.IN_CH[%d].l_level=%d",input_channel_sel,RecStructData.IN_CH[input_channel_sel].l_level);
     }
+    
     if (type==H_Type) {
-        [self.filterBtn setTitle:[NSString stringWithFormat:@"%@",[Filter_List objectAtIndex:RecStructData.OUT_CH[output_channel_sel].h_filter]]  forState:UIControlStateNormal];
-        [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:RecStructData.OUT_CH[output_channel_sel].h_level]]  forState:UIControlStateNormal];
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        [self.filterBtn setTitle:[NSString stringWithFormat:@"%@",[Filter_List objectAtIndex:RecStructData.IN_CH[input_channel_sel].h_filter]]  forState:UIControlStateNormal];
+        [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:RecStructData.IN_CH[input_channel_sel].h_level]]  forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq] forState:UIControlStateNormal];
     }else{
-        [self.filterBtn setTitle:[NSString stringWithFormat:@"%@",[Filter_List objectAtIndex:RecStructData.OUT_CH[output_channel_sel].l_filter]]  forState:UIControlStateNormal];
-        [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:RecStructData.OUT_CH[output_channel_sel].l_level]]  forState:UIControlStateNormal];
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        [self.filterBtn setTitle:[NSString stringWithFormat:@"%@",[Filter_List objectAtIndex:RecStructData.IN_CH[input_channel_sel].l_filter]]  forState:UIControlStateNormal];
+        [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:RecStructData.IN_CH[input_channel_sel].l_level]]  forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq] forState:UIControlStateNormal];
     }
-   
+    
 }
 #pragma mark-------弹窗
 -(void)clickFilter:(NormalButton *)sender{
     if(BOOL_FilterHide6DB_OCT){
-        if(RecStructData.OUT_CH[output_channel_sel].h_level == 0){
+        if(RecStructData.IN_CH[input_channel_sel].h_level == 0){
             return;
         }
     }
@@ -243,7 +245,7 @@
             [self dialogSetFilter:i];
         }]];
     }
-
+    
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
         //        [B_Buf setNormal];
@@ -263,7 +265,7 @@
 }
 - (void)dialogSetFilter:(int)val{
     if (val<Filter_List.count) {
-        RecStructData.OUT_CH[output_channel_sel].h_filter = val;
+        RecStructData.IN_CH[input_channel_sel].h_filter = val;
         [self.filterBtn setTitle:[Filter_List objectAtIndex:val] forState:UIControlStateNormal];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -301,11 +303,11 @@
     _sliderFreq.minimumValue = 0;
     _sliderFreq.maximumValue = 240;
     if(type==H_Type){
-        _sliderFreq.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq];
-        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        _sliderFreq.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].h_freq]];
     }else{
-        _sliderFreq.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq];
-        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        _sliderFreq.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].l_freq]];
     }
     
     [_sliderFreq addTarget:self action:@selector(SBDialogFreqSet) forControlEvents:UIControlEventValueChanged];
@@ -355,7 +357,7 @@
     //    [btnOK addTarget:self action:@selector(Btn_NormalButtom_NormalStatus:) forControlEvents:UIControlEventTouchDragOutside];
     [btnOK setTitle:[LANG DPLocalizedString:@"L_System_OK"] forState:UIControlStateNormal];
     btnOK.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [btnOK addTarget:self action:@selector(dialogExit) forControlEvents:UIControlEventTouchUpInside];
+    //    [btnOK addTarget:self action:@selector(dialogExit) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:btnOK];
     
     [[KGModal sharedInstance] setOKButton:btnOK];
@@ -367,171 +369,171 @@
     int sliderValue = (int)(_sliderFreq.value);
     _sliderFreq.showValue=[NSString stringWithFormat:@"%dHz",(int)FREQ241[sliderValue]];
     if(type==H_Type){
-        RecStructData.OUT_CH[output_channel_sel].h_freq = FREQ241[sliderValue];
+        RecStructData.IN_CH[input_channel_sel].h_freq = FREQ241[sliderValue];
         
-        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
-           RecStructData.OUT_CH[output_channel_sel].l_freq){
+        if(RecStructData.IN_CH[input_channel_sel].h_freq >
+           RecStructData.IN_CH[input_channel_sel].l_freq){
             
-            RecStructData.OUT_CH[output_channel_sel].h_freq =
-            RecStructData.OUT_CH[output_channel_sel].l_freq;
+            RecStructData.IN_CH[input_channel_sel].h_freq =
+            RecStructData.IN_CH[input_channel_sel].l_freq;
         }
-//        if(BOOL_SET_SpkType){
-//            int fr=[self getChannelNum:output_channel_sel];
-//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
-//                if(RecStructData.OUT_CH[output_channel_sel].h_freq <1000){
-//                    //                    RecStructData.OUT_CH[output_channel_sel].h_freq = 1000;
-//                }
-//            }
-//        }
-        _sliderFreq.value = [self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq];
-        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        //        if(BOOL_SET_SpkType){
+        //            int fr=[self getChannelNum:input_channel_sel];
+        //            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+        //                if(RecStructData.IN_CH[input_channel_sel].h_freq <1000){
+        //                    //                    RecStructData.IN_CH[input_channel_sel].h_freq = 1000;
+        //                }
+        //            }
+        //        }
+        _sliderFreq.value = [self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].h_freq];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq]];
         
         
         
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq] forState:UIControlStateNormal];
         
-//        [self flashLinkSyncData:UI_HFreq];
+        //        [self flashLinkSyncData:UI_HFreq];
     }else{
-        RecStructData.OUT_CH[output_channel_sel].l_freq = FREQ241[sliderValue];
+        RecStructData.IN_CH[input_channel_sel].l_freq = FREQ241[sliderValue];
         
         
-        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
-           RecStructData.OUT_CH[output_channel_sel].l_freq){
+        if(RecStructData.IN_CH[input_channel_sel].h_freq >
+           RecStructData.IN_CH[input_channel_sel].l_freq){
             
-            RecStructData.OUT_CH[output_channel_sel].l_freq =
-            RecStructData.OUT_CH[output_channel_sel].h_freq;
+            RecStructData.IN_CH[input_channel_sel].l_freq =
+            RecStructData.IN_CH[input_channel_sel].h_freq;
         }
-//        if(BOOL_SET_SpkType){
-//            int fr=[self getChannelNum:output_channel_sel];
-//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
-//                if(RecStructData.OUT_CH[output_channel_sel].l_freq <1000){
-//                    //                    RecStructData.OUT_CH[output_channel_sel].l_freq = 1000;
-//                }
-//            }
-//        }
-        _sliderFreq.value = [self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq];
-        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        //        if(BOOL_SET_SpkType){
+        //            int fr=[self getChannelNum:input_channel_sel];
+        //            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+        //                if(RecStructData.IN_CH[input_channel_sel].l_freq <1000){
+        //                    //                    RecStructData.IN_CH[input_channel_sel].l_freq = 1000;
+        //                }
+        //            }
+        //        }
+        _sliderFreq.value = [self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].l_freq];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq]];
         
         
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq] forState:UIControlStateNormal];
         
-//        [self flashLinkSyncData:UI_LFreq];
+        //        [self flashLinkSyncData:UI_LFreq];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     
 }
 - (void)DialogFreqSet_Sub{
     if(type==H_Type){
-        if(--RecStructData.OUT_CH[output_channel_sel].h_freq < 20){
-            RecStructData.OUT_CH[output_channel_sel].h_freq = 20;
+        if(--RecStructData.IN_CH[input_channel_sel].h_freq < 20){
+            RecStructData.IN_CH[input_channel_sel].h_freq = 20;
         }
         
-        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
-           RecStructData.OUT_CH[output_channel_sel].l_freq){
+        if(RecStructData.IN_CH[input_channel_sel].h_freq >
+           RecStructData.IN_CH[input_channel_sel].l_freq){
             
-            RecStructData.OUT_CH[output_channel_sel].h_freq =
-            RecStructData.OUT_CH[output_channel_sel].l_freq;
+            RecStructData.IN_CH[input_channel_sel].h_freq =
+            RecStructData.IN_CH[input_channel_sel].l_freq;
         }
-//        if(BOOL_SET_SpkType){
-//            int fr=[self getChannelNum:output_channel_sel];
-//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
-//                if(RecStructData.OUT_CH[output_channel_sel].h_freq <1000){
-//                    //                    RecStructData.OUT_CH[output_channel_sel].h_freq = 1000;
-//                }
-//            }
-//        }
+        //        if(BOOL_SET_SpkType){
+        //            int fr=[self getChannelNum:input_channel_sel];
+        //            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+        //                if(RecStructData.IN_CH[input_channel_sel].h_freq <1000){
+        //                    //                    RecStructData.IN_CH[input_channel_sel].h_freq = 1000;
+        //                }
+        //            }
+        //        }
         
-        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq]];
-        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].h_freq]];
         
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq] forState:UIControlStateNormal];
         
-//        [self flashLinkSyncData:UI_HFreq];
+        //        [self flashLinkSyncData:UI_HFreq];
     }else{
-        if(--RecStructData.OUT_CH[output_channel_sel].l_freq < 20){
-            RecStructData.OUT_CH[output_channel_sel].l_freq = 20;
+        if(--RecStructData.IN_CH[input_channel_sel].l_freq < 20){
+            RecStructData.IN_CH[input_channel_sel].l_freq = 20;
         }
         
-        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
-           RecStructData.OUT_CH[output_channel_sel].l_freq){
+        if(RecStructData.IN_CH[input_channel_sel].h_freq >
+           RecStructData.IN_CH[input_channel_sel].l_freq){
             
-            RecStructData.OUT_CH[output_channel_sel].l_freq =
-            RecStructData.OUT_CH[output_channel_sel].h_freq;
+            RecStructData.IN_CH[input_channel_sel].l_freq =
+            RecStructData.IN_CH[input_channel_sel].h_freq;
         }
-//        if(BOOL_SET_SpkType){
-//            int fr=[self getChannelNum:output_channel_sel];
-//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
-//                if(RecStructData.OUT_CH[output_channel_sel].l_freq <1000){
-//                    //                    RecStructData.OUT_CH[output_channel_sel].l_freq = 1000;
-//                }
-//            }
-//        }
+        //        if(BOOL_SET_SpkType){
+        //            int fr=[self getChannelNum:input_channel_sel];
+        //            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+        //                if(RecStructData.IN_CH[input_channel_sel].l_freq <1000){
+        //                    //                    RecStructData.IN_CH[input_channel_sel].l_freq = 1000;
+        //                }
+        //            }
+        //        }
         
         
-        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq]];
-        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].l_freq]];
         
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq] forState:UIControlStateNormal];
         
-//        [self flashLinkSyncData:UI_LFreq];
+        //        [self flashLinkSyncData:UI_LFreq];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 - (void)DialogFreqSet_Inc{
     if(type==H_Type){
-        if(++RecStructData.OUT_CH[output_channel_sel].h_freq > 20000){
-            RecStructData.OUT_CH[output_channel_sel].h_freq = 20000;
+        if(++RecStructData.IN_CH[input_channel_sel].h_freq > 20000){
+            RecStructData.IN_CH[input_channel_sel].h_freq = 20000;
         }
         
-        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
-           RecStructData.OUT_CH[output_channel_sel].l_freq){
+        if(RecStructData.IN_CH[input_channel_sel].h_freq >
+           RecStructData.IN_CH[input_channel_sel].l_freq){
             
-            RecStructData.OUT_CH[output_channel_sel].h_freq =
-            RecStructData.OUT_CH[output_channel_sel].l_freq;
+            RecStructData.IN_CH[input_channel_sel].h_freq =
+            RecStructData.IN_CH[input_channel_sel].l_freq;
         }
-//        if(BOOL_SET_SpkType){
-//            int fr=[self getChannelNum:output_channel_sel];
-//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
-//                if(RecStructData.OUT_CH[output_channel_sel].h_freq <1000){
-//                    //                    RecStructData.OUT_CH[output_channel_sel].h_freq = 1000;
-//                }
-//            }
-//        }
+        //        if(BOOL_SET_SpkType){
+        //            int fr=[self getChannelNum:input_channel_sel];
+        //            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+        //                if(RecStructData.IN_CH[input_channel_sel].h_freq <1000){
+        //                    //                    RecStructData.IN_CH[input_channel_sel].h_freq = 1000;
+        //                }
+        //            }
+        //        }
         
         
-        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq]];
-        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].h_freq]];
         
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].h_freq] forState:UIControlStateNormal];
         
-//        [self flashLinkSyncData:UI_HFreq];
+        //        [self flashLinkSyncData:UI_HFreq];
     }else{
-        if(++RecStructData.OUT_CH[output_channel_sel].l_freq > 20000){
-            RecStructData.OUT_CH[output_channel_sel].l_freq = 20000;
+        if(++RecStructData.IN_CH[input_channel_sel].l_freq > 20000){
+            RecStructData.IN_CH[input_channel_sel].l_freq = 20000;
         }
         
-        if(RecStructData.OUT_CH[output_channel_sel].h_freq >
-           RecStructData.OUT_CH[output_channel_sel].l_freq){
+        if(RecStructData.IN_CH[input_channel_sel].h_freq >
+           RecStructData.IN_CH[input_channel_sel].l_freq){
             
-            RecStructData.OUT_CH[output_channel_sel].l_freq =
-            RecStructData.OUT_CH[output_channel_sel].h_freq;
+            RecStructData.IN_CH[input_channel_sel].l_freq =
+            RecStructData.IN_CH[input_channel_sel].h_freq;
         }
-//        if(BOOL_SET_SpkType){
-//            int fr=[self getChannelNum:output_channel_sel];
-//            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
-//                if(RecStructData.OUT_CH[output_channel_sel].l_freq <1000){
-//                    //                    RecStructData.OUT_CH[output_channel_sel].l_freq = 1000;
-//                }
-//            }
-//        }
+        //        if(BOOL_SET_SpkType){
+        //            int fr=[self getChannelNum:input_channel_sel];
+        //            if((fr==1)||(fr==7)||(fr==13)||(fr==16)||(fr==19)){
+        //                if(RecStructData.IN_CH[input_channel_sel].l_freq <1000){
+        //                    //                    RecStructData.IN_CH[input_channel_sel].l_freq = 1000;
+        //                }
+        //            }
+        //        }
         
         
-        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq]];
-        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
+        [_sliderFreq setShowValue:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq]];
+        [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.IN_CH[input_channel_sel].l_freq]];
         
-        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
+        [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].l_freq] forState:UIControlStateNormal];
         
-//        [self flashLinkSyncData:UI_LFreq];
+        //        [self flashLinkSyncData:UI_LFreq];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
@@ -586,10 +588,10 @@
     for (int i=0; i<AllLevel.count; i++) {
         [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:AllLevel[i]] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self dialogSetLevel:i];
-           
+            
         }]];
     }
-   
+    
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
         //        [B_Buf setNormal];
@@ -598,17 +600,17 @@
 }
 - (void)dialogSetLevel:(int)val{
     if(type==H_Type){
-        RecStructData.OUT_CH[output_channel_sel].h_level = val;
+        RecStructData.IN_CH[input_channel_sel].h_level = val;
         [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:val]] forState:UIControlStateNormal] ;
-        [self dialogSetFilter:RecStructData.OUT_CH[output_channel_sel].h_filter];
+        [self dialogSetFilter:RecStructData.IN_CH[input_channel_sel].h_filter];
         
-//        [self flashLinkSyncData:UI_HOct];
+        //        [self flashLinkSyncData:UI_HOct];
     }else{
-        RecStructData.OUT_CH[output_channel_sel].l_level = val;
+        RecStructData.IN_CH[input_channel_sel].l_level = val;
         [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:val]] forState:UIControlStateNormal] ;
-        [self dialogSetFilter:RecStructData.OUT_CH[output_channel_sel].l_filter];
+        [self dialogSetFilter:RecStructData.IN_CH[input_channel_sel].l_filter];
         
-//        [self flashLinkSyncData:UI_LOct];
+        //        [self flashLinkSyncData:UI_LOct];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }

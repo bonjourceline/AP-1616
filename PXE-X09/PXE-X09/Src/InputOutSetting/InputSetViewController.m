@@ -9,13 +9,17 @@
 #import "InputSetViewController.h"
 #import "SingleTableViewCell.h"
 #import "SourceSettingController.h"
+#import "EQinputViewController.h"
+#import "DoubleChTableViewCell.h"
 #define btnWidth 80
 #define btnHeight 25
 @interface InputSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIButton *inputTypeBtn;
+    int chCount;
 }
 @property(nonatomic,strong)UITableView *inputTableView;
+@property (nonatomic,strong)NSMutableArray *threeCells;
 
 @end
 
@@ -109,40 +113,106 @@
 }
 #pragma mark--------tableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row<self.threeCells.count) {
+        return [Dimens GDimens:95];
+    }else{
+        return [Dimens GDimens:190];
+    }
     return [Dimens GDimens:95];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return INS_CH_MAX;
+    return chCount;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellId=@"SingleTableViewCell";
-    SingleTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    if (cell==nil) {
-        cell=[[SingleTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    
+    //---------单个通道显示
+    if (indexPath.row<self.threeCells.count) {
+        static NSString *cellId=@"SingleTableViewCell";
+        SingleTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    }
-    if (indexPath.row==0) {
-        cell.item.lineTop.hidden=YES;
-    }else if (indexPath.row==INS_CH_MAX-1){
-        cell.item.lineBottom.hidden=YES;
+        if (cell==nil) {
+            cell=[[SingleTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        if (indexPath.row==0) {
+            cell.item.lineTop.hidden=YES;
+        }else if (indexPath.row==chCount-1){
+            cell.item.lineBottom.hidden=YES;
+        }else{
+            cell.item.lineTop.hidden=NO;
+            cell.item.lineBottom.hidden=NO;
+        }
+        int chValue=[self.threeCells[indexPath.row] intValue];
+        [cell.item setChannelIndex:chValue];
+        cell.item.spkBtn.hidden=YES;
+        [cell.item flashView];
+        if (chValue==0) {
+            cell.item.chName.text=[LANG DPLocalizedString:@"L_InputSource_Optical"];
+            [cell.item.sourceImage setImage:[UIImage imageNamed:@"Source_Optical"]];
+        }else if(chValue==1){
+            cell.item.chName.text=[LANG DPLocalizedString:@"L_InputSource_Coaxial"];
+            [cell.item.sourceImage setImage:[UIImage imageNamed:@"Source_Coaxial"]];
+        }else if(chValue ==2){
+            cell.item.chName.text=[LANG DPLocalizedString:@"L_InputSource_Bluetooth"];
+            [cell.item.sourceImage setImage:[UIImage imageNamed:@"Source_Blue"]];
+        }
+        cell.item.eqblock = ^(int index) {
+            [self openEqVc];
+        };
+        cell.item.reloadblock = ^{
+            [self.inputView reloadData];
+        };
+        return cell;
+        
     }else{
-        cell.item.lineTop.hidden=NO;
-        cell.item.lineBottom.hidden=NO;
+        /////////////双通道显示
+        static NSString *cellId=@"DoubleChTableViewCell";
+        DoubleChTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        if (cell==nil) {
+            cell=[[DoubleChTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        if (indexPath.row==0) {
+            cell.item.item1.lineTop.hidden=YES;
+        }else if (indexPath.row==chCount-1){
+            cell.item.item2.lineBottom.hidden=YES;
+        }else{
+            cell.item.item1.lineTop.hidden=NO;
+            cell.item.item2.lineBottom.hidden=NO;
+        }
+        if (RecStructData.System.high_Low_Set[indexPath.row-self.threeCells.count]==1) {
+            [cell.item.item1.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
+            [cell.item.item2.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
+            [cell.item.hl_setBtn setTitle:@"HI" forState:UIControlStateNormal];
+        }else{
+            [cell.item.item1.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
+            [cell.item.item2.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
+            [cell.item.hl_setBtn setTitle:@"AUX" forState:UIControlStateNormal];
+        }
+        cell.item.item1.eqblock = ^(int index) {
+            [self openEqVc];
+        };
+        cell.item.item1.reloadblock = ^{
+            [self.inputView reloadData];
+        };
+        cell.item.item2.eqblock = ^(int index) {
+            [self openEqVc];
+        };
+        cell.item.item2.reloadblock = ^{
+            [self.inputView reloadData];
+        };
+        int chValue=(int)(indexPath.row-self.threeCells.count+1)*2+1;
+        NSLog(@"----------%d",chValue);
+        [cell.item setChannelIndex:chValue];
+        [cell.item flashView];
+        return cell;
     }
-    [cell.item setChannelIndex:(int)indexPath.row];
-    [cell.item flashView];
-    cell.item.eqblock = ^(int index) {
-        [self openEqVc];
-    };
-    cell.item.reloadblock = ^{
-        [self.inputView reloadData];
-    };
-    return cell;
 }
 #pragma mark--------弹窗
 -(void)openEqVc{
-    
+    EQinputViewController *vc=[[EQinputViewController alloc]init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 #pragma mark-----------输入方式
 -(void)goToSourceSetting{
@@ -153,7 +223,20 @@
     
 }
 -(void)FlashPageUI{
+    self.threeCells =[[NSMutableArray alloc]init];
+    for (int i=0; i<3; i++) {
+        if (RecStructData.System.InSwitch[i]==1) {
+            [self.threeCells addObject:@(i)];
+        }
+    }
+    chCount=(int)self.threeCells.count+(RecStructData.System.AuxInputChNum+RecStructData.System.HiInputChNum)/2;
     [self.inputTableView reloadData];
+}
+-(NSMutableArray *)threeCells{
+    if (!_threeCells) {
+        _threeCells=[[NSMutableArray alloc]init];
+    }
+    return _threeCells;
 }
 /*
 #pragma mark - Navigation

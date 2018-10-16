@@ -103,6 +103,7 @@
  * 高通滤波器更新
  *
  */
+-(void)SetINEQData:(struct input_Struct)SyncEQ;
 - (void)SetEQData:(struct output_Struct)SyncEQ;
 - (void)SetINSEQData:(struct inputs_Struct)SyncEQ;
 

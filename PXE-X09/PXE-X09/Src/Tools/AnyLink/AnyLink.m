@@ -50,12 +50,12 @@
        ChannelAnyLinkBuf[j]=0;
     }
     
-    for(int i=0;i<Output_CH_MAX_USE;i++){
-        if((RecStructData.OUT_CH[i].linkgroup_num <= Output_CH_MAX_USE)
-           && (RecStructData.OUT_CH[i].linkgroup_num!=0)){
-             ChannelAnyLinkBuf[i+1]=RecStructData.OUT_CH[i].linkgroup_num;
-        }
-    }
+//    for(int i=0;i<Output_CH_MAX_USE;i++){
+//        if((RecStructData.OUT_CH[i].linkgroup_num <= Output_CH_MAX_USE)
+//           && (RecStructData.OUT_CH[i].linkgroup_num!=0)){
+//             ChannelAnyLinkBuf[i+1]=RecStructData.OUT_CH[i].linkgroup_num;
+//        }
+//    }
     for(int i=1;i<=Output_CH_MAX_USE;i++){
         /*
         switch (ChannelAnyLinkBuf[i]) {
@@ -568,7 +568,7 @@
     }
     
     for(int i=0;i<Output_CH_MAX_USE;i++){
-        RecStructData.OUT_CH[i].linkgroup_num = ChannelAnyLinkBuf[i+1];
+//        RecStructData.OUT_CH[i].linkgroup_num = ChannelAnyLinkBuf[i+1];
     }
     for(int i=0;i<=16;i++){
         for(int j=0;j<16;j++){

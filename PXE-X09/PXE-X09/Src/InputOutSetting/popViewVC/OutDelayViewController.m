@@ -22,7 +22,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=RGBA(0, 0, 0, 0.5);
     self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
-    self.modalPresentationStyle=UIModalTransitionStyleCrossDissolve;
+    self.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
     UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth-[Dimens GDimens:40], [Dimens GDimens:350])];
     [self.view addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {

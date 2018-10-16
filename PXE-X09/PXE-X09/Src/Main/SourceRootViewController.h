@@ -17,5 +17,6 @@
 @property (nonatomic,strong)UILabel *tiltleLab;
 -(void)toNextView;
 -(void)toPassView;
+-(void)ClickEventOfBack;
 @end
 

@@ -69,7 +69,8 @@
     [items addObject:outputVC];
 
     //状态栏颜色
-    [[UITabBar appearance] setBarTintColor:SetColor(UI_TabbarBgColor)];
+//    [[UITabBar appearance] setBarTintColor:SetColor(UI_TabbarBgColor)];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"tab_bar_bg"]]];
     [UITabBar appearance].translucent = NO;
     
     [self setViewControllers:items];

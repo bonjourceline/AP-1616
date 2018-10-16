@@ -307,14 +307,14 @@ struct	output_Struct			//输出共296字节
     uint8	IN16_Vol;
     
     //压限器 ID = 35
-    uint16	lim_t; //限幅电平 -30dbu~+20dbu，stp:0.1,实际发送值0~500
-    uint8   lim_a; //起动时间,0.3ms~100ms，0.3~1ms,stp:0.1;1~100ms,stp:1,实际发送值为0~106
-    uint8   lim_r; //释放时间值,2x,4x,8x,16x,32x,64x ,实际发送0 ~ 5
-    uint8   cliplim;	//保留	clip_limit; +2 ~ +12db,stp:0.1, 实际发送0~100
-    uint8   lim_rate;	//保留	压缩系数，1：1~1：无穷，    分1：2 ：4 ：8：16：32：64：无穷，共分7级，实际发送0~7
-    uint8   lim_mode;	//保留	0--limit; 1---compressor
-    uint8   linkgroup_num;  //保留comp_swi:	0--manual, 1--auto,linkgroup_num:0无加入联调组，>=1已经加入联调组
-    //uint8   IN_Polar;
+    uint8	IN17_Vol; //限幅电平 -30dbu~+20dbu，stp:0.1,实际发送值0~500
+    uint8   IN18_Vol; //起动时间,0.3ms~100ms，0.3~1ms,stp:0.1;1~100ms,stp:1,实际发送值为0~106
+    uint8   IN19_Vol; //释放时间值,2x,4x,8x,16x,32x,64x ,实际发送0 ~ 5
+    uint8   IN20_Vol;	//保留	clip_limit; +2 ~ +12db,stp:0.1, 实际发送0~100
+    uint8   IN21_Vol;	//保留	压缩系数，1：1~1：无穷，    分1：2 ：4 ：8：16：32：64：无穷，共分7级，实际发送0~7
+    uint8   IN22_Vol;	//保留	0--limit; 1---compressor
+    uint8   IN23_Vol;  //保留comp_swi:	0--manual, 1--auto,linkgroup_num:0无加入联调组，>=1已经加入联调组
+    uint8   IN24_Vol;
     //通道名 ID = 36
     uint8	name[8];
     
@@ -431,6 +431,7 @@ struct	BufData
 struct Data {
     struct inputs_Struct INS_CH[STRUCT_INPUT_MAX];       //输入数据
     struct input_Struct  IN_CH[STRUCT_INPUT_MAX];       //输入数据
+    struct input_Struct IN_CH_BUF[STRUCT_INPUT_MAX];//输出数据
     struct output_Struct OUT_CH[STRUCT_OUTPUT_MAX];    //输出数据
     struct output_Struct OUT_CH_BUF[STRUCT_OUTPUT_MAX];//输出数据
     struct System_Struct System;                       //系统数据

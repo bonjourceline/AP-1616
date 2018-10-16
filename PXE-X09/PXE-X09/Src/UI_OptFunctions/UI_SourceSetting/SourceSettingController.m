@@ -37,14 +37,14 @@
         [item setTag:i+SourceItemTag];
         item.selectBlock = ^(BOOL isSelected, NSInteger itemTag) {
              RecStructData.System.InSwitch[itemTag-SourceItemTag]=isSelected;
-            if (isSelected&&(itemTag<(2+SourceItemTag))) {
-                if (itemTag==0+SourceItemTag) {
-                    RecStructData.System.InSwitch[1]=0;
-                }else if (itemTag==1+SourceItemTag){
-                    RecStructData.System.InSwitch[0]=0;
-                }
+//            if (isSelected&&(itemTag<(2+SourceItemTag))) {
+//                if (itemTag==0+SourceItemTag) {
+//                    RecStructData.System.InSwitch[1]=0;
+//                }else if (itemTag==1+SourceItemTag){
+//                    RecStructData.System.InSwitch[0]=0;
+//                }
                 [self flashSourceItem];
-            }
+//            }
            
         };
         [self.view addSubview:item];

@@ -119,12 +119,12 @@ BOOL  BOOL_HW_MUTE = true;
  * */
 uint8 DELAY_DATA_TRANSFER = COM_TYPE_OUTPUT;
 /*延时的最大值*/
-uint16 DELAY_SETTINGS_MAX = 960;//960 20，384 8 ，240 5 ，259 5.396
+uint16 DELAY_SETTINGS_MAX = 1920;//960 20，384 8 ，240 5 ，259 5.396
 
 //------------------------   输入通道  ---------------------
 /*机型的Input通道数及机型的Input通道的EQ数量,主音量在MUSIC(DataStructInput)中,只使用一路*/
-uint8 Input_CH_MAX = 16;
-uint8 Input_CH_MAX_USE = 16;
+uint8 Input_CH_MAX = 19;
+uint8 Input_CH_MAX_USE = 19;
 uint16 Input_CH_Volume_MAX = 600;
 
 //------------------------   输出通道  ---------------------
@@ -218,7 +218,7 @@ struct LGSt_Struct LG;
 //------------------------   EQ  ---------------------
 //UI配置加载的最大EQ通道数
 uint8 Output_CH_EQ_MAX = 31;
-uint8 Input_CH_EQ_MAX  = 9;
+uint8 Input_CH_EQ_MAX  = 10;
 //输出EQ实际使用道数
 uint8 Output_CH_EQ_MAX_USE = 31;
 int eqIndex;

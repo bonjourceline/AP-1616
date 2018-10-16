@@ -122,6 +122,15 @@
 		722395DF216C429300AA5086 /* SingleOutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395DD216C429300AA5086 /* SingleOutTableViewCell.m */; };
 		722395E0216C429300AA5086 /* SingleOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722395DE216C429300AA5086 /* SingleOutTableViewCell.xib */; };
 		722395E4216CA23200AA5086 /* XoveritemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395E3216CA23200AA5086 /* XoveritemView.m */; };
+		723780C3216EF5EA00335461 /* EQinputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780C2216EF5EA00335461 /* EQinputViewController.m */; };
+		723780C6216EF62000335461 /* XoverInputitem.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780C5216EF62000335461 /* XoverInputitem.m */; };
+		723780C9216F012600335461 /* SpkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780C8216F012600335461 /* SpkViewController.m */; };
+		723780CD2170734400335461 /* DoubleChItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780CC2170734400335461 /* DoubleChItem.m */; };
+		723780D12170A88300335461 /* DoubleChTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780CF2170A88300335461 /* DoubleChTableViewCell.m */; };
+		723780D22170A88300335461 /* DoubleChTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723780D02170A88300335461 /* DoubleChTableViewCell.xib */; };
+		723780D52173407100335461 /* SetChNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780D42173407100335461 /* SetChNumViewController.m */; };
+		723780DC2174927300335461 /* dropdownMenu_cornerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 723780D92174927200335461 /* dropdownMenu_cornerIcon.png */; };
+		723780DD2174927300335461 /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780DA2174927200335461 /* LMJDropdownMenu.m */; };
 		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
 		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
@@ -452,6 +461,22 @@
 		722395DE216C429300AA5086 /* SingleOutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleOutTableViewCell.xib; sourceTree = "<group>"; };
 		722395E2216CA23200AA5086 /* XoveritemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XoveritemView.h; sourceTree = "<group>"; };
 		722395E3216CA23200AA5086 /* XoveritemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XoveritemView.m; sourceTree = "<group>"; };
+		723780C1216EF5EA00335461 /* EQinputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EQinputViewController.h; sourceTree = "<group>"; };
+		723780C2216EF5EA00335461 /* EQinputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EQinputViewController.m; sourceTree = "<group>"; };
+		723780C4216EF62000335461 /* XoverInputitem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XoverInputitem.h; sourceTree = "<group>"; };
+		723780C5216EF62000335461 /* XoverInputitem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XoverInputitem.m; sourceTree = "<group>"; };
+		723780C7216F012600335461 /* SpkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpkViewController.h; sourceTree = "<group>"; };
+		723780C8216F012600335461 /* SpkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpkViewController.m; sourceTree = "<group>"; };
+		723780CB2170734400335461 /* DoubleChItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleChItem.h; sourceTree = "<group>"; };
+		723780CC2170734400335461 /* DoubleChItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubleChItem.m; sourceTree = "<group>"; };
+		723780CE2170A88300335461 /* DoubleChTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleChTableViewCell.h; sourceTree = "<group>"; };
+		723780CF2170A88300335461 /* DoubleChTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubleChTableViewCell.m; sourceTree = "<group>"; };
+		723780D02170A88300335461 /* DoubleChTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleChTableViewCell.xib; sourceTree = "<group>"; };
+		723780D32173407100335461 /* SetChNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetChNumViewController.h; sourceTree = "<group>"; };
+		723780D42173407100335461 /* SetChNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetChNumViewController.m; sourceTree = "<group>"; };
+		723780D92174927200335461 /* dropdownMenu_cornerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownMenu_cornerIcon.png; sourceTree = "<group>"; };
+		723780DA2174927200335461 /* LMJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
+		723780DB2174927200335461 /* LMJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
 		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
@@ -1067,6 +1092,8 @@
 				AABFD3CF202418A40089A5E9 /* EQViewController.h */,
 				AABFD3D0202418A40089A5E9 /* EQViewController.m */,
 				AABFD3D1202418A40089A5E9 /* EQViewController.xib */,
+				723780C1216EF5EA00335461 /* EQinputViewController.h */,
+				723780C2216EF5EA00335461 /* EQinputViewController.m */,
 			);
 			path = UI_EQ;
 			sourceTree = "<group>";
@@ -1409,6 +1436,7 @@
 		14CF987B1E66BC910001FAB9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				723780D82174927200335461 /* LMJDropdownMenu */,
 				AA7B8C6D20739FE50055B37C /* AnyLink */,
 				AA3056DE202455690085672C /* AdvertisementView */,
 				AA321A231FE0B8B20065BD3C /* Utils */,
@@ -1620,30 +1648,32 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		72037102216D8F8D00E21482 /* popView */ = {
+		72037102216D8F8D00E21482 /* popViewVC */ = {
 			isa = PBXGroup;
 			children = (
 				72037106216DA7DB00E21482 /* VolSettingViewController.h */,
 				72037107216DA7DB00E21482 /* VolSettingViewController.m */,
 				7206BB90216DF2F700EC2416 /* OutDelayViewController.h */,
 				7206BB91216DF2F700EC2416 /* OutDelayViewController.m */,
+				723780C7216F012600335461 /* SpkViewController.h */,
+				723780C8216F012600335461 /* SpkViewController.m */,
 			);
-			path = popView;
+			path = popViewVC;
 			sourceTree = "<group>";
 		};
 		722395D32168BBDF00AA5086 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				722395CB2167846800AA5086 /* SingleChItem.h */,
-				722395CC2167846800AA5086 /* SingleChItem.m */,
+				723780CA217070F800335461 /* items */,
 				722395CE2168BBD800AA5086 /* SingleTableViewCell.h */,
 				722395CF2168BBD800AA5086 /* SingleTableViewCell.m */,
 				722395D02168BBD800AA5086 /* SingleTableViewCell.xib */,
-				722395D9216BA4E300AA5086 /* SingleOutChItem.h */,
-				722395DA216BA4E300AA5086 /* SingleOutChItem.m */,
 				722395DC216C429300AA5086 /* SingleOutTableViewCell.h */,
 				722395DD216C429300AA5086 /* SingleOutTableViewCell.m */,
 				722395DE216C429300AA5086 /* SingleOutTableViewCell.xib */,
+				723780CE2170A88300335461 /* DoubleChTableViewCell.h */,
+				723780CF2170A88300335461 /* DoubleChTableViewCell.m */,
+				723780D02170A88300335461 /* DoubleChTableViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1653,8 +1683,33 @@
 			children = (
 				722395E2216CA23200AA5086 /* XoveritemView.h */,
 				722395E3216CA23200AA5086 /* XoveritemView.m */,
+				723780C4216EF62000335461 /* XoverInputitem.h */,
+				723780C5216EF62000335461 /* XoverInputitem.m */,
 			);
 			path = XoverItem;
+			sourceTree = "<group>";
+		};
+		723780CA217070F800335461 /* items */ = {
+			isa = PBXGroup;
+			children = (
+				722395D9216BA4E300AA5086 /* SingleOutChItem.h */,
+				722395DA216BA4E300AA5086 /* SingleOutChItem.m */,
+				722395CB2167846800AA5086 /* SingleChItem.h */,
+				722395CC2167846800AA5086 /* SingleChItem.m */,
+				723780CB2170734400335461 /* DoubleChItem.h */,
+				723780CC2170734400335461 /* DoubleChItem.m */,
+			);
+			path = items;
+			sourceTree = "<group>";
+		};
+		723780D82174927200335461 /* LMJDropdownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				723780D92174927200335461 /* dropdownMenu_cornerIcon.png */,
+				723780DA2174927200335461 /* LMJDropdownMenu.m */,
+				723780DB2174927200335461 /* LMJDropdownMenu.h */,
+			);
+			path = LMJDropdownMenu;
 			sourceTree = "<group>";
 		};
 		AA045138215E1138004675FD /* items */ = {
@@ -1746,6 +1801,8 @@
 				AA61218F215CCA4D006F5F02 /* HiAuxViewController.m */,
 				AA045139215E284A004675FD /* OutModeViewController.h */,
 				AA04513A215E284A004675FD /* OutModeViewController.m */,
+				723780D32173407100335461 /* SetChNumViewController.h */,
+				723780D42173407100335461 /* SetChNumViewController.m */,
 			);
 			name = UI_SourceSetting;
 			path = UI_OptFunctions/UI_SourceSetting;
@@ -1754,7 +1811,7 @@
 		AA62E8FC215F19040023F225 /* InputOutSetting */ = {
 			isa = PBXGroup;
 			children = (
-				72037102216D8F8D00E21482 /* popView */,
+				72037102216D8F8D00E21482 /* popViewVC */,
 				722395D32168BBDF00AA5086 /* cell */,
 				AA62E8F9215F18FD0023F225 /* InputSetViewController.h */,
 				AA62E8FA215F18FD0023F225 /* InputSetViewController.m */,
@@ -1892,11 +1949,13 @@
 				AABFD3D3202418A40089A5E9 /* EQViewController.xib in Resources */,
 				AA5F640C214F53C300FFD50C /* DelayViewController.xib in Resources */,
 				144DD0CA1ED98E3A00825849 /* MixViewController.xib in Resources */,
+				723780D22170A88300335461 /* DoubleChTableViewCell.xib in Resources */,
 				AABFD3CE2024187D0089A5E9 /* MixerViewController.xib in Resources */,
 				AA5F6415214F53CA00FFD50C /* DelayTableViewCell.xib in Resources */,
 				14CF98811E66CC370001FAB9 /* Localizable.strings in Resources */,
 				AABFD477202439E70089A5E9 /* OutputViewController.xib in Resources */,
 				AABFD46D202439A90089A5E9 /* XOverOutputViewController.xib in Resources */,
+				723780DC2174927300335461 /* dropdownMenu_cornerIcon.png in Resources */,
 				722395D22168BBD800AA5086 /* SingleTableViewCell.xib in Resources */,
 				AA6D0C8B1FDE1A86000735FD /* Assets.xcassets in Resources */,
 				AA3056EB202455AD0085672C /* MasterVolView.xib in Resources */,
@@ -1933,6 +1992,7 @@
 			files = (
 				722395DF216C429300AA5086 /* SingleOutTableViewCell.m in Sources */,
 				AABFD455202438130089A5E9 /* EQSB_Gain.m in Sources */,
+				723780D52173407100335461 /* SetChNumViewController.m in Sources */,
 				142332541EC1CD5100E3FCC4 /* ClientData.m in Sources */,
 				1423329A1EC1DB7900E3FCC4 /* MJFoundation.m in Sources */,
 				142332581EC1CD5100E3FCC4 /* SaveLoginInfo.m in Sources */,
@@ -1942,6 +2002,7 @@
 				AABFD430202437120089A5E9 /* OutputItem.m in Sources */,
 				142332381EC1CC5200E3FCC4 /* FMDatabase.m in Sources */,
 				1423329F1EC1DB7900E3FCC4 /* NSObject+MJCoding.m in Sources */,
+				723780C9216F012600335461 /* SpkViewController.m in Sources */,
 				AABFD3FD2024197E0089A5E9 /* BabyOptions.m in Sources */,
 				14B44A9F1E69776D00D524C6 /* WMPageController.m in Sources */,
 				142332821EC1CE0500E3FCC4 /* README.md in Sources */,
@@ -1968,6 +2029,7 @@
 				142332B91EC1DC0800E3FCC4 /* MusicGroupModel.m in Sources */,
 				AA5F640B214F53C300FFD50C /* DelayViewController_FRS.m in Sources */,
 				AABFD43B202437690089A5E9 /* ChannelLineBar.m in Sources */,
+				723780CD2170734400335461 /* DoubleChItem.m in Sources */,
 				722395E4216CA23200AA5086 /* XoveritemView.m in Sources */,
 				AABFD467202438930089A5E9 /* LANG.m in Sources */,
 				AABFD40B202434080089A5E9 /* UIImage+Color.m in Sources */,
@@ -2003,6 +2065,7 @@
 				14B44AC31E69786E00D524C6 /* MASConstraint.m in Sources */,
 				AABFD42E202437120089A5E9 /* OutputItemFRS.m in Sources */,
 				AABFD454202438130089A5E9 /* EQView.m in Sources */,
+				723780DD2174927300335461 /* LMJDropdownMenu.m in Sources */,
 				AABFD440202437BF0089A5E9 /* MixerItem.m in Sources */,
 				722395CD2167846800AA5086 /* SingleChItem.m in Sources */,
 				142332551EC1CD5100E3FCC4 /* DataInfoData.m in Sources */,
@@ -2018,6 +2081,7 @@
 				14DE4B4A1EC49ED300418248 /* IconButton.m in Sources */,
 				142332A01EC1DB7900E3FCC4 /* NSObject+MJKeyValue.m in Sources */,
 				14B44AC91E69786E00D524C6 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				723780C6216EF62000335461 /* XoverInputitem.m in Sources */,
 				AABFD4002024197E0089A5E9 /* BabySpeaker.m in Sources */,
 				142332BA1EC1DC0800E3FCC4 /* OutputGroupModel.m in Sources */,
 				142332801EC1CE0500E3FCC4 /* JSONValueTransformer.m in Sources */,
@@ -2090,6 +2154,7 @@
 				AA21D0131FC57872005EC4E9 /* MainViewController.m in Sources */,
 				14B44ACB1E69786E00D524C6 /* ViewController+MASAdditions.m in Sources */,
 				AABFD452202438130089A5E9 /* EQIndex.m in Sources */,
+				723780C3216EF5EA00335461 /* EQinputViewController.m in Sources */,
 				14DE4B451EC49E2000418248 /* QIZLikeTableViewController.m in Sources */,
 				AABFD4022024197E0089A5E9 /* BLEManager.m in Sources */,
 				AABFD4012024197E0089A5E9 /* BabyToy.m in Sources */,
@@ -2114,6 +2179,7 @@
 				14B44AC61E69786E00D524C6 /* MASViewAttribute.m in Sources */,
 				AABFD3B9202417260089A5E9 /* SimpleTopBar.m in Sources */,
 				AABFD3CD2024187D0089A5E9 /* MixerViewController.m in Sources */,
+				723780D12170A88300335461 /* DoubleChTableViewCell.m in Sources */,
 				1423323B1EC1CC5200E3FCC4 /* FMDatabaseQueue.m in Sources */,
 				AA61218A215CB9F6006F5F02 /* SourceRootViewController.m in Sources */,
 				144DD0C31ED98DA300825849 /* OptFunPage_TBC.m in Sources */,
@@ -2254,7 +2320,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bsaudio.bs-dap812-r128";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apaudio.pxe-x09";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2277,7 +2343,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bsaudio.bs-dap812-r128";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apaudio.pxe-x09";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -9,6 +9,7 @@
 #import "HiAuxViewController.h"
 #import "HiAuxItem.h"
 #import "OutModeViewController.h"
+#import "SetChNumViewController.h"
 #define itemMargin 8
 #define itemWidth (KScreenWidth-[Dimens GDimens:itemMargin]*4)/3
 #define itemHeigh itemWidth*1.3
@@ -26,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.nextBtn setTitle:[LANG DPLocalizedString:@"进入调音"] forState:UIControlStateNormal];
     hiTypeNames=@[@"主动三分频",@"主动二分频",@"自定义"];
     auxTypeNames=@[@"5.1ch",@"4.2ch",@"2.0ch",@"自定义"];
     if (RecStructData.System.InSwitch[3]==1&&RecStructData.System.InSwitch[4]==1){
@@ -219,8 +220,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)toNextView{
-    OutModeViewController *vc=[[OutModeViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ((RecStructData.System.InSwitch[3]==1&&RecStructData.System.high_mode==0)||(RecStructData.System.InSwitch[4]==1&&RecStructData.System.aux_mode==0)) {
+        SetChNumViewController *vc=[[SetChNumViewController alloc]init];
+        vc.type=CHNUMTYPE_input;
+        vc.blackHome = ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self ClickEventOfBack];
+            
+        };
+        vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+        vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        [self ClickEventOfBack];
+    }
+    
 }
 #pragma mark------------刷新
 -(void)flashHiItem{

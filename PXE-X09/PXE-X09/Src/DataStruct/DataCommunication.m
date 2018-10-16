@@ -821,14 +821,14 @@
                             }
                         }
                     }else if(SendFrameData.DataID == OUT_LIMIT_ID) {// id = 35        压限
-                        FrameDataBuf[14] = (SendStructData.OUT_CH[SendFrameData.ChannelID].lim_t & 0xff);
-                        FrameDataBuf[15] = ((SendStructData.OUT_CH[SendFrameData.ChannelID].lim_t >> 8) & 0xff);
-                        FrameDataBuf[16] = (SendStructData.OUT_CH[SendFrameData.ChannelID].lim_a & 0xff);
-                        FrameDataBuf[17] = (SendStructData.OUT_CH[SendFrameData.ChannelID].lim_r & 0xff);
-                        FrameDataBuf[18] = (SendStructData.OUT_CH[SendFrameData.ChannelID].cliplim & 0xff);
-                        FrameDataBuf[19] = (SendStructData.OUT_CH[SendFrameData.ChannelID].lim_rate & 0xff);
-                        FrameDataBuf[20] = (SendStructData.OUT_CH[SendFrameData.ChannelID].lim_mode & 0xff);
-                        FrameDataBuf[21] = (SendStructData.OUT_CH[SendFrameData.ChannelID].linkgroup_num & 0xff);
+                        FrameDataBuf[14] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN17_Vol & 0xff);
+                        FrameDataBuf[15] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN18_Vol & 0xff);
+                        FrameDataBuf[16] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN19_Vol & 0xff);
+                        FrameDataBuf[17] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN20_Vol & 0xff);
+                        FrameDataBuf[18] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN21_Vol & 0xff);
+                        FrameDataBuf[19] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN22_Vol & 0xff);
+                        FrameDataBuf[20] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN23_Vol & 0xff);
+                        FrameDataBuf[21] = (SendStructData.OUT_CH[SendFrameData.ChannelID].IN24_Vol & 0xff);
                         if(BOOL_EncryptionFlag){//加密
                             for(int i=0;i<8;i++){
                                 FrameDataBuf[14+i] = (FrameDataBuf[14+i]^Encrypt_DATA);
@@ -1595,23 +1595,25 @@
     
     //id = id = 35        压限
     for(int i=0;i<Output_CH_MAX;i++){
-        if((SendStructData.OUT_CH[i].lim_t != RecStructData.OUT_CH[i].lim_t)||
-           (SendStructData.OUT_CH[i].lim_a != RecStructData.OUT_CH[i].lim_a)||
-           (SendStructData.OUT_CH[i].lim_r != RecStructData.OUT_CH[i].lim_r)||
-           (SendStructData.OUT_CH[i].cliplim != RecStructData.OUT_CH[i].cliplim)||
-           (SendStructData.OUT_CH[i].lim_rate != RecStructData.OUT_CH[i].lim_rate)||
-           (SendStructData.OUT_CH[i].lim_mode != RecStructData.OUT_CH[i].lim_mode)||
-           (SendStructData.OUT_CH[i].linkgroup_num != RecStructData.OUT_CH[i].linkgroup_num)
+        if((SendStructData.OUT_CH[i].IN17_Vol != RecStructData.OUT_CH[i].IN17_Vol)||
+           (SendStructData.OUT_CH[i].IN18_Vol != RecStructData.OUT_CH[i].IN18_Vol)||
+           (SendStructData.OUT_CH[i].IN19_Vol != RecStructData.OUT_CH[i].IN19_Vol)||
+           (SendStructData.OUT_CH[i].IN20_Vol != RecStructData.OUT_CH[i].IN20_Vol)||
+           (SendStructData.OUT_CH[i].IN21_Vol != RecStructData.OUT_CH[i].IN21_Vol)||
+           (SendStructData.OUT_CH[i].IN22_Vol != RecStructData.OUT_CH[i].IN22_Vol)||
+           (SendStructData.OUT_CH[i].IN23_Vol != RecStructData.OUT_CH[i].IN23_Vol)||
+           (SendStructData.OUT_CH[i].IN24_Vol != RecStructData.OUT_CH[i].IN24_Vol)
            
            ){
             
-            SendStructData.OUT_CH[i].lim_t  = RecStructData.OUT_CH[i].lim_t;
-            SendStructData.OUT_CH[i].lim_a  = RecStructData.OUT_CH[i].lim_a;
-            SendStructData.OUT_CH[i].lim_r  = RecStructData.OUT_CH[i].lim_r;
-            SendStructData.OUT_CH[i].cliplim  = RecStructData.OUT_CH[i].cliplim;
-            SendStructData.OUT_CH[i].lim_rate  = RecStructData.OUT_CH[i].lim_rate;
-            SendStructData.OUT_CH[i].lim_mode  = RecStructData.OUT_CH[i].lim_mode;
-            SendStructData.OUT_CH[i].linkgroup_num  = RecStructData.OUT_CH[i].linkgroup_num;
+            SendStructData.OUT_CH[i].IN17_Vol  = RecStructData.OUT_CH[i].IN17_Vol;
+            SendStructData.OUT_CH[i].IN18_Vol  = RecStructData.OUT_CH[i].IN18_Vol;
+            SendStructData.OUT_CH[i].IN19_Vol  = RecStructData.OUT_CH[i].IN19_Vol;
+            SendStructData.OUT_CH[i].IN20_Vol  = RecStructData.OUT_CH[i].IN20_Vol;
+            SendStructData.OUT_CH[i].IN21_Vol  = RecStructData.OUT_CH[i].IN21_Vol;
+            SendStructData.OUT_CH[i].IN22_Vol  = RecStructData.OUT_CH[i].IN22_Vol;
+            SendStructData.OUT_CH[i].IN23_Vol  = RecStructData.OUT_CH[i].IN23_Vol;
+            SendStructData.OUT_CH[i].IN24_Vol  = RecStructData.OUT_CH[i].IN24_Vol;
             if (uptodevice == true) {
                 SendFrameData.FrameType = WRITE_CMD;
                 SendFrameData.DeviceID = 0x01;
@@ -1974,13 +1976,13 @@
             SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].noise_config & 0xff);
             SendFrameData.Buf[++ChCnt]=((RecStructData.IN_CH[ChannelID].noise_config >> 8) & 0xff);
             //压限 ,ID = 12
-//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].lim_t & 0xff);
-//            SendFrameData.Buf[++ChCnt]=((RecStructData.IN_CH[ChannelID].lim_t >> 8) & 0xff);
-//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].lim_a & 0xff);
-//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].lim_r & 0xff);
-//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].cliplim & 0xff);
-//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].lim_rate & 0xff);
-//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].lim_mode & 0xff);
+//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].IN17_Vol & 0xff);
+//            SendFrameData.Buf[++ChCnt]=((RecStructData.IN_CH[ChannelID].IN17_Vol >> 8) & 0xff);
+//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].IN18_Vol & 0xff);
+//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].IN19_Vol & 0xff);
+//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].IN20_Vol & 0xff);
+//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].IN21_Vol & 0xff);
+//            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].IN22_Vol & 0xff);
 //            SendFrameData.Buf[++ChCnt]= (RecStructData.IN_CH[ChannelID].comp_swi & 0xff);
             //name[8] ID = 13
             for(int i=0;i<8;i++){
@@ -2040,14 +2042,14 @@
         //ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN_polar & 0xff);
         //ChannelBuf[++ChCnt]= ((RecStructData.OUT_CH[ChannelID].IN_polar >> 8) & 0xff);
         // id = 35        压限
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_t & 0xff);
-        SendFrameData.Buf[++ChCnt]=((RecStructData.OUT_CH[ChannelID].lim_t >> 8) & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_a & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_r & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].cliplim & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_rate & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_mode & 0xff);
-        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].linkgroup_num & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN17_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN18_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN19_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN20_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN21_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN22_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN23_Vol & 0xff);
+        SendFrameData.Buf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN24_Vol & 0xff);
         //name[8]  ID = 36
         for(int i=0;i<8;i++){
             SendFrameData.Buf[++ChCnt]=RecStructData.OUT_CH[ChannelID].name[i];
@@ -2188,13 +2190,13 @@
             RecStructData.IN_CH[ChannelID].noise_config  = RecFrameData.DataBuf[++initDataCnt];
             RecStructData.IN_CH[ChannelID].noise_config  +=RecFrameData.DataBuf[++initDataCnt]*256;
             //压限 ,ID = 12
-//            RecStructData.IN_CH[ChannelID].lim_t    = RecFrameData.DataBuf[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_t    +=RecFrameData.DataBuf[++initDataCnt]*256;
-//            RecStructData.IN_CH[ChannelID].lim_a    = RecFrameData.DataBuf[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_r    = RecFrameData.DataBuf[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].cliplim  = RecFrameData.DataBuf[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_rate = RecFrameData.DataBuf[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_mode = RecFrameData.DataBuf[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN17_Vol    = RecFrameData.DataBuf[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN17_Vol    +=RecFrameData.DataBuf[++initDataCnt]*256;
+//            RecStructData.IN_CH[ChannelID].IN18_Vol    = RecFrameData.DataBuf[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN19_Vol    = RecFrameData.DataBuf[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN20_Vol  = RecFrameData.DataBuf[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN21_Vol = RecFrameData.DataBuf[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN22_Vol = RecFrameData.DataBuf[++initDataCnt];
 //            RecStructData.IN_CH[ChannelID].comp_swi = RecFrameData.DataBuf[++initDataCnt];
             //name[8] ID = 13
             for(int i=0;i<8;i++){
@@ -2424,14 +2426,14 @@
         }
         
         // id = 35        压限
-        RecStructData.OUT_CH[ChannelID].lim_t    = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_t    +=RecFrameData.DataBuf[++initDataCnt]*256;
-        RecStructData.OUT_CH[ChannelID].lim_a    = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_r    = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].cliplim  = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_rate = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_mode = RecFrameData.DataBuf[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].linkgroup_num = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN17_Vol    = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN18_Vol    = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN19_Vol    = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN20_Vol  = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN21_Vol = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN22_Vol = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN23_Vol = RecFrameData.DataBuf[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN24_Vol = RecFrameData.DataBuf[++initDataCnt];
         //name[8]  ID = 36
         for(int i=0;i<8;i++){
             RecStructData.OUT_CH[ChannelID].name[i] = RecFrameData.DataBuf[++initDataCnt];
@@ -3950,12 +3952,12 @@ void LINK_MODE_SPKTYPE_S(){
 void LINK_MODE_AUTO(){
     int sumGL=0;
     for(int i=0;i<Output_CH_MAX_USE;i++){
-        sumGL += RecStructData.OUT_CH[i].linkgroup_num;
+        sumGL += RecStructData.OUT_CH[i].IN23_Vol;
     }
     if(sumGL==0){
         return;//没有联调
     }
-    int GL_NUM=RecStructData.OUT_CH[output_channel_sel].linkgroup_num;
+    int GL_NUM=RecStructData.OUT_CH[output_channel_sel].IN23_Vol;
     if(GL_NUM <= 0){
         return;
     }
@@ -4386,13 +4388,13 @@ void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initD
             RecStructData.IN_CH[ChannelID].noise_config  = initData[++initDataCnt];
             RecStructData.IN_CH[ChannelID].noise_config  +=initData[++initDataCnt]*256;
             //压限 ,ID = 12
-//            RecStructData.IN_CH[ChannelID].lim_t    = initData[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_t    +=initData[++initDataCnt]*256;
-//            RecStructData.IN_CH[ChannelID].lim_a    = initData[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_r    = initData[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].cliplim  = initData[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_rate = initData[++initDataCnt];
-//            RecStructData.IN_CH[ChannelID].lim_mode = initData[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN17_Vol    = initData[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN17_Vol    +=initData[++initDataCnt]*256;
+//            RecStructData.IN_CH[ChannelID].IN18_Vol    = initData[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN19_Vol    = initData[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN20_Vol  = initData[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN21_Vol = initData[++initDataCnt];
+//            RecStructData.IN_CH[ChannelID].IN22_Vol = initData[++initDataCnt];
 //            RecStructData.IN_CH[ChannelID].comp_swi = initData[++initDataCnt];
             //name[8] ID = 13
             for(int i=0;i<8;i++){
@@ -4574,14 +4576,14 @@ void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initD
             }
         }
         // id = 35        压限
-        RecStructData.OUT_CH[ChannelID].lim_t    = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_t    +=initData[++initDataCnt]*256;
-        RecStructData.OUT_CH[ChannelID].lim_a    = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_r    = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].cliplim  = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_rate = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].lim_mode = initData[++initDataCnt];
-        RecStructData.OUT_CH[ChannelID].linkgroup_num = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN17_Vol    = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN18_Vol    = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN19_Vol    = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN20_Vol  = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN21_Vol = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN22_Vol = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN23_Vol = initData[++initDataCnt];
+        RecStructData.OUT_CH[ChannelID].IN24_Vol = initData[++initDataCnt];
         //name[8]  ID = 36
         for(int i=0;i<8;i++){
             RecStructData.OUT_CH[ChannelID].name[i] = initData[++initDataCnt];
@@ -4851,14 +4853,14 @@ void FillSedDataStructCHBuf(int DataStruchID, int ChannelID) {
         //ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN_polar & 0xff);
         //ChannelBuf[++ChCnt]= ((RecStructData.OUT_CH[ChannelID].IN_polar >> 8) & 0xff);
         // id = 35        压限
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_t & 0xff);
-        ChannelBuf[++ChCnt]=((RecStructData.OUT_CH[ChannelID].lim_t >> 8) & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_a & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_r & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].cliplim & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_rate & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].lim_mode & 0xff);
-        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].linkgroup_num & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN17_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN18_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN19_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN20_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN21_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN22_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN23_Vol & 0xff);
+        ChannelBuf[++ChCnt]= (RecStructData.OUT_CH[ChannelID].IN24_Vol & 0xff);
         //name[8]  ID = 36
         for(int i=0;i<8;i++){
             ChannelBuf[++ChCnt]=RecStructData.OUT_CH[ChannelID].name[i];
@@ -4931,9 +4933,6 @@ void setOutputSpkType(int type,int ch){
 void initSystemDataStruct(){
     SendStructData.System.input_source = RecStructData.System.input_source=2;
     SendStructData.System.mixer_source = RecStructData.System.mixer_source=0;
-    for (int i=0; i<5; i++) {
-        SendStructData.System.InSwitch[i]=RecStructData.System.InSwitch[i]=0;
-    }
     SendStructData.System.none1 = RecStructData.System.none1=0;
     
     SendStructData.System.main_vol = RecStructData.System.main_vol=38;
@@ -4946,7 +4945,16 @@ void initSystemDataStruct(){
     for (int i=0; i<5; i++) {
          SendStructData.System.InSwitch[i] = RecStructData.System.InSwitch[i]=1;
     }
-    
+    SendStructData.System.OutputChNum=RecStructData.System.OutputChNum=16;
+    SendStructData.System.HiInputChNum=RecStructData.System.HiInputChNum=4;
+    SendStructData.System.AuxInputChNum=RecStructData.System.AuxInputChNum=4;
+    for (int i=0; i<8; i++) {
+        if (i<2) {
+           SendStructData.System.high_Low_Set[i]=RecStructData.System.high_Low_Set[i]=1;
+        }else{
+            SendStructData.System.high_Low_Set[i]=RecStructData.System.high_Low_Set[i]=0;
+        }
+    }
 }
 #pragma mark-----数据初始化
 void initDataStruct(){

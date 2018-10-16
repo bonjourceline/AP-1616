@@ -346,7 +346,36 @@
     
     [self UpdateEQFilter];
 }
-
+-(void)SetINEQData:(struct input_Struct)SyncEQ {
+    MaxEQ = IN_CH_EQ_MAX_USE;
+    for(int j=0;j<MaxEQ;j++){
+        //        NSLog(@"############################");
+        EQ_Filter.EQ[j].freq  = SyncEQ.EQ[j].freq;
+        EQ_Filter.EQ[j].level = SyncEQ.EQ[j].level;
+        EQ_Filter.EQ[j].bw    = SyncEQ.EQ[j].bw;
+        EQ_Filter.EQ[j].shf_db= SyncEQ.EQ[j].shf_db;
+        EQ_Filter.EQ[j].type  = SyncEQ.EQ[j].type;
+        //        NSLog(@"EQ.%d,EQ_Filter.EQ.freq=%d",j,EQ_Filter.EQ[j].freq);
+        //        NSLog(@"EQ.%d,EQ_Filter.EQ.level=%d",j,EQ_Filter.EQ[j].level);
+        //        NSLog(@"EQ.%d,EQ_Filter.EQ.bw=%d",j,EQ_Filter.EQ[j].bw);
+    }
+    
+    EQ_Filter.h_freq   = SyncEQ.h_freq;
+    EQ_Filter.h_filter = SyncEQ.h_filter;
+    EQ_Filter.h_level  = SyncEQ.h_level;
+    EQ_Filter.l_freq   = SyncEQ.l_freq;
+    EQ_Filter.l_filter = SyncEQ.l_filter;
+    EQ_Filter.l_level  = SyncEQ.l_level;
+    //    NSLog(@"--------------------------------------");
+    //    NSLog(@"EQ_Filter.h_freq=%d",EQ_Filter.h_freq);
+    //    NSLog(@"EQ_Filter.h_filter=%d",EQ_Filter.h_filter);
+    //    NSLog(@"EQ_Filter.h_level=%d",EQ_Filter.h_level);
+    //    NSLog(@"EQ_Filter.l_freq=%d",EQ_Filter.l_freq);
+    //    NSLog(@"EQ_Filter.l_filter=%d",EQ_Filter.l_filter);
+    //    NSLog(@"EQ_Filter.l_level=%d",EQ_Filter.l_level);
+    
+    [self UpdateEQFilter];
+}
 
 - (void)SetINSEQData:(struct inputs_Struct)SyncEQ {
     INS_OUT = false;

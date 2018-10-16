@@ -2084,12 +2084,12 @@
 }
 -(void)setAnyLinkDialog_Ok_Click:(UIButton *)sender{
     BOOL Link = false;
-    for(int i=0;i<Output_CH_MAX_USE;i++){
-        if(RecStructData.OUT_CH[i].linkgroup_num > 0){
-            Link = true;
-            break;
-        }
-    }
+//    for(int i=0;i<Output_CH_MAX_USE;i++){
+//        if(RecStructData.OUT_CH[i].linkgroup_num > 0){
+//            Link = true;
+//            break;
+//        }
+//    }
     if(Link){
         [self setLinkState];
 //        setDataSyncLink();
@@ -2435,7 +2435,7 @@
     
     if(LinkMODE == LINKMODE_AUTO){
         for(int i=0;i<Output_CH_MAX_USE;i++){
-            RecStructData.OUT_CH[i].linkgroup_num = 0;
+//            RecStructData.OUT_CH[i].linkgroup_num = 0;
         }
     }
 }
@@ -3072,13 +3072,13 @@
         ChannelAnyLinkBuf[j]=0;
     }
     
-    for(int i=0;i<Output_CH_MAX_USE;i++){
-        if((RecStructData.OUT_CH[i].linkgroup_num <= Output_CH_MAX_USE)
-           && (RecStructData.OUT_CH[i].linkgroup_num!=0)){
-            ChannelAnyLinkBuf[i+1]=RecStructData.OUT_CH[i].linkgroup_num;
-            BOOL_LINK = true;
-        }
-    }
+//    for(int i=0;i<Output_CH_MAX_USE;i++){
+//        if((RecStructData.OUT_CH[i].linkgroup_num <= Output_CH_MAX_USE)
+//           && (RecStructData.OUT_CH[i].linkgroup_num!=0)){
+//            ChannelAnyLinkBuf[i+1]=RecStructData.OUT_CH[i].linkgroup_num;
+//            BOOL_LINK = true;
+//        }
+//    }
     for(int i=1;i<=Output_CH_MAX_USE;i++){
         /*
          switch (ChannelAnyLinkBuf[i]) {

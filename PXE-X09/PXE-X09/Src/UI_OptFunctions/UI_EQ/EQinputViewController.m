@@ -1,28 +1,29 @@
 //
-//  EQViewController.m
-//  MT-IOS
+//  EQinputViewController.m
+//  PXE-X09
 //
-//  Created by chsdsp on 2017/2/21.
-//  Copyright © 2017年 dsp. All rights reserved.
+//  Created by celine on 2018/10/11.
+//  Copyright © 2018 dsp. All rights reserved.
 //
 
-#import "EQViewController.h"
+#import "EQinputViewController.h"
 #import "MyChannelCView.h"
-#import "XoveritemView.h"
-@interface EQViewController ()
+#import "XoverInputitem.h"
+@interface EQinputViewController ()
 @property(nonatomic,strong)MyChannelCView *channelColletionView;
-@property(nonatomic,strong)XoveritemView *h_Xover;
-@property(nonatomic,strong)XoveritemView *l_Xover;
+@property(nonatomic,strong)XoverInputitem *h_Xover;
+@property(nonatomic,strong)XoverInputitem *l_Xover;
 @end
 
-@implementation EQViewController
+@implementation EQinputViewController
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     CurPage = UI_Page_EQ;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-  [self.mToolbar setLogoShow:false];
+    [self.mToolbar setLogoShow:false];
     //添加通知观察者
     //接收noticeScanBLE通知
     //获取通知中心单例对象
@@ -34,8 +35,8 @@
     //[center addObserver:self selector:@selector(ConnectStateFormNotification:) name:MyNotification_ConnectSuccess object:nil];
     
     
-
-//    self.view.backgroundColor = [UIColor clearColor];
+    
+    //    self.view.backgroundColor = [UIColor clearColor];
     [self initData];
     [self initView];
     [self initEncrypt];
@@ -51,7 +52,7 @@
 }
 
 - (void)initData{
-
+    
 }
 
 #pragma mark -------------------- channelBar
@@ -67,18 +68,18 @@
         make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:Custom_ChannelBtnHeight]));
     }];
     
-//    UIView *VLine = [[UIView alloc]init];
-//    [self.view addSubview:VLine];
-//    [VLine setBackgroundColor:SetColor(UI_ToolbarBackgroundLineColor)];
-//    [VLine mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.channelBar.mas_bottom).offset([Dimens GDimens:0]);
-//        make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
-//        make.size.mas_equalTo(CGSizeMake(KScreenWidth, 1));
-//    }];
+    //    UIView *VLine = [[UIView alloc]init];
+    //    [self.view addSubview:VLine];
+    //    [VLine setBackgroundColor:SetColor(UI_ToolbarBackgroundLineColor)];
+    //    [VLine mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.equalTo(self.channelBar.mas_bottom).offset([Dimens GDimens:0]);
+    //        make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
+    //        make.size.mas_equalTo(CGSizeMake(KScreenWidth, 1));
+    //    }];
 }
 
 - (void)ChannelbarEvent:(ChannelBar *)sender{
-    output_channel_sel = [sender getChannel];
+    input_channel_sel = [sender getChannel];
     [self FlashPageUI_];
 }
 
@@ -90,7 +91,7 @@
     [self.view addSubview:self.channelLab];
     self.channelLab.textAlignment=NSTextAlignmentCenter;
     self.channelLab.textColor=[UIColor whiteColor];
-    self.channelLab.text=[NSString stringWithFormat:@"输入%d",output_channel_sel];
+    self.channelLab.text=[NSString stringWithFormat:@"输入%d",input_channel_sel];
     self.channelLab.font=[UIFont systemFontOfSize:15];
     [self.channelLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:10]);
@@ -117,43 +118,43 @@
         make.left.equalTo(self.channelLab.mas_right);
         make.size.mas_equalTo(lastBtn);
     }];
-//    self.channelColletionView=[[MyChannelCView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, [Dimens GDimens:ChannelBtnListHeight])];
-//    __weak typeof(self) weakself=self;
-//    self.channelColletionView.backgroundColor=SetColor(Color_EQChannelLis_bg);
-//    self.channelColletionView.selectedIndex = ^(int row) {
-//        //选择后的回调
-//        [weakself FlashPageUI_];
-//    };
-//    [self.view addSubview:self.channelColletionView];
-//    [self.channelColletionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:15]);
-//                make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
-//                make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:ChannelBtnListHeight]));
-//    }];
+    //    self.channelColletionView=[[MyChannelCView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, [Dimens GDimens:ChannelBtnListHeight])];
+    //    __weak typeof(self) weakself=self;
+    //    self.channelColletionView.backgroundColor=SetColor(Color_EQChannelLis_bg);
+    //    self.channelColletionView.selectedIndex = ^(int row) {
+    //        //选择后的回调
+    //        [weakself FlashPageUI_];
+    //    };
+    //    [self.view addSubview:self.channelColletionView];
+    //    [self.channelColletionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:15]);
+    //                make.centerX.equalTo(self.view.mas_centerX).offset([Dimens GDimens:0]);
+    //                make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:ChannelBtnListHeight]));
+    //    }];
     
 };
 -(void)nextCh{
-    int nextIndex=output_channel_sel;
-    if (++nextIndex>=Output_CH_MAX_USE) {
+    int nextIndex=input_channel_sel;
+    if (++nextIndex>=Input_CH_MAX_USE) {
         
     }else{
-        output_channel_sel=nextIndex;
+        input_channel_sel=nextIndex;
         [self FlashPageUI];
     }
 }
 -(void)lastCh{
-    int lastIndex=output_channel_sel;
+    int lastIndex=input_channel_sel;
     if (--lastIndex<0) {
         
     }else{
-        output_channel_sel=lastIndex;
+        input_channel_sel=lastIndex;
         [self FlashPageUI];
     }
 }
 #pragma mark --------页面初始化
 - (void)initView{
     [self initChannelList];
-//    [self initChannelBar];
+    //    [self initChannelBar];
     UIImageView *eqImageView=[[UIImageView alloc]init];
     [self.view addSubview:eqImageView];
     [eqImageView setImage:[UIImage imageNamed:@"eq_bg"]];
@@ -165,14 +166,14 @@
     //EQ 曲线图
     self.EQV_INS = [[EQView alloc]initWithFrame:CGRectMake(0, [Dimens GDimens:UI_StartWithTopBar+20], KScreenWidth-[Dimens GDimens:8], [Dimens GDimens:EQViewHeight])];
     [self.view addSubview:self.EQV_INS];
-//    self.EQV_INS.layer.borderColor=[UIColor blackColor].CGColor;
-//    self.EQV_INS.layer.borderWidth=0.5;
+    //    self.EQV_INS.layer.borderColor=[UIColor blackColor].CGColor;
+    //    self.EQV_INS.layer.borderWidth=0.5;
     [self.EQV_INS mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.top.equalTo(self.channelLab.mas_bottom).offset([Dimens GDimens:0]);
         make.size.mas_equalTo(CGSizeMake(KScreenWidth, [Dimens GDimens:EQViewHeight]));
     }];
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[0]];
+//    [self.EQV_INS SetINEQData:RecStructData.IN_CH[0]];
     
     //EQ提示边
     self.EQindex = [[EQIndex alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:EQItemWidth], [Dimens GDimens:EQItemHeight])];
@@ -194,14 +195,14 @@
     //    [self.Btn_EQReset initView:3 withBorderWidth:0 withNormalColor:UI_EQSet_Btn_Normal withPressColor:UI_EQSet_Btn_Press withType:1];
     //    [self.Btn_EQReset setTextColorWithNormalColor:UI_EQSet_BtnText_Normal withPressColor:UI_EQSet_BtnText_Press];
     [self.Btn_EQReset initViewBroder:0
-                          withBorderWidth:0
-                          withNormalColor:UI_DelayBtn_NormalIN
-                           withPressColor:UI_DelayBtn_PressIN
-                    withBorderNormalColor:UI_EQSet_Btn_Normal
-                     withBorderPressColor:UI_EQSet_Btn_Press
-                      withTextNormalColor:UI_EQSet_BtnText_Normal
-                       withTextPressColor:UI_EQSet_BtnText_Press
-                                 withType:4];
+                     withBorderWidth:0
+                     withNormalColor:UI_DelayBtn_NormalIN
+                      withPressColor:UI_DelayBtn_PressIN
+               withBorderNormalColor:UI_EQSet_Btn_Normal
+                withBorderPressColor:UI_EQSet_Btn_Press
+                 withTextNormalColor:UI_EQSet_BtnText_Normal
+                  withTextPressColor:UI_EQSet_BtnText_Press
+                            withType:4];
     self.Btn_EQReset.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.Btn_EQReset addTarget:self action:@selector(Btn_EQReset_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.Btn_EQReset setTitle:[LANG DPLocalizedString:@"L_EQ_ResetEQ"] forState:UIControlStateNormal] ;
@@ -266,7 +267,7 @@
         self.Btn_EQPG_MD.hidden = true;
     }
     
-    if(RecStructData.OUT_CH[output_channel_sel].eq_mode == 0){
+    if(RecStructData.IN_CH[input_channel_sel].eq_mode == 0){
         [self.Btn_EQPG_MD setPress];
         [self.Btn_EQPG_MD setTitle:[LANG DPLocalizedString:@"L_EQ_PEQ_MODE"] forState:UIControlStateNormal] ;
     }else{
@@ -291,7 +292,7 @@
     
 }
 -(void)creatXoverView{
-    self.h_Xover=[[XoveritemView alloc]init];
+    self.h_Xover=[[XoverInputitem alloc]init];
     [self.h_Xover addTarget:self action:@selector(changedXover:) forControlEvents:UIControlEventValueChanged];
     [self.h_Xover setXoverType:H_Type];
     [self.view addSubview:self.h_Xover];
@@ -300,8 +301,8 @@
         make.left.equalTo(self.view.mas_left).offset([Dimens GDimens:5]);
         make.size.mas_equalTo(CGSizeMake(KScreenWidth/2-[Dimens GDimens:10], [Dimens GDimens:110]));
     }];
-    self.l_Xover=[[XoveritemView alloc]init];
-     [self.l_Xover addTarget:self action:@selector(changedXover:) forControlEvents:UIControlEventValueChanged];
+    self.l_Xover=[[XoverInputitem alloc]init];
+    [self.l_Xover addTarget:self action:@selector(changedXover:) forControlEvents:UIControlEventValueChanged];
     [self.l_Xover setXoverType:L_Type];
     [self.view addSubview:self.l_Xover];
     [self.l_Xover mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -310,8 +311,8 @@
         make.size.mas_equalTo(self.h_Xover);
     }];
 }
--(void)changedXover:(XoveritemView *)item{
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
+-(void)changedXover:(XoverInputitem *)item{
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
 }
 #pragma mark---------滑动事件
 - (void) initSVEQ{
@@ -332,7 +333,7 @@
     //scrollview.contentSize =  CGSizeMake(你要的长度, 0);
     //禁止UIScrollView水平方向滚动，只允许垂直方向滚动
     //scrollview.contentSize =  CGSizeMake(0, 你要的宽度);
-    self.SVEQ.contentSize = CGSizeMake([Dimens GDimens:EQItemWidth]*Output_CH_EQ_MAX_USE, 0);
+    self.SVEQ.contentSize = CGSizeMake([Dimens GDimens:EQItemWidth]*Input_CH_EQ_MAX, 0);
     // 是否反弹
     self.SVEQ.bounces = NO;
     // 是否分页
@@ -351,7 +352,7 @@
     self.SVEQ.directionalLockEnabled = NO;
     
     
-    for(int i=0;i<Output_CH_EQ_MAX_USE;i++){
+    for(int i=0;i<Input_CH_EQ_MAX;i++){
         EQItem *eqitem = [[EQItem alloc]initWithFrame:CGRectMake([Dimens GDimens:EQItemWidth]*i, 0, [Dimens GDimens:EQItemWidth], [Dimens GDimens:EQItemHeight])];
         [eqitem setTag:i];
         
@@ -359,17 +360,17 @@
         
         eqitem.Lab_ID.text = [NSString stringWithFormat:@"%d",i+1];
         ///
-        [eqitem.Btn_Gain setTitle:[NSString stringWithFormat:@"%@dB",[self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[i].level]] forState:UIControlStateNormal] ;
+        [eqitem.Btn_Gain setTitle:[NSString stringWithFormat:@"%@dB",[self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[i].level]] forState:UIControlStateNormal] ;
         [eqitem.Btn_Gain addTarget:self action:@selector(EQ_Btn_Gain_Click:) forControlEvents:UIControlEventTouchUpInside];
         ///
-        [eqitem.Btn_BW setTitle:[self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[i].bw] forState:UIControlStateNormal] ;
+        [eqitem.Btn_BW setTitle:[self ChangeBWValume:RecStructData.IN_CH[input_channel_sel].EQ[i].bw] forState:UIControlStateNormal] ;
         [eqitem.Btn_BW addTarget:self action:@selector(EQ_Btn_BW_Click:) forControlEvents:UIControlEventTouchUpInside];
         ///
-//        [eqitem.Btn_Freq setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
-        [eqitem.Btn_Freq setTitle:[NSString stringWithFormat:@"%d",RecStructData.OUT_CH[output_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
+        //        [eqitem.Btn_Freq setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
+        [eqitem.Btn_Freq setTitle:[NSString stringWithFormat:@"%d",RecStructData.IN_CH[input_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
         [eqitem.Btn_Freq addTarget:self action:@selector(EQ_Btn_Freq_Click:) forControlEvents:UIControlEventTouchUpInside];
         //
-        eqitem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[i].level - EQ_LEVEL_MIN;
+        eqitem.SB_Gain.value = RecStructData.IN_CH[input_channel_sel].EQ[i].level - EQ_LEVEL_MIN;
         [eqitem.SB_Gain addTarget:self action:@selector(EQ_SB_Gain_ValueChanged:) forControlEvents:UIControlEventValueChanged];
         //
         [eqitem.Btn_Reset addTarget:self action:@selector(EQ_Btn_Reset_Click:) forControlEvents:UIControlEventTouchUpInside];
@@ -381,7 +382,7 @@
 
 - (void)EQ_Btn_Gain_Click:(UIButton*)sender{
     if(EnableGPEQ){
-        if(RecStructData.OUT_CH[output_channel_sel].eq_mode != 0){
+        if(RecStructData.IN_CH[input_channel_sel].eq_mode != 0){
             return;
         }
     }
@@ -394,7 +395,7 @@
 }
 - (void)EQ_Btn_BW_Click:(UIButton*)sender{
     if(EnableGPEQ){
-        if(RecStructData.OUT_CH[output_channel_sel].eq_mode != 0){
+        if(RecStructData.IN_CH[input_channel_sel].eq_mode != 0){
             return;
         }
     }
@@ -407,7 +408,7 @@
 }
 - (void)EQ_Btn_Freq_Click:(UIButton*)sender{
     if(EnableGPEQ){
-        if(RecStructData.OUT_CH[output_channel_sel].eq_mode != 0){
+        if(RecStructData.IN_CH[input_channel_sel].eq_mode != 0){
             return;
         }
     }
@@ -426,24 +427,24 @@
     [self setEQItemSelColor];
     
     
-    if((RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level == EQ_LEVEL_ZERO)
-       &&(BufStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level != EQ_LEVEL_ZERO)){
-        RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level =
-        BufStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level;
+    if((RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level == EQ_LEVEL_ZERO)
+       &&(BufStructData.IN_CH[input_channel_sel].EQ[eqIndex].level != EQ_LEVEL_ZERO)){
+        RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level =
+        BufStructData.IN_CH[input_channel_sel].EQ[eqIndex].level;
         
-        BufStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
+        BufStructData.IN_CH[input_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
         [_CurEQItem.Btn_Reset setImage:[UIImage imageNamed:@"eq_resetg_press"] forState:UIControlStateNormal];
-    }else if((RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level != EQ_LEVEL_ZERO)){
-        BufStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level =
-        RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level;
+    }else if((RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level != EQ_LEVEL_ZERO)){
+        BufStructData.IN_CH[input_channel_sel].EQ[eqIndex].level =
+        RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level;
         
-        RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
+        RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
         [_CurEQItem.Btn_Reset setImage:[UIImage imageNamed:@"eq_resetg_normal"] forState:UIControlStateNormal];
     }
     
-    _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level-EQ_LEVEL_MIN;
-    [_CurEQItem.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level] forState:UIControlStateNormal] ;
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
+    _CurEQItem.SB_Gain.value = RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level-EQ_LEVEL_MIN;
+    [_CurEQItem.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level] forState:UIControlStateNormal] ;
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
     
     syncLinkData(UI_EQ_ALL);
 }
@@ -453,18 +454,18 @@
     eqIndex = (int)sender.tag-TagStartEQItem_SB_Gain;
     _CurEQItem = (EQItem *)[self.view viewWithTag:eqIndex+TagStartEQItem_Self];
     [self setEQItemSelColor];
-    RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = (uint16)sender.value + EQ_LEVEL_MIN;
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
-    BufStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
-    [_CurEQItem.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level] forState:UIControlStateNormal] ;
+    RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level = (uint16)sender.value + EQ_LEVEL_MIN;
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
+    BufStructData.IN_CH[input_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
+    [_CurEQItem.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level] forState:UIControlStateNormal] ;
     
     [self checkCurResetBtnState];
     syncLinkData(UI_EQ_Level);
 }
 - (NSString*)ChangeGainValume:(int) num{
     num -= EQ_LEVEL_MIN;
-//    return [NSString stringWithFormat:@"%.1fdB",0.0-(EQ_Gain_MAX/2-num)/10.0];
-  return [NSString stringWithFormat:@"%.1fdB",0.0-(EQ_Gain_MAX/2-num)/10.0];
+    //    return [NSString stringWithFormat:@"%.1fdB",0.0-(EQ_Gain_MAX/2-num)/10.0];
+    return [NSString stringWithFormat:@"%.1fdB",0.0-(EQ_Gain_MAX/2-num)/10.0];
 }
 //获取Equalizer 的EQ的Q值数据显示
 - (NSString*) ChangeBWValume:(int) num{
@@ -545,8 +546,8 @@
 #pragma 响应事件
 //通道選擇
 - (void)ChannelChange:(ChannelBtn*)sender {
-    output_channel_sel = [sender GetChannelSelected];
-    //NSLog(@"ChannelChange channel=@%d",output_channel_sel);
+    input_channel_sel = [sender GetChannelSelected];
+    //NSLog(@"ChannelChange channel=@%d",input_channel_sel);
     [self FlashPageUI];
     
 }
@@ -563,32 +564,32 @@
 }
 
 - (void)Btn_PGEQMode_click:(NormalButton*)sender {
-    if(RecStructData.OUT_CH[output_channel_sel].eq_mode == 0){
-        RecStructData.OUT_CH[output_channel_sel].eq_mode = 1;
+    if(RecStructData.IN_CH[input_channel_sel].eq_mode == 0){
+        RecStructData.IN_CH[input_channel_sel].eq_mode = 1;
         [self.Btn_EQPG_MD setNormal];
         [self.Btn_EQPG_MD setTitle:[LANG DPLocalizedString:@"L_EQ_GEQ_MODE"] forState:UIControlStateNormal] ;
     }else{
-        RecStructData.OUT_CH[output_channel_sel].eq_mode = 0;
+        RecStructData.IN_CH[input_channel_sel].eq_mode = 0;
         [self.Btn_EQPG_MD setPress];
         [self.Btn_EQPG_MD setTitle:[LANG DPLocalizedString:@"L_EQ_PEQ_MODE"] forState:UIControlStateNormal] ;
     }
-    for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
-        RecStructData.OUT_CH[output_channel_sel].EQ[j].bw = DefaultStructData.OUT_CH[output_channel_sel].EQ[j].bw;
-        RecStructData.OUT_CH[output_channel_sel].EQ[j].freq = DefaultStructData.OUT_CH[output_channel_sel].EQ[j].freq;
-        RecStructData.OUT_CH[output_channel_sel].EQ[j].level = DefaultStructData.OUT_CH[output_channel_sel].EQ[j].level;
-        RecStructData.OUT_CH[output_channel_sel].EQ[j].shf_db= DefaultStructData.OUT_CH[output_channel_sel].EQ[j].shf_db;
-        RecStructData.OUT_CH[output_channel_sel].EQ[j].type = DefaultStructData.OUT_CH[output_channel_sel].EQ[j].type;
+    for(int j=0;j<Input_CH_EQ_MAX;j++){
+        RecStructData.IN_CH[input_channel_sel].EQ[j].bw = DefaultStructData.IN_CH[input_channel_sel].EQ[j].bw;
+        RecStructData.IN_CH[input_channel_sel].EQ[j].freq = DefaultStructData.IN_CH[input_channel_sel].EQ[j].freq;
+        RecStructData.IN_CH[input_channel_sel].EQ[j].level = DefaultStructData.IN_CH[input_channel_sel].EQ[j].level;
+        RecStructData.IN_CH[input_channel_sel].EQ[j].shf_db= DefaultStructData.IN_CH[input_channel_sel].EQ[j].shf_db;
+        RecStructData.IN_CH[input_channel_sel].EQ[j].type = DefaultStructData.IN_CH[input_channel_sel].EQ[j].type;
     }
-//    syncLinkData(UI_EQ_G_P_MODE_EQ);
+    //    syncLinkData(UI_EQ_G_P_MODE_EQ);
     [self FlashPageUI];
 }
 
 #pragma 功能函数
 - (void)setEQItemSelColorClean{
     EQItem *find_btn;
-    for(int i=0;i<Output_CH_EQ_MAX_USE;i++){
+    for(int i=0;i<Input_CH_EQ_MAX;i++){
         find_btn = (EQItem *)[self.view viewWithTag:i+TagStartEQItem_Self];
-        if(RecStructData.OUT_CH[output_channel_sel].eq_mode == 0){
+        if(RecStructData.IN_CH[input_channel_sel].eq_mode == 0){
             [find_btn setStateColor:EQItemNoramlColor];
         }else{
             [find_btn setStateColor:EQItemNoramlLockColor];
@@ -599,7 +600,7 @@
 - (void)setEQItemSelColor{
     
     [self setEQItemSelColorClean];
-    if(RecStructData.OUT_CH[output_channel_sel].eq_mode == 0){
+    if(RecStructData.IN_CH[input_channel_sel].eq_mode == 0){
         [_CurEQItem setStateColor:EQItemPressColor];
     }else{
         [_CurEQItem setStateColor:EQItemLockedlColor];
@@ -609,8 +610,8 @@
 }
 
 - (BOOL)getByPass{
-    for(int i=0;i<Output_CH_EQ_MAX_USE;i++){
-        if(RecStructData.OUT_CH[output_channel_sel].EQ[i].level != EQ_LEVEL_ZERO){
+    for(int i=0;i<Input_CH_EQ_MAX;i++){
+        if(RecStructData.IN_CH[input_channel_sel].EQ[i].level != EQ_LEVEL_ZERO){
             return false;
         }
     }
@@ -630,7 +631,7 @@
     }
 }
 - (void)checkCurResetBtnState{
-    if(RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level == EQ_LEVEL_ZERO){
+    if(RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level == EQ_LEVEL_ZERO){
         [_CurEQItem.Btn_Reset setImage:[[UIImage imageNamed:@"eq_resetg_normal"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     }else{
         [_CurEQItem.Btn_Reset setImage:[[UIImage imageNamed:@"eq_resetg_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
@@ -641,16 +642,16 @@
 
 - (void)setEQByPass{
     if(bool_ByPass){
-        for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
-            RecStructData.OUT_CH[output_channel_sel].EQ[j].level =
-            RecStructData.OUT_CH_BUF[output_channel_sel].EQ[j].level;
+        for(int j=0;j<Input_CH_EQ_MAX;j++){
+            RecStructData.IN_CH[input_channel_sel].EQ[j].level =
+            RecStructData.IN_CH_BUF[input_channel_sel].EQ[j].level;
         }
         
     }else{
-        for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
-            RecStructData.OUT_CH_BUF[output_channel_sel].EQ[j].level =
-            RecStructData.OUT_CH[output_channel_sel].EQ[j].level;
-            RecStructData.OUT_CH[output_channel_sel].EQ[j].level = EQ_LEVEL_ZERO;
+        for(int j=0;j<Input_CH_EQ_MAX;j++){
+            RecStructData.IN_CH_BUF[input_channel_sel].EQ[j].level =
+            RecStructData.IN_CH[input_channel_sel].EQ[j].level;
+            RecStructData.IN_CH[input_channel_sel].EQ[j].level = EQ_LEVEL_ZERO;
         }
     }
     syncLinkData(UI_EQ_Level);
@@ -668,19 +669,19 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        for(int i=0;i<Output_CH_EQ_MAX_USE;i++){
-            RecStructData.OUT_CH[output_channel_sel].EQ[i].bw     = DefaultStructData.OUT_CH[output_channel_sel].EQ[i].bw;
-            RecStructData.OUT_CH[output_channel_sel].EQ[i].freq   = DefaultStructData.OUT_CH[output_channel_sel].EQ[i].freq;
-            RecStructData.OUT_CH[output_channel_sel].EQ[i].level  = DefaultStructData.OUT_CH[output_channel_sel].EQ[i].level;
-            RecStructData.OUT_CH[output_channel_sel].EQ[i].shf_db = DefaultStructData.OUT_CH[output_channel_sel].EQ[i].shf_db;
-            RecStructData.OUT_CH[output_channel_sel].EQ[i].type   = DefaultStructData.OUT_CH[output_channel_sel].EQ[i].type;
+        for(int i=0;i<Input_CH_EQ_MAX;i++){
+            RecStructData.IN_CH[input_channel_sel].EQ[i].bw     = DefaultStructData.IN_CH[input_channel_sel].EQ[i].bw;
+            RecStructData.IN_CH[input_channel_sel].EQ[i].freq   = DefaultStructData.IN_CH[input_channel_sel].EQ[i].freq;
+            RecStructData.IN_CH[input_channel_sel].EQ[i].level  = DefaultStructData.IN_CH[input_channel_sel].EQ[i].level;
+            RecStructData.IN_CH[input_channel_sel].EQ[i].shf_db = DefaultStructData.IN_CH[input_channel_sel].EQ[i].shf_db;
+            RecStructData.IN_CH[input_channel_sel].EQ[i].type   = DefaultStructData.IN_CH[input_channel_sel].EQ[i].type;
         }
         //EQ复位用
-        for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
-            BufStructData.OUT_CH[output_channel_sel].EQ[j].level = EQ_LEVEL_ZERO;
+        for(int j=0;j<Input_CH_EQ_MAX;j++){
+            BufStructData.IN_CH[input_channel_sel].EQ[j].level = EQ_LEVEL_ZERO;
         }
-        for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
-            RecStructData.OUT_CH_BUF[output_channel_sel].EQ[j].level =  EQ_LEVEL_ZERO;
+        for(int j=0;j<Input_CH_EQ_MAX;j++){
+            RecStructData.IN_CH_BUF[input_channel_sel].EQ[j].level =  EQ_LEVEL_ZERO;
         }
         syncLinkData(UI_EQ_ALL);
         [self FlashPageUI];
@@ -771,22 +772,22 @@
             labelTitle.text = [LANG DPLocalizedString:@"L_XOver_SetGain"];
             _sliderEQ.minimumValue = 0;
             _sliderEQ.maximumValue = EQ_Gain_MAX;
-            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
-            [_sliderEQ setValue:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level- IN_EQ_LEVEL_MIN];
+            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level];
+            [_sliderEQ setValue:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level- IN_EQ_LEVEL_MIN];
             break;
         case 2:
             labelTitle.text = [LANG DPLocalizedString:@"L_XOver_SetEQ"];
             _sliderEQ.minimumValue = 0;
             _sliderEQ.maximumValue = EQ_BW_MAX;
-            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw];
-            [_sliderEQ setValue:EQ_BW_MAX - RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw];
+            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw];
+            [_sliderEQ setValue:EQ_BW_MAX - RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw];
             break;
         case 3:
             labelTitle.text = [LANG DPLocalizedString:@"L_XOver_SetFreq"];
             _sliderEQ.minimumValue = 0;
             _sliderEQ.maximumValue = 240;
-            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq];
-            [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq]];
+            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq];
+            [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq]];
             break;
         default:
             break;
@@ -856,11 +857,11 @@
     switch (EQ_MODE) {
         case 1:
         {
-            RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level=EQ_LEVEL_MIN+sliderValue;
-            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
+            RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level=EQ_LEVEL_MIN+sliderValue;
+            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level];
             
             [_CurEQItem.Btn_Gain setTitle:_sliderEQ.showValue forState:UIControlStateNormal];
-            _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
+            _CurEQItem.SB_Gain.value = RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [self checkCurResetBtnState];
             syncLinkData(UI_EQ_Level);
@@ -869,8 +870,8 @@
         case 2:
         {
             sliderValue = EQ_BW_MAX - sliderValue;
-            RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw=sliderValue;
-            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw];
+            RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw=sliderValue;
+            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw];
             
             [_CurEQItem.Btn_BW setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
             syncLinkData(UI_EQ_BW);
@@ -878,8 +879,8 @@
             break;
         case 3:
         {
-            RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq= FREQ241[sliderValue];
-            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq];
+            RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq= FREQ241[sliderValue];
+            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq];
             
             [_CurEQItem.Btn_Freq setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
             syncLinkData(UI_EQ_Freq);
@@ -888,21 +889,21 @@
         default:
             break;
     }
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
 }
 
 - (void)DialogSet_Sub{
     switch (EQ_MODE) {
         case 1:
         {
-            if(--RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level < IN_EQ_LEVEL_MIN){
-                RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = IN_EQ_LEVEL_MIN;
+            if(--RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level < IN_EQ_LEVEL_MIN){
+                RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level = IN_EQ_LEVEL_MIN;
             }
-            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
-            _sliderEQ.value=RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
+            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level];
+            _sliderEQ.value=RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [_CurEQItem.Btn_Gain setTitle:_sliderEQ.showValue forState:UIControlStateNormal];
-            _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
+            _CurEQItem.SB_Gain.value = RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [self checkCurResetBtnState];
             syncLinkData(UI_EQ_Level);
@@ -910,11 +911,11 @@
             break;
         case 2:
         {
-            if(++RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw > EQ_BW_MAX){
-                RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw = EQ_BW_MAX;
+            if(++RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw > EQ_BW_MAX){
+                RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw = EQ_BW_MAX;
             }
-            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw];
-            _sliderEQ.value=EQ_BW_MAX - RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw;
+            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw];
+            _sliderEQ.value=EQ_BW_MAX - RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw;
             
             [_CurEQItem.Btn_BW setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
             syncLinkData(UI_EQ_BW);
@@ -922,11 +923,11 @@
             break;
         case 3:
         {
-            if(--RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq < 20){
-                RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq = 20;
+            if(--RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq < 20){
+                RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq = 20;
             }
-            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq];
-            [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq]];
+            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq];
+            [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq]];
             
             [_CurEQItem.Btn_Freq setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
             syncLinkData(UI_EQ_Freq);
@@ -935,20 +936,20 @@
         default:
             break;
     }
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
 }
 - (void)DialogSet_Inc{
     switch (EQ_MODE) {
         case 1:
         {
-            if(++RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level > IN_EQ_LEVEL_MAX){
-                RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = IN_EQ_LEVEL_MAX;
+            if(++RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level > IN_EQ_LEVEL_MAX){
+                RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level = IN_EQ_LEVEL_MAX;
             }
-            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
-            _sliderEQ.value=RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
+            _sliderEQ.showValue = [self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level];
+            _sliderEQ.value=RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [_CurEQItem.Btn_Gain setTitle:_sliderEQ.showValue forState:UIControlStateNormal];
-            _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
+            _CurEQItem.SB_Gain.value = RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [self checkCurResetBtnState];
             syncLinkData(UI_EQ_Level);
@@ -956,11 +957,11 @@
             break;
         case 2:
         {
-            if(--RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw < 0){
-                RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw = 0;
+            if(--RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw < 0){
+                RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw = 0;
             }
-            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw];
-            _sliderEQ.value=EQ_BW_MAX - RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw;
+            _sliderEQ.showValue = [self ChangeBWValume:RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw];
+            _sliderEQ.value=EQ_BW_MAX - RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].bw;
             
             [_CurEQItem.Btn_BW setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
             syncLinkData(UI_EQ_BW);
@@ -969,11 +970,11 @@
             break;
         case 3:
         {
-            if(++RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq > 20000){
-                RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq = 20000;
+            if(++RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq > 20000){
+                RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq = 20000;
             }
-            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq];
-            [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq]];
+            _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq];
+            [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.IN_CH[input_channel_sel].EQ[eqIndex].freq]];
             
             [_CurEQItem.Btn_Freq setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
             syncLinkData(UI_EQ_Freq);
@@ -982,7 +983,7 @@
         default:
             break;
     }
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];}
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];}
 //长按操作
 -(void)Btn_VolumeSUB_LongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
@@ -1196,11 +1197,11 @@
             ChannelLinkBuf[i][j]=EndFlag;
         }
     }
-    for(i=0;i<Output_CH_MAX_USE;i++){
+    for(i=0;i<Input_CH_MAX_USE;i++){
         channelNameNum=[self GetChannelNum:i];
         //NSLog(@"channelNameNum=%d",channelNameNum);
         if(channelNameNum>=0){
-            for(j=i+1;j<Output_CH_MAX_USE;j++){
+            for(j=i+1;j<Input_CH_MAX_USE;j++){
                 channelNameNumEls=[self GetChannelNum:j];
                 //NSLog(@"channelNameNumEls=%d",channelNameNumEls);
                 if((channelNameNum>=1)&&(channelNameNum<=6)&&
@@ -1261,7 +1262,7 @@
     for (int i=0; i<16; i++) {
         ChannelNumBuf[i]=RecStructData.System.out_spk_type[i];
     }
-
+    
     for(int i=0;i<16;i++){
         if(ChannelNumBuf[i]<0){
             ChannelNumBuf[i]=0;
@@ -1276,9 +1277,9 @@
 #pragma 广播通知
 - (void)FlashPageUI{
     dispatch_async(dispatch_get_main_queue(), ^{
-        //    [self.channelBtn setChannelSelected:output_channel_sel];
-//        [self.channelBar selectRowAtIndex:output_channel_sel];
-//        [self.channelBar setChannel:output_channel_sel];
+        //    [self.channelBtn setChannelSelected:input_channel_sel];
+        //        [self.channelBar selectRowAtIndex:input_channel_sel];
+        //        [self.channelBar setChannel:input_channel_sel];
         
         [self FlashPageUI_];
     });
@@ -1288,33 +1289,33 @@
     //更新控件选择位置
     [self.h_Xover flashXover];
     [self.l_Xover flashXover];
-//    [self.channelColletionView MyChannelReload];
-    self.channelLab.text=[NSString stringWithFormat:@"输入%d",output_channel_sel+1];
+    //    [self.channelColletionView MyChannelReload];
+    self.channelLab.text=[NSString stringWithFormat:@"输入%d",input_channel_sel+1];
     EQItem *find_btn;
-    [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
+    [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
     [self setEQItemSelColorClean];
-    for(int i=0;i<Output_CH_EQ_MAX_USE;i++){
-
+    for(int i=0;i<Input_CH_EQ_MAX;i++){
+        
         find_btn = (EQItem *)[self.view viewWithTag:i+TagStartEQItem_Self];
-//        if(output_channel_sel >=6){
-//            if(i>=10){
-//                find_btn.hidden = true;
-//            }
-//            self.SVEQ.contentSize = CGSizeMake([Dimens GDimens:EQItemWidth]*10, 0);
-//        }else{
-//            if(i>=10){
-//                find_btn.hidden = false;
-//            }
-//            self.SVEQ.contentSize = CGSizeMake([Dimens GDimens:EQItemWidth]*Output_CH_EQ_MAX_USE, 0);
-//        }
+        //        if(input_channel_sel >=6){
+        //            if(i>=10){
+        //                find_btn.hidden = true;
+        //            }
+        //            self.SVEQ.contentSize = CGSizeMake([Dimens GDimens:EQItemWidth]*10, 0);
+        //        }else{
+        //            if(i>=10){
+        //                find_btn.hidden = false;
+        //            }
+        //            self.SVEQ.contentSize = CGSizeMake([Dimens GDimens:EQItemWidth]*Input_CH_EQ_MAX, 0);
+        //        }
         
         
-        [find_btn.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[i].level] forState:UIControlStateNormal] ;
-        find_btn.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[i].level - IN_EQ_LEVEL_MIN;
-        [find_btn.Btn_BW setTitle:[self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[i].bw] forState:UIControlStateNormal] ;
-        [find_btn.Btn_Freq setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
+        [find_btn.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.IN_CH[input_channel_sel].EQ[i].level] forState:UIControlStateNormal] ;
+        find_btn.SB_Gain.value = RecStructData.IN_CH[input_channel_sel].EQ[i].level - IN_EQ_LEVEL_MIN;
+        [find_btn.Btn_BW setTitle:[self ChangeBWValume:RecStructData.IN_CH[input_channel_sel].EQ[i].bw] forState:UIControlStateNormal] ;
+        [find_btn.Btn_Freq setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.IN_CH[input_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
         
-        if(RecStructData.OUT_CH[output_channel_sel].EQ[i].level == EQ_LEVEL_ZERO){
+        if(RecStructData.IN_CH[input_channel_sel].EQ[i].level == EQ_LEVEL_ZERO){
             [find_btn.Btn_Reset setImage:[[UIImage imageNamed:@"eq_resetg_normal"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         }else{
             [find_btn.Btn_Reset setImage:[[UIImage imageNamed:@"eq_resetg_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
@@ -1322,7 +1323,7 @@
     }
     
     [self checkByPass];
-    if(RecStructData.OUT_CH[output_channel_sel].eq_mode == 0){
+    if(RecStructData.IN_CH[input_channel_sel].eq_mode == 0){
         [self.Btn_EQPG_MD setPress];
         [self.Btn_EQPG_MD setTitle:[LANG DPLocalizedString:@"L_EQ_PEQ_MODE"] forState:UIControlStateNormal] ;
     }else{
@@ -1335,16 +1336,16 @@
         
         [self.Btn_EQPG_MD setNormal];
         [self.Btn_EQPG_MD setTitle:[LANG DPLocalizedString:@"L_EQ_GEQ_MODE"] forState:UIControlStateNormal] ;
-        [self.EQV_INS SetEQData:DefaultStructData.OUT_CH[output_channel_sel]];
-        for(int i=0;i<Output_CH_EQ_MAX_USE;i++){
+        [self.EQV_INS SetINEQData:DefaultStructData.IN_CH[input_channel_sel]];
+        for(int i=0;i<Input_CH_EQ_MAX;i++){
             find_btn = (EQItem *)[self.view viewWithTag:i+TagStartEQItem_Self];
             
-            [find_btn.Btn_Gain setTitle:[self ChangeGainValume:DefaultStructData.OUT_CH[output_channel_sel].EQ[i].level] forState:UIControlStateNormal] ;
-            find_btn.SB_Gain.value = DefaultStructData.OUT_CH[output_channel_sel].EQ[i].level - IN_EQ_LEVEL_MIN;
-            [find_btn.Btn_BW setTitle:[self ChangeBWValume:DefaultStructData.OUT_CH[output_channel_sel].EQ[i].bw] forState:UIControlStateNormal] ;
-            [find_btn.Btn_Freq setTitle:[NSString stringWithFormat:@"%d",DefaultStructData.OUT_CH[output_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
+            [find_btn.Btn_Gain setTitle:[self ChangeGainValume:DefaultStructData.IN_CH[input_channel_sel].EQ[i].level] forState:UIControlStateNormal] ;
+            find_btn.SB_Gain.value = DefaultStructData.IN_CH[input_channel_sel].EQ[i].level - IN_EQ_LEVEL_MIN;
+            [find_btn.Btn_BW setTitle:[self ChangeBWValume:DefaultStructData.IN_CH[input_channel_sel].EQ[i].bw] forState:UIControlStateNormal] ;
+            [find_btn.Btn_Freq setTitle:[NSString stringWithFormat:@"%d",DefaultStructData.IN_CH[input_channel_sel].EQ[i].freq] forState:UIControlStateNormal] ;
             
-            if(DefaultStructData.OUT_CH[output_channel_sel].EQ[i].level == EQ_LEVEL_ZERO){
+            if(DefaultStructData.IN_CH[input_channel_sel].EQ[i].level == EQ_LEVEL_ZERO){
                 [find_btn.Btn_Reset setImage:[[UIImage imageNamed:@"eq_resetg_normal"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
             }else{
                 [find_btn.Btn_Reset setImage:[[UIImage imageNamed:@"eq_resetg_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
@@ -1363,20 +1364,20 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self FlashPageUI];
         
-//        if (LinkMODE == LINKMODE_SPKTYPE_S) {
-//            if(RecStructData.OUT_CH[0].name[1] == 1){
-//                BOOL_LINK = true;
-//                BOOL_LOCK = true;
-//                [self CheckChannelCanLink];
-//            }else{
-//                BOOL_LINK = false;
-//                BOOL_LOCK = false;
-//            }
-//        }else{
-//            BOOL_LINK = false;
-//            BOOL_LOCK = false;
-//        }
-//
+        //        if (LinkMODE == LINKMODE_SPKTYPE_S) {
+        //            if(RecStructData.IN_CH[0].name[1] == 1){
+        //                BOOL_LINK = true;
+        //                BOOL_LOCK = true;
+        //                [self CheckChannelCanLink];
+        //            }else{
+        //                BOOL_LINK = false;
+        //                BOOL_LOCK = false;
+        //            }
+        //        }else{
+        //            BOOL_LINK = false;
+        //            BOOL_LOCK = false;
+        //        }
+        //
     });
 }
 
