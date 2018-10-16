@@ -116,21 +116,25 @@
 		72037108216DA7DB00E21482 /* VolSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72037107216DA7DB00E21482 /* VolSettingViewController.m */; };
 		7206BB92216DF2F700EC2416 /* OutDelayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7206BB91216DF2F700EC2416 /* OutDelayViewController.m */; };
 		722395CD2167846800AA5086 /* SingleChItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395CC2167846800AA5086 /* SingleChItem.m */; };
-		722395D12168BBD800AA5086 /* SingleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395CF2168BBD800AA5086 /* SingleTableViewCell.m */; };
-		722395D22168BBD800AA5086 /* SingleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722395D02168BBD800AA5086 /* SingleTableViewCell.xib */; };
 		722395DB216BA4E300AA5086 /* SingleOutChItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395DA216BA4E300AA5086 /* SingleOutChItem.m */; };
-		722395DF216C429300AA5086 /* SingleOutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395DD216C429300AA5086 /* SingleOutTableViewCell.m */; };
-		722395E0216C429300AA5086 /* SingleOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722395DE216C429300AA5086 /* SingleOutTableViewCell.xib */; };
 		722395E4216CA23200AA5086 /* XoveritemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722395E3216CA23200AA5086 /* XoveritemView.m */; };
 		723780C3216EF5EA00335461 /* EQinputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780C2216EF5EA00335461 /* EQinputViewController.m */; };
 		723780C6216EF62000335461 /* XoverInputitem.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780C5216EF62000335461 /* XoverInputitem.m */; };
 		723780C9216F012600335461 /* SpkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780C8216F012600335461 /* SpkViewController.m */; };
 		723780CD2170734400335461 /* DoubleChItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780CC2170734400335461 /* DoubleChItem.m */; };
-		723780D12170A88300335461 /* DoubleChTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780CF2170A88300335461 /* DoubleChTableViewCell.m */; };
-		723780D22170A88300335461 /* DoubleChTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723780D02170A88300335461 /* DoubleChTableViewCell.xib */; };
 		723780D52173407100335461 /* SetChNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780D42173407100335461 /* SetChNumViewController.m */; };
 		723780DC2174927300335461 /* dropdownMenu_cornerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 723780D92174927200335461 /* dropdownMenu_cornerIcon.png */; };
 		723780DD2174927300335461 /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 723780DA2174927200335461 /* LMJDropdownMenu.m */; };
+		723781232175D4B200335461 /* SourceModeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 723781222175D4B200335461 /* SourceModeUtils.m */; };
+		7237812B2175D5D900335461 /* DoubleOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723781262175D5D900335461 /* DoubleOutTableViewCell.xib */; };
+		7237812D2175D5D900335461 /* DoubleOutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 723781282175D5D900335461 /* DoubleOutTableViewCell.m */; };
+		723781322175D6D900335461 /* SingleOutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 723781302175D6D900335461 /* SingleOutTableViewCell.m */; };
+		723781332175D6D900335461 /* SingleOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723781312175D6D900335461 /* SingleOutTableViewCell.xib */; };
+		723781452175D76B00335461 /* SingleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7237813F2175D76B00335461 /* SingleTableViewCell.m */; };
+		723781462175D76B00335461 /* SingleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723781402175D76B00335461 /* SingleTableViewCell.xib */; };
+		723781472175D76B00335461 /* DoubleChTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 723781412175D76B00335461 /* DoubleChTableViewCell.m */; };
+		723781482175D76B00335461 /* DoubleChTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723781432175D76B00335461 /* DoubleChTableViewCell.xib */; };
+		7237814B2175D96200335461 /* DoubleOutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7237814A2175D96200335461 /* DoubleOutItem.m */; };
 		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
 		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
@@ -451,14 +455,8 @@
 		7206BB91216DF2F700EC2416 /* OutDelayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutDelayViewController.m; sourceTree = "<group>"; };
 		722395CB2167846800AA5086 /* SingleChItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleChItem.h; sourceTree = "<group>"; };
 		722395CC2167846800AA5086 /* SingleChItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleChItem.m; sourceTree = "<group>"; };
-		722395CE2168BBD800AA5086 /* SingleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleTableViewCell.h; sourceTree = "<group>"; };
-		722395CF2168BBD800AA5086 /* SingleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleTableViewCell.m; sourceTree = "<group>"; };
-		722395D02168BBD800AA5086 /* SingleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleTableViewCell.xib; sourceTree = "<group>"; };
 		722395D9216BA4E300AA5086 /* SingleOutChItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleOutChItem.h; sourceTree = "<group>"; };
 		722395DA216BA4E300AA5086 /* SingleOutChItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleOutChItem.m; sourceTree = "<group>"; };
-		722395DC216C429300AA5086 /* SingleOutTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleOutTableViewCell.h; sourceTree = "<group>"; };
-		722395DD216C429300AA5086 /* SingleOutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleOutTableViewCell.m; sourceTree = "<group>"; };
-		722395DE216C429300AA5086 /* SingleOutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleOutTableViewCell.xib; sourceTree = "<group>"; };
 		722395E2216CA23200AA5086 /* XoveritemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XoveritemView.h; sourceTree = "<group>"; };
 		722395E3216CA23200AA5086 /* XoveritemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XoveritemView.m; sourceTree = "<group>"; };
 		723780C1216EF5EA00335461 /* EQinputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EQinputViewController.h; sourceTree = "<group>"; };
@@ -469,14 +467,27 @@
 		723780C8216F012600335461 /* SpkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpkViewController.m; sourceTree = "<group>"; };
 		723780CB2170734400335461 /* DoubleChItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleChItem.h; sourceTree = "<group>"; };
 		723780CC2170734400335461 /* DoubleChItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubleChItem.m; sourceTree = "<group>"; };
-		723780CE2170A88300335461 /* DoubleChTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleChTableViewCell.h; sourceTree = "<group>"; };
-		723780CF2170A88300335461 /* DoubleChTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubleChTableViewCell.m; sourceTree = "<group>"; };
-		723780D02170A88300335461 /* DoubleChTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleChTableViewCell.xib; sourceTree = "<group>"; };
 		723780D32173407100335461 /* SetChNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetChNumViewController.h; sourceTree = "<group>"; };
 		723780D42173407100335461 /* SetChNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetChNumViewController.m; sourceTree = "<group>"; };
 		723780D92174927200335461 /* dropdownMenu_cornerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownMenu_cornerIcon.png; sourceTree = "<group>"; };
 		723780DA2174927200335461 /* LMJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
 		723780DB2174927200335461 /* LMJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
+		723781212175D4B200335461 /* SourceModeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceModeUtils.h; sourceTree = "<group>"; };
+		723781222175D4B200335461 /* SourceModeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceModeUtils.m; sourceTree = "<group>"; };
+		723781262175D5D900335461 /* DoubleOutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoubleOutTableViewCell.xib; sourceTree = "<group>"; };
+		723781282175D5D900335461 /* DoubleOutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleOutTableViewCell.m; sourceTree = "<group>"; };
+		7237812A2175D5D900335461 /* DoubleOutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleOutTableViewCell.h; sourceTree = "<group>"; };
+		7237812F2175D6D800335461 /* SingleOutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleOutTableViewCell.h; sourceTree = "<group>"; };
+		723781302175D6D900335461 /* SingleOutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleOutTableViewCell.m; sourceTree = "<group>"; };
+		723781312175D6D900335461 /* SingleOutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleOutTableViewCell.xib; sourceTree = "<group>"; };
+		7237813F2175D76B00335461 /* SingleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTableViewCell.m; sourceTree = "<group>"; };
+		723781402175D76B00335461 /* SingleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTableViewCell.xib; sourceTree = "<group>"; };
+		723781412175D76B00335461 /* DoubleChTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleChTableViewCell.m; sourceTree = "<group>"; };
+		723781422175D76B00335461 /* DoubleChTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleChTableViewCell.h; sourceTree = "<group>"; };
+		723781432175D76B00335461 /* DoubleChTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoubleChTableViewCell.xib; sourceTree = "<group>"; };
+		723781442175D76B00335461 /* SingleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTableViewCell.h; sourceTree = "<group>"; };
+		723781492175D96200335461 /* DoubleOutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleOutItem.h; sourceTree = "<group>"; };
+		7237814A2175D96200335461 /* DoubleOutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleOutItem.m; sourceTree = "<group>"; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
 		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
@@ -1664,16 +1675,9 @@
 		722395D32168BBDF00AA5086 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				723781342175D6FD00335461 /* input */,
+				723781242175D5D900335461 /* output */,
 				723780CA217070F800335461 /* items */,
-				722395CE2168BBD800AA5086 /* SingleTableViewCell.h */,
-				722395CF2168BBD800AA5086 /* SingleTableViewCell.m */,
-				722395D02168BBD800AA5086 /* SingleTableViewCell.xib */,
-				722395DC216C429300AA5086 /* SingleOutTableViewCell.h */,
-				722395DD216C429300AA5086 /* SingleOutTableViewCell.m */,
-				722395DE216C429300AA5086 /* SingleOutTableViewCell.xib */,
-				723780CE2170A88300335461 /* DoubleChTableViewCell.h */,
-				723780CF2170A88300335461 /* DoubleChTableViewCell.m */,
-				723780D02170A88300335461 /* DoubleChTableViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1692,6 +1696,8 @@
 		723780CA217070F800335461 /* items */ = {
 			isa = PBXGroup;
 			children = (
+				723781492175D96200335461 /* DoubleOutItem.h */,
+				7237814A2175D96200335461 /* DoubleOutItem.m */,
 				722395D9216BA4E300AA5086 /* SingleOutChItem.h */,
 				722395DA216BA4E300AA5086 /* SingleOutChItem.m */,
 				722395CB2167846800AA5086 /* SingleChItem.h */,
@@ -1712,9 +1718,37 @@
 			path = LMJDropdownMenu;
 			sourceTree = "<group>";
 		};
+		723781242175D5D900335461 /* output */ = {
+			isa = PBXGroup;
+			children = (
+				7237812F2175D6D800335461 /* SingleOutTableViewCell.h */,
+				723781302175D6D900335461 /* SingleOutTableViewCell.m */,
+				723781312175D6D900335461 /* SingleOutTableViewCell.xib */,
+				723781262175D5D900335461 /* DoubleOutTableViewCell.xib */,
+				723781282175D5D900335461 /* DoubleOutTableViewCell.m */,
+				7237812A2175D5D900335461 /* DoubleOutTableViewCell.h */,
+			);
+			path = output;
+			sourceTree = "<group>";
+		};
+		723781342175D6FD00335461 /* input */ = {
+			isa = PBXGroup;
+			children = (
+				723781422175D76B00335461 /* DoubleChTableViewCell.h */,
+				723781412175D76B00335461 /* DoubleChTableViewCell.m */,
+				723781432175D76B00335461 /* DoubleChTableViewCell.xib */,
+				723781442175D76B00335461 /* SingleTableViewCell.h */,
+				7237813F2175D76B00335461 /* SingleTableViewCell.m */,
+				723781402175D76B00335461 /* SingleTableViewCell.xib */,
+			);
+			path = input;
+			sourceTree = "<group>";
+		};
 		AA045138215E1138004675FD /* items */ = {
 			isa = PBXGroup;
 			children = (
+				723781212175D4B200335461 /* SourceModeUtils.h */,
+				723781222175D4B200335461 /* SourceModeUtils.m */,
 				AA045132215DBD7D004675FD /* HiAuxItem.h */,
 				AA045133215DBD7D004675FD /* HiAuxItem.m */,
 				AA5F641A214F5E7500FFD50C /* SourceItem.h */,
@@ -1940,23 +1974,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				723781462175D76B00335461 /* SingleTableViewCell.xib in Resources */,
 				14B44ACD1E69786E00D524C6 /* MBProgressHUD.bundle in Resources */,
 				1459BFA61E5C3F840085FFA6 /* LaunchScreen.storyboard in Resources */,
 				AABFD3C1202417BB0089A5E9 /* InputViewController.xib in Resources */,
 				142332811EC1CE0500E3FCC4 /* LICENSE_jsonmodel.txt in Resources */,
+				723781332175D6D900335461 /* SingleOutTableViewCell.xib in Resources */,
 				14CCB0FA1EF41B3200ABDC5E /* HomePageViewController.xib in Resources */,
-				722395E0216C429300AA5086 /* SingleOutTableViewCell.xib in Resources */,
+				723781482175D76B00335461 /* DoubleChTableViewCell.xib in Resources */,
 				AABFD3D3202418A40089A5E9 /* EQViewController.xib in Resources */,
 				AA5F640C214F53C300FFD50C /* DelayViewController.xib in Resources */,
 				144DD0CA1ED98E3A00825849 /* MixViewController.xib in Resources */,
-				723780D22170A88300335461 /* DoubleChTableViewCell.xib in Resources */,
 				AABFD3CE2024187D0089A5E9 /* MixerViewController.xib in Resources */,
 				AA5F6415214F53CA00FFD50C /* DelayTableViewCell.xib in Resources */,
 				14CF98811E66CC370001FAB9 /* Localizable.strings in Resources */,
 				AABFD477202439E70089A5E9 /* OutputViewController.xib in Resources */,
 				AABFD46D202439A90089A5E9 /* XOverOutputViewController.xib in Resources */,
 				723780DC2174927300335461 /* dropdownMenu_cornerIcon.png in Resources */,
-				722395D22168BBD800AA5086 /* SingleTableViewCell.xib in Resources */,
+				7237812B2175D5D900335461 /* DoubleOutTableViewCell.xib in Resources */,
 				AA6D0C8B1FDE1A86000735FD /* Assets.xcassets in Resources */,
 				AA3056EB202455AD0085672C /* MasterVolView.xib in Resources */,
 			);
@@ -1990,7 +2025,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				722395DF216C429300AA5086 /* SingleOutTableViewCell.m in Sources */,
 				AABFD455202438130089A5E9 /* EQSB_Gain.m in Sources */,
 				723780D52173407100335461 /* SetChNumViewController.m in Sources */,
 				142332541EC1CD5100E3FCC4 /* ClientData.m in Sources */,
@@ -1999,6 +2033,7 @@
 				1423322A1EC1CBBA00E3FCC4 /* QIZFileTool.m in Sources */,
 				72037108216DA7DB00E21482 /* VolSettingViewController.m in Sources */,
 				AABFD45F202438560089A5E9 /* UICountingLabel.m in Sources */,
+				7237812D2175D5D900335461 /* DoubleOutTableViewCell.m in Sources */,
 				AABFD430202437120089A5E9 /* OutputItem.m in Sources */,
 				142332381EC1CC5200E3FCC4 /* FMDatabase.m in Sources */,
 				1423329F1EC1DB7900E3FCC4 /* NSObject+MJCoding.m in Sources */,
@@ -2024,6 +2059,7 @@
 				146287F61F2B0BBF001092B8 /* DelayItem.m in Sources */,
 				145FB5361EB8CC4300DA91A9 /* ASValuePopUpView.m in Sources */,
 				AABFD3FC2024197E0089A5E9 /* BabyCentralManager.m in Sources */,
+				723781452175D76B00335461 /* SingleTableViewCell.m in Sources */,
 				1423323C1EC1CC5200E3FCC4 /* FMResultSet.m in Sources */,
 				AA3056EC202455AD0085672C /* MasterVolView.m in Sources */,
 				142332B91EC1DC0800E3FCC4 /* MusicGroupModel.m in Sources */,
@@ -2082,11 +2118,13 @@
 				142332A01EC1DB7900E3FCC4 /* NSObject+MJKeyValue.m in Sources */,
 				14B44AC91E69786E00D524C6 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				723780C6216EF62000335461 /* XoverInputitem.m in Sources */,
+				723781322175D6D900335461 /* SingleOutTableViewCell.m in Sources */,
 				AABFD4002024197E0089A5E9 /* BabySpeaker.m in Sources */,
 				142332BA1EC1DC0800E3FCC4 /* OutputGroupModel.m in Sources */,
 				142332801EC1CE0500E3FCC4 /* JSONValueTransformer.m in Sources */,
 				14B44ACE1E69786E00D524C6 /* MBProgressHUD.m in Sources */,
 				7206BB92216DF2F700EC2416 /* OutDelayViewController.m in Sources */,
+				7237814B2175D96200335461 /* DoubleOutItem.m in Sources */,
 				14B44AC81E69786E00D524C6 /* NSArray+MASAdditions.m in Sources */,
 				1423329E1EC1DB7900E3FCC4 /* NSObject+MJClass.m in Sources */,
 				AABFD431202437120089A5E9 /* OutputItemChPMV_L.m in Sources */,
@@ -2107,6 +2145,7 @@
 				142332281EC1CBBA00E3FCC4 /* QIZDatabaseTool.m in Sources */,
 				141732C01EBCA398002481B9 /* ExpandCell.m in Sources */,
 				146898CF1E7A95ED001D0868 /* ADView.m in Sources */,
+				723781472175D76B00335461 /* DoubleChTableViewCell.m in Sources */,
 				AA3056E62024556A0085672C /* AdvertisementView.m in Sources */,
 				142332B51EC1DC0800E3FCC4 /* ChsModel.m in Sources */,
 				AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */,
@@ -2124,7 +2163,6 @@
 				142332591EC1CD5100E3FCC4 /* SEFFFile.m in Sources */,
 				AABFD46F202439A90089A5E9 /* XOverOutputFRSViewController.m in Sources */,
 				1459BFA11E5C3F840085FFA6 /* MT_IOS.xcdatamodeld in Sources */,
-				722395D12168BBD800AA5086 /* SingleTableViewCell.m in Sources */,
 				142332291EC1CBBA00E3FCC4 /* QIZDataStructTool.m in Sources */,
 				1423327B1EC1CE0500E3FCC4 /* NSArray+JSONModel.m in Sources */,
 				AABFD451202438130089A5E9 /* EQItem.m in Sources */,
@@ -2139,6 +2177,7 @@
 				1423323A1EC1CC5200E3FCC4 /* FMDatabasePool.m in Sources */,
 				14B44ACC1E69786E00D524C6 /* MBProgressHUD+MJ.m in Sources */,
 				1459BF951E5C3F840085FFA6 /* main.m in Sources */,
+				723781232175D4B200335461 /* SourceModeUtils.m in Sources */,
 				142332BB1EC1DC0800E3FCC4 /* SystemModel.m in Sources */,
 				AABFD3E4202419250089A5E9 /* DataCommunication.m in Sources */,
 				14C84F371EF1776300FF6165 /* ViewLine.m in Sources */,
@@ -2179,7 +2218,6 @@
 				14B44AC61E69786E00D524C6 /* MASViewAttribute.m in Sources */,
 				AABFD3B9202417260089A5E9 /* SimpleTopBar.m in Sources */,
 				AABFD3CD2024187D0089A5E9 /* MixerViewController.m in Sources */,
-				723780D12170A88300335461 /* DoubleChTableViewCell.m in Sources */,
 				1423323B1EC1CC5200E3FCC4 /* FMDatabaseQueue.m in Sources */,
 				AA61218A215CB9F6006F5F02 /* SourceRootViewController.m in Sources */,
 				144DD0C31ED98DA300825849 /* OptFunPage_TBC.m in Sources */,

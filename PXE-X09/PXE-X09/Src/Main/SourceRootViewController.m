@@ -79,7 +79,11 @@
      [self.passBtn addTarget:self action:@selector(toPassView) forControlEvents:UIControlEventTouchUpInside];
     [self.passBtn setTitle:[LANG DPLocalizedString:@"上一步"] forState:UIControlStateNormal];
     [self.passBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:600]);
+        if (KScreenHeight>=812) {
+            make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:620]);
+        }else{
+            make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:600]);
+        }
         make.left.equalTo(self.view.mas_left).offset([Dimens GDimens:30]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:160], [Dimens GDimens:40]));
     }];
@@ -96,7 +100,12 @@
     [self.nextBtn addTarget:self action:@selector(toNextView) forControlEvents:UIControlEventTouchUpInside];
     [self.nextBtn setTitle:[LANG DPLocalizedString:@"下一步"] forState:UIControlStateNormal];
     [self.nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:600]);
+        if (KScreenHeight>=812) {
+            make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:620]);
+        }else{
+            make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:600]);
+        }
+        
         make.right.equalTo(self.view.mas_right).offset([Dimens GDimens:-30]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:160], [Dimens GDimens:40]));
     }];

@@ -10,9 +10,9 @@
 #import "HiAuxItem.h"
 #import "OutModeViewController.h"
 #import "SetChNumViewController.h"
-#define itemMargin 8
+#define itemMargin 5
 #define itemWidth (KScreenWidth-[Dimens GDimens:itemMargin]*4)/3
-#define itemHeigh itemWidth*1.3
+#define itemHeigh itemWidth*1.8
 #define hiItemTag 111
 #define auxItemTag 211
 @interface HiAuxViewController ()
@@ -90,7 +90,7 @@
             make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:60]);
             make.size.mas_equalTo(CGSizeMake(KScreenWidth, itemHeigh*2+[Dimens GDimens:20]));
         }else{
-             make.top.equalTo(hilab.mas_bottom).offset([Dimens GDimens:20]);
+             make.top.equalTo(hilab.mas_bottom).offset([Dimens GDimens:10]);
              make.size.mas_equalTo(CGSizeMake(KScreenWidth, itemHeigh));
         }
        
@@ -137,7 +137,12 @@
     auxlab.font=[UIFont systemFontOfSize:15];
     [self.view addSubview:auxlab];
     [auxlab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_centerY).offset([Dimens GDimens:-50]);
+        if (KScreenHeight>=812) {
+             make.top.equalTo(self.view.mas_top).offset([Dimens GDimens:390]);
+        }else{
+             make.top.equalTo(self.view.mas_top).offset([Dimens GDimens:370]);
+        }
+       
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -160,7 +165,7 @@
              make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:60]);
             make.size.mas_equalTo(CGSizeMake(KScreenWidth, itemHeigh*2+[Dimens GDimens:20]));
         }else{
-             make.top.equalTo(auxlab.mas_bottom).offset([Dimens GDimens:20]);
+             make.top.equalTo(auxlab.mas_bottom).offset([Dimens GDimens:10]);
             make.size.mas_equalTo(CGSizeMake(KScreenWidth, itemHeigh));
         }
         make.centerX.equalTo(self.view.mas_centerX);
