@@ -114,7 +114,7 @@
 //音量
     self.sbVol=[[VolumeCircleIMLine alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:45], [Dimens GDimens:45])];
     [self addSubview:self.sbVol];
-    [self.sbVol setMaxProgress:Input_CH_Volume_MAX];
+    [self.sbVol setMaxProgress:Output_Volume_MAX];
     [self.sbVol mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.centerX.equalTo(self.muteBtn.mas_centerX).offset(-[Dimens GDimens:65]);

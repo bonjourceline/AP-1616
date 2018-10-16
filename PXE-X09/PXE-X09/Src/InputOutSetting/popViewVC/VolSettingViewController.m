@@ -313,6 +313,22 @@
     }else if(self.chType==CH_INPUT){
         self.chTopLabel.text=[NSString stringWithFormat:@"输入%d音量",input_channel_sel+1];
         self.chLabel.text=[NSString stringWithFormat:@"输入%d",input_channel_sel+1];
+        if (input_channel_sel==0) {
+            
+            self.chTopLabel.text=[NSString stringWithFormat:@"%@音量",[LANG DPLocalizedString:@"L_InputSource_Optical"]];
+            self.chLabel.text=[LANG DPLocalizedString:@"L_InputSource_Optical"];
+            
+        }else if (input_channel_sel==1){
+            self.chTopLabel.text=[NSString stringWithFormat:@"%@音量",[LANG DPLocalizedString:@"L_InputSource_Coaxial"]];
+            self.chLabel.text=[LANG DPLocalizedString:@"L_InputSource_Coaxial"];
+            
+        }else if (input_channel_sel==2){
+            self.chTopLabel.text=[NSString stringWithFormat:@"%@音量",[LANG DPLocalizedString:@"L_InputSource_Bluetooth"]];
+            self.chLabel.text=[LANG DPLocalizedString:@"L_InputSource_Bluetooth"];
+        }else{
+            self.chTopLabel.text=[NSString stringWithFormat:@"输入%d音量",input_channel_sel-2];
+            self.chLabel.text=[NSString stringWithFormat:@"输入%d",input_channel_sel-2];
+        }
         [self.sbVol setProgress:RecStructData.IN_CH[input_channel_sel].gain];
         self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.IN_CH[input_channel_sel].gain/Output_Volume_Step];
         if (RecStructData.IN_CH[input_channel_sel].polar==0) {
