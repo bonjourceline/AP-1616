@@ -11,9 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SourceModeUtils : NSObject
-
++ (instancetype)shareManager;
 + (NSString *)getOutModeName:(int)index;
 + (NSString *)getAuxModeName:(int)index;
++(void)syncSourceTemp;
++(void)syncSource;
 @end
 
 NS_ASSUME_NONNULL_END

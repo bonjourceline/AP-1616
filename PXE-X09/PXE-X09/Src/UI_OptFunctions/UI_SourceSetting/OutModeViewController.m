@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [SourceModeUtils syncSourceTemp];
     self.tiltleLab.text=[LANG DPLocalizedString:@"输出方式选择"];
     outModes=@[@"主动2分频",@"主动3分频",@"主动4分频",@"主动3分频+超低",@"主动2分频+超低",@"自定义"];
     self.passBtn.hidden=YES;
@@ -62,9 +63,9 @@
 -(void)clickHiItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-outItemTag;
     if(tag==outModes.count-1){
-        RecStructData.System.out_mode=0;
+        RecStructData.System.out_mode_temp=0;
     }else{
-        RecStructData.System.out_mode=tag+1;
+        RecStructData.System.out_mode_temp=tag+1;
     }
     [self flashOutItem];
 }
@@ -73,7 +74,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)toNextView{
-    if (RecStructData.System.aux_mode==0) {
+    if (RecStructData.System.out_mode_temp==0) {
         SetChNumViewController *vc=[[SetChNumViewController alloc]init];
         vc.type=CHNUMTYPE_output;
         vc.blackHome = ^{
@@ -85,6 +86,7 @@
         vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
         [self presentViewController:vc animated:YES completion:nil];
     }else{
+        [SourceModeUtils syncSource];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
@@ -93,9 +95,9 @@
 -(void)flashOutItem{
     for (int i=0; i<outModes.count; i++) {
         HiAuxItem *item=(HiAuxItem *)[self.view viewWithTag:i+outItemTag];
-        if ((i+1)==RecStructData.System.out_mode) {
+        if ((i+1)==RecStructData.System.out_mode_temp) {
             [item setPress];
-        }else if ((i==outModes.count-1)&&RecStructData.System.out_mode==0){
+        }else if ((i==outModes.count-1)&&RecStructData.System.out_mode_temp==0){
             [item setPress];
         }else{
             [item setNormal];

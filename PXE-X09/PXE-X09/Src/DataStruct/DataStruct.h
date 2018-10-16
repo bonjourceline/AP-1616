@@ -370,10 +370,16 @@ struct	System_Struct  //系统数据共64字节
     uint8   high_Low_Set[8];        //8个高&低电平选择继电器设置值  0低电平   1高电平
     uint8   in_spk_type[16];        //16路模拟输入的类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
     uint8      out_spk_type[16];      //16路模拟输出的喇叭类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
-    
-    
-    
     uint8 input_source_temp;
+    //调整方式时中间变量
+    uint8   InSwitch_temp[5];
+    uint8   high_mode_temp;         //高电平模式      0:自定义  1:前主动3分频后主动2分频-----等等
+    uint8   aux_mode_temp;          //AXU电平模式  0:自定义  1:立体声   2:四声道  3:六声道
+    uint8   out_mode_temp;
+    uint8   HiInputChNum_temp;    //输入高电平通道数量（偶数倍，最大16，高+Aux最大等于16）
+    uint8   AuxInputChNum_temp;   //输入Aux通道数量（偶数倍，最大16，高+Aux最大等于16）
+    uint8   OutputChNum_temp;     //输入通道数量 最大16
+    uint8   high_Low_Set_temp[8];
 };
 
 struct MData {

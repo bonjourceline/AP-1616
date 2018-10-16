@@ -15,10 +15,13 @@
 #define itemHeigh itemWidth*1.8
 #define hiItemTag 111
 #define auxItemTag 211
+#define outItemTag 311
+#define hmodeMax 17
+#define amodeMax 5
 @interface HiAuxViewController ()
 {
-    NSArray *hiTypeNames;
-    NSArray *auxTypeNames;
+    NSMutableArray *hiTypeNames;
+    NSMutableArray *auxTypeNames;
     
 }
 @end
@@ -28,18 +31,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.nextBtn setTitle:[LANG DPLocalizedString:@"进入调音"] forState:UIControlStateNormal];
-    hiTypeNames=@[@"主动三分频",@"主动二分频",@"自定义"];
-    auxTypeNames=@[@"5.1ch",@"4.2ch",@"2.0ch",@"自定义"];
-    if (RecStructData.System.InSwitch[3]==1&&RecStructData.System.InSwitch[4]==1){
+    hiTypeNames=[[NSMutableArray alloc]init];
+    auxTypeNames=[[NSMutableArray alloc]init];
+    for (int i=1; i<hmodeMax; i++) {
+        [hiTypeNames addObject:[SourceModeUtils getOutModeName:i] ];
+    }
+    [hiTypeNames addObject:[SourceModeUtils getOutModeName:0]];
+    for (int i=1; i<amodeMax; i++) {
+        [auxTypeNames addObject:[SourceModeUtils getAuxModeName:i]];
+    }
+    [auxTypeNames addObject:[SourceModeUtils getAuxModeName:0]];
+//    hiTypeNames=@[@"主动三分频",@"主动二分频",@"自定义"];
+//    auxTypeNames=@[@"5.1ch",@"4.2ch",@"2.0ch",@"自定义"];
+    if (RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.InSwitch_temp[4]==1){
         //高低电平
         self.tiltleLab.text=[LANG DPLocalizedString:@"高+低电平输入选择"];
         [self creatHiTypeView];
         [self creatAuxTypeView];
-    }else if(RecStructData.System.InSwitch[3]==1&&RecStructData.System.InSwitch[4]==0){
+    }else if(RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.InSwitch_temp[4]==0){
         self.tiltleLab.text=[LANG DPLocalizedString:@"高电平输入选择"];
         [self creatHiTypeView];
         //单独高
-    }else if(RecStructData.System.InSwitch[3]==0&&RecStructData.System.InSwitch[4]==1){
+    }else if(RecStructData.System.InSwitch_temp[3]==0&&RecStructData.System.InSwitch_temp[4]==1){
         //单独低
          self.tiltleLab.text=[LANG DPLocalizedString:@"低电平输入选择"];
          [self creatAuxTypeView];
@@ -86,7 +99,7 @@
     UIScrollView *hiScrollView=[[UIScrollView alloc]init];
     [self.view addSubview:hiScrollView];
     [hiScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        if(RecStructData.System.InSwitch[3]==1&&RecStructData.System.InSwitch[4]==0){
+        if(RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.InSwitch_temp[4]==0){
             make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:60]);
             make.size.mas_equalTo(CGSizeMake(KScreenWidth, itemHeigh*2+[Dimens GDimens:20]));
         }else{
@@ -97,7 +110,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
        
     }];
-    if(RecStructData.System.InSwitch[3]==1&&RecStructData.System.InSwitch[4]==0){
+    if(RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.InSwitch_temp[4]==0){
         hilab.hidden=YES;
         line1.hidden=YES;
         line2.hidden=YES;
@@ -110,13 +123,18 @@
 
     for (int i=0; i<hiTypeNames.count; i++) {
         HiAuxItem *item=[[HiAuxItem alloc]init];
-        if(RecStructData.System.InSwitch[3]==1&&RecStructData.System.InSwitch[4]==0){
+        if(RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.InSwitch_temp[4]==0){
             
             item.frame=CGRectMake((itemMargin+itemWidth)*(i%3)+itemMargin+(i/6)*KScreenWidth, i%6/3*(itemHeigh+[Dimens GDimens:20]), itemWidth, itemHeigh);
         }else{
             item.frame=CGRectMake((itemMargin+itemWidth)*i+itemMargin, 0, itemWidth, itemHeigh);
         }
         item.typeName.text=[LANG DPLocalizedString:hiTypeNames[i]];
+        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"hmode%d",i+1]];
+        if ((hiTypeNames.count-1)==i) {
+            image=[UIImage imageNamed:@"hmode0"];
+        }
+        [item.typeImageView setImage:image];
         [item setTag:i+hiItemTag];
         [item addTarget:self action:@selector(clickHiItem:) forControlEvents:UIControlEventTouchDown];
         [hiScrollView addSubview:item];
@@ -161,7 +179,7 @@
     UIScrollView *auxScrollView=[[UIScrollView alloc]init];
     [self.view addSubview:auxScrollView];
     [auxScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        if(RecStructData.System.InSwitch[3]==0&&RecStructData.System.InSwitch[4]==1){
+        if(RecStructData.System.InSwitch_temp[3]==0&&RecStructData.System.InSwitch_temp[4]==1){
              make.top.equalTo(self.navBar.mas_bottom).offset([Dimens GDimens:60]);
             make.size.mas_equalTo(CGSizeMake(KScreenWidth, itemHeigh*2+[Dimens GDimens:20]));
         }else{
@@ -171,7 +189,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         
     }];
-    if(RecStructData.System.InSwitch[3]==0&&RecStructData.System.InSwitch[4]==1){
+    if(RecStructData.System.InSwitch_temp[3]==0&&RecStructData.System.InSwitch_temp[4]==1){
         auxlab.hidden=YES;
         line1.hidden=YES;
         line2.hidden=YES;
@@ -186,12 +204,20 @@
     
     for (int i=0; i<auxTypeNames.count; i++) {
         HiAuxItem *item=[[HiAuxItem alloc]init];
-        if(RecStructData.System.InSwitch[3]==0&&RecStructData.System.InSwitch[4]==1){
+        if(RecStructData.System.InSwitch_temp[3]==0&&RecStructData.System.InSwitch_temp[4]==1){
             
             item.frame=CGRectMake((itemMargin+itemWidth)*(i%3)+itemMargin+(i/6)*KScreenWidth, i%6/3*(itemHeigh+[Dimens GDimens:20]), itemWidth, itemHeigh);
         }else{
             item.frame=CGRectMake((itemMargin+itemWidth)*i+itemMargin, 0, itemWidth, itemHeigh);
         }
+        UIImage *image=[[UIImage alloc]init];
+        
+        image=[UIImage imageNamed:[NSString stringWithFormat:@"amode%d",i+1]];
+        if (i==auxTypeNames.count-1) {
+            image=[UIImage imageNamed:@"hmode0"];
+        }
+        
+        [item.typeImageView setImage:image];
 //        HiAuxItem *item=[[HiAuxItem alloc]initWithFrame:CGRectMake((itemMargin+itemWidth)*i+itemMargin, 0, itemWidth, itemHeigh)];
         item.typeName.text=[LANG DPLocalizedString:auxTypeNames[i]];
         [item setTag:i+auxItemTag];
@@ -204,28 +230,29 @@
 -(void)clickHiItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-hiItemTag;
     if(tag==hiTypeNames.count-1){
-        RecStructData.System.high_mode=0;
+        RecStructData.System.high_mode_temp=0;
     }else{
-        RecStructData.System.high_mode=tag+1;
+        RecStructData.System.high_mode_temp=tag+1;
     }
     [self flashHiItem];
 }
 //低电平
 -(void)clickAuxItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-auxItemTag;
-    if(tag==auxTypeNames.count-1){
-        RecStructData.System.aux_mode=0;
+    if(tag==hiTypeNames.count-1){
+        RecStructData.System.out_mode_temp=0;
     }else{
-        RecStructData.System.aux_mode=tag+1;
+        RecStructData.System.out_mode_temp=tag+1;
     }
     [self flashAuxItem];
 }
+
 #pragma mark-------------页面跳转
 -(void)toPassView{
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)toNextView{
-    if ((RecStructData.System.InSwitch[3]==1&&RecStructData.System.high_mode==0)||(RecStructData.System.InSwitch[4]==1&&RecStructData.System.aux_mode==0)) {
+    if ((RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0)||(RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0)) {
         SetChNumViewController *vc=[[SetChNumViewController alloc]init];
         vc.type=CHNUMTYPE_input;
         vc.blackHome = ^{
@@ -237,6 +264,7 @@
         vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
         [self presentViewController:vc animated:YES completion:nil];
     }else{
+        [SourceModeUtils syncSource];
         [self ClickEventOfBack];
     }
     
@@ -245,9 +273,9 @@
 -(void)flashHiItem{
     for (int i=0; i<hiTypeNames.count; i++) {
         HiAuxItem *item=(HiAuxItem *)[self.view viewWithTag:i+hiItemTag];
-        if ((i+1)==RecStructData.System.high_mode) {
+        if ((i+1)==RecStructData.System.high_mode_temp) {
             [item setPress];
-        }else if ((i==hiTypeNames.count-1)&&RecStructData.System.high_mode==0){
+        }else if ((i==hiTypeNames.count-1)&&RecStructData.System.high_mode_temp==0){
             [item setPress];
         }else{
             [item setNormal];
@@ -257,15 +285,16 @@
 -(void)flashAuxItem{
     for (int i=0; i<auxTypeNames.count; i++) {
         HiAuxItem *item=(HiAuxItem *)[self.view viewWithTag:i+auxItemTag];
-        if ((i+1)==RecStructData.System.aux_mode) {
+        if ((i+1)==RecStructData.System.aux_mode_temp) {
             [item setPress];
-        }else if ((i==auxTypeNames.count-1)&&RecStructData.System.aux_mode==0){
+        }else if ((i==auxTypeNames.count-1)&&RecStructData.System.aux_mode_temp==0){
             [item setPress];
         }else{
             [item setNormal];
         }
     }
 }
+
 /*
 #pragma mark - Navigation
 

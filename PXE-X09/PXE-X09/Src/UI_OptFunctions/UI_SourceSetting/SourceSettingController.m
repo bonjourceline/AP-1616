@@ -23,11 +23,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initData];
     [self.passBtn setTitle:[LANG DPLocalizedString:@"跳过"] forState:UIControlStateNormal];
     [self creatView];
     // Do any additional setup after loading the view.
 }
-
+-(void)initData{
+    
+    [SourceModeUtils syncSourceTemp];
+    
+}
 -(void)creatView{
     
     for (int i=0; i<5; i++) {
@@ -36,7 +41,7 @@
         [item.logoImage setImage:[UIImage imageNamed:self.ImageArray[i]]];
         [item setTag:i+SourceItemTag];
         item.selectBlock = ^(BOOL isSelected, NSInteger itemTag) {
-             RecStructData.System.InSwitch[itemTag-SourceItemTag]=isSelected;
+             RecStructData.System.InSwitch_temp[itemTag-SourceItemTag]=isSelected;
 //            if (isSelected&&(itemTag<(2+SourceItemTag))) {
 //                if (itemTag==0+SourceItemTag) {
 //                    RecStructData.System.InSwitch[1]=0;
@@ -54,8 +59,9 @@
  
 }
 -(void)toNextView{
-    if (RecStructData.System.InSwitch[3]==0&&RecStructData.System.InSwitch[4]==0) {
-       
+    if (RecStructData.System.InSwitch_temp[3]==0&&RecStructData.System.InSwitch_temp[4]==0) {
+        [SourceModeUtils syncSource];
+        [self ClickEventOfBack];
     }else{
         HiAuxViewController *vc=[[HiAuxViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -67,7 +73,7 @@
 -(void)flashSourceItem{
     for (int i=0; i<5; i++) {
         SourceItem *item=(SourceItem *)[self.view viewWithTag:i+SourceItemTag];
-        [item flashSelect:RecStructData.System.InSwitch[i]];
+        [item flashSelect:RecStructData.System.InSwitch_temp[i]];
     }
 }
 -(NSArray *)NameArray{

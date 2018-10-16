@@ -229,7 +229,14 @@
             [self.threeCells addObject:@(i)];
         }
     }
-    chCount=(int)self.threeCells.count+(RecStructData.System.AuxInputChNum+RecStructData.System.HiInputChNum)/2;
+    chCount=(int)self.threeCells.count;
+    if (RecStructData.System.InSwitch[3]==1) {
+        chCount=chCount+(RecStructData.System.HiInputChNum)/2;
+    }
+    if (RecStructData.System.InSwitch[4]==1) {
+        chCount=chCount+(RecStructData.System.AuxInputChNum)/2;
+    }
+    
     [self.inputTableView reloadData];
 }
 -(NSMutableArray *)threeCells{

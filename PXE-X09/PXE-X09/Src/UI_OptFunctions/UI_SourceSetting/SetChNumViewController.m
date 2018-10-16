@@ -38,9 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self creatView];
-    ANum=RecStructData.System.AuxInputChNum;
-    HNum=RecStructData.System.HiInputChNum;
-    OutNum=RecStructData.System.OutputChNum;
+    ANum=RecStructData.System.AuxInputChNum_temp;
+    HNum=RecStructData.System.HiInputChNum_temp;
+    OutNum=RecStructData.System.OutputChNum_temp;
     // Do any additional setup after loading the view.
 }
 -(void)creatView{
@@ -157,38 +157,38 @@
     if (self.type==CHNUMTYPE_input) {
         int H_count=2;
         int A_count=2;
-        if (RecStructData.System.InSwitch[3]==1&&RecStructData.System.high_mode==0) {
-            RecStructData.System.HiInputChNum=HNum;
+        if (RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0) {
+            RecStructData.System.HiInputChNum_temp=HNum;
             H_count=HNum/2;
             for (int i=0; i<H_count; i++) {
-                RecStructData.System.high_Low_Set[i]=1;
+                RecStructData.System.high_Low_Set_temp[i]=1;
             }
         }
-        if (RecStructData.System.InSwitch[4]==1&&RecStructData.System.aux_mode==0) {
-             RecStructData.System.AuxInputChNum=ANum;
+        if (RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0) {
+             RecStructData.System.AuxInputChNum_temp=ANum;
             A_count=ANum/2;
             for (int i=H_count; i<(H_count+A_count); i++) {
-                RecStructData.System.high_Low_Set[i]=0;
+                RecStructData.System.high_Low_Set_temp[i]=0;
             }
         }
        
     }else{
-        RecStructData.System.OutputChNum=OutNum;
+        RecStructData.System.OutputChNum_temp=OutNum;
     }
-    
+    [SourceModeUtils syncSource];
     
     self.blackHome();
 }
 -(void)setChNumType:(CHNUMTYPE)type{
     if (type==CHNUMTYPE_input) {
         self.chTopLabel.text=[NSString stringWithFormat:@"输入自定义"];
-        if (RecStructData.System.InSwitch[3]==1&&RecStructData.System.high_mode==0) {
+        if (RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0) {
             [self.stackView addArrangedSubview:self.input_HNumBtnView];
             [self.input_HNumBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake([Dimens GDimens:380], [Dimens GDimens:45]));
             }];
         }
-        if(RecStructData.System.InSwitch[4]==1&&RecStructData.System.aux_mode==0){
+        if(RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0){
             [self.stackView addArrangedSubview:self.input_ANumBtnView];
             [self.input_ANumBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake([Dimens GDimens:380], [Dimens GDimens:45]));
@@ -222,7 +222,7 @@
         [self.input_ANumBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.input_ANumBtn.titleLabel.font=[UIFont systemFontOfSize:15];
         self.input_ANumBtn.layer.borderColor=SetColor(0xFF2f3b42).CGColor;
-        [self.input_ANumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.AuxInputChNum] forState:UIControlStateNormal];
+        [self.input_ANumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.AuxInputChNum_temp] forState:UIControlStateNormal];
         [self.input_ANumBtn addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
         [_input_ANumBtnView addSubview:self.input_ANumBtn];
         [self.input_ANumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -253,7 +253,7 @@
         [self.input_HNumBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.input_HNumBtn.titleLabel.font=[UIFont systemFontOfSize:15];
         self.input_HNumBtn.layer.borderColor=SetColor(0xFF2f3b42).CGColor;
-        [self.input_HNumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.HiInputChNum] forState:UIControlStateNormal];
+        [self.input_HNumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.HiInputChNum_temp] forState:UIControlStateNormal];
         [self.input_HNumBtn addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
         [_input_HNumBtnView addSubview:self.input_HNumBtn];
         [self.input_HNumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -280,7 +280,7 @@
     }
     curBtn=sender;
     if (self.type==CHNUMTYPE_input) {
-        if ((RecStructData.System.InSwitch[3]==1&&RecStructData.System.high_mode==0)&&(RecStructData.System.InSwitch[4]==1&&RecStructData.System.aux_mode==0)) {
+        if ((RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0)&&(RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0)) {
             if (curBtn==self.input_HNumBtn) {
                 self.dropdownMenu.frame=CGRectMake([Dimens GDimens:170], [Dimens GDimens:123], [Dimens GDimens:175], 0);
                 [self.dropdownMenu setMenuTitles:numTitles rowHeight:[Dimens GDimens:35]];
