@@ -9,14 +9,15 @@
 #import "OutModeViewController.h"
 #import "SetChNumViewController.h"
 #import "HiAuxItem.h"
-#define itemMargin 8
+#define itemMargin 5
 #define itemWidth (KScreenWidth-[Dimens GDimens:itemMargin]*4)/3
-#define itemHeigh itemWidth*1.3
+#define itemHeigh itemWidth*1.8
 #define outItemTag 111
+#define outModeMax 17
 
 @interface OutModeViewController ()
 {
-    NSArray *outModes;
+    NSMutableArray *outModes;
 }
 @end
 
@@ -26,7 +27,12 @@
     [super viewDidLoad];
     [SourceModeUtils syncSourceTemp];
     self.tiltleLab.text=[LANG DPLocalizedString:@"输出方式选择"];
-    outModes=@[@"主动2分频",@"主动3分频",@"主动4分频",@"主动3分频+超低",@"主动2分频+超低",@"自定义"];
+    outModes=[[NSMutableArray alloc]init];
+    for (int i=1; i<outModeMax; i++) {
+        [outModes addObject:[SourceModeUtils getOutModeName:i] ];
+    }
+    [outModes addObject:[SourceModeUtils getOutModeName:0]];
+//    outModes=@[@"主动2分频",@"主动3分频",@"主动4分频",@"主动3分频+超低",@"主动2分频+超低",@"自定义"];
     self.passBtn.hidden=YES;
     [self.nextBtn setTitle:[LANG DPLocalizedString:@"进入调音"] forState:UIControlStateNormal];
     [self creatOutModeView];
@@ -53,6 +59,11 @@
         item.frame=CGRectMake((itemMargin+itemWidth)*(i%3)+itemMargin+(i/6)*KScreenWidth, i%6/3*(itemHeigh+[Dimens GDimens:20]), itemWidth, itemHeigh);
         
         item.typeName.text=[LANG DPLocalizedString:outModes[i]];
+        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"hmode%d",i+1]];
+        if ((outModes.count-1)==i) {
+            image=[UIImage imageNamed:@"hmode0"];
+        }
+        [item.typeImageView setImage:image];
         [item setTag:i+outItemTag];
         [item addTarget:self action:@selector(clickHiItem:) forControlEvents:UIControlEventTouchDown];
         [outScrollView addSubview:item];

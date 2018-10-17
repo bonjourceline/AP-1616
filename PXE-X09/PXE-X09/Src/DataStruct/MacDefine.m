@@ -21,18 +21,18 @@
  */
 //界面功能
 uint8     COMBleType         =0x00;
-uint8     HEAD_DATA           = 0x93;              //BAF 包头 0x72
-NSString* MCU_Versions        = @"MPBS-AV1.";     //下位机版本号 MPFL-DV1.
-NSString* MCU_Versions_I      = @"MPBS-AV1.";     //下位机版本号 MPFL-DV1.
-NSString* BRAND               = @"BSYX";	          //BAF 包头
-NSString* App_versions        = @"APBS-AV1.00";   //定义本软件版本
-NSString* Copyright           = @"Copyright © 2018 BS. All Rights Reserved.";//定义本版权
-NSString* welcome_logo        = @"R12.8";
-NSString* MAC_Type            = @"R12.8";        //下位机版本号
+uint8     HEAD_DATA           = 0x7C;              //BAF 包头 0x72
+NSString* MCU_Versions        = @"MPAP-AV1.";     //下位机版本号 MPFL-DV1.
+NSString* MCU_Versions_I      = @"MPAP-AV1.";     //下位机版本号 MPFL-DV1.
+NSString* BRAND               = @"AP";	          //BAF 包头
+NSString* App_versions        = @"iPAP-KV1.00(Bate1.0)";   //定义本软件版本
+NSString* Copyright           = @"Copyright © 2018 Alpine Electronics, Inc. All Rights Reserved.";//定义本版权
+NSString* welcome_logo        = @"PXE-X09";
+NSString* MAC_Type            = @"PXE-X09";        //下位机版本号
 NSString* Json_versions       = @"CHS-JSON_V1.00";//定义本软件版本
 NSString* Json_versions_V0_00 = @"CHS-JSON_V0.00";//定义本软件版本
 NSString* Json_MacCfgVersions = @"CHS-JSONMacCfg_V0.00";//定义本软件版本
-uint8     AgentID             = AgentID_BSYX;
+uint8     AgentID             = AgentID_AP;
 NSString* DeviceVerString  = @"";
 NSString* ENTER_ADVANCE_PW = @"12345678";
 enum Enum_MaxDelay     enum_MaxDelay;    //延时

@@ -15,7 +15,7 @@
 #define itemHeigh itemWidth*1.8
 #define hiItemTag 111
 #define auxItemTag 211
-#define outItemTag 311
+
 #define hmodeMax 17
 #define amodeMax 5
 @interface HiAuxViewController ()
@@ -240,9 +240,9 @@
 -(void)clickAuxItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-auxItemTag;
     if(tag==hiTypeNames.count-1){
-        RecStructData.System.out_mode_temp=0;
+        RecStructData.System.aux_mode_temp=0;
     }else{
-        RecStructData.System.out_mode_temp=tag+1;
+        RecStructData.System.aux_mode_temp=tag+1;
     }
     [self flashAuxItem];
 }

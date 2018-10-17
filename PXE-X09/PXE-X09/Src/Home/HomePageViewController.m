@@ -12,6 +12,8 @@
 #import "DataProgressHUD.h"
 #import "AdvertisementView.h"
 #import "DetailViewController.h"
+#import "MixerSelViewController.h"
+#import "InSourceSelViewController.h"
 #define BOOL_USEG false
 #define Tag_Btn_SEFF_Start 100
 
@@ -26,15 +28,8 @@
 @implementation HomePageViewController
 //@synthesize name = _name;
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [DataCManager sendGetSystemDataCMD];
-    CurPage = UI_Page_Home;
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [DataProgressHUD shareManager].showVolView=YES;
-}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     //广告
@@ -281,7 +276,14 @@
 
 //音源设置
 - (void)SelectInputSource:(UIButton *)sender {
-    [self showInputSourceOptDialog];
+    InSourceSelViewController *vc=[[InSourceSelViewController alloc]init];
+    vc.mixerBlock = ^{
+        [self FlashInputSource];
+    };
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:vc animated:YES completion:nil];
+//    [self showInputSourceOptDialog];
 }
 - (void)dealWithInputsource{
     [_mDataTransmitOpt setInputSourceNow];
@@ -443,7 +445,14 @@
 
 //混音音源设置
 - (void)SelectMixerInputSource:(NormalButton *)sender {
-    [self showMixerSourceOptDialog];
+    MixerSelViewController *vc=[[MixerSelViewController alloc]init];
+    vc.mixerBlock = ^{
+        [self FlashMixerInputSource];
+    };
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:vc animated:YES completion:nil];
+//    [self showMixerSourceOptDialog];
 }
 - (void)dealWithMixersource{
     [self selectMixerSourceAndInputSource];
@@ -2268,9 +2277,9 @@
         [self FlashEncryption];
         [self FlashSEFFName];
         [self FlashMasterMute];
-        [self FlashInputSource];
+//        [self FlashInputSource];
         [self flashMasterSubSelect:boolMasterSub];
-        [self FlashMixerInputSource];
+//        [self FlashMixerInputSource];
         //    [self FlashUserGroupWithInputSource:RecStructData.System.input_source];
     });
     

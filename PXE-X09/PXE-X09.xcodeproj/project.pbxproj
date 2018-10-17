@@ -135,6 +135,8 @@
 		723781472175D76B00335461 /* DoubleChTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 723781412175D76B00335461 /* DoubleChTableViewCell.m */; };
 		723781482175D76B00335461 /* DoubleChTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723781432175D76B00335461 /* DoubleChTableViewCell.xib */; };
 		7237814B2175D96200335461 /* DoubleOutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7237814A2175D96200335461 /* DoubleOutItem.m */; };
+		72398D362176C2B500F99FA5 /* MixerSelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D352176C2B500F99FA5 /* MixerSelViewController.m */; };
+		72398D392176DD4F00F99FA5 /* InSourceSelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D382176DD4F00F99FA5 /* InSourceSelViewController.m */; };
 		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
 		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
@@ -488,6 +490,10 @@
 		723781442175D76B00335461 /* SingleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTableViewCell.h; sourceTree = "<group>"; };
 		723781492175D96200335461 /* DoubleOutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleOutItem.h; sourceTree = "<group>"; };
 		7237814A2175D96200335461 /* DoubleOutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleOutItem.m; sourceTree = "<group>"; };
+		72398D342176C2B500F99FA5 /* MixerSelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixerSelViewController.h; sourceTree = "<group>"; };
+		72398D352176C2B500F99FA5 /* MixerSelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixerSelViewController.m; sourceTree = "<group>"; };
+		72398D372176DD4F00F99FA5 /* InSourceSelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InSourceSelViewController.h; sourceTree = "<group>"; };
+		72398D382176DD4F00F99FA5 /* InSourceSelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InSourceSelViewController.m; sourceTree = "<group>"; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
 		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
@@ -1668,6 +1674,10 @@
 				7206BB91216DF2F700EC2416 /* OutDelayViewController.m */,
 				723780C7216F012600335461 /* SpkViewController.h */,
 				723780C8216F012600335461 /* SpkViewController.m */,
+				72398D342176C2B500F99FA5 /* MixerSelViewController.h */,
+				72398D352176C2B500F99FA5 /* MixerSelViewController.m */,
+				72398D372176DD4F00F99FA5 /* InSourceSelViewController.h */,
+				72398D382176DD4F00F99FA5 /* InSourceSelViewController.m */,
 			);
 			path = popViewVC;
 			sourceTree = "<group>";
@@ -2094,6 +2104,7 @@
 				144DD0C91ED98E3A00825849 /* MixViewController.m in Sources */,
 				AA5F640A214F53C300FFD50C /* DelayViewController.m in Sources */,
 				142332B41EC1DC0800E3FCC4 /* AllGroupFileModel.m in Sources */,
+				72398D362176C2B500F99FA5 /* MixerSelViewController.m in Sources */,
 				14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */,
 				142332991EC1DB7900E3FCC4 /* MJExtensionConst.m in Sources */,
 				AABFD46E202439A90089A5E9 /* XOverOutputViewController.m in Sources */,
@@ -2187,6 +2198,7 @@
 				AA3056E72024556A0085672C /* DetailViewController.m in Sources */,
 				14C84F361EF1776300FF6165 /* SEffOptView.m in Sources */,
 				AA5F6414214F53CA00FFD50C /* DelayTableViewCell.m in Sources */,
+				72398D392176DD4F00F99FA5 /* InSourceSelViewController.m in Sources */,
 				AABFD4222024364E0089A5E9 /* GainSBItem.m in Sources */,
 				AABFD461202438560089A5E9 /* TInstrumentView.m in Sources */,
 				14B44A9E1E69776D00D524C6 /* WMScrollView.m in Sources */,

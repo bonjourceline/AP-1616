@@ -380,6 +380,7 @@ struct	System_Struct  //系统数据共64字节
     uint8   AuxInputChNum_temp;   //输入Aux通道数量（偶数倍，最大16，高+Aux最大等于16）
     uint8   OutputChNum_temp;     //输入通道数量 最大16
     uint8   high_Low_Set_temp[8];
+    uint8   mixer_source_temp;
 };
 
 struct MData {
