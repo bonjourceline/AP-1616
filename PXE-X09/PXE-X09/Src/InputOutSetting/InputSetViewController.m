@@ -225,15 +225,15 @@
 -(void)FlashPageUI{
     self.threeCells =[[NSMutableArray alloc]init];
     for (int i=0; i<3; i++) {
-        if (RecStructData.System.InSwitch[i]==1) {
+        if (RecStructData.System.InSwitch[i]!=0) {
             [self.threeCells addObject:@(i)];
         }
     }
     chCount=(int)self.threeCells.count;
-    if (RecStructData.System.InSwitch[3]==1) {
+    if (RecStructData.System.InSwitch[3]!=0) {
         chCount=chCount+(RecStructData.System.HiInputChNum)/2;
     }
-    if (RecStructData.System.InSwitch[4]==1) {
+    if (RecStructData.System.InSwitch[4]!=0) {
         chCount=chCount+(RecStructData.System.AuxInputChNum)/2;
     }
     

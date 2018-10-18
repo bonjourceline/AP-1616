@@ -16,6 +16,26 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getAuxModeName:(int)index;
 +(void)syncSourceTemp;
 +(void)syncSource;
+/**
+ 设置高电平通道类型
+ */
++(void)setHiModeTypeSetting;
+/**
+ 获取高电平类型通道个数
+ */
++(int)getHiModeTypeChNum:(int)index;
+/**
+ 设置低电平通道类型
+ */
++(void)setAUXModeTypeSetting;
+/**
+ 获取低电平类型通道个数
+ */
++(int)getAuxModeTypeChNum:(int)index;
+/**
+ 设置输出通道类型
+ */
++(void)setOUTModeTypeSetting;
 @end
 
 NS_ASSUME_NONNULL_END

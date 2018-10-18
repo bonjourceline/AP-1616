@@ -129,7 +129,7 @@
     return [Dimens GDimens:95];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return Output_CH_MAX_USE;
+    return RecStructData.System.OutputChNum;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellId=@"SingleOutTableViewCell";
@@ -141,11 +141,15 @@
     }
     if (indexPath.row==0) {
         cell.item.lineTop.hidden=YES;
-    }else if (indexPath.row==Output_CH_MAX_USE-1){
+    }else if (indexPath.row==RecStructData.System.OutputChNum-1){
         cell.item.lineBottom.hidden=YES;
     }else{
         cell.item.lineTop.hidden=NO;
         cell.item.lineBottom.hidden=NO;
+    }
+    if (indexPath.row==RecStructData.System.OutputChNum-1){
+        cell.item.lineBottom.hidden=YES;
+        
     }
     [cell.item setChannelIndex:(int)indexPath.row];
     [cell.item flashView];
@@ -166,7 +170,9 @@
     [self presentViewController:vc animated:YES completion:nil];
 
 }
-
+-(void)FlashPageUI{
+    [self.outputTableView reloadData];
+}
 /*
 #pragma mark - Navigation
 

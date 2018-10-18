@@ -40,7 +40,7 @@
 #define VIEW_HEIGHT(aView)       ((aView).frame.size.height)
 #define VIEW_WIDTH(aView)        ((aView).frame.size.width)
 
-
+#define VIEW_MAXHEIGHT [Dimens GDimens:45]*7
 #define VIEW_X_Right(aView)      ((aView).frame.origin.x + (aView).frame.size.width)
 #define VIEW_Y_Bottom(aView)     ((aView).frame.origin.y + (aView).frame.size.height)
 
@@ -126,15 +126,17 @@
     _listView.frame = CGRectMake(VIEW_X(self) , VIEW_Y(self)+1, VIEW_WIDTH(self),  0);
     _listView.clipsToBounds       = YES;
     _listView.layer.masksToBounds = NO;
-    _listView.layer.borderColor   = [UIColor lightTextColor].CGColor;
+    _listView.layer.borderColor   = [UIColor grayColor].CGColor;
     _listView.layer.borderWidth   = 0.5f;
-
+    
     
     // 下拉列表TableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView))];
     _tableView.delegate        = self;
     _tableView.dataSource      = self;
+    _tableView.backgroundColor=[UIColor clearColor];
     _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor=RGBA(228, 228, 228, 0.95);
     _tableView.bounces         = NO;
     [_listView addSubview:_tableView];
 }
@@ -161,11 +163,19 @@
         [self.delegate dropdownMenuWillShow:self]; // 将要显示回调代理
     }
     
-    
+    int rowHeight=_rowHeight*_titleArr.count;
+    if (rowHeight>VIEW_MAXHEIGHT) {
+        rowHeight=VIEW_MAXHEIGHT;
+    }
     [UIView animateWithDuration:AnimateTime animations:^{
         
         _arrowMark.transform = CGAffineTransformMakeRotation(M_PI);
-        _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), _rowHeight *_titleArr.count);
+       
+        
+        if (_rowHeight*_titleArr.count>[Dimens GDimens:350]) {
+            
+        }
+        _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), rowHeight);
         _tableView.frame = CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView));
         
     }completion:^(BOOL finished) {
@@ -221,15 +231,15 @@
     if (cell == nil) {
         //---------------------------下拉选项样式，可在此处自定义-------------------------
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.font          = [UIFont systemFontOfSize:12.f];
+        cell.textLabel.font          = [UIFont systemFontOfSize:14.f];
         cell.textLabel.adjustsFontSizeToFitWidth=YES;
         cell.textLabel.textAlignment=NSTextAlignmentCenter;
         cell.selectionStyle          = UITableViewCellSelectionStyleNone;
     
-        cell.backgroundColor=SetColor(UI_MasterBackgroundColor);
-        cell.textLabel.textColor=[UIColor whiteColor];
+        cell.backgroundColor=[UIColor clearColor];
+        cell.textLabel.textColor=[UIColor blackColor];
         UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, _rowHeight -0.5, VIEW_WIDTH(cell), 0.5)];
-        line.backgroundColor = [UIColor whiteColor];
+        line.backgroundColor = [UIColor lightGrayColor];
         [cell addSubview:line];
         //---------------------------------------------------------------------------
     }

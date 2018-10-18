@@ -106,7 +106,7 @@ BOOL BOOL_EncryptionFlag  = false;
 /*音量改变时如果静音则静音消失,true:有，false:无*/
 BOOL  BOOL_ValC_MUTE = true;
 /* 最大主音量 */
-uint16 Master_Volume_MAX = 66;
+uint16 Master_Volume_MAX = 35;
 uint16 Master_Volume_Base = 0;
 /*主音量和静音的数据通信方式COM_TYPE_SYSTEM,COM_TYPE_INPUT,COM_TYPE_OUTPUT,(INPUT固定通道2)*/
 uint8 MasterVolumeMute_DATA_TRANSFER = COM_TYPE_SYSTEM;

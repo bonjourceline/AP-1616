@@ -54,6 +54,7 @@
     }];
     self.firstTableView=[[UITableView alloc]init];
     self.firstTableView.backgroundColor=[UIColor clearColor];
+    [self.firstTableView setSeparatorColor:SetColor(0xFF262d35)];
     self.firstTableView.delegate=self;
     self.firstTableView.dataSource=self;
     [bgView addSubview: self.firstTableView];
@@ -127,7 +128,7 @@
 }
 #pragma mark-------tableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [Dimens GDimens:40];
+    return [Dimens GDimens:45];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
@@ -157,7 +158,7 @@
         return [UIView new];
     }else{
         UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth-[Dimens GDimens:-60], [Dimens GDimens:45])];
-        bgView.backgroundColor=[UIColor grayColor];
+        bgView.backgroundColor=SetColor(0XFF292f34);
         UILabel *sectionLab=[[UILabel alloc]init];
         sectionLab.textColor=[UIColor whiteColor];
         sectionLab.font=[UIFont systemFontOfSize:15];
@@ -179,7 +180,8 @@
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.backgroundColor=[UIColor clearColor];
-    cell.textLabel.textColor=[UIColor whiteColor];
+    cell.textLabel.textColor=SetColor(0xFF9399a3);
+    cell.textLabel.font=[UIFont systemFontOfSize:15];
     NSString *rowName=[[NSString alloc]init];
     if (indexPath.section==0) {
         rowName=[self getOutputSpkTypeNameByIndex:(int)indexPath.row];

@@ -348,6 +348,7 @@
                     break;
                     
                 case SYSTEM_DATA:
+                    NSLog(@"%d-----%d",RecFrameData.DataBuf[10],RecStructData.DataBuf[11]);
                     RecStructData.System.main_vol = RecFrameData.DataBuf[10]
                     + RecStructData.DataBuf[11] * 256;
                     RecStructData.System.high_mode = RecFrameData.DataBuf[12];
@@ -385,15 +386,49 @@
                         RecStructData.System.out_spk_type[i]=RecFrameData.DataBuf[42+i];
                     }
                     break;
-                case SYSTEM_SPK_TYPEB:
-           
+                case SYSTEM_ALL:
+                    RecStructData.System.input_source = RecFrameData.DataBuf[10];
+                    RecStructData.System.mixer_source = RecFrameData.DataBuf[11]; // 低电平模式
+                    for (int i=0; i<5; i++) {
+                        RecStructData.System.InSwitch[i]=RecFrameData.DataBuf[12+i];
+                    }
+                    RecStructData.System.none1=RecFrameData.DataBuf[17];
+                    /////
+                    RecStructData.System.main_vol = RecFrameData.DataBuf[18]
+                    + RecStructData.DataBuf[19] * 256;
+                    RecStructData.System.high_mode = RecFrameData.DataBuf[20];
+                    
+                    RecStructData.System.aux_mode = RecFrameData.DataBuf[21];
+                    RecStructData.System.out_mode = RecFrameData.DataBuf[22];
+                    RecStructData.System.mixer_SourcedB = RecFrameData.DataBuf[23];
+                    RecStructData.System.MainvolMuteFlg = RecFrameData.DataBuf[24];
+                    RecStructData.System.theme = RecFrameData.DataBuf[25];// 保留
+                    /////////
+                    RecStructData.System.HiInputChNum=RecFrameData.DataBuf[26];
+                    RecStructData.System.AuxInputChNum=RecFrameData.DataBuf[27];
+                    RecStructData.System.OutputChNum=RecFrameData.DataBuf[28];
+                    RecStructData.System.IsRTA_outch=RecFrameData.DataBuf[29];
+                    RecStructData.System.InSignelThreshold=RecFrameData.DataBuf[30];
+                    RecStructData.System.OffTime=RecFrameData.DataBuf[31];
+                    RecStructData.System.none[0]=RecFrameData.DataBuf[32];
+                    RecStructData.System.none[1]=RecFrameData.DataBuf[33];
+                    
+                    for (int i=0; i<8; i++) {
+                        RecStructData.System.high_Low_Set[i]=RecFrameData.DataBuf[34+i];
+                    }
+                    for (int i=0; i<16; i++) {
+                        RecStructData.System.in_spk_type[i]=RecFrameData.DataBuf[42+i];
+                    }
+                    for (int i=0; i<16; i++) {
+                        RecStructData.System.out_spk_type[i]=RecFrameData.DataBuf[58+i];
+                    }
                     break;
                 case LED_DATA:
                     //数据共52字节，前31为RTA数据，中间20为信号 76~127属于有信号 小于76灯灭  后1个字节为当前最新信号源数据 光纤同轴各一个 蓝牙两个
-                    if(RecStructData.System.input_source_temp != RecFrameData.DataBuf[10 + 31]){
-                        RecStructData.System.input_source_temp = RecFrameData.DataBuf[10 + 31];
+                    if(RecStructData.System.input_source_temp != RecFrameData.DataBuf[10 + 31+20]){
+                        RecStructData.System.input_source_temp = RecFrameData.DataBuf[10 + 31+20];
                         if(RecStructData.System.input_source_temp != RecStructData.System.input_source){
-                            NSLog(@"收到的音源为 %d",RecFrameData.DataBuf[10 + 31]);
+                            NSLog(@"收到的音源为 %d",RecFrameData.DataBuf[10 + 31+20]);
                             RecStructData.System.input_source = RecStructData.System.input_source_temp;
                             SendStructData.System.input_source=RecStructData.System.input_source;
                             //连接状态
@@ -940,7 +975,7 @@
                     }
                   
                     break;
-                case SYSTEM_SPK_TYPEB:
+                case SYSTEM_ALL:
 //                    FrameDataBuf[14] =  (SendStructData.System.out9_spk_type & 0xff);
 //                    FrameDataBuf[15] =  (SendStructData.System.out10_spk_type & 0xff);
 //                    FrameDataBuf[16] =  (SendStructData.System.out11_spk_type & 0xff);
@@ -1692,10 +1727,10 @@
     SendFrameData.ChannelID = CUR_PROGRAM_INFO; // 当前用户组ID
     [self SendDataToDevice:FALSE];
     
-    SendFrameData.ChannelID = PC_SOURCE_SET; // 输入源选择
-    [self SendDataToDevice:FALSE];
+    
     
     /*获取用户名字*/
+    
     for (int i = 1; i <= MAX_USE_GROUP; i++) {
         SendFrameData.FrameType = READ_CMD;
         SendFrameData.DeviceID = 0x01;
@@ -1733,49 +1768,34 @@
             SendFrameData.DataLen = 8;//IN_LEN;
             [self SendDataToDevice:FALSE];
         }
-//        if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-//            /*增加读取Input数据，获取音量 0x77*/
-//            SendFrameData.FrameType = READ_CMD;
-//            SendFrameData.DeviceID = 0x01;
-//            SendFrameData.UserID = 0x00;
-//            SendFrameData.DataType = MUSIC;
-//            SendFrameData.ChannelID = 0x02;//MUSIC 固定2
-//            SendFrameData.DataID = 0x77;//IN_MISC_ID;
-//            SendFrameData.PCFadeInFadeOutFlg = 0x00;//
-//            SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
-//            SendFrameData.DataLen = 8;//IN_LEN;
-//            [self SendDataToDevice:FALSE];
-//        }
+
     }
-    /*读取音量*/
-    if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_SYSTEM){
-        SendFrameData.FrameType = READ_CMD;
-        SendFrameData.DeviceID = 0x01;
-        SendFrameData.UserID = 0x00;
-        SendFrameData.DataType = SYSTEM;
-        SendFrameData.ChannelID = SYSTEM_DATA;
-        SendFrameData.DataID = 0x00;
-        SendFrameData.PCFadeInFadeOutFlg = 0x00;
-        SendFrameData.PcCustom = 0x00;
-        SendFrameData.DataLen = 0x00;
-        [self SendDataToDevice:FALSE];
-    }
+
+   
     
     //读取通道输出类型配置
+//    SendFrameData.FrameType = READ_CMD;
+//    SendFrameData.DeviceID = 0x01;
+//    SendFrameData.UserID = 0x00;
+//    SendFrameData.DataType = SYSTEM;
+//    SendFrameData.ChannelID = SYSTEM_SPK_TYPE;
+//    SendFrameData.DataID = 0x00;
+//    SendFrameData.PCFadeInFadeOutFlg = 0x00;
+//    SendFrameData.PcCustom = 0x00;
+//    SendFrameData.DataLen = 0x00;
+//    [self SendDataToDevice:FALSE];
     SendFrameData.FrameType = READ_CMD;
     SendFrameData.DeviceID = 0x01;
     SendFrameData.UserID = 0x00;
     SendFrameData.DataType = SYSTEM;
-    SendFrameData.ChannelID = SYSTEM_SPK_TYPE;
+    SendFrameData.ChannelID = SYSTEM_ALL;
     SendFrameData.DataID = 0x00;
     SendFrameData.PCFadeInFadeOutFlg = 0x00;
     SendFrameData.PcCustom = 0x00;
     SendFrameData.DataLen = 0x00;
     [self SendDataToDevice:FALSE];
-
     
-    //增加读取全部通道的输出数据 Recovery
-    //    if(CurPage != UI_Page_Home){
+    
     for (int i = 0; i < Output_CH_MAX; i++) {
         SendFrameData.FrameType = READ_CMD;
         SendFrameData.DeviceID = 0x01;
@@ -1789,22 +1809,9 @@
         [self SendDataToDevice:FALSE];
     }
     
-    //    }
     
     
-    /*增加读取通道延时,要放到最后（读取全部通道的输出数据）读取，若条件成立，会覆盖OUTPUT通道里的数据*/
-    if(DELAY_DATA_TRANSFER==COM_TYPE_SYSTEM){
-        SendFrameData.FrameType = READ_CMD;
-        SendFrameData.DeviceID = 0x01;
-        SendFrameData.UserID = 0x00;
-        SendFrameData.DataType = SYSTEM;
-        SendFrameData.ChannelID = SOUND_FIELD_INFO;
-        SendFrameData.DataID = 0x00;
-        SendFrameData.PCFadeInFadeOutFlg = 0x00;//
-        SendFrameData.PcCustom = 0x00;// 自定义字符，发什么下去，返回什么
-        SendFrameData.DataLen = 8;
-        [self SendDataToDevice:FALSE];
-    }
+    
     
     return true; // 插入数据完成
 }

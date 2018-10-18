@@ -12,7 +12,7 @@
 #define  weight 380
 #define  btnNormal (0xFF20272e)
 #define  btnPress (0xFF2ea1ff)
-@interface SetChNumViewController ()<LMJDropdownMenuDelegate>
+@interface SetChNumViewController ()<LMJDropdownMenuDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     int HNum;
     int ANum;
@@ -20,6 +20,7 @@
     NormalButton *curBtn;
     NSArray *numTitles;
     NSArray *numValues;
+    NSMutableArray *showTitles;
     UIView *bgView;
 }
 @property (nonatomic,strong)NormalButton *input_HNumBtn;
@@ -37,6 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     [self creatView];
     ANum=RecStructData.System.AuxInputChNum_temp;
     HNum=RecStructData.System.HiInputChNum_temp;
@@ -44,17 +46,20 @@
     // Do any additional setup after loading the view.
 }
 -(void)creatView{
-    numTitles=@[@"2",@"4",@"6",@"8"];
-    numValues=@[@(2),@(4),@(6),@(8)];
+    
+    numValues=@[@(2),@(4),@(6),@(8),@(10),@(12),@(14),@(16)];
     self.view.backgroundColor=RGBA(0, 0, 0, 0.5);
     self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
     self.modalPresentationStyle=UIModalTransitionStyleCrossDissolve;
-    bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:380], [Dimens GDimens:320])];
+    bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:380], [Dimens GDimens:500])];
     [self.view addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.centerY.equalTo(self.view.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:380], [Dimens GDimens:320]));
+//        make.centerY.equalTo(self.view.mas_centerY);
+        make.top.equalTo(self.view.mas_top).offset((KScreenHeight-[Dimens GDimens:320])/2);
+        make.width.mas_equalTo([Dimens GDimens:380]);
+        make.bottom.equalTo(self.view.mas_bottom);
+//        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:380], [Dimens GDimens:500]));
     }];
     UIImageView *bgImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:380], [Dimens GDimens:320])];
     [bgImageView setImage:[UIImage imageNamed:@"delay_bg"]];
@@ -68,8 +73,8 @@
     passBtn.titleLabel.font=[UIFont systemFontOfSize:13];
     [bgView addSubview:passBtn];
     [passBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(bgView.mas_bottom).offset([Dimens GDimens:-20]);
-        make.left.equalTo(bgView.mas_left).offset([Dimens GDimens:15]);
+        make.bottom.equalTo(bgImageView.mas_bottom).offset([Dimens GDimens:-20]);
+        make.left.equalTo(bgImageView.mas_left).offset([Dimens GDimens:15]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:85], [Dimens GDimens:30]));
     }];
     [passBtn addTarget:self action:@selector(passView) forControlEvents:UIControlEventTouchUpInside];
@@ -82,8 +87,8 @@
     okBtn.titleLabel.font=[UIFont systemFontOfSize:13];
     [bgView addSubview:okBtn];
     [okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(bgView.mas_bottom).offset([Dimens GDimens:-20]);
-        make.right.equalTo(bgView.mas_right).offset([Dimens GDimens:-15]);
+        make.bottom.equalTo(bgImageView.mas_bottom).offset([Dimens GDimens:-20]);
+        make.right.equalTo(bgImageView.mas_right).offset([Dimens GDimens:-15]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:85], [Dimens GDimens:30]));
     }];
     [okBtn addTarget:self action:@selector(okClick) forControlEvents:UIControlEventTouchUpInside];
@@ -96,7 +101,7 @@
     lastBtn.titleLabel.font=[UIFont systemFontOfSize:13];
     [bgView addSubview:lastBtn];
     [lastBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(bgView.mas_bottom).offset([Dimens GDimens:-20]);
+        make.bottom.equalTo(bgImageView.mas_bottom).offset([Dimens GDimens:-20]);
         make.right.equalTo(okBtn.mas_left).offset([Dimens GDimens:-10]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:85], [Dimens GDimens:30]));
     }];
@@ -107,8 +112,8 @@
     [bgView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(lastBtn.mas_top).offset([Dimens GDimens:-20]);
-        make.left.equalTo(bgView.mas_left).offset([Dimens GDimens:15]);
-        make.right.equalTo(bgView.mas_right).offset([Dimens GDimens:-15]);
+        make.left.equalTo(bgImageView.mas_left).offset([Dimens GDimens:15]);
+        make.right.equalTo(bgImageView.mas_right).offset([Dimens GDimens:-15]);
         make.height.mas_equalTo(1);
     }];
     
@@ -119,7 +124,7 @@
     self.stackView.alignment=UIStackViewAlignmentCenter;
     [self.stackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(bgView.mas_left);
-        make.centerY.equalTo(bgView.mas_centerY).offset([Dimens GDimens:-30]);
+        make.centerY.equalTo(bgImageView.mas_centerY).offset([Dimens GDimens:-30]);
         make.width.mas_equalTo([Dimens GDimens:380]);
     }];
    
@@ -129,8 +134,8 @@
     [backBtn addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bgView.mas_top);
-        make.right.equalTo(bgView.mas_right);
+        make.top.equalTo(bgImageView.mas_top);
+        make.right.equalTo(bgImageView.mas_right);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:30], [Dimens GDimens:30]));
     }];
     self.chTopLabel=[[UILabel alloc]init];
@@ -139,8 +144,8 @@
     [bgView addSubview:self.chTopLabel];
     self.chTopLabel.font=[UIFont systemFontOfSize:13];
     [self.chTopLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bgView.mas_top);
-        make.left.equalTo(bgView.mas_left).offset([Dimens GDimens:5]);
+        make.top.equalTo(bgImageView.mas_top);
+        make.left.equalTo(bgImageView.mas_left).offset([Dimens GDimens:5]);
         make.height.mas_equalTo([Dimens GDimens:30]);
     }];
     [self setChNumType:self.type];
@@ -267,6 +272,32 @@
 -(UIView *)ouputNumBtnView{
     if (!_ouputNumBtnView) {
         _ouputNumBtnView=[[UIView alloc]init];
+        _ouputNumBtnView=[[UIView alloc]init];
+        UILabel *label=[[UILabel alloc]init];
+        label.font=[UIFont systemFontOfSize:13];
+        label.textColor=[UIColor whiteColor];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.adjustsFontSizeToFitWidth=YES;
+        label.text=[LANG DPLocalizedString:@"设置输出通道个数"];
+        [_ouputNumBtnView addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_ouputNumBtnView.mas_left);
+            make.centerY.equalTo(_ouputNumBtnView.mas_centerY);
+            make.size.mas_equalTo(CGSizeMake([Dimens GDimens:170], [Dimens GDimens:40]));
+        }];
+        self.ouputNumBtn=[[NormalButton alloc]init];
+        self.ouputNumBtn.layer.borderWidth=1;
+        [self.ouputNumBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.ouputNumBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+        self.ouputNumBtn.layer.borderColor=SetColor(0xFF2f3b42).CGColor;
+        [self.ouputNumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.OutputChNum_temp] forState:UIControlStateNormal];
+        [self.ouputNumBtn addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
+        [_ouputNumBtnView addSubview:self.ouputNumBtn];
+        [self.ouputNumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(label.mas_right);
+            make.centerY.equalTo(_ouputNumBtnView.mas_centerY);
+            make.size.mas_equalTo(CGSizeMake([Dimens GDimens:175], [Dimens GDimens:40]));
+        }];
     }
     return _ouputNumBtnView;
 }
@@ -282,48 +313,97 @@
     if (self.type==CHNUMTYPE_input) {
         if ((RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0)&&(RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0)) {
             if (curBtn==self.input_HNumBtn) {
+                
                 self.dropdownMenu.frame=CGRectMake([Dimens GDimens:170], [Dimens GDimens:123], [Dimens GDimens:175], 0);
-                [self.dropdownMenu setMenuTitles:numTitles rowHeight:[Dimens GDimens:35]];
+                showTitles=[self getValueArrayStr];
+                [self.dropdownMenu setMenuTitles:showTitles rowHeight:[Dimens GDimens:45]];
+                
             }else if(curBtn==self.input_ANumBtn){
+                
                 self.dropdownMenu.frame=CGRectMake([Dimens GDimens:170], [Dimens GDimens:178], [Dimens GDimens:175], 0);
-                [self.dropdownMenu setMenuTitles:numTitles rowHeight:[Dimens GDimens:35]];
+                showTitles=[self getValueArrayStr];
+                [self.dropdownMenu setMenuTitles:showTitles rowHeight:[Dimens GDimens:45]];
 
             }
         }else{
             self.dropdownMenu.frame=CGRectMake([Dimens GDimens:170], [Dimens GDimens:150], [Dimens GDimens:175], 0);
-            [self.dropdownMenu setMenuTitles:numTitles rowHeight:[Dimens GDimens:35]];
+            showTitles=[self getValueArrayStr];
+            [self.dropdownMenu setMenuTitles:showTitles rowHeight:[Dimens GDimens:45]];
             
         }
     }else{
         self.dropdownMenu.frame=CGRectMake([Dimens GDimens:170], [Dimens GDimens:150], [Dimens GDimens:175], 0);
-        [self.dropdownMenu setMenuTitles:numTitles rowHeight:[Dimens GDimens:35]];
+        showTitles=[[NSMutableArray alloc]init];
+        for (int i=1; i<17; i++) {
+            [showTitles addObject:[NSString stringWithFormat:@"%d",i]];
+        }
+        [self.dropdownMenu setMenuTitles:showTitles rowHeight:[Dimens GDimens:45]];
     }
     [self.dropdownMenu clickMainBtn];
 }
 -(LMJDropdownMenu *)dropdownMenu{
     if (!_dropdownMenu) {
         _dropdownMenu=[[LMJDropdownMenu alloc]init];
-//        _dropdownMenu.frame=CGRectMake(0, 0, [Dimens GDimens:175], [Dimens GDimens:150]);
-//        [_dropdownMenu setMenuTitles:numTitles rowHeight:[Dimens GDimens:35]];
         _dropdownMenu.delegate=self;
         [bgView addSubview:_dropdownMenu];
     }
     return _dropdownMenu;
 }
+-(NSMutableArray *)getValueArrayStr{
+    NSMutableArray *valueArray=[[NSMutableArray alloc]init];
+    if (curBtn==self.input_ANumBtn) {
+        for (id num in numValues) {
+            int intNum=[num intValue];
+            if (((intNum+HNum)<=16)||(RecStructData.System.InSwitch_temp[3]==0)) {
+                [valueArray addObject:[NSString stringWithFormat:@"%d",intNum]];
+            }
+        }
+    }else if(curBtn==self.input_HNumBtn){
+        for (id num in numValues) {
+            int intNum=[num intValue];
+            if (((intNum+ANum)<=16)||(RecStructData.System.InSwitch_temp[4]==0)) {
+                [valueArray addObject:[NSString stringWithFormat:@"%d",intNum]];
+            }
+        }
+    }
+    return valueArray;
+}
+-(NSMutableArray *)getValueArray{
+    NSMutableArray *valueArray=[[NSMutableArray alloc]init];
+    if (curBtn==self.input_ANumBtn) {
+        for (id num in numValues) {
+            int intNum=[num intValue];
+            if (((intNum+HNum)<=16)||(RecStructData.System.InSwitch_temp[3]==0)) {
+                [valueArray addObject:num];
+            }
+        }
+    }else if(curBtn==self.input_HNumBtn){
+        for (id num in numValues) {
+            int intNum=[num intValue];
+            if (((intNum+ANum)<=16)||(RecStructData.System.InSwitch_temp[4]==0)) {
+                [valueArray addObject:num];
+            }
+        }
+    }
+    return valueArray;
+}
 #pragma mark - LMJDropdownMenu Delegate
 
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
     NSLog(@"你选择了：%ld",number);
-    [curBtn setTitle:numTitles[number] forState:UIControlStateNormal];
+    NSMutableArray *ValueArray=[self getValueArray];
+    [curBtn setTitle:showTitles[number] forState:UIControlStateNormal];
     if (curBtn==self.input_HNumBtn) {
-        HNum=[numValues[number] intValue];
+        HNum=[ValueArray[number] intValue];
     }else if (curBtn==self.input_ANumBtn){
-        ANum=[numValues[number] intValue];
+        ANum=[ValueArray[number] intValue];
     }else if (curBtn==self.ouputNumBtn){
-        OutNum=[numValues[number] intValue];
+        OutNum=(int)number+1;
     }
     [self.dropdownMenu clickMainBtn];
 }
+
+
 /*
 #pragma mark - Navigation
 

@@ -229,21 +229,56 @@
 //高电平
 -(void)clickHiItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-hiItemTag;
-    if(tag==hiTypeNames.count-1){
-        RecStructData.System.high_mode_temp=0;
+    if (RecStructData.System.InSwitch_temp[4]!=0) {
+        //高低数量不能超过16
+        int hiCount=[SourceModeUtils getHiModeTypeChNum:tag+1];
+        int auxCount=[SourceModeUtils getAuxModeTypeChNum:RecStructData.System.aux_mode_temp];
+        if (hiCount+auxCount>16) {
+            return;
+        }else{
+            if(tag==hiTypeNames.count-1){
+                RecStructData.System.high_mode_temp=0;
+            }else{
+                RecStructData.System.high_mode_temp=tag+1;
+            }
+            [SourceModeUtils setHiModeTypeSetting];
+        }
+        
     }else{
-        RecStructData.System.high_mode_temp=tag+1;
+        if(tag==hiTypeNames.count-1){
+            RecStructData.System.high_mode_temp=0;
+        }else{
+            RecStructData.System.high_mode_temp=tag+1;
+        }
+        [SourceModeUtils setHiModeTypeSetting];
     }
+    
     [self flashHiItem];
 }
 //低电平
 -(void)clickAuxItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-auxItemTag;
-    if(tag==hiTypeNames.count-1){
-        RecStructData.System.aux_mode_temp=0;
+    if (RecStructData.System.InSwitch_temp[3]!=0) {
+        //高低数量不能超过16
+        int hiCount=[SourceModeUtils getHiModeTypeChNum:RecStructData.System.high_mode_temp];
+        int auxCount=[SourceModeUtils getAuxModeTypeChNum:tag+1];
+        if (hiCount+auxCount>16) {
+            return;
+        }else{
+            if(tag==auxTypeNames.count-1){
+                RecStructData.System.aux_mode_temp=0;
+            }else{
+                RecStructData.System.aux_mode_temp=tag+1;
+            }
+        }
     }else{
-        RecStructData.System.aux_mode_temp=tag+1;
+        if(tag==auxTypeNames.count-1){
+            RecStructData.System.aux_mode_temp=0;
+        }else{
+            RecStructData.System.aux_mode_temp=tag+1;
+        }
     }
+    
     [self flashAuxItem];
 }
 

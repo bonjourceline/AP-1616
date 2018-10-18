@@ -80,6 +80,7 @@
     self.typeName.font=[UIFont systemFontOfSize:12];
     self.typeName.numberOfLines=2;
     self.typeName.adjustsFontSizeToFitWidth=YES;
+    self.typeName.textAlignment=NSTextAlignmentCenter;
     self.typeName.backgroundColor=SetColor(bgColorNormal);
     self.typeName.textColor=SetColor(textColorNormal);
     [self.typeName mas_makeConstraints:^(MASConstraintMaker *make) {

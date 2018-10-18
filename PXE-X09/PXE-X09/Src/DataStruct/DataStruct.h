@@ -49,7 +49,7 @@ typedef short int         uint16;
 #define SOFTWARE_VERSION	  0x04	//设备版本号
 #define SYSTEM_DATA	          0x05
 #define SYSTEM_SPK_TYPE	      0x06
-#define SYSTEM_SPK_TYPEB      0x07
+#define SYSTEM_ALL            0x07
 #define LOGO_INFO	          0x10
 #define SYSTEM_INFO	          0x11
 #define CUR_PASSWORD_DATA	  0x12
@@ -370,6 +370,8 @@ struct	System_Struct  //系统数据共64字节
     uint8   high_Low_Set[8];        //8个高&低电平选择继电器设置值  0低电平   1高电平
     uint8   in_spk_type[16];        //16路模拟输入的类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
     uint8      out_spk_type[16];      //16路模拟输出的喇叭类型 共25种 0~24表示   顺序按 无连接、前(左右)、中置、后(左右)、低音(左右)
+    
+    
     uint8 input_source_temp;
     //调整方式时中间变量
     uint8   InSwitch_temp[5];
@@ -381,6 +383,9 @@ struct	System_Struct  //系统数据共64字节
     uint8   OutputChNum_temp;     //输入通道数量 最大16
     uint8   high_Low_Set_temp[8];
     uint8   mixer_source_temp;
+    uint8   in_spk_type_temp[16];
+    uint8   out_spk_type_temp[16];
+    
 };
 
 struct MData {

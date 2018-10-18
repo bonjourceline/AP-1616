@@ -901,41 +901,24 @@
 //音量切换
 - (void)Btn_CMaster_Event:(UIButton*)sender{
     boolMasterSub = true;
-    [self flashMasterSubSelect:true];
+//    [self flashMasterSubSelect:true];
 }
 
 - (void)Btn_CSub_Event:(UIButton*)sender{
     boolMasterSub = false;
-    [self flashMasterSubSelect:false];
+//    [self flashMasterSubSelect:false];
 }
 
-- (void)flashMasterSubSelect:(Boolean)Bm{
-    int val=0;
-    if(Bm){
-        [self.Btn_CMaster setBackgroundImage:[UIImage imageNamed:@"chs_mastersub_val_set_sel"] forState:UIControlStateNormal];
-        [self.Btn_CSub setBackgroundImage:[UIImage imageNamed:@"vivid_bg"] forState:UIControlStateNormal];
-//        [self.SB_MasterVolume setMaxProgress:Master_Volume_MAX];
+- (void)flashMasterSubSelect{
+        int val=0;
+    
                 [self.SB_MasterVolume setMaximumValue:Master_Volume_MAX];
-        if(MasterVolumeMute_DATA_TRANSFER == COM_TYPE_INPUT){
-         }else{
+    
 //            [self.SB_MasterVolume setProgress:RecStructData.System.main_vol];
-                        self.SB_MasterVolume.value = RecStructData.System.main_vol;
+            self.SB_MasterVolume.value = RecStructData.System.main_vol;
             val = RecStructData.System.main_vol;
-        }
-        
-        
-    }else{
-        [self.Btn_CSub setBackgroundImage:[UIImage imageNamed:@"chs_mastersub_val_set_sel"] forState:UIControlStateNormal];
-        [self.Btn_CMaster setBackgroundImage:[UIImage imageNamed:@"vivid_bg"] forState:UIControlStateNormal];
-        
-        //[self.MasterVolSlider setMaxProgress:CurMacMode.Out.MaxOutVol/CurMacMode.Out.StepOutVol];
-        //[self.MasterVolSlider setProgress:[self getSubVal]/CurMacMode.Out.StepOutVol];
-        val = [self getSubVal]/Output_Volume_Step;
-//        [self.SB_MasterVolume setMaxProgress:Output_Volume_MAX/Output_Volume_Step];
-                [self.SB_MasterVolume setMaximumValue:Output_Volume_MAX/Output_Volume_Step];
-                self.SB_MasterVolume.value = val;
-//        [self.SB_MasterVolume setProgress:val];
-    }
+    
+
     self.Lab_MasterVolume.text=[NSString stringWithFormat:@"%d",val];
 }
 
@@ -1544,16 +1527,26 @@
     return _SourceImages;
 }
 -(void) FlashMixerInputSource{
+    if (RecStructData.System.mixer_source<self.SourceArray.count) {
+        [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:RecStructData.System.mixer_source]] forState:UIControlStateNormal];
+    }else{
+         [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:@"关闭"] forState:UIControlStateNormal];
+    }
     
-    [self.Btn_MixerInputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:RecStructData.System.mixer_source]] forState:UIControlStateNormal];
 
     
 }
 
 -(void) FlashInputSource{
+    NSLog(@"输入音源的值%d",RecStructData.System.input_source);
+    if (RecStructData.System.input_source<self.SourceArray.count) {
+        [self.Btn_InputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:RecStructData.System.input_source]] forState:UIControlStateNormal];
+        [self.Btn_InputSource setImage:[UIImage imageNamed:self.SourceImages[RecStructData.System.input_source]] forState:UIControlStateNormal];
+    }else{
+        [self.Btn_InputSource setTitle:[LANG DPLocalizedString:@"关闭"] forState:UIControlStateNormal];
+        
+    }
     
-    [self.Btn_InputSource setTitle:[LANG DPLocalizedString:[self.SourceArray objectAtIndex:RecStructData.System.input_source]] forState:UIControlStateNormal];
-    [self.Btn_InputSource setImage:[UIImage imageNamed:self.SourceImages[RecStructData.System.input_source]] forState:UIControlStateNormal];
 
     [self selectMixerSourceAndInputSource];
     
@@ -2277,9 +2270,9 @@
         [self FlashEncryption];
         [self FlashSEFFName];
         [self FlashMasterMute];
-//        [self FlashInputSource];
-        [self flashMasterSubSelect:boolMasterSub];
-//        [self FlashMixerInputSource];
+        [self FlashInputSource];
+        [self flashMasterSubSelect];
+        [self FlashMixerInputSource];
         //    [self FlashUserGroupWithInputSource:RecStructData.System.input_source];
     });
     
@@ -2329,12 +2322,7 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
 }
-#pragma mark ---------------SystemVolDelegate
--(void)updateVolValue:(int)value{
-    self.SB_MasterVolume.value=value;
-//    [self.SB_MasterVolume setProgress:value];
-    self.Lab_MasterVolume.text=[NSString stringWithFormat:@"%d",value];
-}
+
 
 @end
 
