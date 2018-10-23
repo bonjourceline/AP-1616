@@ -65,13 +65,13 @@
         }
         [item.typeImageView setImage:image];
         [item setTag:i+outItemTag];
-        [item addTarget:self action:@selector(clickHiItem:) forControlEvents:UIControlEventTouchDown];
+        [item addTarget:self action:@selector(clickOutItem:) forControlEvents:UIControlEventTouchDown];
         [outScrollView addSubview:item];
     }
 }
 #pragma mark-----------------点击事件
 //高电平
--(void)clickHiItem:(HiAuxItem *)selectItem{
+-(void)clickOutItem:(HiAuxItem *)selectItem{
     int tag=(int)selectItem.tag-outItemTag;
     if(tag==outModes.count-1){
         RecStructData.System.out_mode_temp=0;
@@ -97,6 +97,8 @@
         vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
         [self presentViewController:vc animated:YES completion:nil];
     }else{
+        
+        [SourceModeUtils setOUTModeTypeSetting];
         [SourceModeUtils syncSource];
         [self dismissViewControllerAnimated:YES completion:nil];
     }

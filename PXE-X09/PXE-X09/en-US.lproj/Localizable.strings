@@ -207,10 +207,12 @@
 
 "L_Out_RL_Tweeter" = "RL-Tweeter";
 "L_Out_RL_Woofer" = "RL-Woofer";
+"L_Out_RL_Midrange" ="RL-Midrange";
 "L_Out_RL_Full" = "RL-Full";
 
 "L_Out_RR_Tweeter" = "RR-Tweeter";
 "L_Out_RR_Woofer" = "RR-Woofer";
+"L_Out_RR_Midrange" ="RR-Midrange";
 "L_Out_RR_Full" = "RR-Full";
 
 "L_Out_C_Tweeter" = "C-Tweeter";
@@ -220,8 +222,11 @@
 "L_Out_L_Subweeter" = "L-Subweeter";
 "L_Out_R_Subweeter" = "R-Subweeter";
 "L_Out_Subweeter" = "Subweeter";
+
 "L_Out_Front_Subweeter" = "Front-Subweeter";
 "L_Out_Rear_Subweeter" = "Rear-Subweeter";
+"L_Out_L_Loop"="左环绕";
+"L_Out_R_Loop"="右环绕";
 "L_Out_C_Front" = "CL-Full";
 "L_Out_C_Rear" = "CR-Full";
 

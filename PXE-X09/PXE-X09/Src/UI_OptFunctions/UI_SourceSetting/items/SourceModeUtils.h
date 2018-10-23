@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SourceModeUtils : NSObject
 + (instancetype)shareManager;
+/**
+ 获取通道类型名称
+ */
++ (NSString*)getOutputSpkTypeNameByIndex:(int)index;
 + (NSString *)getOutModeName:(int)index;
 + (NSString *)getAuxModeName:(int)index;
 +(void)syncSourceTemp;

@@ -15,10 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)SingleChItem *item1;
 @property(nonatomic,strong)SingleChItem *item2;
 @property (nonatomic,strong)NormalButton *hl_setBtn;
-
+@property(nonatomic,strong)UIImageView *linkModeView;
+@property(nonatomic,strong)UIButton *linkBtn;
 
 -(void)setChannelIndex:(int)index;
--(void)setLinkView:(BOOL)boolean;
+-(void)showLinkView:(BOOL)boolean;
 -(void)flashView;
 @end
 

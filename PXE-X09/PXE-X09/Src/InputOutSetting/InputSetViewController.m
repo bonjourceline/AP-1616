@@ -181,15 +181,7 @@
             cell.item.item1.lineTop.hidden=NO;
             cell.item.item2.lineBottom.hidden=NO;
         }
-        if (RecStructData.System.high_Low_Set[indexPath.row-self.threeCells.count]==1) {
-            [cell.item.item1.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
-            [cell.item.item2.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
-            [cell.item.hl_setBtn setTitle:@"HI" forState:UIControlStateNormal];
-        }else{
-            [cell.item.item1.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
-            [cell.item.item2.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
-            [cell.item.hl_setBtn setTitle:@"AUX" forState:UIControlStateNormal];
-        }
+        
         cell.item.item1.eqblock = ^(int index) {
             [self openEqVc];
         };

@@ -14,9 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DoubleOutItem : UIControl
 @property(nonatomic,strong)SingleOutChItem *item1;
 @property(nonatomic,strong)SingleOutChItem *item2;
+@property(nonatomic,strong)UIImageView *linkModeView;
+@property(nonatomic,strong)UIButton *linkBtn;
 
 -(void)setChannelIndex:(int)index;
--(void)setLinkView:(BOOL)boolean;
+-(void)showLinkView:(BOOL)boolean;
 -(void)flashView;
 @end
 

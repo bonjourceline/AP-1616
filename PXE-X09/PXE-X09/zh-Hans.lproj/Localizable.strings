@@ -198,10 +198,12 @@
 
 "L_Out_RL_Tweeter" = "后左高频";
 "L_Out_RL_Woofer" = "后左低频";
+"L_Out_RL_Midrange" ="后左中频";
 "L_Out_RL_Full" = "后左全频";
 
 "L_Out_RR_Tweeter" = "后右高频";
 "L_Out_RR_Woofer" = "后右低频";
+"L_Out_RR_Midrange" ="后右中频";
 "L_Out_RR_Full" = "后右全频";
 
 "L_Out_C_Tweeter" = "中置高频";
@@ -212,8 +214,10 @@
 "L_Out_R_Subweeter" = "右超低";
 "L_Out_Subweeter" = "超低";
 
-"L_Out_Front_Subweeter" = "后左中频";
-"L_Out_Rear_Subweeter" = "后右中频";
+"L_Out_Front_Subweeter" = "前超低频";
+"L_Out_Rear_Subweeter" = "后超低频";
+"L_Out_L_Loop"="左环绕";
+"L_Out_R_Loop"="右环绕";
 "L_Out_C_Front" = "左环绕";
 "L_Out_C_Rear" = "右环绕";
 

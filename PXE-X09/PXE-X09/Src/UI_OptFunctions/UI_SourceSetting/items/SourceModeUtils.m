@@ -26,6 +26,48 @@
     }
     return self;
 }
++ (NSString*)getOutputSpkTypeNameByIndex:(int)index{
+    switch (index) {
+        case 0: return [LANG DPLocalizedString:@"L_Out_NULL"];
+            
+        case 1: return [LANG DPLocalizedString:@"L_Out_FL_Tweeter"];
+        case 2: return [LANG DPLocalizedString:@"L_Out_FL_Midrange"];
+        case 3: return [LANG DPLocalizedString:@"L_Out_FL_Woofer"];
+        case 4: return [LANG DPLocalizedString:@"L_Out_FL_M_T"];
+        case 5: return [LANG DPLocalizedString:@"L_Out_FL_M_WF"];
+        case 6: return [LANG DPLocalizedString:@"L_Out_FL_Full"];
+            
+        case 7: return [LANG DPLocalizedString:@"L_Out_FR_Tweeter"];
+        case 8: return [LANG DPLocalizedString:@"L_Out_FR_Midrange"];
+        case 9: return [LANG DPLocalizedString:@"L_Out_FR_Woofer"];
+        case 10: return [LANG DPLocalizedString:@"L_Out_FR_M_T"];
+        case 11: return [LANG DPLocalizedString:@"L_Out_FR_M_WF"];
+        case 12: return [LANG DPLocalizedString:@"L_Out_FR_Full"];
+            
+        case 13: return [LANG DPLocalizedString:@"L_Out_RL_Tweeter"];
+        case 14: return [LANG DPLocalizedString:@"L_Out_RL_Woofer"];
+        case 15: return [LANG DPLocalizedString:@"L_Out_RL_Full"];
+            
+        case 16: return [LANG DPLocalizedString:@"L_Out_RR_Tweeter"];
+        case 17: return [LANG DPLocalizedString:@"L_Out_RR_Woofer"];
+        case 18: return [LANG DPLocalizedString:@"L_Out_RR_Full"];
+            
+        case 19: return [LANG DPLocalizedString:@"L_Out_C_Tweeter"];
+        case 20: return [LANG DPLocalizedString:@"L_Out_C_Woofer"];
+        case 21: return [LANG DPLocalizedString:@"L_Out_C_Full"];
+            
+        case 22: return [LANG DPLocalizedString:@"L_Out_L_Subweeter"];
+        case 23: return [LANG DPLocalizedString:@"L_Out_R_Subweeter"];
+        case 24: return [LANG DPLocalizedString:@"L_Out_Subweeter"];
+            
+        case 25: return [LANG DPLocalizedString:@"L_Out_RL_Midrange"];
+        case 26: return [LANG DPLocalizedString:@"L_Out_RR_Midrange"];
+        case 27: return [LANG DPLocalizedString:@"L_Out_L_Loop"];
+        case 28: return [LANG DPLocalizedString:@"L_Out_R_Loop"];
+            
+        default: return [LANG DPLocalizedString:@"L_Out_NULL"];
+    }
+}
 + (NSString *) getOutModeName:(int)index{
     NSString *str=@"";
     NSArray *nameArray=@[
@@ -87,8 +129,15 @@
         
         RecStructData.System.high_Low_Set_temp[i]=RecStructData.System.high_Low_Set[i];
     }
+    for (int i=0; i<16; i++) {
+        RecStructData.System.in_spk_type_temp[i]=RecStructData.System.in_spk_type[i];
+    }
+    for (int i=0; i<16; i++) {
+        RecStructData.System.out_spk_type_temp[i]=RecStructData.System.out_spk_type[i];
+    }
 }
 +(void)syncSource{
+    
     for (int i=0; i<5; i++) {
         RecStructData.System.InSwitch[i]=RecStructData.System.InSwitch_temp[i];
     }
@@ -104,66 +153,233 @@
         
         RecStructData.System.high_Low_Set[i]=RecStructData.System.high_Low_Set_temp[i];
     }
+    for (int i=0; i<16; i++) {
+        RecStructData.System.in_spk_type[i]=RecStructData.System.in_spk_type_temp[i];
+    }
+    for (int i=0; i<16; i++) {
+        RecStructData.System.out_spk_type[i]=RecStructData.System.out_spk_type_temp[i];
+    }
 }
 +(void)setHiModeTypeSetting{
+    if (RecStructData.System.InSwitch_temp[3]==0||RecStructData.System.high_mode_temp==0) {
+        return;
+    }
     switch (RecStructData.System.high_mode_temp) {
         case 1:
             RecStructData.System.HiInputChNum_temp=2;
+           
             RecStructData.System.in_spk_type_temp[0]=6;
             RecStructData.System.in_spk_type_temp[1]=12;
             break;
         case 2:
             RecStructData.System.HiInputChNum_temp=4;
-            
+            RecStructData.System.in_spk_type_temp[0]=6;
+            RecStructData.System.in_spk_type_temp[1]=12;
+            RecStructData.System.in_spk_type_temp[2]=15;
+            RecStructData.System.in_spk_type_temp[3]=18;
             break;
         case 3:
-            RecStructData.System.HiInputChNum_temp=5;
+            RecStructData.System.HiInputChNum_temp=6;
+            RecStructData.System.in_spk_type_temp[0]=6;
+            RecStructData.System.in_spk_type_temp[1]=12;
+            RecStructData.System.in_spk_type_temp[2]=15;
+            RecStructData.System.in_spk_type_temp[3]=18;
+            RecStructData.System.in_spk_type_temp[4]=24;
+            RecStructData.System.in_spk_type_temp[5]=0;
             break;
         case 4:
             RecStructData.System.HiInputChNum_temp=6;
+            RecStructData.System.in_spk_type_temp[0]=6;
+            RecStructData.System.in_spk_type_temp[1]=12;
+            RecStructData.System.in_spk_type_temp[2]=15;
+            RecStructData.System.in_spk_type_temp[3]=18;
+            RecStructData.System.in_spk_type_temp[4]=22;
+            RecStructData.System.in_spk_type_temp[5]=23;
             break;
         case 5:
             RecStructData.System.HiInputChNum_temp=6;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=3;
+            RecStructData.System.in_spk_type_temp[3]=9;
+            RecStructData.System.in_spk_type_temp[4]=15;
+            RecStructData.System.in_spk_type_temp[5]=18;
             break;
         case 6:
-            RecStructData.System.HiInputChNum_temp=7;
+            RecStructData.System.HiInputChNum_temp=8;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=3;
+            RecStructData.System.in_spk_type_temp[3]=9;
+            RecStructData.System.in_spk_type_temp[4]=15;
+            RecStructData.System.in_spk_type_temp[5]=18;
+            RecStructData.System.in_spk_type_temp[6]=24;
+             RecStructData.System.in_spk_type_temp[7]=0;
             break;
         case 7:
             RecStructData.System.HiInputChNum_temp=8;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=3;
+            RecStructData.System.in_spk_type_temp[3]=9;
+            RecStructData.System.in_spk_type_temp[4]=15;
+            RecStructData.System.in_spk_type_temp[5]=18;
+            RecStructData.System.in_spk_type_temp[6]=22;
+            RecStructData.System.in_spk_type_temp[7]=23;
             break;
         case 8:
-            RecStructData.System.HiInputChNum_temp=9;
+            RecStructData.System.HiInputChNum_temp=10;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=3;
+            RecStructData.System.in_spk_type_temp[3]=9;
+            RecStructData.System.in_spk_type_temp[4]=15;
+            RecStructData.System.in_spk_type_temp[5]=18;
+            RecStructData.System.in_spk_type_temp[6]=22;
+            RecStructData.System.in_spk_type_temp[7]=23;
+            RecStructData.System.in_spk_type_temp[8]=21;
+            RecStructData.System.in_spk_type_temp[9]=0;
             break;
         case 9:{
             RecStructData.System.HiInputChNum_temp=8;
+            
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=3;
+            RecStructData.System.in_spk_type_temp[3]=9;
+            RecStructData.System.in_spk_type_temp[4]=15;
+            RecStructData.System.in_spk_type_temp[5]=18;
+            RecStructData.System.in_spk_type_temp[6]=21;
+            RecStructData.System.in_spk_type_temp[7]=24;
         }
             break;
         case 10:{
             RecStructData.System.HiInputChNum_temp=12;
+            
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            RecStructData.System.in_spk_type_temp[6]=13;
+            RecStructData.System.in_spk_type_temp[7]=16;
+            RecStructData.System.in_spk_type_temp[8]=14;
+            RecStructData.System.in_spk_type_temp[9]=17;
+            RecStructData.System.in_spk_type_temp[10]=21;
+            RecStructData.System.in_spk_type_temp[11]=24;
         }
             break;
         case 11:{
-            RecStructData.System.HiInputChNum_temp=13;
+            RecStructData.System.HiInputChNum_temp=14;
+            
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            
+            RecStructData.System.in_spk_type_temp[6]=13;
+            RecStructData.System.in_spk_type_temp[7]=16;
+            RecStructData.System.in_spk_type_temp[8]=14;
+            RecStructData.System.in_spk_type_temp[9]=17;
+            
+            RecStructData.System.in_spk_type_temp[10]=22;
+            RecStructData.System.in_spk_type_temp[11]=23;
+            RecStructData.System.in_spk_type_temp[12]=21;
+            RecStructData.System.in_spk_type_temp[13]=0;
+            
         }
             break;
         case 12:{
             RecStructData.System.HiInputChNum_temp=10;
+            
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            
+            RecStructData.System.in_spk_type_temp[6]=15;
+            RecStructData.System.in_spk_type_temp[7]=18;
+            
+            RecStructData.System.in_spk_type_temp[8]=21;
+            RecStructData.System.in_spk_type_temp[9]=24;
         }
             break;
         case 13:{
-            RecStructData.System.HiInputChNum_temp=11;
+            RecStructData.System.HiInputChNum_temp=12;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            
+            RecStructData.System.in_spk_type_temp[6]=15;
+            RecStructData.System.in_spk_type_temp[7]=18;
+            
+            RecStructData.System.in_spk_type_temp[8]=22;
+            RecStructData.System.in_spk_type_temp[9]=23;
+            RecStructData.System.in_spk_type_temp[10]=21;
+            RecStructData.System.in_spk_type_temp[11]=0;
         }
             break;
         case 14:{
-            RecStructData.System.HiInputChNum_temp=9;
+            RecStructData.System.HiInputChNum_temp=10;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            
+            RecStructData.System.in_spk_type_temp[6]=15;
+            RecStructData.System.in_spk_type_temp[7]=18;
+            RecStructData.System.in_spk_type_temp[8]=24;
+            RecStructData.System.in_spk_type_temp[9]=0;
         }
             break;
         case 15:{
             RecStructData.System.HiInputChNum_temp=10;
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            
+            RecStructData.System.in_spk_type_temp[6]=15;
+            RecStructData.System.in_spk_type_temp[7]=18;
+            RecStructData.System.in_spk_type_temp[8]=22;
+            RecStructData.System.in_spk_type_temp[9]=23;
         }
             break;
         case 16:{
             RecStructData.System.HiInputChNum_temp=16;
+            RecStructData.System.AuxInputChNum_temp=0;
+            
+            RecStructData.System.in_spk_type_temp[0]=1;
+            RecStructData.System.in_spk_type_temp[1]=7;
+            RecStructData.System.in_spk_type_temp[2]=2;
+            RecStructData.System.in_spk_type_temp[3]=8;
+            RecStructData.System.in_spk_type_temp[4]=3;
+            RecStructData.System.in_spk_type_temp[5]=9;
+            
+            RecStructData.System.in_spk_type_temp[6]=13;
+            RecStructData.System.in_spk_type_temp[7]=16;
+            RecStructData.System.in_spk_type_temp[8]=25;
+            RecStructData.System.in_spk_type_temp[9]=26;
+            RecStructData.System.in_spk_type_temp[10]=14;
+            RecStructData.System.in_spk_type_temp[11]=17;
+            
+            RecStructData.System.in_spk_type_temp[12]=19;
+            RecStructData.System.in_spk_type_temp[13]=20;
+            RecStructData.System.in_spk_type_temp[14]=22;
+            RecStructData.System.in_spk_type_temp[15]=23;
+            
         }
             break;
 //        case 0:{
@@ -172,6 +388,9 @@
             break;
         default:
             break;
+    }
+    for (int i=0; i<RecStructData.System.HiInputChNum_temp/2; i++) {
+        RecStructData.System.high_Low_Set_temp[i]=1;
     }
 }
 +(int)getHiModeTypeChNum:(int)index{
@@ -190,7 +409,7 @@
             
             break;
         case 3:
-            count=5;
+            count=6;
             break;
         case 4:
             count=6;
@@ -199,13 +418,13 @@
             count=6;
             break;
         case 6:
-            count=7;
+            count=8;
             break;
         case 7:
             count=8;
             break;
         case 8:
-            count=9;
+            count=10;
             break;
         case 9:{
             count=8;
@@ -216,7 +435,7 @@
         }
             break;
         case 11:{
-            count=13;
+            count=14;
         }
             break;
         case 12:{
@@ -224,11 +443,11 @@
         }
             break;
         case 13:{
-            count=11;
+            count=12;
         }
             break;
         case 14:{
-            count=9;
+            count=10;
         }
             break;
         case 15:{
@@ -245,26 +464,64 @@
     return count;
 }
 +(void)setAUXModeTypeSetting{
+    if (RecStructData.System.InSwitch_temp[4]==0||RecStructData.System.aux_mode_temp==0) {
+        return;
+    }
+    
+    int spkIndex=0;
+    if (RecStructData.System.InSwitch_temp[3]==1) {
+        spkIndex=RecStructData.System.HiInputChNum_temp;
+    }
     switch (RecStructData.System.aux_mode_temp) {
         case 1:{
             RecStructData.System.AuxInputChNum_temp=2;
+            
+            RecStructData.System.in_spk_type_temp[spkIndex]=6;
+            RecStructData.System.in_spk_type_temp[spkIndex+1]=12;
         }
             break;
         case 2:{
             RecStructData.System.AuxInputChNum_temp=4;
+            RecStructData.System.in_spk_type_temp[spkIndex]=6;
+            RecStructData.System.in_spk_type_temp[spkIndex+1]=12;
+            RecStructData.System.in_spk_type_temp[spkIndex+2]=15;
+            RecStructData.System.in_spk_type_temp[spkIndex+3]=18;
         }
             break;
         case 3:{
             RecStructData.System.AuxInputChNum_temp=6;
+            
+            RecStructData.System.in_spk_type_temp[spkIndex]=6;
+            RecStructData.System.in_spk_type_temp[spkIndex+1]=12;
+            RecStructData.System.in_spk_type_temp[spkIndex+2]=15;
+            RecStructData.System.in_spk_type_temp[spkIndex+3]=18;
+            
+             RecStructData.System.in_spk_type_temp[spkIndex+4]=21;
+             RecStructData.System.in_spk_type_temp[spkIndex+5]=24;
         }
             break;
         case 4:{
             RecStructData.System.AuxInputChNum_temp=8;
+            RecStructData.System.in_spk_type_temp[spkIndex]=6;
+            RecStructData.System.in_spk_type_temp[spkIndex+1]=12;
+            RecStructData.System.in_spk_type_temp[spkIndex+2]=15;
+            RecStructData.System.in_spk_type_temp[spkIndex+3]=18;
+            
+            RecStructData.System.in_spk_type_temp[spkIndex+4]=21;
+            RecStructData.System.in_spk_type_temp[spkIndex+5]=24;
+            
+            RecStructData.System.in_spk_type_temp[spkIndex+6]=27;
+            RecStructData.System.in_spk_type_temp[spkIndex+7]=28;
+            
         }
             break;
         default:
             break;
-            
+    }
+    
+    int hiNum=RecStructData.System.HiInputChNum_temp/2;
+    for (int i=0; i<RecStructData.System.AuxInputChNum_temp/2; i++) {
+        RecStructData.System.high_Low_Set_temp[i+hiNum]=0;
     }
 }
 +(int)getAuxModeTypeChNum:(int)index{
@@ -296,67 +553,231 @@
     return count;
 }
 +(void)setOUTModeTypeSetting{
+    if (RecStructData.System.out_mode_temp==0) {
+        return;
+    }
     switch (RecStructData.System.out_mode_temp) {
         case 1:
+            RecStructData.System.OutputChNum_temp=2;
             
+            RecStructData.System.out_spk_type_temp[0]=6;
+            RecStructData.System.out_spk_type_temp[1]=12;
             break;
         case 2:
-            
+            RecStructData.System.OutputChNum_temp=4;
+            RecStructData.System.out_spk_type_temp[0]=6;
+            RecStructData.System.out_spk_type_temp[1]=12;
+            RecStructData.System.out_spk_type_temp[2]=15;
+            RecStructData.System.out_spk_type_temp[3]=18;
             break;
         case 3:
-            
+            RecStructData.System.OutputChNum_temp=5;
+            RecStructData.System.out_spk_type_temp[0]=6;
+            RecStructData.System.out_spk_type_temp[1]=12;
+            RecStructData.System.out_spk_type_temp[2]=15;
+            RecStructData.System.out_spk_type_temp[3]=18;
+            RecStructData.System.out_spk_type_temp[4]=24;
+
             break;
         case 4:
-            
+            RecStructData.System.OutputChNum_temp=6;
+            RecStructData.System.out_spk_type_temp[0]=6;
+            RecStructData.System.out_spk_type_temp[1]=12;
+            RecStructData.System.out_spk_type_temp[2]=15;
+            RecStructData.System.out_spk_type_temp[3]=18;
+            RecStructData.System.out_spk_type_temp[4]=22;
+            RecStructData.System.out_spk_type_temp[5]=23;
             break;
         case 5:
-            
+            RecStructData.System.OutputChNum_temp=6;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=3;
+            RecStructData.System.out_spk_type_temp[3]=9;
+            RecStructData.System.out_spk_type_temp[4]=15;
+            RecStructData.System.out_spk_type_temp[5]=18;
             break;
         case 6:
+            RecStructData.System.OutputChNum_temp=7;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=3;
+            RecStructData.System.out_spk_type_temp[3]=9;
+            RecStructData.System.out_spk_type_temp[4]=15;
+            RecStructData.System.out_spk_type_temp[5]=18;
+            RecStructData.System.out_spk_type_temp[6]=24;
+            
             break;
         case 7:
+            RecStructData.System.OutputChNum_temp=8;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=3;
+            RecStructData.System.out_spk_type_temp[3]=9;
+            RecStructData.System.out_spk_type_temp[4]=15;
+            RecStructData.System.out_spk_type_temp[5]=18;
+            RecStructData.System.out_spk_type_temp[6]=22;
+            RecStructData.System.out_spk_type_temp[7]=23;
             break;
         case 8:
+            RecStructData.System.OutputChNum_temp=9;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=3;
+            RecStructData.System.out_spk_type_temp[3]=9;
+            RecStructData.System.out_spk_type_temp[4]=15;
+            RecStructData.System.out_spk_type_temp[5]=18;
+            RecStructData.System.out_spk_type_temp[6]=22;
+            RecStructData.System.out_spk_type_temp[7]=23;
+            RecStructData.System.out_spk_type_temp[8]=21;
+            
             break;
         case 9:{
+            RecStructData.System.OutputChNum_temp=8;
             
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=3;
+            RecStructData.System.out_spk_type_temp[3]=9;
+            RecStructData.System.out_spk_type_temp[4]=15;
+            RecStructData.System.out_spk_type_temp[5]=18;
+            RecStructData.System.out_spk_type_temp[6]=21;
+            RecStructData.System.out_spk_type_temp[7]=24;
         }
             break;
         case 10:{
+            RecStructData.System.OutputChNum_temp=12;
             
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
+            RecStructData.System.out_spk_type_temp[6]=13;
+            RecStructData.System.out_spk_type_temp[7]=16;
+            RecStructData.System.out_spk_type_temp[8]=14;
+            RecStructData.System.out_spk_type_temp[9]=17;
+            RecStructData.System.out_spk_type_temp[10]=21;
+            RecStructData.System.out_spk_type_temp[11]=24;
         }
             break;
         case 11:{
+            RecStructData.System.OutputChNum_temp=13;
+            
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
+            
+            RecStructData.System.out_spk_type_temp[6]=13;
+            RecStructData.System.out_spk_type_temp[7]=16;
+            RecStructData.System.out_spk_type_temp[8]=14;
+            RecStructData.System.out_spk_type_temp[9]=17;
+            
+            RecStructData.System.out_spk_type_temp[10]=22;
+            RecStructData.System.out_spk_type_temp[11]=23;
+            RecStructData.System.out_spk_type_temp[12]=21;
+            
             
         }
             break;
         case 12:{
+            RecStructData.System.OutputChNum_temp=10;
             
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
+            
+            RecStructData.System.out_spk_type_temp[6]=15;
+            RecStructData.System.out_spk_type_temp[7]=18;
+            
+            RecStructData.System.out_spk_type_temp[8]=21;
+            RecStructData.System.out_spk_type_temp[9]=24;
         }
             break;
         case 13:{
+            RecStructData.System.OutputChNum_temp=11;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
+            
+            RecStructData.System.out_spk_type_temp[6]=15;
+            RecStructData.System.out_spk_type_temp[7]=18;
+            
+            RecStructData.System.out_spk_type_temp[8]=22;
+            RecStructData.System.out_spk_type_temp[9]=23;
+            RecStructData.System.out_spk_type_temp[10]=21;
             
         }
             break;
         case 14:{
+            RecStructData.System.OutputChNum_temp=9;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
+            
+            RecStructData.System.out_spk_type_temp[6]=15;
+            RecStructData.System.out_spk_type_temp[7]=18;
+            RecStructData.System.out_spk_type_temp[8]=24;
             
         }
             break;
         case 15:{
+            RecStructData.System.OutputChNum_temp=10;
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
             
+            RecStructData.System.out_spk_type_temp[6]=15;
+            RecStructData.System.out_spk_type_temp[7]=18;
+            RecStructData.System.out_spk_type_temp[8]=22;
+            RecStructData.System.out_spk_type_temp[9]=23;
         }
             break;
         case 16:{
+            RecStructData.System.OutputChNum_temp=16;
+            
+            RecStructData.System.out_spk_type_temp[0]=1;
+            RecStructData.System.out_spk_type_temp[1]=7;
+            RecStructData.System.out_spk_type_temp[2]=2;
+            RecStructData.System.out_spk_type_temp[3]=8;
+            RecStructData.System.out_spk_type_temp[4]=3;
+            RecStructData.System.out_spk_type_temp[5]=9;
+            
+            RecStructData.System.out_spk_type_temp[6]=13;
+            RecStructData.System.out_spk_type_temp[7]=16;
+            RecStructData.System.out_spk_type_temp[8]=25;
+            RecStructData.System.out_spk_type_temp[9]=26;
+            RecStructData.System.out_spk_type_temp[10]=14;
+            RecStructData.System.out_spk_type_temp[11]=17;
+            
+            RecStructData.System.out_spk_type_temp[12]=19;
+            RecStructData.System.out_spk_type_temp[13]=20;
+            RecStructData.System.out_spk_type_temp[14]=22;
+            RecStructData.System.out_spk_type_temp[15]=23;
             
         }
             break;
-        case 17:{
-            
-        }
+
             break;
         default:
             break;
     }
-    
+   
 }
 @end

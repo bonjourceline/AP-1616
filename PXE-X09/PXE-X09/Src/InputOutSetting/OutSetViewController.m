@@ -7,7 +7,8 @@
 //
 
 #import "OutSetViewController.h"
-#import "SingleOutTableViewCell.h"
+#import "DoubleOutTableViewCell.h"
+//#import "SingleOutTableViewCell.h"
 #import "EQViewController.h"
 #import "OutModeViewController.h"
 #define btnWidth 60
@@ -16,6 +17,7 @@
 @interface OutSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIButton *outputTypeBtn;
+    int chCount;
 }
 @property(nonatomic,strong)UITableView *outputTableView;
 @end
@@ -126,38 +128,54 @@
 }
 #pragma mark--------tableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [Dimens GDimens:95];
+    
+    return [Dimens GDimens:190];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return RecStructData.System.OutputChNum;
+    
+    return chCount;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellId=@"SingleOutTableViewCell";
-    SingleOutTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId=@"DoubleOutTableViewCell";
+    DoubleOutTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (cell==nil) {
-        cell=[[SingleOutTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+        cell=[[DoubleOutTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
+    cell.item.item1.lineTop.hidden=NO;
+    cell.item.item1.lineBottom.hidden=NO;
+    cell.item.item2.lineBottom.hidden=NO;
+    cell.item.item2.hidden=NO;
     if (indexPath.row==0) {
-        cell.item.lineTop.hidden=YES;
-    }else if (indexPath.row==RecStructData.System.OutputChNum-1){
-        cell.item.lineBottom.hidden=YES;
-    }else{
-        cell.item.lineTop.hidden=NO;
-        cell.item.lineBottom.hidden=NO;
+        cell.item.item1.lineTop.hidden=YES;
+       
     }
-    if (indexPath.row==RecStructData.System.OutputChNum-1){
-        cell.item.lineBottom.hidden=YES;
+    if (indexPath.row==chCount-1){
         
+        if (RecStructData.System.OutputChNum%2==1) {
+            cell.item.item1.lineBottom.hidden=YES;
+            cell.item.item2.hidden=YES;
+        }else{
+            cell.item.item2.hidden=NO;
+            cell.item.item2.lineBottom.hidden=YES;
+        }
     }
-    [cell.item setChannelIndex:(int)indexPath.row];
+    
+    
+    [cell.item setChannelIndex:(int)indexPath.row*2];
     [cell.item flashView];
     //eq
-    cell.item.eqblock = ^(int index) {
+    cell.item.item1.eqblock = ^(int index) {
         [self openEqVc];
     };
-    cell.item.reloadblock = ^{
+    cell.item.item1.reloadblock = ^{
+        [self.outputTableView reloadData];
+    };
+    cell.item.item2.eqblock = ^(int index) {
+        [self openEqVc];
+    };
+    cell.item.item2.reloadblock = ^{
         [self.outputTableView reloadData];
     };
 
@@ -171,6 +189,13 @@
 
 }
 -(void)FlashPageUI{
+    
+    if (RecStructData.System.OutputChNum%2==1) {
+        chCount=RecStructData.System.OutputChNum/2+1;
+    }else{
+        chCount=RecStructData.System.OutputChNum/2;
+    }
+    
     [self.outputTableView reloadData];
 }
 /*

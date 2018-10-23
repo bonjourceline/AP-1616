@@ -44,9 +44,33 @@
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.mas_bottom);
     }];
-}
--(void)setLinkView:(BOOL)boolean{
+    self.linkModeView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:80], [Dimens GDimens:150])];
+    self.linkModeView.userInteractionEnabled=NO;
+    [self addSubview:self.linkModeView];
+    [self.linkModeView setImage:[UIImage imageNamed:@"link_bg"]];
+    [self.linkModeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.item2.spkBtn.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:80], [Dimens GDimens:150]));
+    }];
     
+    self.linkBtn=[[UIButton alloc]init];
+    [self addSubview:self.linkBtn];
+    [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
+    [self.linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.centerX.equalTo(self.linkModeView.mas_right);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:25], [Dimens GDimens:25]));
+    }];
+}
+-(void)showLinkView:(BOOL)boolean{
+    if(boolean){
+        self.linkBtn.hidden=NO;
+        self.linkModeView.hidden=NO;
+    }else{
+        self.linkBtn.hidden=YES;
+        self.linkModeView.hidden=YES;
+    }
 }
 -(void)flashView{
     [self.item1 setChannelIndex:firstCh];
@@ -55,7 +79,21 @@
     self.item1.chName.text=[NSString stringWithFormat:@"输入%d",firstCh+1];
     [self.item2 flashView];
     self.item2.chName.text=[NSString stringWithFormat:@"输入%d",secCh+1];
-    
+    if (RecStructData.System.out_mode!=0) {
+        int spkType=RecStructData.System.out_spk_type[firstCh];
+        if (spkType==0||spkType==21||spkType==24||spkType==19||spkType==20) {
+            [self showLinkView:NO];
+        }else{
+            [self showLinkView:YES];
+        }
+        self.item1.spkBtn.userInteractionEnabled=NO;
+        self.item2.spkBtn.userInteractionEnabled=NO;
+    }else{
+        self.item1.spkBtn.userInteractionEnabled=YES;
+        self.item2.spkBtn.userInteractionEnabled=YES;
+        
+        [self showLinkView:NO];
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

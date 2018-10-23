@@ -39,10 +39,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    [self creatView];
     ANum=RecStructData.System.AuxInputChNum_temp;
     HNum=RecStructData.System.HiInputChNum_temp;
     OutNum=RecStructData.System.OutputChNum_temp;
+    [self creatView];
+    
     // Do any additional setup after loading the view.
 }
 -(void)creatView{
@@ -159,27 +160,52 @@
     self.blackHome();
 }
 -(void)okClick{
+    
     if (self.type==CHNUMTYPE_input) {
-        int H_count=2;
-        int A_count=2;
-        if (RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0) {
-            RecStructData.System.HiInputChNum_temp=HNum;
-            H_count=HNum/2;
+        int H_count=0;
+        int A_count=0;
+        if (RecStructData.System.InSwitch_temp[3]==1) {
+            
+                RecStructData.System.HiInputChNum_temp=HNum;
+            
+                H_count=HNum/2;
             for (int i=0; i<H_count; i++) {
                 RecStructData.System.high_Low_Set_temp[i]=1;
             }
+            if (RecStructData.System.high_mode_temp==0) {
+                for (int i=0; i<HNum; i++) {
+                    RecStructData.System.in_spk_type_temp[i]=0;
+                }
+            }
+
         }
-        if (RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0) {
+        if (RecStructData.System.InSwitch_temp[4]==1) {
              RecStructData.System.AuxInputChNum_temp=ANum;
             A_count=ANum/2;
             for (int i=H_count; i<(H_count+A_count); i++) {
                 RecStructData.System.high_Low_Set_temp[i]=0;
             }
+            if (RecStructData.System.aux_mode_temp==0) {
+                if (RecStructData.System.InSwitch_temp[3]==1) {
+                    //如果有高电平
+                    for (int i=HNum; i<ANum+HNum; i++) {
+                        RecStructData.System.in_spk_type_temp[i]=0;
+                    }
+                }else{
+                    for (int i=0; i<ANum; i++) {
+                        RecStructData.System.in_spk_type_temp[i]=0;
+                    }
+                }
+            }
+            
         }
        
     }else{
+        
         RecStructData.System.OutputChNum_temp=OutNum;
     }
+    [SourceModeUtils setHiModeTypeSetting];
+    [SourceModeUtils setAUXModeTypeSetting];
     [SourceModeUtils syncSource];
     
     self.blackHome();
@@ -227,6 +253,9 @@
         [self.input_ANumBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.input_ANumBtn.titleLabel.font=[UIFont systemFontOfSize:15];
         self.input_ANumBtn.layer.borderColor=SetColor(0xFF2f3b42).CGColor;
+        if (RecStructData.System.AuxInputChNum_temp+RecStructData.System.HiInputChNum_temp>16) {
+            RecStructData.System.AuxInputChNum_temp=2;
+        }
         [self.input_ANumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.AuxInputChNum_temp] forState:UIControlStateNormal];
         [self.input_ANumBtn addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
         [_input_ANumBtnView addSubview:self.input_ANumBtn];
@@ -258,6 +287,10 @@
         [self.input_HNumBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.input_HNumBtn.titleLabel.font=[UIFont systemFontOfSize:15];
         self.input_HNumBtn.layer.borderColor=SetColor(0xFF2f3b42).CGColor;
+        if (RecStructData.System.AuxInputChNum_temp+RecStructData.System.HiInputChNum_temp>16) {
+            RecStructData.System.HiInputChNum_temp=2;
+            
+        }
         [self.input_HNumBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.System.HiInputChNum_temp] forState:UIControlStateNormal];
         [self.input_HNumBtn addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
         [_input_HNumBtnView addSubview:self.input_HNumBtn];

@@ -233,15 +233,17 @@
         //高低数量不能超过16
         int hiCount=[SourceModeUtils getHiModeTypeChNum:tag+1];
         int auxCount=[SourceModeUtils getAuxModeTypeChNum:RecStructData.System.aux_mode_temp];
-        if (hiCount+auxCount>16) {
+        
+        if ((hiCount+auxCount>16)&&(RecStructData.System.aux_mode_temp!=0)) {
             return;
         }else{
             if(tag==hiTypeNames.count-1){
                 RecStructData.System.high_mode_temp=0;
             }else{
                 RecStructData.System.high_mode_temp=tag+1;
+                RecStructData.System.HiInputChNum_temp=[SourceModeUtils getHiModeTypeChNum:tag+1];
             }
-            [SourceModeUtils setHiModeTypeSetting];
+            
         }
         
     }else{
@@ -250,7 +252,7 @@
         }else{
             RecStructData.System.high_mode_temp=tag+1;
         }
-        [SourceModeUtils setHiModeTypeSetting];
+//        [SourceModeUtils setHiModeTypeSetting];
     }
     
     [self flashHiItem];
@@ -269,6 +271,7 @@
                 RecStructData.System.aux_mode_temp=0;
             }else{
                 RecStructData.System.aux_mode_temp=tag+1;
+                [SourceModeUtils getAuxModeTypeChNum:tag+1];
             }
         }
     }else{
@@ -287,7 +290,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)toNextView{
+    [SourceModeUtils setHiModeTypeSetting];
+    [SourceModeUtils setAUXModeTypeSetting];
     if ((RecStructData.System.InSwitch_temp[3]==1&&RecStructData.System.high_mode_temp==0)||(RecStructData.System.InSwitch_temp[4]==1&&RecStructData.System.aux_mode_temp==0)) {
+        
+        if (RecStructData.System.HiInputChNum_temp>=16&&RecStructData.System.high_mode_temp!=0) {
+           
+            [SourceModeUtils syncSource];
+            [self ClickEventOfBack];
+            return;
+        }
+        
         SetChNumViewController *vc=[[SetChNumViewController alloc]init];
         vc.type=CHNUMTYPE_input;
         vc.blackHome = ^{
@@ -299,6 +312,7 @@
         vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
         [self presentViewController:vc animated:YES completion:nil];
     }else{
+        
         [SourceModeUtils syncSource];
         [self ClickEventOfBack];
     }
@@ -315,6 +329,7 @@
         }else{
             [item setNormal];
         }
+        
     }
 }
 -(void)flashAuxItem{

@@ -84,48 +84,7 @@
     self.dismissBlock();
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (NSString*)getOutputSpkTypeNameByIndex:(int)index{
-    switch (index) {
-        case 0: return [LANG DPLocalizedString:@"L_Out_NULL"];
-            
-        case 1: return [LANG DPLocalizedString:@"L_Out_FL_Tweeter"];
-        case 2: return [LANG DPLocalizedString:@"L_Out_FL_Midrange"];
-        case 3: return [LANG DPLocalizedString:@"L_Out_FL_Woofer"];
-        case 4: return [LANG DPLocalizedString:@"L_Out_FL_M_T"];
-        case 5: return [LANG DPLocalizedString:@"L_Out_FL_M_WF"];
-        case 6: return [LANG DPLocalizedString:@"L_Out_FL_Full"];
-            
-        case 7: return [LANG DPLocalizedString:@"L_Out_FR_Tweeter"];
-        case 8: return [LANG DPLocalizedString:@"L_Out_FR_Midrange"];
-        case 9: return [LANG DPLocalizedString:@"L_Out_FR_Woofer"];
-        case 10: return [LANG DPLocalizedString:@"L_Out_FR_M_T"];
-        case 11: return [LANG DPLocalizedString:@"L_Out_FR_M_WF"];
-        case 12: return [LANG DPLocalizedString:@"L_Out_FR_Full"];
-            
-        case 13: return [LANG DPLocalizedString:@"L_Out_RL_Tweeter"];
-        case 14: return [LANG DPLocalizedString:@"L_Out_RL_Woofer"];
-        case 15: return [LANG DPLocalizedString:@"L_Out_RL_Full"];
-            
-        case 16: return [LANG DPLocalizedString:@"L_Out_RR_Tweeter"];
-        case 17: return [LANG DPLocalizedString:@"L_Out_RR_Woofer"];
-        case 18: return [LANG DPLocalizedString:@"L_Out_RR_Full"];
-            
-        case 19: return [LANG DPLocalizedString:@"L_Out_C_Tweeter"];
-        case 20: return [LANG DPLocalizedString:@"L_Out_C_Woofer"];
-        case 21: return [LANG DPLocalizedString:@"L_Out_C_Full"];
-            
-        case 22: return [LANG DPLocalizedString:@"L_Out_L_Subweeter"];
-        case 23: return [LANG DPLocalizedString:@"L_Out_R_Subweeter"];
-        case 24: return [LANG DPLocalizedString:@"L_Out_Subweeter"];
-            
-        case 25: return [LANG DPLocalizedString:@"L_Out_Front_Subweeter"];
-        case 26: return [LANG DPLocalizedString:@"L_Out_Rear_Subweeter"];
-        case 27: return [LANG DPLocalizedString:@"L_Out_C_Front"];
-        case 28: return [LANG DPLocalizedString:@"L_Out_C_Rear"];
-            
-        default: return [LANG DPLocalizedString:@"L_Out_NULL"];
-    }
-}
+
 #pragma mark-------tableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [Dimens GDimens:45];
@@ -184,19 +143,19 @@
     cell.textLabel.font=[UIFont systemFontOfSize:15];
     NSString *rowName=[[NSString alloc]init];
     if (indexPath.section==0) {
-        rowName=[self getOutputSpkTypeNameByIndex:(int)indexPath.row];
+        rowName=[SourceModeUtils getOutputSpkTypeNameByIndex:(int)indexPath.row];
 //        return 1;
     }else if (indexPath.section==1){
-         rowName=[self getOutputSpkTypeNameByIndex:(int)indexPath.row+1];
+         rowName=[SourceModeUtils getOutputSpkTypeNameByIndex:(int)indexPath.row+1];
 //        return 12;
     }else if (indexPath.section==2){
-         rowName=[self getOutputSpkTypeNameByIndex:(int)indexPath.row+13];
+         rowName=[SourceModeUtils getOutputSpkTypeNameByIndex:(int)indexPath.row+13];
 //        return 6;
     }else if (indexPath.section==3){
-         rowName=[self getOutputSpkTypeNameByIndex:(int)indexPath.row+19];
+         rowName=[SourceModeUtils getOutputSpkTypeNameByIndex:(int)indexPath.row+19];
 //        return 3;
     }else if (indexPath.section==4){
-         rowName=[self getOutputSpkTypeNameByIndex:(int)indexPath.row+21];
+         rowName=[SourceModeUtils getOutputSpkTypeNameByIndex:(int)indexPath.row+21];
 //        return 3;
     }
     cell.textLabel.text=rowName;
@@ -223,23 +182,29 @@
             //        return 3;
         }
     }else if(self.myType==SPKTYPE_IN){
-        if (indexPath.section==0) {
-            RecStructData.System.in_spk_type[input_channel_sel]=indexPath.row;
-            //        return 1;
-        }else if (indexPath.section==1){
-            RecStructData.System.in_spk_type[input_channel_sel]=indexPath.row+1;
-            
-            //        return 12;
-        }else if (indexPath.section==2){
-            RecStructData.System.in_spk_type[input_channel_sel]=indexPath.row+13;
-            //        return 6;
-        }else if (indexPath.section==3){
-            RecStructData.System.in_spk_type[input_channel_sel]=indexPath.row+19;
-            //        return 3;
-        }else if (indexPath.section==4){
-            RecStructData.System.in_spk_type[input_channel_sel]=indexPath.row+21;
-            //        return 3;
+        
+        
+        if (input_channel_sel>=3) {
+            int index=input_channel_sel-3;
+            if (indexPath.section==0) {
+                RecStructData.System.in_spk_type[index]=indexPath.row;
+                //        return 1;
+            }else if (indexPath.section==1){
+                RecStructData.System.in_spk_type[index]=indexPath.row+1;
+                
+                //        return 12;
+            }else if (indexPath.section==2){
+                RecStructData.System.in_spk_type[index]=indexPath.row+13;
+                //        return 6;
+            }else if (indexPath.section==3){
+                RecStructData.System.in_spk_type[index]=indexPath.row+19;
+                //        return 3;
+            }else if (indexPath.section==4){
+                RecStructData.System.in_spk_type[index]=indexPath.row+21;
+                //        return 3;
+            }
         }
+        
         
     }
     

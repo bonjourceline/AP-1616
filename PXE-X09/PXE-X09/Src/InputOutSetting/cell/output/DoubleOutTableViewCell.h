@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoubleOutItem.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoubleOutTableViewCell : UITableViewCell
-
+@property(nonatomic,strong)DoubleOutItem *item;
 @end
 
 NS_ASSUME_NONNULL_END

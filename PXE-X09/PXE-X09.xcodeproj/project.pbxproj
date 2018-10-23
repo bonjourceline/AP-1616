@@ -1061,7 +1061,6 @@
 				1459BFD31E5C428B0085FFA6 /* UI_Mixer */,
 				1459BFD21E5C427F0085FFA6 /* UI_EQ */,
 				1459BFD11E5C42650085FFA6 /* UI_Output */,
-				1459BFD01E5C424F0085FFA6 /* UI_XOver */,
 				14E452DC1E8AAEBD0078A4AE /* UI_OutputPage */,
 				1459BFCF1E5C423B0085FFA6 /* UI_Delay */,
 			);
@@ -1081,13 +1080,6 @@
 				AA7B8C6320720D240055B37C /* DelayViewController_Ch.m */,
 			);
 			path = UI_Delay;
-			sourceTree = "<group>";
-		};
-		1459BFD01E5C424F0085FFA6 /* UI_XOver */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI_XOver;
 			sourceTree = "<group>";
 		};
 		1459BFD11E5C42650085FFA6 /* UI_Output */ = {
@@ -1734,9 +1726,9 @@
 				7237812F2175D6D800335461 /* SingleOutTableViewCell.h */,
 				723781302175D6D900335461 /* SingleOutTableViewCell.m */,
 				723781312175D6D900335461 /* SingleOutTableViewCell.xib */,
-				723781262175D5D900335461 /* DoubleOutTableViewCell.xib */,
-				723781282175D5D900335461 /* DoubleOutTableViewCell.m */,
 				7237812A2175D5D900335461 /* DoubleOutTableViewCell.h */,
+				723781282175D5D900335461 /* DoubleOutTableViewCell.m */,
+				723781262175D5D900335461 /* DoubleOutTableViewCell.xib */,
 			);
 			path = output;
 			sourceTree = "<group>";

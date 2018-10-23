@@ -34,26 +34,7 @@
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.mas_centerY);
     }];
-    self.hl_setBtn=[[NormalButton alloc]init];
-    [self.hl_setBtn
-                    initViewBroder:[Dimens GDimens:11]
-                   withBorderWidth:1
-                   withNormalColor:bgNormal
-                    withPressColor:bgNormal
-             withBorderNormalColor:borderNormal
-              withBorderPressColor:borderNormal
-               withTextNormalColor:(0xFFffffff)
-                withTextPressColor:(0xFFffffff)
-                          withType:4];
-    [self.hl_setBtn setTitle:[LANG DPLocalizedString:@"HI"] forState:UIControlStateNormal];
-    self.hl_setBtn.titleLabel.font=[UIFont systemFontOfSize:13];
-    self.hl_setBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
-    [self addSubview:self.hl_setBtn];
-    [self.hl_setBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_centerY);
-        make.centerX.equalTo(self.item1.chName.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:22]));
-    }];
+    
     
     self.item2=[[SingleChItem alloc]init];
     [self.item2 setChannelIndex:secCh];
@@ -64,17 +45,129 @@
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.mas_bottom);
     }];
-}
--(void)setLinkView:(BOOL)boolean{
     
+    self.hl_setBtn=[[NormalButton alloc]init];
+    [self.hl_setBtn
+     initViewBroder:[Dimens GDimens:11]
+     withBorderWidth:1
+     withNormalColor:bgNormal
+     withPressColor:bgNormal
+     withBorderNormalColor:borderNormal
+     withBorderPressColor:borderNormal
+     withTextNormalColor:(0xFFffffff)
+     withTextPressColor:(0xFFffffff)
+     withType:4];
+    [self.hl_setBtn setTitle:[LANG DPLocalizedString:@"HI"] forState:UIControlStateNormal];
+    self.hl_setBtn.titleLabel.font=[UIFont systemFontOfSize:13];
+    [self.hl_setBtn addTarget:self action:@selector(changeHl_setBtn:) forControlEvents:UIControlEventTouchUpInside];
+    self.hl_setBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
+    [self addSubview:self.hl_setBtn];
+    [self.hl_setBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.centerX.equalTo(self.item1.chName.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:45], [Dimens GDimens:22]));
+    }];
+    
+    self.linkModeView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [Dimens GDimens:80], [Dimens GDimens:150])];
+    self.linkModeView.userInteractionEnabled=NO;
+    [self addSubview:self.linkModeView];
+    [self.linkModeView setImage:[UIImage imageNamed:@"link_bg"]];
+    [self.linkModeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.item2.spkBtn.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:80], [Dimens GDimens:150]));
+    }];
+    
+    self.linkBtn=[[UIButton alloc]init];
+    [self addSubview:self.linkBtn];
+    [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
+    [self.linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.centerX.equalTo(self.linkModeView.mas_right);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:25], [Dimens GDimens:25]));
+    }];
+    
+//    self.linkModeView.backgroundColor=RGBA(255, 255, 255, 0.7);
+}
+-(void)showLinkView:(BOOL)boolean{
+    if (boolean) {
+        
+        self.linkModeView.hidden=NO;
+        self.linkBtn.hidden=NO;
+    }else{
+        
+        self.linkModeView.hidden=YES;
+        self.linkBtn.hidden=YES;
+    }
+}
+-(void)changeHl_setBtn:(UIButton *)sender{
+    int index=(secCh-2)/2-1;
+    if (RecStructData.System.high_Low_Set[index]==0) {
+        RecStructData.System.high_Low_Set[index]=1;
+        [self.item1.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
+        [self.item2.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
+        [self.hl_setBtn setTitle:@"HI" forState:UIControlStateNormal];
+    }else{
+        RecStructData.System.high_Low_Set[index]=0;
+        [self.item1.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
+        [self.item2.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
+        [self.hl_setBtn setTitle:@"AUX" forState:UIControlStateNormal];
+    }
 }
 -(void)flashView{
+    //设置真实下发通道位置
     [self.item1 setChannelIndex:firstCh];
     [self.item2 setChannelIndex:secCh];
     [self.item1 flashView];
     self.item1.chName.text=[NSString stringWithFormat:@"输入%d",firstCh-2];
     [self.item2 flashView];
     self.item2.chName.text=[NSString stringWithFormat:@"输入%d",secCh-2];
+    
+    if (RecStructData.System.aux_mode==0&&RecStructData.System.high_mode==0) {
+        self.hl_setBtn.userInteractionEnabled=YES;
+    }else{
+        self.hl_setBtn.userInteractionEnabled=NO;
+    }
+    //判断是高电平还是低电平
+    int index=(secCh-2)/2-1;
+    if (RecStructData.System.high_Low_Set[index]==0) {
+        [self.item1.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
+        [self.item2.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
+        [self.hl_setBtn setTitle:@"AUX" forState:UIControlStateNormal];
+        if (RecStructData.System.aux_mode==0) {
+            self.item1.spkBtn.userInteractionEnabled=YES;
+            self.item2.spkBtn.userInteractionEnabled=YES;
+            [self showLinkView:NO];
+        }else{
+            self.item1.spkBtn.userInteractionEnabled=NO;
+            self.item2.spkBtn.userInteractionEnabled=NO;
+            
+            int spkType=RecStructData.System.in_spk_type[firstCh-3];
+            if (spkType==0||spkType==21||spkType==24||spkType==19||spkType==20) {
+                [self showLinkView:NO];
+            }else{
+                [self showLinkView:YES];
+            }
+        }
+    }else{
+        [self.item1.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
+        [self.item2.sourceImage setImage:[UIImage imageNamed:@"Source_High"]];
+        [self.hl_setBtn setTitle:@"HI" forState:UIControlStateNormal];
+        if (RecStructData.System.high_mode==0) {
+            self.item1.spkBtn.userInteractionEnabled=YES;
+            self.item2.spkBtn.userInteractionEnabled=YES;
+            [self showLinkView:NO];
+        }else{
+            self.item1.spkBtn.userInteractionEnabled=NO;
+            self.item2.spkBtn.userInteractionEnabled=NO;
+            int spkType=RecStructData.System.in_spk_type[firstCh-3];
+            if (spkType==0||spkType==21||spkType==24||spkType==19||spkType==20) {
+                [self showLinkView:NO];
+            }else{
+                [self showLinkView:YES];
+            }
+        }
+    }
    
 }
 /*
