@@ -137,7 +137,9 @@
     }
 }
 +(void)syncSource{
-    
+    for (int i=0; i<IN_CH_MAX; i++) {
+        RecStructData.IN_CH[i].LinkFlag=0;
+    }
     for (int i=0; i<5; i++) {
         RecStructData.System.InSwitch[i]=RecStructData.System.InSwitch_temp[i];
     }
@@ -158,6 +160,19 @@
     }
     for (int i=0; i<16; i++) {
         RecStructData.System.out_spk_type[i]=RecStructData.System.out_spk_type_temp[i];
+    }
+}
++(void)syncOutSource{
+  
+    RecStructData.System.out_mode=RecStructData.System.out_mode_temp;
+   
+    RecStructData.System.OutputChNum=RecStructData.System.OutputChNum_temp;
+    
+    for (int i=0; i<16; i++) {
+        RecStructData.System.out_spk_type[i]=RecStructData.System.out_spk_type_temp[i];
+    }
+    for (int i=0; i<Output_CH_MAX; i++) {
+        RecStructData.OUT_CH[i].LinkFlag=0;
     }
 }
 +(void)setHiModeTypeSetting{
@@ -779,5 +794,23 @@
             break;
     }
    
+}
++(int)getMaxInputChannel{
+    int maxChannel=0;
+    NSMutableArray * threeCells =[[NSMutableArray alloc]init];
+    for (int i=0; i<3; i++) {
+        if (RecStructData.System.InSwitch[i]!=0) {
+            [threeCells addObject:@(i)];
+        }
+    }
+   
+    maxChannel=3;
+    if (RecStructData.System.InSwitch[3]!=0) {
+        maxChannel=maxChannel+RecStructData.System.HiInputChNum;
+    }
+    if (RecStructData.System.InSwitch[4]!=0) {
+        maxChannel=maxChannel+RecStructData.System.AuxInputChNum;
+    }
+    return maxChannel;
 }
 @end

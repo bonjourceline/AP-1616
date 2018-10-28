@@ -235,17 +235,28 @@
             output_channel_sel=nextIndex;
             
         }
+        [self flashView];
     }else{
         int nextIndex=input_channel_sel;
-        if (++nextIndex>=Input_CH_MAX_USE) {
+        if (++nextIndex>=[SourceModeUtils getMaxInputChannel]) {
             
         }else{
             input_channel_sel=nextIndex;
+            if (nextIndex<3) {
+                if (RecStructData.System.InSwitch[nextIndex]!=0) {
+                    //含有该音源
+                    [self flashView];
+                }else{
+                    [self nextCh];
+                }
+            }else{
+                [self flashView];
+            }
             
         }
     }
     
-    [self flashView];
+    
 }
 -(void)lastCh{
     if (self.chType==CH_OUT) {
@@ -256,16 +267,28 @@
             output_channel_sel=lastIndex;
             
         }
+        [self flashView];
     }else{
         int lastIndex=input_channel_sel;
-        if (--lastIndex<0) {
+        lastIndex=lastIndex-1;
+        if (lastIndex<3) {
+            if (lastIndex<0) {
+                return;
+            }
+            input_channel_sel=lastIndex;
+            if (RecStructData.System.InSwitch[lastIndex]!=0) {
+                //含有该音源
+                [self flashView];
+            }else{
+                [self lastCh];
+            }
             
         }else{
             input_channel_sel=lastIndex;
-            
+            [self flashView];
         }
     }
-    [self flashView];
+    
 }
 -(void)OutPolar_CLick:(UIButton *)sender{
     if (self.chType==CH_OUT) {

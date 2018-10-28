@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getOutModeName:(int)index;
 + (NSString *)getAuxModeName:(int)index;
 +(void)syncSourceTemp;
-+(void)syncSource;
++(void)syncSource;//主要是输入配置
++(void)syncOutSource;//输出配置
 /**
  设置高电平通道类型
  */
@@ -40,6 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
  设置输出通道类型
  */
 +(void)setOUTModeTypeSetting;
+/**
+ 获取最大通道数
+ */
++(int)getMaxInputChannel;
 @end
 
 NS_ASSUME_NONNULL_END

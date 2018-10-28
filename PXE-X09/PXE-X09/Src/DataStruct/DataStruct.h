@@ -295,7 +295,7 @@ struct	output_Struct			//输出共296字节
     uint8   IN6_Vol;
     uint8   IN7_Vol;
     uint8   IN8_Vol;
-    
+    //前六个是光纤同轴蓝牙的 7、8不用
     //压缩器 ID = 34
     uint8	IN9_Vol;
     uint8	IN10_Vol;
@@ -460,7 +460,7 @@ struct Data {
 #pragma Json 数据
 
 struct JMusic {
-    uint8	MusicJ[16][U0DataLen];	//数据内容
+    uint8	MusicJ[19][U0DataLen];	//数据内容
 };
 struct JOutput {
     uint8	OutputJ[16][U0DataLen];	//数据内容

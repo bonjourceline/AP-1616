@@ -199,14 +199,15 @@
             }
             
         }
-       
+        [SourceModeUtils setHiModeTypeSetting];
+        [SourceModeUtils setAUXModeTypeSetting];
+        [SourceModeUtils syncSource];
     }else{
         
         RecStructData.System.OutputChNum_temp=OutNum;
+        [SourceModeUtils syncOutSource];
     }
-    [SourceModeUtils setHiModeTypeSetting];
-    [SourceModeUtils setAUXModeTypeSetting];
-    [SourceModeUtils syncSource];
+    
     
     self.blackHome();
 }

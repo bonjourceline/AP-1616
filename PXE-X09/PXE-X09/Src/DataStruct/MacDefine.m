@@ -237,7 +237,7 @@ uint16 IN_EQ_Gain_MAX  = 240;
 uint16 EQ_Freq_MAX = 240;
 uint16 EQ_BW_MAX = 295;
 
-uint8 IN_CH_MAX       = 16;//Json 要同步
+uint8 IN_CH_MAX       = 19;//Json 要同步
 uint8 IN_CH_VolumeMAX = 40;
 uint8 IN_CH_EQ_MAX_USE= 10;
 

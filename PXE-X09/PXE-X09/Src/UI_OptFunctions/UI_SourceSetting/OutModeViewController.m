@@ -99,7 +99,7 @@
     }else{
         
         [SourceModeUtils setOUTModeTypeSetting];
-        [SourceModeUtils syncSource];
+        [SourceModeUtils syncOutSource];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     

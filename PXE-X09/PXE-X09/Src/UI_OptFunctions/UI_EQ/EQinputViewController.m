@@ -135,16 +135,37 @@
 };
 -(void)nextCh{
     int nextIndex=input_channel_sel;
-    if (++nextIndex>=Input_CH_MAX_USE) {
+    if (++nextIndex>=[SourceModeUtils getMaxInputChannel]) {
         
     }else{
         input_channel_sel=nextIndex;
-        [self FlashPageUI];
+        if (nextIndex<3) {
+            if (RecStructData.System.InSwitch[nextIndex]!=0) {
+                //含有该音源
+                [self FlashPageUI];
+            }else{
+                [self nextCh];
+            }
+        }else{
+            [self FlashPageUI];
+        }
+        
     }
 }
 -(void)lastCh{
     int lastIndex=input_channel_sel;
-    if (--lastIndex<0) {
+    lastIndex=lastIndex-1;
+    if (lastIndex<3) {
+        if (lastIndex<0) {
+            return;
+        }
+        input_channel_sel=lastIndex;
+        if (RecStructData.System.InSwitch[lastIndex]!=0) {
+            //含有该音源
+            [self FlashPageUI];
+        }else{
+            [self lastCh];
+        }
         
     }else{
         input_channel_sel=lastIndex;
@@ -1290,7 +1311,22 @@
     [self.h_Xover flashXover];
     [self.l_Xover flashXover];
     //    [self.channelColletionView MyChannelReload];
-    self.channelLab.text=[NSString stringWithFormat:@"输入%d",input_channel_sel+1];
+    if (input_channel_sel==0) {
+        
+        self.channelLab.text=[NSString stringWithFormat:@"%@",[LANG DPLocalizedString:@"L_InputSource_Optical"]];
+        
+        
+    }else if (input_channel_sel==1){
+        self.channelLab.text=[NSString stringWithFormat:@"%@",[LANG DPLocalizedString:@"L_InputSource_Coaxial"]];
+        
+        
+    }else if (input_channel_sel==2){
+        self.channelLab.text=[NSString stringWithFormat:@"%@",[LANG DPLocalizedString:@"L_InputSource_Bluetooth"]];
+        
+    }else{
+        self.channelLab.text=[NSString stringWithFormat:@"输入%d",input_channel_sel-2];
+    }
+//    self.channelLab.text=[NSString stringWithFormat:@"输入%d",input_channel_sel+1];
     EQItem *find_btn;
     [self.EQV_INS SetINEQData:RecStructData.IN_CH[input_channel_sel]];
     [self setEQItemSelColorClean];

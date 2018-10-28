@@ -7,7 +7,7 @@
 //
 
 #import "DoubleOutItem.h"
-
+#import "DataCommunication.h"
 @implementation DoubleOutItem
 {
     int firstCh;
@@ -55,6 +55,7 @@
     }];
     
     self.linkBtn=[[UIButton alloc]init];
+    [self.linkBtn addTarget:self action:@selector(changeLinkState:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.linkBtn];
     [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
     [self.linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,6 +63,59 @@
         make.centerX.equalTo(self.linkModeView.mas_right);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:25], [Dimens GDimens:25]));
     }];
+}
+-(void)changeLinkState:(UIButton *)sender{
+ 
+    if (RecStructData.OUT_CH[firstCh].LinkFlag!=0) {
+        RecStructData.OUT_CH[firstCh].LinkFlag=0;
+        RecStructData.OUT_CH[secCh].LinkFlag=0;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
+    }else{
+        [self showLinkView];
+    }
+}
+-(void)showLinkView{
+    UIAlertController *alert;
+    alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_Out_Set_LinkLR"]message:[LANG DPLocalizedString:@"L_Out_Opt_Channel_Link"]preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Out_LeftToRight"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        copyGroupData(firstCh, secCh);
+        RecStructData.OUT_CH[firstCh].LinkFlag=secCh;
+        RecStructData.OUT_CH[secCh].LinkFlag=secCh;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+        [DataCManager ComparedToSendData:false];
+        [DataCManager SEFF_Save:0];
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Out_RightToLeft"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        copyGroupData(secCh, firstCh);
+        RecStructData.OUT_CH[firstCh].LinkFlag=secCh;
+        RecStructData.OUT_CH[secCh].LinkFlag=secCh;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+        [DataCManager ComparedToSendData:false];
+        [DataCManager SEFF_Save:0];
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"不复制"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        RecStructData.OUT_CH[firstCh].LinkFlag=secCh;
+        RecStructData.OUT_CH[secCh].LinkFlag=secCh;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+        
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
+    }]];
+    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    [window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 -(void)showLinkView:(BOOL)boolean{
     if(boolean){
@@ -79,6 +133,16 @@
     self.item1.chName.text=[NSString stringWithFormat:@"输入%d",firstCh+1];
     [self.item2 flashView];
     self.item2.chName.text=[NSString stringWithFormat:@"输入%d",secCh+1];
+    
+    int index=firstCh/2;
+    if (RecStructData.OUT_CH[firstCh].LinkFlag!=0) {
+    
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+    }else{
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
+    }
+    
+    
     if (RecStructData.System.out_mode!=0) {
         int spkType=RecStructData.System.out_spk_type[firstCh];
         if (spkType==0||spkType==21||spkType==24||spkType==19||spkType==20) {

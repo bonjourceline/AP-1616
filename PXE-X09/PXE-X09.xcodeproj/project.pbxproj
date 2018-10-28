@@ -137,6 +137,8 @@
 		7237814B2175D96200335461 /* DoubleOutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7237814A2175D96200335461 /* DoubleOutItem.m */; };
 		72398D362176C2B500F99FA5 /* MixerSelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D352176C2B500F99FA5 /* MixerSelViewController.m */; };
 		72398D392176DD4F00F99FA5 /* InSourceSelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D382176DD4F00F99FA5 /* InSourceSelViewController.m */; };
+		72398D3C21803FBE00F99FA5 /* LinkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D3B21803FBE00F99FA5 /* LinkTool.m */; };
+		72398D402182B6C200F99FA5 /* LinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D3F2182B6C200F99FA5 /* LinkViewController.m */; };
 		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
 		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
@@ -494,6 +496,10 @@
 		72398D352176C2B500F99FA5 /* MixerSelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixerSelViewController.m; sourceTree = "<group>"; };
 		72398D372176DD4F00F99FA5 /* InSourceSelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InSourceSelViewController.h; sourceTree = "<group>"; };
 		72398D382176DD4F00F99FA5 /* InSourceSelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InSourceSelViewController.m; sourceTree = "<group>"; };
+		72398D3A21803FBE00F99FA5 /* LinkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkTool.h; sourceTree = "<group>"; };
+		72398D3B21803FBE00F99FA5 /* LinkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkTool.m; sourceTree = "<group>"; };
+		72398D3E2182B6C200F99FA5 /* LinkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkViewController.h; sourceTree = "<group>"; };
+		72398D3F2182B6C200F99FA5 /* LinkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkViewController.m; sourceTree = "<group>"; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
 		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
@@ -1023,6 +1029,7 @@
 		1459BFC91E5C41E50085FFA6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				72398D3D2182B69000F99FA5 /* linkViewController */,
 				14CCB0F51EF41B3200ABDC5E /* Home */,
 				AA62E8FC215F19040023F225 /* InputOutSetting */,
 				AA5F6416214F54E300FFD50C /* UI_SourceSetting */,
@@ -1679,7 +1686,6 @@
 			children = (
 				723781342175D6FD00335461 /* input */,
 				723781242175D5D900335461 /* output */,
-				723780CA217070F800335461 /* items */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1695,21 +1701,6 @@
 			path = XoverItem;
 			sourceTree = "<group>";
 		};
-		723780CA217070F800335461 /* items */ = {
-			isa = PBXGroup;
-			children = (
-				723781492175D96200335461 /* DoubleOutItem.h */,
-				7237814A2175D96200335461 /* DoubleOutItem.m */,
-				722395D9216BA4E300AA5086 /* SingleOutChItem.h */,
-				722395DA216BA4E300AA5086 /* SingleOutChItem.m */,
-				722395CB2167846800AA5086 /* SingleChItem.h */,
-				722395CC2167846800AA5086 /* SingleChItem.m */,
-				723780CB2170734400335461 /* DoubleChItem.h */,
-				723780CC2170734400335461 /* DoubleChItem.m */,
-			);
-			path = items;
-			sourceTree = "<group>";
-		};
 		723780D82174927200335461 /* LMJDropdownMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1723,6 +1714,10 @@
 		723781242175D5D900335461 /* output */ = {
 			isa = PBXGroup;
 			children = (
+				723781492175D96200335461 /* DoubleOutItem.h */,
+				7237814A2175D96200335461 /* DoubleOutItem.m */,
+				722395D9216BA4E300AA5086 /* SingleOutChItem.h */,
+				722395DA216BA4E300AA5086 /* SingleOutChItem.m */,
 				7237812F2175D6D800335461 /* SingleOutTableViewCell.h */,
 				723781302175D6D900335461 /* SingleOutTableViewCell.m */,
 				723781312175D6D900335461 /* SingleOutTableViewCell.xib */,
@@ -1736,6 +1731,10 @@
 		723781342175D6FD00335461 /* input */ = {
 			isa = PBXGroup;
 			children = (
+				722395CB2167846800AA5086 /* SingleChItem.h */,
+				722395CC2167846800AA5086 /* SingleChItem.m */,
+				723780CB2170734400335461 /* DoubleChItem.h */,
+				723780CC2170734400335461 /* DoubleChItem.m */,
 				723781422175D76B00335461 /* DoubleChTableViewCell.h */,
 				723781412175D76B00335461 /* DoubleChTableViewCell.m */,
 				723781432175D76B00335461 /* DoubleChTableViewCell.xib */,
@@ -1744,6 +1743,15 @@
 				723781402175D76B00335461 /* SingleTableViewCell.xib */,
 			);
 			path = input;
+			sourceTree = "<group>";
+		};
+		72398D3D2182B69000F99FA5 /* linkViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72398D3E2182B6C200F99FA5 /* LinkViewController.h */,
+				72398D3F2182B6C200F99FA5 /* LinkViewController.m */,
+			);
+			path = linkViewController;
 			sourceTree = "<group>";
 		};
 		AA045138215E1138004675FD /* items */ = {
@@ -1853,6 +1861,8 @@
 				AA62E8FA215F18FD0023F225 /* InputSetViewController.m */,
 				AA62E8FD215F194D0023F225 /* OutSetViewController.h */,
 				AA62E8FE215F194D0023F225 /* OutSetViewController.m */,
+				72398D3A21803FBE00F99FA5 /* LinkTool.h */,
+				72398D3B21803FBE00F99FA5 /* LinkTool.m */,
 			);
 			path = InputOutSetting;
 			sourceTree = "<group>";
@@ -2099,6 +2109,7 @@
 				72398D362176C2B500F99FA5 /* MixerSelViewController.m in Sources */,
 				14E8CCDF1EF8D42800887903 /* IZValueSelectorView.m in Sources */,
 				142332991EC1DB7900E3FCC4 /* MJExtensionConst.m in Sources */,
+				72398D402182B6C200F99FA5 /* LinkViewController.m in Sources */,
 				AABFD46E202439A90089A5E9 /* XOverOutputViewController.m in Sources */,
 				1423327E1EC1CE0500E3FCC4 /* JSONModel+networking.m in Sources */,
 				14B44AC31E69786E00D524C6 /* MASConstraint.m in Sources */,
@@ -2156,6 +2167,7 @@
 				141732C11EBCA398002481B9 /* ExpandTableVC.m in Sources */,
 				142332521EC1CD5100E3FCC4 /* BaseModel.m in Sources */,
 				AABFD47F20243AA60089A5E9 /* OutputPageViewController.m in Sources */,
+				72398D3C21803FBE00F99FA5 /* LinkTool.m in Sources */,
 				AABFD3FF2024197E0089A5E9 /* BabyRhythm.m in Sources */,
 				1423322B1EC1CBBA00E3FCC4 /* Tools.m in Sources */,
 				AA04513B215E284A004675FD /* OutModeViewController.m in Sources */,

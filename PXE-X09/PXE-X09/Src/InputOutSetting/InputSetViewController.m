@@ -11,6 +11,7 @@
 #import "SourceSettingController.h"
 #import "EQinputViewController.h"
 #import "DoubleChTableViewCell.h"
+#import "LinkViewController.h"
 #define btnWidth 80
 #define btnHeight 25
 @interface InputSetViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -20,6 +21,7 @@
 }
 @property(nonatomic,strong)UITableView *inputTableView;
 @property (nonatomic,strong)NSMutableArray *threeCells;
+@property (nonatomic,strong)UIButton *linkBtn;
 
 @end
 
@@ -49,6 +51,20 @@
         make.centerX.equalTo(self.view.mas_left).offset([Dimens GDimens:125]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:btnWidth], [Dimens GDimens:btnHeight]));
     }];
+    self.linkBtn=[[UIButton alloc]init];
+    [self.view addSubview:self.linkBtn];
+    [self.linkBtn addTarget:self action:@selector(openLinkVc) forControlEvents:UIControlEventTouchUpInside];
+    [self.linkBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    self.linkBtn.backgroundColor=[UIColor greenColor];
+    [self.linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(inputTypeBtn.mas_centerY);
+        make.left.equalTo(self.view.mas_left).offset([Dimens GDimens:18]);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:30], [Dimens GDimens:30]));
+        
+    }];
+    
+    
+    
     UILabel *eqlabel=[[UILabel alloc]init];
     eqlabel.adjustsFontSizeToFitWidth=YES;
     eqlabel.font=[UIFont systemFontOfSize:12];
@@ -204,6 +220,13 @@
 #pragma mark--------弹窗
 -(void)openEqVc{
     EQinputViewController *vc=[[EQinputViewController alloc]init];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+-(void)openLinkVc{
+    LinkViewController *vc=[[LinkViewController alloc]init];
+    vc.isInputType=YES;
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
     [self presentViewController:vc animated:YES completion:nil];
 }
 #pragma mark-----------输入方式

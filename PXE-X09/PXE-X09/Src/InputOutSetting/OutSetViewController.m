@@ -8,6 +8,7 @@
 
 #import "OutSetViewController.h"
 #import "DoubleOutTableViewCell.h"
+#import "LinkViewController.h"
 //#import "SingleOutTableViewCell.h"
 #import "EQViewController.h"
 #import "OutModeViewController.h"
@@ -20,6 +21,7 @@
     int chCount;
 }
 @property(nonatomic,strong)UITableView *outputTableView;
+@property (nonatomic,strong)UIButton *linkBtn;
 @end
 
 @implementation OutSetViewController
@@ -47,6 +49,18 @@
         make.top.equalTo(self.mToolbar.mas_bottom).offset([Dimens GDimens:8]);
         make.centerX.equalTo(self.view.mas_right).offset(-[Dimens GDimens:95]);
         make.size.mas_equalTo(CGSizeMake([Dimens GDimens:btnWidth], [Dimens GDimens:btnHeight]));
+    }];
+    
+    self.linkBtn=[[UIButton alloc]init];
+    [self.view addSubview:self.linkBtn];
+    [self.linkBtn addTarget:self action:@selector(openLinkVc) forControlEvents:UIControlEventTouchUpInside];
+    [self.linkBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    self.linkBtn.backgroundColor=[UIColor greenColor];
+    [self.linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(outputTypeBtn.mas_centerY);
+        make.right.equalTo(self.view.mas_right).offset([Dimens GDimens:-13]);
+        make.size.mas_equalTo(CGSizeMake([Dimens GDimens:30], [Dimens GDimens:30]));
+        
     }];
     
     UILabel *muteLabel=[[UILabel alloc]init];
@@ -187,6 +201,13 @@
     EQViewController *vc=[[EQViewController alloc]init];
     [self presentViewController:vc animated:YES completion:nil];
 
+}
+-(void)openLinkVc{
+    LinkViewController *vc=[[LinkViewController alloc]init];
+    vc.isInputType=NO;
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 -(void)FlashPageUI{
     

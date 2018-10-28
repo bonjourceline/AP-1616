@@ -7,6 +7,7 @@
 //
 
 #import "DoubleChItem.h"
+#import "DataCommunication.h"
 #define borderNormal (0xFF313c45)
 #define bgNormal (0xFF27323d)
 @implementation DoubleChItem
@@ -79,6 +80,7 @@
     }];
     
     self.linkBtn=[[UIButton alloc]init];
+    [self.linkBtn addTarget:self action:@selector(changeLinkState:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.linkBtn];
     [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
     [self.linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,6 +90,60 @@
     }];
     
 //    self.linkModeView.backgroundColor=RGBA(255, 255, 255, 0.7);
+}
+-(void)changeLinkState:(UIButton *)sender{
+    if (RecStructData.IN_CH[firstCh].LinkFlag!=0) {
+        RecStructData.IN_CH[firstCh].LinkFlag=0;
+        RecStructData.IN_CH[secCh].LinkFlag=0;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
+    }else{
+        
+        [self showLinkView];
+        
+    }
+}
+-(void)showLinkView{
+    UIAlertController *alert;
+    alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_Out_Set_LinkLR"]message:[LANG DPLocalizedString:@"L_Out_Opt_Channel_Link"]preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Out_LeftToRight"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        copyGroupData(firstCh, secCh);
+        RecStructData.IN_CH[firstCh].LinkFlag=firstCh;
+        RecStructData.IN_CH[secCh].LinkFlag=firstCh;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+        [DataCManager ComparedToSendData:false];
+        [DataCManager SEFF_Save:0];
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Out_RightToLeft"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        copyGroupData(secCh, firstCh);
+        RecStructData.IN_CH[firstCh].LinkFlag=firstCh;
+        RecStructData.IN_CH[secCh].LinkFlag=firstCh;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+        [DataCManager ComparedToSendData:false];
+        [DataCManager SEFF_Save:0];
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"不复制"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        RecStructData.IN_CH[firstCh].LinkFlag=firstCh;
+        RecStructData.IN_CH[secCh].LinkFlag=firstCh;
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+   
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
+    }]];
+    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    [window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 -(void)showLinkView:(BOOL)boolean{
     if (boolean) {
@@ -128,8 +184,14 @@
     }else{
         self.hl_setBtn.userInteractionEnabled=NO;
     }
+    if (RecStructData.IN_CH[firstCh].LinkFlag!=0) {
+         [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
+    }else{
+        [self.linkBtn setImage:[UIImage imageNamed:@"input_link_normal"] forState:UIControlStateNormal];
+    }
     //判断是高电平还是低电平
     int index=(secCh-2)/2-1;
+    
     if (RecStructData.System.high_Low_Set[index]==0) {
         [self.item1.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
         [self.item2.sourceImage setImage:[UIImage imageNamed:@"Source_Aux"]];
