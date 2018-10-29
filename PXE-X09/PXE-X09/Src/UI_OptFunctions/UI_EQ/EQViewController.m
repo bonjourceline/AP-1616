@@ -134,7 +134,7 @@
 };
 -(void)nextCh{
     int nextIndex=output_channel_sel;
-    if (++nextIndex>=Output_CH_MAX_USE) {
+    if (++nextIndex>=RecStructData.System.OutputChNum) {
         
     }else{
         output_channel_sel=nextIndex;
@@ -445,7 +445,7 @@
     [_CurEQItem.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level] forState:UIControlStateNormal] ;
     [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
     
-    syncLinkData(UI_EQ_ALL);
+    LINK_MODE_AUTOTAG_OUT(UI_EQ_ALL);
 }
 - (void)EQ_SB_Gain_ValueChanged:(UISlider*)sender{
     //NSLog(@"EQ_SB_Gain_ValueChanged id=%d",(int)sender.tag);
@@ -453,13 +453,14 @@
     eqIndex = (int)sender.tag-TagStartEQItem_SB_Gain;
     _CurEQItem = (EQItem *)[self.view viewWithTag:eqIndex+TagStartEQItem_Self];
     [self setEQItemSelColor];
+    AutoLinkValue=(uint16)sender.value + EQ_LEVEL_MIN-RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level;
     RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = (uint16)sender.value + EQ_LEVEL_MIN;
     [self.EQV_INS SetEQData:RecStructData.OUT_CH[output_channel_sel]];
     BufStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = EQ_LEVEL_ZERO;
     [_CurEQItem.Btn_Gain setTitle:[self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level] forState:UIControlStateNormal] ;
     
     [self checkCurResetBtnState];
-    syncLinkData(UI_EQ_Level);
+    LINK_MODE_AUTOTAG_OUT(UI_EQ_Level);
 }
 - (NSString*)ChangeGainValume:(int) num{
     num -= EQ_LEVEL_MIN;
@@ -579,7 +580,7 @@
         RecStructData.OUT_CH[output_channel_sel].EQ[j].shf_db= DefaultStructData.OUT_CH[output_channel_sel].EQ[j].shf_db;
         RecStructData.OUT_CH[output_channel_sel].EQ[j].type = DefaultStructData.OUT_CH[output_channel_sel].EQ[j].type;
     }
-//    syncLinkData(UI_EQ_G_P_MODE_EQ);
+//    LINK_MODE_AUTOTAG_OUT(UI_EQ_G_P_MODE_EQ);
     [self FlashPageUI];
 }
 
@@ -594,7 +595,7 @@
             [find_btn setStateColor:EQItemNoramlLockColor];
         }
     }
-    syncLinkData(UI_EQ_ALL);
+    LINK_MODE_AUTOTAG_OUT(UI_EQ_ALL);
 }
 - (void)setEQItemSelColor{
     
@@ -653,7 +654,7 @@
             RecStructData.OUT_CH[output_channel_sel].EQ[j].level = EQ_LEVEL_ZERO;
         }
     }
-    syncLinkData(UI_EQ_Level);
+     LINK_MODE_AUTOTAG_OUT(UI_EQ_Level);
     [self FlashPageUI];
 }
 #pragma 弹出对话框
@@ -682,7 +683,7 @@
         for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
             RecStructData.OUT_CH_BUF[output_channel_sel].EQ[j].level =  EQ_LEVEL_ZERO;
         }
-        syncLinkData(UI_EQ_ALL);
+        LINK_MODE_AUTOTAG_OUT(UI_EQ_ALL);
         [self FlashPageUI];
         [self.Btn_EQReset setNormal];
         [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
@@ -734,7 +735,7 @@
             break;
         }
     }
-    return i;
+    return i+1;
 }
 -(void)showEQDialog{
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 130)];
@@ -856,6 +857,7 @@
     switch (EQ_MODE) {
         case 1:
         {
+            AutoLinkValue=EQ_LEVEL_MIN+sliderValue-RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level;
             RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level=EQ_LEVEL_MIN+sliderValue;
             _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
             
@@ -863,7 +865,7 @@
             _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [self checkCurResetBtnState];
-            syncLinkData(UI_EQ_Level);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_Level);
         }
             break;
         case 2:
@@ -873,7 +875,7 @@
             _sliderEQ.showValue = [self ChangeBWValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw];
             
             [_CurEQItem.Btn_BW setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
-            syncLinkData(UI_EQ_BW);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_BW);
         }
             break;
         case 3:
@@ -882,7 +884,7 @@
             _sliderEQ.showValue = [NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq];
             
             [_CurEQItem.Btn_Freq setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
-            syncLinkData(UI_EQ_Freq);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_Freq);
         }
             break;
         default:
@@ -897,6 +899,8 @@
         {
             if(--RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level < IN_EQ_LEVEL_MIN){
                 RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = IN_EQ_LEVEL_MIN;
+            }else{
+                AutoLinkValue=-1;
             }
             _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
             _sliderEQ.value=RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
@@ -905,7 +909,7 @@
             _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [self checkCurResetBtnState];
-            syncLinkData(UI_EQ_Level);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_Level);
         }
             break;
         case 2:
@@ -917,7 +921,7 @@
             _sliderEQ.value=EQ_BW_MAX - RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw;
             
             [_CurEQItem.Btn_BW setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
-            syncLinkData(UI_EQ_BW);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_BW);
         }
             break;
         case 3:
@@ -929,7 +933,7 @@
             [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq]];
             
             [_CurEQItem.Btn_Freq setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
-            syncLinkData(UI_EQ_Freq);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_Freq);
         }
             break;
         default:
@@ -943,6 +947,8 @@
         {
             if(++RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level > IN_EQ_LEVEL_MAX){
                 RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level = IN_EQ_LEVEL_MAX;
+            }else{
+                AutoLinkValue=1;
             }
             _sliderEQ.showValue = [self ChangeGainValume:RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level];
             _sliderEQ.value=RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
@@ -951,7 +957,7 @@
             _CurEQItem.SB_Gain.value = RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].level - IN_EQ_LEVEL_MIN;
             
             [self checkCurResetBtnState];
-            syncLinkData(UI_EQ_Level);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_Level);
         }
             break;
         case 2:
@@ -963,7 +969,7 @@
             _sliderEQ.value=EQ_BW_MAX - RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].bw;
             
             [_CurEQItem.Btn_BW setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
-            syncLinkData(UI_EQ_BW);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_BW);
         }
             
             break;
@@ -976,7 +982,7 @@
             [_sliderEQ setValue:[self getFreqIndexFromArray: RecStructData.OUT_CH[output_channel_sel].EQ[eqIndex].freq]];
             
             [_CurEQItem.Btn_Freq setTitle:_sliderEQ.showValue forState:UIControlStateNormal] ;
-            syncLinkData(UI_EQ_Freq);
+            LINK_MODE_AUTOTAG_OUT(UI_EQ_Freq);
         }
             break;
         default:

@@ -8,6 +8,7 @@
 
 #import "XoveritemView.h"
 #import "KGModal.h"
+#import "DataCommunication.h"
 #define btnBorderColor (0xFF212932)
 #define btnTextColor (0xFFffffff)
 @implementation XoveritemView{
@@ -262,10 +263,20 @@
     return (UIViewController *)responder;
 }
 - (void)dialogSetFilter:(int)val{
-    if (val<Filter_List.count) {
-        RecStructData.OUT_CH[output_channel_sel].h_filter = val;
-        [self.filterBtn setTitle:[Filter_List objectAtIndex:val] forState:UIControlStateNormal];
+    if (type==H_Type) {
+        if (val<Filter_List.count) {
+            RecStructData.OUT_CH[output_channel_sel].h_filter = val;
+            [self.filterBtn setTitle:[Filter_List objectAtIndex:val] forState:UIControlStateNormal];
+        }
+        LINK_MODE_AUTOTAG_OUT(UI_HFilter);
+    }else{
+        if (val<Filter_List.count) {
+            RecStructData.OUT_CH[output_channel_sel].l_filter = val;
+            [self.filterBtn setTitle:[Filter_List objectAtIndex:val] forState:UIControlStateNormal];
+        }
+         LINK_MODE_AUTOTAG_OUT(UI_LFilter);
     }
+    
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 #pragma mark -------------------- 弹出选择 Freq
@@ -367,6 +378,7 @@
     int sliderValue = (int)(_sliderFreq.value);
     _sliderFreq.showValue=[NSString stringWithFormat:@"%dHz",(int)FREQ241[sliderValue]];
     if(type==H_Type){
+        int oldValue=RecStructData.OUT_CH[output_channel_sel].h_freq;
         RecStructData.OUT_CH[output_channel_sel].h_freq = FREQ241[sliderValue];
         
         if(RecStructData.OUT_CH[output_channel_sel].h_freq >
@@ -389,12 +401,13 @@
         
         
         [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
-        
+        AutoLinkValue=RecStructData.OUT_CH[output_channel_sel].h_freq-oldValue;
+        LINK_MODE_AUTOTAG_OUT(UI_HFreq);
 //        [self flashLinkSyncData:UI_HFreq];
     }else{
+        int oldValue=RecStructData.OUT_CH[output_channel_sel].l_freq;
         RecStructData.OUT_CH[output_channel_sel].l_freq = FREQ241[sliderValue];
-        
-        
+    
         if(RecStructData.OUT_CH[output_channel_sel].h_freq >
            RecStructData.OUT_CH[output_channel_sel].l_freq){
             
@@ -414,7 +427,8 @@
         
         
         [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
-        
+        AutoLinkValue=RecStructData.OUT_CH[output_channel_sel].l_freq-oldValue;
+        LINK_MODE_AUTOTAG_OUT(UI_LFreq);
 //        [self flashLinkSyncData:UI_LFreq];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -422,6 +436,7 @@
 }
 - (void)DialogFreqSet_Sub{
     if(type==H_Type){
+        int oldValue=RecStructData.OUT_CH[output_channel_sel].h_freq;
         if(--RecStructData.OUT_CH[output_channel_sel].h_freq < 20){
             RecStructData.OUT_CH[output_channel_sel].h_freq = 20;
         }
@@ -445,9 +460,11 @@
         [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
         
         [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
-        
+        AutoLinkValue=RecStructData.OUT_CH[output_channel_sel].h_freq-oldValue;
+        LINK_MODE_AUTOTAG_OUT(UI_HFreq);
 //        [self flashLinkSyncData:UI_HFreq];
     }else{
+        int oldValue=RecStructData.OUT_CH[output_channel_sel].l_freq;
         if(--RecStructData.OUT_CH[output_channel_sel].l_freq < 20){
             RecStructData.OUT_CH[output_channel_sel].l_freq = 20;
         }
@@ -472,13 +489,15 @@
         [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
         
         [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
-        
+        AutoLinkValue=RecStructData.OUT_CH[output_channel_sel].l_freq-oldValue;
+        LINK_MODE_AUTOTAG_OUT(UI_LFreq);
 //        [self flashLinkSyncData:UI_LFreq];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 - (void)DialogFreqSet_Inc{
     if(type==H_Type){
+        int oldValue=RecStructData.OUT_CH[output_channel_sel].h_freq;
         if(++RecStructData.OUT_CH[output_channel_sel].h_freq > 20000){
             RecStructData.OUT_CH[output_channel_sel].h_freq = 20000;
         }
@@ -503,9 +522,11 @@
         [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].h_freq]];
         
         [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].h_freq] forState:UIControlStateNormal];
-        
+        AutoLinkValue=RecStructData.OUT_CH[output_channel_sel].h_freq-oldValue;
+        LINK_MODE_AUTOTAG_OUT(UI_HFreq);
 //        [self flashLinkSyncData:UI_HFreq];
     }else{
+        int oldValue=RecStructData.OUT_CH[output_channel_sel].l_freq;
         if(++RecStructData.OUT_CH[output_channel_sel].l_freq > 20000){
             RecStructData.OUT_CH[output_channel_sel].l_freq = 20000;
         }
@@ -530,7 +551,8 @@
         [_sliderFreq setValue:[self getFreqIndexFromArray:RecStructData.OUT_CH[output_channel_sel].l_freq]];
         
         [self.freqBtn setTitle:[NSString stringWithFormat:@"%dHz",RecStructData.OUT_CH[output_channel_sel].l_freq] forState:UIControlStateNormal];
-        
+        AutoLinkValue=RecStructData.OUT_CH[output_channel_sel].l_freq-oldValue;
+        LINK_MODE_AUTOTAG_OUT(UI_LFreq);
 //        [self flashLinkSyncData:UI_LFreq];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -602,12 +624,13 @@
         [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:val]] forState:UIControlStateNormal] ;
         [self dialogSetFilter:RecStructData.OUT_CH[output_channel_sel].h_filter];
         
+        LINK_MODE_AUTOTAG_OUT(UI_HOct);
 //        [self flashLinkSyncData:UI_HOct];
     }else{
         RecStructData.OUT_CH[output_channel_sel].l_level = val;
         [self.levelBtn setTitle:[NSString stringWithFormat:@"%@",[AllLevel objectAtIndex:val]] forState:UIControlStateNormal] ;
         [self dialogSetFilter:RecStructData.OUT_CH[output_channel_sel].l_filter];
-        
+        LINK_MODE_AUTOTAG_OUT(UI_LOct);
 //        [self flashLinkSyncData:UI_LOct];
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];

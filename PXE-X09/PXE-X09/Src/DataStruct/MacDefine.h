@@ -176,7 +176,7 @@
 #define LINKMODE_AUTO       7 //任意联调，每个通道可以单独联调，可联机保存
 #define LINKMODE_LEFTRIGHT  8 //固定两两通道联调
 #define LINKMODE_FR2A       9 //前声场，后声场，一起两两联调
-
+#define LINKMODE_AUTOTAG    10//标识相同联调
 
 /*名数据块的长度*/
 //  112; //0x70  DataStruct_Iutput:EQ8X9+40=112

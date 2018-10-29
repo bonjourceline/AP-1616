@@ -119,7 +119,7 @@
 //*********Delay
 #define UI_DelayBtn_Press   (0xFF2ea9ff)
 #define UI_DelayBtn_Normal  (0xFF7e7e7e)
-#define UI_DelayBtn_PressIN   (0x24e2ae4e)
+#define UI_DelayBtn_PressIN   (0xFF369bff)
 #define UI_DelayBtn_NormalIN  (0xFF20272e)
 #define UI_DelayBtnText_Press   (0xFF5c3e10)
 #define UI_DelayBtnText_Normal  (0xFFffffff)

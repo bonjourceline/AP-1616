@@ -81,6 +81,8 @@
 
 extern void setMixerVolWithOutputSpk(int chsel);
 extern void syncLinkData(int ui);
+extern void LINK_MODE_AUTOTAG_IN(int ui);
+extern void LINK_MODE_AUTOTAG_OUT(int ui);
 extern void setDataSyncLink(void);
 extern void INS_DataCopy(int Dfrom, int Dto);
 extern void setOutputSpkType(int type,int ch);
@@ -92,6 +94,7 @@ extern void FillSedDataStruct(int DataStruchID, int initBuf[]);
 extern void FillRecDataStructFromArray(uint8 DataStruchID, uint8 ChannelID, uint8 initData[]);
 extern void setXOverFreqWithOutputSpkType(int channel);
 extern void copyGroupData(int Dfrom, int Dto);
+extern void copyGroupData_IN(int Dfrom, int Dto);
 void FillSedData_INS_StructCHBuf(int ch);
 
 #pragma Json Data  转换

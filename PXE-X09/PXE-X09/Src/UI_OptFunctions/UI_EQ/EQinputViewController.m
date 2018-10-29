@@ -756,7 +756,7 @@
             break;
         }
     }
-    return i;
+    return i+1;
 }
 -(void)showEQDialog{
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 130)];

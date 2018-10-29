@@ -7,7 +7,7 @@
 //
 
 #import "VolSettingViewController.h"
-
+#import "DataCommunication.h"
 @interface VolSettingViewController ()
 {
     //主音量计数定时器 减
@@ -153,26 +153,38 @@
 -(void)VolumeSBChange:(VolumeCircleIMLine *)sender{
     int val=[sender GetProgress];
     if (self.chType==CH_OUT) {
+        AutoLinkValue=val-RecStructData.OUT_CH[output_channel_sel].gain;
         RecStructData.OUT_CH[output_channel_sel].gain=val;
+        LINK_MODE_AUTOTAG_OUT(UI_OutVal);
     }else{
+        AutoLinkValue=val-RecStructData.IN_CH[input_channel_sel].gain;
         RecStructData.IN_CH[input_channel_sel].gain=val;
+        LINK_MODE_AUTOTAG_IN(UI_OutVal);
     }
     self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step];
 }
 -(void)subClick{
     int val=0;
+    
     if (self.chType==CH_OUT) {
+        
         val=RecStructData.OUT_CH[output_channel_sel].gain-(1*Output_Volume_Step);
         if (val<0) {
             val=0;
+        }else{
+            AutoLinkValue=-1*Output_Volume_Step;
         }
          RecStructData.OUT_CH[output_channel_sel].gain=val;
+        LINK_MODE_AUTOTAG_OUT(UI_OutVal);
     }else{
         val=RecStructData.IN_CH[input_channel_sel].gain-(1*Output_Volume_Step);
         if (val<0) {
             val=0;
+        }else{
+            AutoLinkValue=-1*Output_Volume_Step;
         }
          RecStructData.IN_CH[input_channel_sel].gain=val;
+        LINK_MODE_AUTOTAG_IN(UI_OutVal);
     }
    
     [self.sbVol setProgress:val];
@@ -180,18 +192,25 @@
 }
 -(void)incClick{
     int val=0;
+    
     if (self.chType==CH_OUT) {
         val=RecStructData.OUT_CH[output_channel_sel].gain+(1*Output_Volume_Step);
         if (val>Output_Volume_MAX) {
             val=Output_Volume_MAX;
+        }else{
+            AutoLinkValue=1*Output_Volume_Step;
         }
          RecStructData.OUT_CH[output_channel_sel].gain=val;
+         LINK_MODE_AUTOTAG_OUT(UI_OutVal);
     }else{
         val=RecStructData.IN_CH[input_channel_sel].gain+(1*Output_Volume_Step);
         if (val>Input_CH_Volume_MAX) {
             val=Input_CH_Volume_MAX;
+        }else{
+            AutoLinkValue=1*Output_Volume_Step;
         }
          RecStructData.IN_CH[input_channel_sel].gain=val;
+        LINK_MODE_AUTOTAG_IN(UI_OutVal);
     }
     [self.sbVol setProgress:val];
     self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step];
@@ -229,7 +248,7 @@
 -(void)nextCh{
     if (self.chType==CH_OUT) {
         int nextIndex=output_channel_sel;
-        if (++nextIndex>=Output_CH_MAX_USE) {
+        if (++nextIndex>=RecStructData.System.OutputChNum) {
             
         }else{
             output_channel_sel=nextIndex;

@@ -3719,11 +3719,179 @@ void syncLinkData(int ui){
     //前声场，后声场，一起两两联调
     else if(LinkMODE == LINKMODE_FR2A){
         LINK_MODE_FR2A();
+    }else if(LinkMODE==LINKMODE_AUTOTAG){
+//        LINK_MODE_AUTOTAG();
     }
     
     
 }
-
+//标识相同联调
+void LINK_MODE_AUTOTAG_IN(int ui){
+    if (RecStructData.IN_CH[input_channel_sel].LinkFlag==0) {
+        return;
+    }
+    int Dfrom=input_channel_sel;
+    int allChannel=0;
+    if (RecStructData.System.InSwitch[3]!=0) {
+        allChannel=RecStructData.System.HiInputChNum;
+    }
+    if (RecStructData.System.InSwitch[4]!=0) {
+        allChannel=allChannel+RecStructData.System.AuxInputChNum;
+    }
+    for (int i=3; i<allChannel; i++) {
+        if ((i!=Dfrom)&&(RecStructData.IN_CH[Dfrom].LinkFlag==RecStructData.IN_CH[i].LinkFlag)) {
+            if(ui == UI_HFilter){
+        
+                RecStructData.IN_CH[i].h_filter=RecStructData.IN_CH[input_channel_sel].h_filter;
+                
+            }else if (ui == UI_HOct){
+                
+                RecStructData.IN_CH[i].h_level=RecStructData.IN_CH[input_channel_sel].h_level;
+                
+            }else if (ui == UI_HFreq){
+                RecStructData.IN_CH[i].h_freq=RecStructData.IN_CH[i].h_freq+AutoLinkValue;
+                if (RecStructData.IN_CH[i].h_freq<20) {
+                    RecStructData.IN_CH[i].h_freq=20;
+                }else if (RecStructData.IN_CH[i].h_freq>RecStructData.IN_CH[i].l_freq){
+                    RecStructData.IN_CH[i].h_freq=RecStructData.IN_CH[i].l_freq;
+                }else if (RecStructData.IN_CH[i].h_freq>20000){
+                    RecStructData.IN_CH[i].h_freq=20000;
+                }
+            }else if (ui == UI_LFilter){
+                RecStructData.IN_CH[i].l_filter=RecStructData.IN_CH[Dfrom].l_filter;
+            }else if (ui == UI_LOct){
+                RecStructData.IN_CH[i].l_level=RecStructData.IN_CH[Dfrom].l_level;
+            }else if (ui == UI_LFreq){
+                RecStructData.IN_CH[i].l_freq=RecStructData.IN_CH[Dfrom].l_freq;
+                RecStructData.IN_CH[i].l_freq=RecStructData.IN_CH[i].l_freq+AutoLinkValue;
+                if (RecStructData.IN_CH[i].l_freq<20) {
+                    RecStructData.IN_CH[i].l_freq=20;
+                }else if (RecStructData.IN_CH[i].h_freq>RecStructData.IN_CH[i].l_freq){
+                    RecStructData.IN_CH[i].l_freq=RecStructData.IN_CH[i].h_freq;
+                }else if (RecStructData.IN_CH[i].l_freq>20000){
+                    RecStructData.IN_CH[i].l_freq=20000;
+                }
+            }else if (ui == UI_OutVal){
+                
+                RecStructData.IN_CH[i].gain=RecStructData.IN_CH[i].gain+AutoLinkValue;
+                if (RecStructData.IN_CH[i].gain<0) {
+                    RecStructData.IN_CH[i].gain=0;
+                }else if (RecStructData.IN_CH[i].gain>Output_Volume_MAX){
+                    RecStructData.IN_CH[i].gain=Output_Volume_MAX;
+                }
+            }else if (ui == UI_OutMute){
+                
+            }else if (ui == UI_OutPolar){
+                 RecStructData.IN_CH[i].polar = RecStructData.IN_CH[Dfrom].polar;
+            }else if (ui == UI_EQ_BW){
+                RecStructData.IN_CH[i].EQ[eqIndex].bw=RecStructData.IN_CH[Dfrom].EQ[eqIndex].bw;
+            }else if (ui == UI_EQ_Freq){
+                 RecStructData.IN_CH[i].EQ[eqIndex].freq=RecStructData.IN_CH[Dfrom].EQ[eqIndex].freq;
+            }else if (ui == UI_EQ_Level){
+                RecStructData.IN_CH[i].EQ[eqIndex].level=RecStructData.IN_CH[i].EQ[eqIndex].level+AutoLinkValue;
+                if (RecStructData.IN_CH[i].EQ[eqIndex].level<EQ_LEVEL_MIN) {
+                    RecStructData.IN_CH[i].EQ[eqIndex].level=EQ_LEVEL_MIN;
+                }else if (RecStructData.IN_CH[i].EQ[eqIndex].level>EQ_LEVEL_MAX){
+                    RecStructData.IN_CH[i].EQ[eqIndex].level=EQ_LEVEL_MAX;
+                }
+            }else if (ui == UI_EQ_G_P_MODE_EQ){
+                RecStructData.IN_CH[i].eq_mode=RecStructData.IN_CH[Dfrom].eq_mode;
+            }else if (ui == UI_EQ_ALL){
+                for(int j=0;j<IN_CH_EQ_MAX;j++){
+                RecStructData.IN_CH[i].EQ[j].freq  =RecStructData.IN_CH[Dfrom].EQ[j].freq;
+                RecStructData.IN_CH[i].EQ[j].level =RecStructData.IN_CH[Dfrom].EQ[j].level;
+                RecStructData.IN_CH[i].EQ[j].bw    =RecStructData.IN_CH[Dfrom].EQ[j].bw;
+                RecStructData.IN_CH[i].EQ[j].shf_db=RecStructData.IN_CH[Dfrom].EQ[j].shf_db;
+                RecStructData.IN_CH[i].EQ[j].type  =RecStructData.IN_CH[Dfrom].EQ[j].type;
+                }
+            }else if (ui == UI_Delay){
+                
+            }
+        }
+    }
+}
+void LINK_MODE_AUTOTAG_OUT(int ui){
+    if (RecStructData.OUT_CH[output_channel_sel].LinkFlag==0) {
+        return;
+    }
+    int Dfrom=output_channel_sel;
+    for (int i=0; i<RecStructData.System.OutputChNum; i++) {
+        if ((i!=Dfrom)&&(RecStructData.OUT_CH[Dfrom].LinkFlag==RecStructData.OUT_CH[i].LinkFlag)) {
+            if(ui==UI_HFilter){
+                RecStructData.OUT_CH[i].h_filter=RecStructData.OUT_CH[Dfrom].h_filter;
+            }else if(ui==UI_HOct){
+                RecStructData.OUT_CH[i].h_level=RecStructData.OUT_CH[Dfrom].h_level;
+            }else if(ui==UI_HFreq){
+                //                RecStructData.OUT_CH[i].h_freq=RecStructData.OUT_CH[Dfrom].h_freq;
+                RecStructData.OUT_CH[i].h_freq=RecStructData.OUT_CH[i].h_freq+AutoLinkValue;
+                if (RecStructData.OUT_CH[i].h_freq<20) {
+                    RecStructData.OUT_CH[i].h_freq=20;
+                }else if (RecStructData.OUT_CH[i].h_freq>RecStructData.OUT_CH[i].l_freq){
+                    RecStructData.OUT_CH[i].h_freq=RecStructData.OUT_CH[i].l_freq;
+                }else if (RecStructData.OUT_CH[i].h_freq>20000){
+                    RecStructData.OUT_CH[i].h_freq=20000;
+                }
+            }else if(ui==UI_LFilter){
+                RecStructData.OUT_CH[i].l_filter=RecStructData.OUT_CH[Dfrom].l_filter;
+                
+            }else if(ui==UI_LOct){
+                RecStructData.OUT_CH[i].l_level=RecStructData.OUT_CH[Dfrom].l_level;
+            }else if(ui==UI_LFreq){
+                //                RecStructData.OUT_CH[i].l_freq=RecStructData.OUT_CH[Dfrom].l_freq;
+                RecStructData.OUT_CH[i].l_freq=RecStructData.OUT_CH[i].l_freq+AutoLinkValue;
+                if (RecStructData.OUT_CH[i].l_freq<20) {
+                    RecStructData.OUT_CH[i].l_freq=20;
+                }else if (RecStructData.OUT_CH[i].h_freq>RecStructData.OUT_CH[i].l_freq){
+                    RecStructData.OUT_CH[i].l_freq=RecStructData.OUT_CH[i].h_freq;
+                }else if (RecStructData.OUT_CH[i].l_freq>20000){
+                    RecStructData.OUT_CH[i].l_freq=20000;
+                }
+            }else if(ui==UI_OutVal){
+                
+                RecStructData.OUT_CH[i].gain=RecStructData.OUT_CH[i].gain+AutoLinkValue;
+                if (RecStructData.OUT_CH[i].gain<0) {
+                    RecStructData.OUT_CH[i].gain=0;
+                }else if (RecStructData.OUT_CH[i].gain>Output_Volume_MAX){
+                    RecStructData.OUT_CH[i].gain=Output_Volume_MAX;
+                }
+            }else if(ui==UI_OutMute){
+                
+            }else if(ui==UI_OutPolar){
+                /*由反相到正相*/
+                RecStructData.OUT_CH[i].polar = RecStructData.OUT_CH[Dfrom].polar;
+            }else if(ui==UI_EQ_BW){
+                RecStructData.OUT_CH[i].EQ[eqIndex].bw=RecStructData.OUT_CH[Dfrom].EQ[eqIndex].bw;
+            }else if(ui==UI_EQ_Freq){
+                RecStructData.OUT_CH[i].EQ[eqIndex].freq=RecStructData.OUT_CH[Dfrom].EQ[eqIndex].freq;
+            }else if(ui==UI_EQ_Level){
+                //                RecStructData.OUT_CH[i].EQ[eqIndex].level=RecStructData.OUT_CH[Dfrom].EQ[eqIndex].level;
+                RecStructData.OUT_CH[i].EQ[eqIndex].level=RecStructData.OUT_CH[i].EQ[eqIndex].level+AutoLinkValue;
+                if (RecStructData.OUT_CH[i].EQ[eqIndex].level<EQ_LEVEL_MIN) {
+                    RecStructData.OUT_CH[i].EQ[eqIndex].level=EQ_LEVEL_MIN;
+                }else if (RecStructData.OUT_CH[i].EQ[eqIndex].level>EQ_LEVEL_MAX){
+                    RecStructData.OUT_CH[i].EQ[eqIndex].level=EQ_LEVEL_MAX;
+                }
+            }else if(ui==UI_EQ_G_P_MODE_EQ){
+                RecStructData.OUT_CH[i].eq_mode=RecStructData.OUT_CH[Dfrom].eq_mode;
+            }else if(ui==UI_EQ_ALL){
+                for(int j=0;j<OUT_CH_EQ_MAX;j++){
+                    RecStructData.OUT_CH[i].EQ[j].freq  =RecStructData.OUT_CH[Dfrom].EQ[j].freq;
+                    RecStructData.OUT_CH[i].EQ[j].level =RecStructData.OUT_CH[Dfrom].EQ[j].level;
+                    RecStructData.OUT_CH[i].EQ[j].bw    =RecStructData.OUT_CH[Dfrom].EQ[j].bw;
+                    RecStructData.OUT_CH[i].EQ[j].shf_db=RecStructData.OUT_CH[Dfrom].EQ[j].shf_db;
+                    RecStructData.OUT_CH[i].EQ[j].type  =RecStructData.OUT_CH[Dfrom].EQ[j].type;
+                }
+            }else if (ui==UI_Delay){
+                RecStructData.OUT_CH[i].delay=RecStructData.OUT_CH[i].delay+AutoLinkValue;
+                if (RecStructData.OUT_CH[i].delay<0) {
+                    RecStructData.OUT_CH[i].delay=0;
+                }else if(RecStructData.OUT_CH[i].delay>DELAY_SETTINGS_MAX){
+                    RecStructData.OUT_CH[i].delay=DELAY_SETTINGS_MAX;
+                }
+            }
+        }
+    }
+}
 //前声场，后声场，超低的联调，单独分开
 void LINK_MODE_FRS(){
     int Dfrom=output_channel_sel;
@@ -4133,25 +4301,37 @@ void LINK_MODE_LEFTRIGHT(){
 void copyGroupData(int Dfrom, int Dto){
     for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
         RecStructData.OUT_CH[Dto].EQ[j].freq   = RecStructData.OUT_CH[Dfrom].EQ[j].freq;
-//        RecStructData.OUT_CH[Dto].EQ[j].level  = RecStructData.OUT_CH[Dfrom].EQ[j].level;
         RecStructData.OUT_CH[Dto].EQ[j].bw     = RecStructData.OUT_CH[Dfrom].EQ[j].bw;
         RecStructData.OUT_CH[Dto].EQ[j].shf_db = RecStructData.OUT_CH[Dfrom].EQ[j].shf_db;
         RecStructData.OUT_CH[Dto].EQ[j].type   = RecStructData.OUT_CH[Dfrom].EQ[j].type;
     }
     //id = 31    杂项  （静音，延时,spk_type不联调）
-//RecStructData.OUT_CH[Dto].mute=ActivityMain.RecStructData.OUT_CH[Dfrom].mute;
-//    RecStructData.OUT_CH[Dto].gain=RecStructData.OUT_CH[Dfrom].gain;
     RecStructData.OUT_CH[Dto].polar=RecStructData.OUT_CH[Dfrom].polar;
-    //RecStructData.OUT_CH[Dto].delay=RecStructData.OUT_CH[Dfrom].delay;
     RecStructData.OUT_CH[Dto].eq_mode=RecStructData.OUT_CH[Dfrom].eq_mode;
-    //RecStructData.OUT_CH[Dto].spk_type=RecStructData.OUT_CH[Dfrom].spk_type;
     //高低通 ,ID = 32    (xover限MIC)
-//    RecStructData.OUT_CH[Dto].h_freq   = RecStructData.OUT_CH[Dfrom].h_freq;
+
     RecStructData.OUT_CH[Dto].h_filter = RecStructData.OUT_CH[Dfrom].h_filter;
     RecStructData.OUT_CH[Dto].h_level  = RecStructData.OUT_CH[Dfrom].h_level;
-//    RecStructData.OUT_CH[Dto].l_freq   = RecStructData.OUT_CH[Dfrom].l_freq;
     RecStructData.OUT_CH[Dto].l_filter = RecStructData.OUT_CH[Dfrom].l_filter;
     RecStructData.OUT_CH[Dto].l_level  = RecStructData.OUT_CH[Dfrom].l_level;
+}
+void copyGroupData_IN(int Dfrom, int Dto){
+    for(int j=0;j<IN_CH_EQ_MAX_USE;j++){
+        RecStructData.IN_CH[Dto].EQ[j].freq   = RecStructData.IN_CH[Dfrom].EQ[j].freq;
+        RecStructData.IN_CH[Dto].EQ[j].bw     = RecStructData.IN_CH[Dfrom].EQ[j].bw;
+        RecStructData.IN_CH[Dto].EQ[j].shf_db = RecStructData.IN_CH[Dfrom].EQ[j].shf_db;
+        RecStructData.IN_CH[Dto].EQ[j].type   = RecStructData.IN_CH[Dfrom].EQ[j].type;
+    }
+    //id = 31    杂项  （静音，延时,spk_type不联调）
+ 
+    RecStructData.IN_CH[Dto].polar=RecStructData.IN_CH[Dfrom].polar;
+    RecStructData.IN_CH[Dto].eq_mode=RecStructData.IN_CH[Dfrom].eq_mode;
+    
+    //高低通 ,ID = 32    (xover限MIC)
+    RecStructData.IN_CH[Dto].h_filter = RecStructData.IN_CH[Dfrom].h_filter;
+    RecStructData.IN_CH[Dto].h_level  = RecStructData.IN_CH[Dfrom].h_level;
+    RecStructData.IN_CH[Dto].l_filter = RecStructData.IN_CH[Dfrom].l_filter;
+    RecStructData.IN_CH[Dto].l_level  = RecStructData.IN_CH[Dfrom].l_level;
 }
 void setDataSyncLink(void){
     //前声场，后声场，超低的联调，单独分开

@@ -183,6 +183,9 @@
 }
 -(void)clickSpk:(UIButton *)btn{
     input_channel_sel=chIndex;
+    if (RecStructData.IN_CH[input_channel_sel].LinkFlag==0) {
+        return;
+    }
     SpkViewController *vc=[[SpkViewController alloc]init];
     vc.myType=SPKTYPE_IN;
     vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;

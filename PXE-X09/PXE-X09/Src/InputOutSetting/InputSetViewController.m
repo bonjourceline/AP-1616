@@ -176,7 +176,7 @@
             [self openEqVc];
         };
         cell.item.reloadblock = ^{
-            [self.inputView reloadData];
+            [self.inputTableView reloadData];
         };
         return cell;
         
@@ -202,13 +202,13 @@
             [self openEqVc];
         };
         cell.item.item1.reloadblock = ^{
-            [self.inputView reloadData];
+            [self.inputTableView reloadData];
         };
         cell.item.item2.eqblock = ^(int index) {
             [self openEqVc];
         };
         cell.item.item2.reloadblock = ^{
-            [self.inputView reloadData];
+            [self.inputTableView reloadData];
         };
         int chValue=(int)(indexPath.row-self.threeCells.count+1)*2+1;
         NSLog(@"----------%d",chValue);

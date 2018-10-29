@@ -109,7 +109,7 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Out_LeftToRight"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        copyGroupData(firstCh, secCh);
+        copyGroupData_IN(firstCh, secCh);
         RecStructData.IN_CH[firstCh].LinkFlag=firstCh;
         RecStructData.IN_CH[secCh].LinkFlag=firstCh;
         [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];
@@ -120,7 +120,7 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Out_RightToLeft"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        copyGroupData(secCh, firstCh);
+        copyGroupData_IN(secCh, firstCh);
         RecStructData.IN_CH[firstCh].LinkFlag=firstCh;
         RecStructData.IN_CH[secCh].LinkFlag=firstCh;
         [self.linkBtn setImage:[UIImage imageNamed:@"input_link_press"] forState:UIControlStateNormal];

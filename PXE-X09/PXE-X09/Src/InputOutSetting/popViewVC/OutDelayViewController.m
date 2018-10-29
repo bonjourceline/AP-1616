@@ -7,7 +7,7 @@
 //
 
 #import "OutDelayViewController.h"
-
+#import "DataCommunication.h"
 @interface OutDelayViewController ()
 {
     //主音量计数定时器 减
@@ -171,19 +171,28 @@
 }
 #pragma mark--------按钮
 -(void)delayChange:(UISlider *)slider{
+    AutoLinkValue=(int)slider.value-RecStructData.OUT_CH[output_channel_sel].delay;
     RecStructData.OUT_CH[output_channel_sel].delay=(int)slider.value;
+    LINK_MODE_AUTOTAG_OUT(UI_Delay);
     [self flashView];
 }
 -(void)incClick{
     if(++RecStructData.OUT_CH[output_channel_sel].delay > DELAY_SETTINGS_MAX){
         RecStructData.OUT_CH[output_channel_sel].delay = DELAY_SETTINGS_MAX;
+    }else{
+        AutoLinkValue=1;
     }
+    
+    LINK_MODE_AUTOTAG_OUT(UI_Delay);
     [self flashView];
 }
 -(void)subClick{
     if(--RecStructData.OUT_CH[output_channel_sel].delay < 0){
         RecStructData.OUT_CH[output_channel_sel].delay = 0;
+    }else{
+        AutoLinkValue=-1;
     }
+    LINK_MODE_AUTOTAG_OUT(UI_Delay);
     [self flashView];
 }
 -(void)Btn_VolumeSUB_LongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
@@ -217,7 +226,7 @@
 }
 -(void)nextCh{
     int nextIndex=output_channel_sel;
-    if (++nextIndex>=Output_CH_MAX_USE) {
+    if (++nextIndex>=RecStructData.System.OutputChNum) {
         
     }else{
         output_channel_sel=nextIndex;

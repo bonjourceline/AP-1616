@@ -192,7 +192,8 @@ uint8 Mixer_Volume_MAX = 100;
 //#define LINKMODE_AUTO       7 //任意联调，每个通道可以单独联调，可联机保存
 //#define LINKMODE_LEFTRIGHT  8 //固定两两通道联调
 //#define LINKMODE_FR2A       9 //前声场，后声场，一起两两联调
-uint8 LinkMODE = LINKMODE_SPKTYPE_S;
+
+uint8 LinkMODE = LINKMODE_AUTOTAG;
 BOOL BOOL_LinkPolar = false;//正反相联调
 BOOL BOOL_LinkDAll = false;//false:最后两通道是双通道联调，true:整车联调
 BOOL BOOL_LinkMute = true;//
