@@ -39,9 +39,11 @@ dispatch_async(dispatch_get_main_queue(), block);\
 #import "Masonry.h"
 #import "SourceModeUtils.h"
 #import "LinkTool.h"
+#import "DataProgressHUD.h"
 #define KNmusicMesArrive @"KNmusicMesArrive" //当前音乐数据返回
 #define KNmusiclistArrive @"KNmusiclistArrive"//音乐列表数据返回
-
+#define LastPeripheral   @"LastPeripheral"//最后保存的设备id
+#define LastPeripheralName @"LastPeripheralName"//最后保存的设备名
 //#define CBLALARMSOURCETYPE0 @"U盘音乐"
 //#define CBLALARMSOURCETYPE1 @"卡歌音乐"
 //#define CBLALARMSOURCETYPE2 @"FM"

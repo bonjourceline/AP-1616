@@ -29,8 +29,8 @@
 #define kEffectOpBtnH 50
 
 #define kEffectOpViewW kWindowW
-#define kEffectOpViewH 2*(kMarginTop+kEffectOpInBtnH)+kMarginTop
-
+//#define kEffectOpViewH 2*(kMarginTop+kEffectOpInBtnH)+kMarginTop
+#define kEffectOpViewH (kMarginTop+kEffectOpInBtnH)+kMarginTop
 #define kEffectOpInBtnW 60
 #define kEffectOpInBtnH 45
 
@@ -76,8 +76,8 @@
             make.size.mas_equalTo(CGSizeMake(kIconW, kIconH));
         }];
         
-       // [_multiCheckBtn setBackgroundImage:[UIImage imageNamed:@"seff_sel_normal"] forState:UIControlStateNormal];
-//        [_multiCheckBtn setImage:[UIImage imageNamed:@"seff_sel_press"] forState:UIControlStateNormal];
+        // [_multiCheckBtn setBackgroundImage:[UIImage imageNamed:@"seff_sel_normal"] forState:UIControlStateNormal];
+        //        [_multiCheckBtn setImage:[UIImage imageNamed:@"seff_sel_press"] forState:UIControlStateNormal];
     }
     return _multiCheckBtn;
 }
@@ -93,7 +93,8 @@
             make.left.mas_equalTo(self.multiCheckBtn.mas_right);
             make.size.mas_equalTo(CGSizeMake(kTitleLabelW*0.8, kTitleLabelH));
         }];
-        _effectTitleLabel.textColor = SetColor(UI_SEFFFItem_Color);
+        _effectTitleLabel.textColor = SetColor(UI_SEFFItemTitle_Color);
+        
     }
     return _effectTitleLabel;
 }
@@ -104,12 +105,13 @@
         _singleLabel = [UILabel new];
         [self.contentView addSubview:_singleLabel];
         [_singleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kMarginTop);
+            make.centerY.mas_equalTo(self.effectTitleLabel.mas_centerY);
             make.left.mas_equalTo(self.effectTitleLabel.mas_right);
-            make.size.mas_equalTo(CGSizeMake(3*kTitleLabelH, kTitleLabelH));
+            //            make.size.mas_equalTo(CGSizeMake(3*kTitleLabelH, kTitleLabelH));
         }];
         _singleLabel.font = [UIFont systemFontOfSize:14.0];
         _singleLabel.textColor = SetColor(UI_SEFFFItem_Color);
+        
         
     }
     return _singleLabel;
@@ -159,7 +161,6 @@
             make.size.mas_equalTo(CGSizeMake(kEffectOpBtnW, kEffectOpBtnH));
         }];
         [_popMenuBtn setImage:[UIImage imageNamed:@"seff_menu"] forState:UIControlStateNormal];
-        
         [_popMenuBtn addTarget:self action:@selector(doOpenMenu:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _popMenuBtn;
@@ -171,7 +172,7 @@
         [_likeIconCellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             //            make.top.mas_equalTo(kMarginTop);
             make.centerY.mas_equalTo(self.popMenuBtn.mas_centerY);
-            make.right.mas_equalTo(self.popMenuBtn.mas_left).mas_equalTo(-kMarginRight/2);
+            make.right.mas_equalTo(self.popMenuBtn.mas_left).mas_equalTo(-kMarginRight/2-[Dimens GDimens:10]);
             make.size.mas_equalTo(CGSizeMake(kIconW, kIconH));
         }];
         
@@ -243,28 +244,31 @@
     return _shareBtn;
 }
 
-- (IconButton *)collectionBtn {
-    if (!_collectionBtn) {
-        _collectionBtn = [IconButton new];
-        [self.effectOpView addSubview:_collectionBtn];
-        [_collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kMarginTop);
-            make.left.mas_equalTo(self.shareBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
-            make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
-        }];
-        _collectionBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
-        [_collectionBtn setImage:[UIImage imageNamed:@"seff_favorite"] forState:UIControlStateNormal];
-    }
-    return _collectionBtn;
-}
+//- (IconButton *)collectionBtn {
+//    if (!_collectionBtn) {
+//        _collectionBtn = [IconButton new];
+//        [self.effectOpView addSubview:_collectionBtn];
+//        [_collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(kMarginTop);
+//            make.left.mas_equalTo(self.shareBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
+//            make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
+//        }];
+//        _collectionBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
+//        [_collectionBtn setImage:[UIImage imageNamed:@"seff_favorite"] forState:UIControlStateNormal];
+//    }
+//    return _collectionBtn;
+//}
 
 - (IconButton *)likeBtn {
     if (!_likeBtn) {
         _likeBtn = [IconButton new];
         [self.effectOpView addSubview:_likeBtn];
         [_likeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            //            make.top.mas_equalTo(kMarginTop);
+            //            make.left.mas_equalTo(self.collectionBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
+            //            make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
             make.top.mas_equalTo(kMarginTop);
-            make.left.mas_equalTo(self.collectionBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
+            make.left.mas_equalTo(self.shareBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
             make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
         }];
         _likeBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
@@ -280,7 +284,9 @@
         [self.effectOpView addSubview:_deleteBtn];
         [_deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(kMarginTop);
-            make.left.mas_equalTo(self.likeBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
+            
+            //            make.left.mas_equalTo(self.likeBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
+            make.left.mas_equalTo(self.detailBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
             make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
         }];
         _deleteBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
@@ -294,9 +300,12 @@
         _detailBtn = [IconButton new];
         [self.effectOpView addSubview:_detailBtn];
         [_detailBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.applicationBtn.mas_bottom).mas_equalTo(kMarginTop);
-            make.left.mas_equalTo(kEffectOpInBtnMargin);
+            make.top.mas_equalTo(kMarginTop);
+            make.left.mas_equalTo(self.likeBtn.mas_right).mas_equalTo(kEffectOpInBtnMargin);
             make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
+            //            make.top.mas_equalTo(self.applicationBtn.mas_bottom).mas_equalTo(kMarginTop);
+            //            make.left.mas_equalTo(kEffectOpInBtnMargin);
+            //            make.size.mas_equalTo(CGSizeMake(kEffectOpInBtnW, kEffectOpInBtnH));
         }];
         _detailBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
         [_detailBtn setImage:[UIImage imageNamed:@"seff_details"] forState:UIControlStateNormal];

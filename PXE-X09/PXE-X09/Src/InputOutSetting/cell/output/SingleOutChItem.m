@@ -216,7 +216,7 @@
     [self.cmBtn setTitle:[self CountDelayCM:RecStructData.OUT_CH[chIndex].delay] forState:UIControlStateNormal];
      [self.msBtn setTitle:[self CountDelayMs:RecStructData.OUT_CH[chIndex].delay] forState:UIControlStateNormal];
     [self.sbVol setProgress:RecStructData.OUT_CH[chIndex].gain];
-    [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.OUT_CH[chIndex].gain/Output_Volume_Step] forState:UIControlStateNormal];
+    [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.OUT_CH[chIndex].gain/Output_Volume_Step-60] forState:UIControlStateNormal];
     [self.spkBtn setTitle:[SourceModeUtils getOutputSpkTypeNameByIndex:RecStructData.System.out_spk_type[chIndex]] forState:UIControlStateNormal];
 }
 
@@ -298,7 +298,8 @@
 }
 -(void)clickSpk:(UIButton *)btn{
     output_channel_sel=chIndex;
-    if (RecStructData.OUT_CH[output_channel_sel].LinkFlag==0) {
+    if (RecStructData.OUT_CH[output_channel_sel].LinkFlag!=0) {
+        [[DataProgressHUD shareManager]showHub:[LANG DPLocalizedString:@"已联调不可操作"] WithTime:1.0];
         return;
     }
     SpkViewController *vc=[[SpkViewController alloc]init];

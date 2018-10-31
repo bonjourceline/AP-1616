@@ -40,7 +40,7 @@
     //NSMutableData *_ReadDeviceData;
     int _nBluetoothDeviceState;
     BOOL _bChooseBLEConnect;
-
+    
     BOOL BluetoothSwitch;
     //BOOL _bReadOver;
     //BOOL _bHeadFlag;
@@ -49,7 +49,7 @@
     //int _nRevDataLen;
     //int _nRevNum;
     //int _nRouteid;
-
+    
 }
 
 /**
@@ -62,7 +62,7 @@
 @property (nonatomic,strong) CBCharacteristic *writecharacteristic;
 @property (nonatomic,strong) CBCharacteristic *readcharacteristic;
 @property (nonatomic,strong) CBPeripheral *savePeripheral;
-
+@property (nonatomic,assign)BOOL isAutoConnect;
 /**
  * 真实数据收发处理类
  */

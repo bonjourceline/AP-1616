@@ -9,6 +9,7 @@
 "L_System_OK" = "确定";
 "L_System_Cancel" = "取消";
 "L_System_Save" = "保存";
+"L_System_Confirm"="确认";
 "L_System_Delete" = "删除";
 "L_System_Title" = "系统提示";
 "L_System_CMsg"  = "请连接设备！";
@@ -108,7 +109,7 @@
 
 "L_InputSourceSelect" = "主音源";
 "L_InputSource_High" = "高电平";
-"L_InputSource_AUX" = "低电平";
+"L_InputSource_AUX" = "AUX";
 "L_InputSource_Optical" = "光纤";
 "L_InputSource_Coaxial" = "同轴";
 "L_InputSource_Bluetooth" = "蓝牙";
@@ -706,3 +707,7 @@
 "L_notice_playmode_toggle"="随机播放";
 "L_notice_playmode_repeatone"="单曲循环";
 
+"spp_le_select_device"="选择一个设备连接";
+"L_AutoConnect_device"="自动连接";
+"Rescan"="扫描设备";
+"blueToothFailsOpen"="手机蓝牙状态异常，请重新打开手机蓝牙";

@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         //初始化对象
-      
+        
     }
     return self;
 }
@@ -36,7 +36,16 @@
     }
     return _volView;
 }
-
+-(void)showHub:(NSString *)tis WithTime:(int)time{
+    MBProgressHUD *hub=[MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication]keyWindow] animated:YES];
+    hub.mode=MBProgressHUDModeText;
+    hub.dimBackground=YES;
+    hub.labelText=tis;
+    //    hub.detailsLabelFont=[Dimens adjustFont:18];
+    hub.removeFromSuperViewOnHide=YES;
+    [hub hide:YES afterDelay:time];
+    
+}
 -(void)addNotification{
     //通信连接成功
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(ConnectStateFormNotification:) name:MyNotification_ConnectSuccess object:nil];
@@ -55,15 +64,15 @@
             [self showSEFFLoadOrSaveProgress:[LANG DPLocalizedString:@"L_Data_Sync"] WithMode:SEFF_OPT_READ];
             
         }else {
-//            if(self.HUD_SEFF != nil){
-
-                [self.HUD_SEFF hide:YES];
-                
-                self.HUD_SEFF = nil;
-                if ([okStr isEqualToString:@"DER"]) {
-                    [self ShowVersionsErrorDialog];
-                }
-//            }
+            //            if(self.HUD_SEFF != nil){
+            
+            [self.HUD_SEFF hide:YES];
+            
+            self.HUD_SEFF = nil;
+            if ([okStr isEqualToString:@"DER"]) {
+                [self ShowVersionsErrorDialog];
+            }
+            //            }
         }
     });
 }
@@ -71,19 +80,19 @@
 - (void)ShowVersionsErrorDialog{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_System_Title"]message:[NSString stringWithFormat:@"%@:%@",[LANG DPLocalizedString:@"L_DeviceVersionERR"],DeviceVerString] preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"]style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-
-
+        
+        
     }]];
-   
+    
     UIWindow  *window=[[UIApplication sharedApplication]keyWindow];
     UIViewController *vc=window.rootViewController;
     [vc presentViewController:alert animated:YES completion:nil];
-
+    
 }
 -(void)hudWasHidden:(MBProgressHUD *)hud{
     NSLog(@"hudWasHidden");
     [hud removeFromSuperview];
-//    [hud release];
+    //    [hud release];
     hud = nil;
 }
 
@@ -97,6 +106,9 @@
     SEFF_SendListTotal = cnt;
     int progress = 100;
     while (cnt > 0) {
+        if(!COM_BLE_DEVICECONNECTED){
+            break;
+        }
         cnt = [DataCManager GetSendbufferListCount];
         progress = (int)((float)cnt/(float)SEFF_SendListTotal * 100);
         self.HUD_SEFF.labelText = [NSString stringWithFormat:@"%d%%",100-progress];
@@ -116,7 +128,7 @@
     
 }
 -(void)initSaveLoadSEFFProgress{
-//    [self.HUD_SEFF hide:YES];
+    //    [self.HUD_SEFF hide:YES];
     UIWindow *window=[[UIApplication sharedApplication]keyWindow];
     self.HUD_SEFF=[[MBProgressHUD alloc]initWithWindow:window];
     
@@ -204,13 +216,22 @@
         [self showSEFFLoadOrSaveProgress:[LANG DPLocalizedString:@"L_Data_Sync"] WithMode:SEFF_OPT_READ];
     }
 }
--(void)showFailConnectionHub{
-    UIAlertController *alert=[UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_BLE_Disconnect"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
+-(void)showAlertWithtis:(NSString *)tis{
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:tis message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"] style:UIAlertActionStyleDestructive handler:nil]];
     UIWindow *window=[[UIApplication sharedApplication]keyWindow];
     UIViewController *vc=window.rootViewController;
     [vc presentViewController:alert animated:YES completion:nil];
+}
+-(void)showFailConnectionHub{
+    self.ConnectfailsTis=[UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_BLE_Disconnect"] message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self.ConnectfailsTis addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    UIWindow *window=[[UIApplication sharedApplication]keyWindow];
+    UIViewController *vc=window.rootViewController;
+    [vc presentViewController:self.ConnectfailsTis animated:YES completion:nil];
+}
+-(void)hideFailConnectionHud{
+    [self.ConnectfailsTis dismissViewControllerAnimated:NO completion:nil];
 }
 @end

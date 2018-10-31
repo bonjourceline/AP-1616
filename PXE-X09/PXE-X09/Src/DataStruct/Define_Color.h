@@ -232,6 +232,7 @@
 #define UI_InputCh_BtnText_Normal (0xFF000000) //音效常态颜色
 
 #define UI_SEFFFItem_Color  (0xFFffffff)
+#define UI_SEFFItemTitle_Color (0xFFffffff)
 #define UI_SEFFFItemTime_Color  (0xFF7e8c8f) //
 //musicList
 #define UI_Musiclist_ThemeColor (0xFFff1818) // 主题色

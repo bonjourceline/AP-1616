@@ -4301,35 +4301,45 @@ void LINK_MODE_LEFTRIGHT(){
 void copyGroupData(int Dfrom, int Dto){
     for(int j=0;j<Output_CH_EQ_MAX_USE;j++){
         RecStructData.OUT_CH[Dto].EQ[j].freq   = RecStructData.OUT_CH[Dfrom].EQ[j].freq;
+        RecStructData.OUT_CH[Dto].EQ[j].level   = RecStructData.OUT_CH[Dfrom].EQ[j].level;
         RecStructData.OUT_CH[Dto].EQ[j].bw     = RecStructData.OUT_CH[Dfrom].EQ[j].bw;
         RecStructData.OUT_CH[Dto].EQ[j].shf_db = RecStructData.OUT_CH[Dfrom].EQ[j].shf_db;
         RecStructData.OUT_CH[Dto].EQ[j].type   = RecStructData.OUT_CH[Dfrom].EQ[j].type;
     }
     //id = 31    杂项  （静音，延时,spk_type不联调）
+    RecStructData.OUT_CH[Dto].mute=RecStructData.OUT_CH[Dfrom].mute;
     RecStructData.OUT_CH[Dto].polar=RecStructData.OUT_CH[Dfrom].polar;
+    RecStructData.OUT_CH[Dto].gain=RecStructData.OUT_CH[Dfrom].gain;
+    RecStructData.OUT_CH[Dto].delay=RecStructData.OUT_CH[Dfrom].delay;
     RecStructData.OUT_CH[Dto].eq_mode=RecStructData.OUT_CH[Dfrom].eq_mode;
     //高低通 ,ID = 32    (xover限MIC)
-
+    RecStructData.OUT_CH[Dto].h_freq=RecStructData.OUT_CH[Dfrom].h_freq;
     RecStructData.OUT_CH[Dto].h_filter = RecStructData.OUT_CH[Dfrom].h_filter;
     RecStructData.OUT_CH[Dto].h_level  = RecStructData.OUT_CH[Dfrom].h_level;
+    RecStructData.OUT_CH[Dto].l_freq=RecStructData.OUT_CH[Dfrom].l_freq;
     RecStructData.OUT_CH[Dto].l_filter = RecStructData.OUT_CH[Dfrom].l_filter;
     RecStructData.OUT_CH[Dto].l_level  = RecStructData.OUT_CH[Dfrom].l_level;
 }
 void copyGroupData_IN(int Dfrom, int Dto){
     for(int j=0;j<IN_CH_EQ_MAX_USE;j++){
         RecStructData.IN_CH[Dto].EQ[j].freq   = RecStructData.IN_CH[Dfrom].EQ[j].freq;
+        RecStructData.IN_CH[Dto].EQ[j].level   = RecStructData.IN_CH[Dfrom].EQ[j].level;
         RecStructData.IN_CH[Dto].EQ[j].bw     = RecStructData.IN_CH[Dfrom].EQ[j].bw;
         RecStructData.IN_CH[Dto].EQ[j].shf_db = RecStructData.IN_CH[Dfrom].EQ[j].shf_db;
         RecStructData.IN_CH[Dto].EQ[j].type   = RecStructData.IN_CH[Dfrom].EQ[j].type;
     }
     //id = 31    杂项  （静音，延时,spk_type不联调）
- 
+    RecStructData.IN_CH[Dto].mute=RecStructData.IN_CH[Dfrom].mute;
     RecStructData.IN_CH[Dto].polar=RecStructData.IN_CH[Dfrom].polar;
+    RecStructData.IN_CH[Dto].gain=RecStructData.IN_CH[Dfrom].gain;
+    RecStructData.IN_CH[Dto].delay=RecStructData.IN_CH[Dfrom].delay;
     RecStructData.IN_CH[Dto].eq_mode=RecStructData.IN_CH[Dfrom].eq_mode;
     
     //高低通 ,ID = 32    (xover限MIC)
+    RecStructData.IN_CH[Dto].h_freq=RecStructData.IN_CH[Dfrom].h_freq;
     RecStructData.IN_CH[Dto].h_filter = RecStructData.IN_CH[Dfrom].h_filter;
     RecStructData.IN_CH[Dto].h_level  = RecStructData.IN_CH[Dfrom].h_level;
+    RecStructData.IN_CH[Dto].l_freq=RecStructData.IN_CH[Dfrom].l_freq;
     RecStructData.IN_CH[Dto].l_filter = RecStructData.IN_CH[Dfrom].l_filter;
     RecStructData.IN_CH[Dto].l_level  = RecStructData.IN_CH[Dfrom].l_level;
 }

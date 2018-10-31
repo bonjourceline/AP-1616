@@ -139,6 +139,10 @@
 		72398D392176DD4F00F99FA5 /* InSourceSelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D382176DD4F00F99FA5 /* InSourceSelViewController.m */; };
 		72398D3C21803FBE00F99FA5 /* LinkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D3B21803FBE00F99FA5 /* LinkTool.m */; };
 		72398D402182B6C200F99FA5 /* LinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D3F2182B6C200F99FA5 /* LinkViewController.m */; };
+		72398D492188016400F99FA5 /* ConnectAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D422188016400F99FA5 /* ConnectAlert.m */; };
+		72398D4A2188016400F99FA5 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D432188016400F99FA5 /* ScanViewController.m */; };
+		72398D4B2188016400F99FA5 /* ScanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72398D442188016400F99FA5 /* ScanTableViewCell.m */; };
+		72398D4C2188016400F99FA5 /* ScanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72398D462188016400F99FA5 /* ScanTableViewCell.xib */; };
 		AA045134215DBD7D004675FD /* HiAuxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA045133215DBD7D004675FD /* HiAuxItem.m */; };
 		AA04513B215E284A004675FD /* OutModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA04513A215E284A004675FD /* OutModeViewController.m */; };
 		AA21D0121FC57872005EC4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21D00D1FC57872005EC4E9 /* AppDelegate.m */; };
@@ -194,8 +198,6 @@
 		AABFD40C202434080089A5E9 /* UIImage+Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD405202434070089A5E9 /* UIImage+Gif.m */; };
 		AABFD40D202434080089A5E9 /* UIImage+SubImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD408202434070089A5E9 /* UIImage+SubImage.m */; };
 		AABFD40E202434080089A5E9 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD40A202434070089A5E9 /* UIImage+Rotate.m */; };
-		AABFD413202435110089A5E9 /* CustomVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD40F202435110089A5E9 /* CustomVolumeView.m */; };
-		AABFD414202435110089A5E9 /* UIApplication+VolumeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD411202435110089A5E9 /* UIApplication+VolumeControl.m */; };
 		AABFD41C202435FD0089A5E9 /* InputChannelSel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD41A202435FD0089A5E9 /* InputChannelSel.m */; };
 		AABFD41F202436300089A5E9 /* SeekBarChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD41E202436300089A5E9 /* SeekBarChannel.m */; };
 		AABFD4222024364E0089A5E9 /* GainSBItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFD4212024364E0089A5E9 /* GainSBItem.m */; };
@@ -500,6 +502,13 @@
 		72398D3B21803FBE00F99FA5 /* LinkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkTool.m; sourceTree = "<group>"; };
 		72398D3E2182B6C200F99FA5 /* LinkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkViewController.h; sourceTree = "<group>"; };
 		72398D3F2182B6C200F99FA5 /* LinkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkViewController.m; sourceTree = "<group>"; };
+		72398D422188016400F99FA5 /* ConnectAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectAlert.m; sourceTree = "<group>"; };
+		72398D432188016400F99FA5 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		72398D442188016400F99FA5 /* ScanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanTableViewCell.m; sourceTree = "<group>"; };
+		72398D452188016400F99FA5 /* ConnectAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectAlert.h; sourceTree = "<group>"; };
+		72398D462188016400F99FA5 /* ScanTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanTableViewCell.xib; sourceTree = "<group>"; };
+		72398D472188016400F99FA5 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		72398D482188016400F99FA5 /* ScanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanTableViewCell.h; sourceTree = "<group>"; };
 		8DE2FC9A1C0C47355F257BA8 /* Pods-PXE-X09.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.release.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.release.xcconfig"; sourceTree = "<group>"; };
 		944B2DFAE2577489002711BA /* Pods-PXE-X09.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PXE-X09.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PXE-X09/Pods-PXE-X09.debug.xcconfig"; sourceTree = "<group>"; };
 		AA045132215DBD7D004675FD /* HiAuxItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiAuxItem.h; sourceTree = "<group>"; };
@@ -611,10 +620,6 @@
 		AABFD408202434070089A5E9 /* UIImage+SubImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SubImage.m"; sourceTree = "<group>"; };
 		AABFD409202434070089A5E9 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
 		AABFD40A202434070089A5E9 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
-		AABFD40F202435110089A5E9 /* CustomVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVolumeView.m; sourceTree = "<group>"; };
-		AABFD410202435110089A5E9 /* CustomVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVolumeView.h; sourceTree = "<group>"; };
-		AABFD411202435110089A5E9 /* UIApplication+VolumeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+VolumeControl.m"; sourceTree = "<group>"; };
-		AABFD412202435110089A5E9 /* UIApplication+VolumeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+VolumeControl.h"; sourceTree = "<group>"; };
 		AABFD41A202435FD0089A5E9 /* InputChannelSel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputChannelSel.m; sourceTree = "<group>"; };
 		AABFD41B202435FD0089A5E9 /* InputChannelSel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputChannelSel.h; sourceTree = "<group>"; };
 		AABFD41D202436300089A5E9 /* SeekBarChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekBarChannel.h; sourceTree = "<group>"; };
@@ -1456,7 +1461,6 @@
 				AA7B8C6D20739FE50055B37C /* AnyLink */,
 				AA3056DE202455690085672C /* AdvertisementView */,
 				AA321A231FE0B8B20065BD3C /* Utils */,
-				AA700CA31FCBC08C003EC362 /* VolumeManager */,
 				AA21D00A1FC57808005EC4E9 /* MasterVolView */,
 				146287F31F2B0BBF001092B8 /* DelayItem */,
 				146287EF1F2B0B90001092B8 /* SliderButton */,
@@ -1525,6 +1529,7 @@
 		14DAFBE91E67F253003BCD35 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				72398D412188016400F99FA5 /* ScanViewController */,
 				AABFD3E82024197E0089A5E9 /* BabyBluetooth */,
 				AABFD3E72024197E0089A5E9 /* BLEManager.h */,
 				AABFD3F92024197E0089A5E9 /* BLEManager.m */,
@@ -1754,6 +1759,20 @@
 			path = linkViewController;
 			sourceTree = "<group>";
 		};
+		72398D412188016400F99FA5 /* ScanViewController */ = {
+			isa = PBXGroup;
+			children = (
+				72398D452188016400F99FA5 /* ConnectAlert.h */,
+				72398D422188016400F99FA5 /* ConnectAlert.m */,
+				72398D472188016400F99FA5 /* ScanViewController.h */,
+				72398D432188016400F99FA5 /* ScanViewController.m */,
+				72398D482188016400F99FA5 /* ScanTableViewCell.h */,
+				72398D442188016400F99FA5 /* ScanTableViewCell.m */,
+				72398D462188016400F99FA5 /* ScanTableViewCell.xib */,
+			);
+			path = ScanViewController;
+			sourceTree = "<group>";
+		};
 		AA045138215E1138004675FD /* items */ = {
 			isa = PBXGroup;
 			children = (
@@ -1865,17 +1884,6 @@
 				72398D3B21803FBE00F99FA5 /* LinkTool.m */,
 			);
 			path = InputOutSetting;
-			sourceTree = "<group>";
-		};
-		AA700CA31FCBC08C003EC362 /* VolumeManager */ = {
-			isa = PBXGroup;
-			children = (
-				AABFD410202435110089A5E9 /* CustomVolumeView.h */,
-				AABFD40F202435110089A5E9 /* CustomVolumeView.m */,
-				AABFD412202435110089A5E9 /* UIApplication+VolumeControl.h */,
-				AABFD411202435110089A5E9 /* UIApplication+VolumeControl.m */,
-			);
-			path = VolumeManager;
 			sourceTree = "<group>";
 		};
 		AA7B8C6920735CDC0055B37C /* MixCollectionCell */ = {
@@ -1990,6 +1998,7 @@
 				14B44ACD1E69786E00D524C6 /* MBProgressHUD.bundle in Resources */,
 				1459BFA61E5C3F840085FFA6 /* LaunchScreen.storyboard in Resources */,
 				AABFD3C1202417BB0089A5E9 /* InputViewController.xib in Resources */,
+				72398D4C2188016400F99FA5 /* ScanTableViewCell.xib in Resources */,
 				142332811EC1CE0500E3FCC4 /* LICENSE_jsonmodel.txt in Resources */,
 				723781332175D6D900335461 /* SingleOutTableViewCell.xib in Resources */,
 				14CCB0FA1EF41B3200ABDC5E /* HomePageViewController.xib in Resources */,
@@ -2039,6 +2048,7 @@
 			files = (
 				AABFD455202438130089A5E9 /* EQSB_Gain.m in Sources */,
 				723780D52173407100335461 /* SetChNumViewController.m in Sources */,
+				72398D4B2188016400F99FA5 /* ScanTableViewCell.m in Sources */,
 				142332541EC1CD5100E3FCC4 /* ClientData.m in Sources */,
 				1423329A1EC1DB7900E3FCC4 /* MJFoundation.m in Sources */,
 				142332581EC1CD5100E3FCC4 /* SaveLoginInfo.m in Sources */,
@@ -2055,6 +2065,7 @@
 				142332821EC1CE0500E3FCC4 /* README.md in Sources */,
 				142332A21EC1DB7900E3FCC4 /* NSString+MJExtension.m in Sources */,
 				1423329D1EC1DB7900E3FCC4 /* MJPropertyType.m in Sources */,
+				72398D4A2188016400F99FA5 /* ScanViewController.m in Sources */,
 				AABFD3BC202417260089A5E9 /* TopBarVC.m in Sources */,
 				AABFD3E6202419250089A5E9 /* MacDefine.m in Sources */,
 				142332B81EC1DC0800E3FCC4 /* DataModel.m in Sources */,
@@ -2066,8 +2077,7 @@
 				14B44A9B1E69776D00D524C6 /* WMMenuItem.m in Sources */,
 				14DE4B411EC49E2000418248 /* LocalEffectTableViewCell.m in Sources */,
 				1423327F1EC1CE0500E3FCC4 /* JSONKeyMapper.m in Sources */,
-				AABFD414202435110089A5E9 /* UIApplication+VolumeControl.m in Sources */,
-				AABFD413202435110089A5E9 /* CustomVolumeView.m in Sources */,
+				72398D492188016400F99FA5 /* ConnectAlert.m in Sources */,
 				146287F61F2B0BBF001092B8 /* DelayItem.m in Sources */,
 				145FB5361EB8CC4300DA91A9 /* ASValuePopUpView.m in Sources */,
 				AABFD3FC2024197E0089A5E9 /* BabyCentralManager.m in Sources */,

@@ -9,6 +9,7 @@
 "L_System_OK" = "確定";
 "L_System_Cancel" = "取消";
 "L_System_Save" = "保存";
+"L_System_Confirm"="確認";
 "L_System_Delete" = "删除";
 "L_System_Title" = "系統提示";
 "L_System_CMsg"  = "請連接設備！";
@@ -670,3 +671,8 @@
 "L_notice_playmode_repeat"="循環播放";
 "L_notice_playmode_toggle"="隨機播放";
 "L_notice_playmode_repeatone"="單曲循环";
+
+"spp_le_select_device"="選擇一個設備連接";
+"L_AutoConnect_device"="自動連接";
+"Rescan"="掃描設備";
+"blueToothFailsOpen"="手機藍牙狀態異常，請重新打開手機藍牙";

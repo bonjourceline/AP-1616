@@ -25,6 +25,7 @@
     [super viewDidLoad];
     [self initData];
     [self.passBtn setTitle:[LANG DPLocalizedString:@"跳过"] forState:UIControlStateNormal];
+    self.passBtn.hidden=YES;
     [self creatView];
     // Do any additional setup after loading the view.
 }

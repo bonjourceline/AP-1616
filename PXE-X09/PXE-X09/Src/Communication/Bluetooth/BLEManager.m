@@ -11,13 +11,19 @@
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+MJ.h"
 #import "DataCommunication.h"
+#import "ScanViewController.h"
+#import "DataProgressHUD.h"
+#import "ConnectAlert.h"
 #define LastServiceIds  @"LastServiceIds"
 #define DSPHDS @"DSP HD"
 #define SPPLE @"DSP CC"
-@interface BLEManager()<DataCommunicationDelegate,UIActionSheetDelegate>
-@property (nonatomic,strong)UIAlertController *connectionAlert;
+@interface BLEManager()<DataCommunicationDelegate,UIActionSheetDelegate>{
+    int failsTime;
+}
+@property (nonatomic,strong)ConnectAlert *connectionAlert;
 @property (nonatomic,assign)CBCentralManager *Mycentral;
 @property (nonatomic,strong)MBProgressHUD *hud;
+@property(nonatomic,strong)ScanViewController *scanVC;
 @end
 
 @implementation BLEManager
@@ -43,10 +49,18 @@
         self.mDataTransmitOpt.delegate = self;
         [self babyDelegate];
         BluetoothSwitch = true;
+        self.isAutoConnect=YES;
     }
     return self;
 }
-
+-(ScanViewController *)scanVC{
+    if (!_scanVC) {
+        _scanVC=[[ScanViewController alloc]init];
+        _scanVC.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+        _scanVC.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    }
+    return _scanVC;
+}
 
 -(void)initBLEManager
 {
@@ -81,7 +95,7 @@
         //查找前缀
         //@"DSP HD-A007B7"
         //if ([peripheralName hasPrefix:@"DSP HD"] ) {
-//            return YES;
+        //            return YES;
         //}
         
         if ([peripheralName hasPrefix:DSPHDS]|[peripheralName hasPrefix:SPPLE]|[peripheralName hasPrefix:@"DSP Play"]) {//DSP HD
@@ -95,22 +109,30 @@
     //设置设备连接成功的委托
     [self.baby setBlockOnConnected:^(CBCentralManager *central, CBPeripheral *peripheral) {
         QIZLog(@"连接成功的设备名称为：%@--连接成功",peripheral.name);
+        weakSelf.currPeripheral=peripheral;
+        [weakSelf.baby AutoReconnect:peripheral];
+        QIZLog(@"连接成功的设备名称为：%@--连接成功 identifier:%@--",peripheral.name,peripheral.identifier.UUIDString);
+        [[DataProgressHUD shareManager]hideFailConnectionHud];
+        [weakSelf.scanVC dismissViewControllerAnimated:YES completion:nil];
+        
     }];
     
     //设置设备连接失败的委托
     [self.baby setBlockOnFailToConnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
         QIZLog(@"设备连接失败");
+        [[DataProgressHUD shareManager]showAlertWithtis:[LANG DPLocalizedString:@"L_BLE_DeviceConnectERR"]];
     }];
     
     //设置断开Peripherals的连接委托
     [self.baby setBlockOnDisconnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
-        COM_BLE_DEVICECONNECTED=false;
-        NSMutableDictionary *ConnectState = [NSMutableDictionary dictionary];
-        ConnectState[@"ConnectState"] = @"NO";
-        [[NSNotificationCenter defaultCenter]postNotificationName:MyNotification_ConnectSuccess object:nil userInfo:ConnectState];
-        QIZLog(@"设备连接断开");
-        QIZLog(@"设备断开原因：=========%@==========",error);
-        
+        if (COM_BLE_DEVICECONNECTED) {
+            COM_BLE_DEVICECONNECTED=false;
+            NSMutableDictionary *ConnectState = [NSMutableDictionary dictionary];
+            ConnectState[@"ConnectState"] = @"NO";
+            [[NSNotificationCenter defaultCenter]postNotificationName:MyNotification_ConnectSuccess object:nil userInfo:ConnectState];
+            QIZLog(@"设备连接断开");
+            QIZLog(@"设备断开原因：=========%@==========",error);
+        }
     }];
     
     //设置发现设备的Services的委托
@@ -125,7 +147,7 @@
     //设置发现设service的Characteristics的委托  （读写特征）
     [self.baby setBlockOnDiscoverCharacteristics:^(CBPeripheral *peripheral, CBService *service, NSError *error) {
         for (CBCharacteristic *c in service.characteristics) {
-
+            
             if([[c UUID] isEqual:[CBUUID UUIDWithString:@"FFE1"]]){//8888
                 QIZLog(@"BUG ###+++读特征名称UUID :%@",c.UUID);
                 weakSelf.readcharacteristic = c;
@@ -146,12 +168,12 @@
     //设置读取characteristics的委托
     [self.baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
         QIZLog(@"FUCK------读取到的特征名称是:%@ 特征值是:%@",characteristics.UUID,characteristics.value);
-//        NSData *data = characteristics.value;
-//        Byte *readByte = (Byte *)[data bytes];
-//        for(int i=0;i<(int)[data length];i++){
-//            [_mDataTransmitOpt ReceiveDataFromDevice : readByte[i] : COM_WITH_MODE];
-//        }
-
+        //        NSData *data = characteristics.value;
+        //        Byte *readByte = (Byte *)[data bytes];
+        //        for(int i=0;i<(int)[data length];i++){
+        //            [_mDataTransmitOpt ReceiveDataFromDevice : readByte[i] : COM_WITH_MODE];
+        //        }
+        
     }];
     
     
@@ -187,7 +209,7 @@
         NSData *data = characteristic.value;
         Byte *readByte = (Byte *)[data bytes];
         for(int i=0;i<(int)[data length];i++){
-             [weakSelf.mDataTransmitOpt ReceiveDataFromDevice : readByte[i] : COM_WITH_MODE];
+            [weakSelf.mDataTransmitOpt ReceiveDataFromDevice : readByte[i] : COM_WITH_MODE];
         }
         
     }];
@@ -199,14 +221,17 @@
     [self.baby setBlockOnCancelScanBlock:^(CBCentralManager *centralManager) {
         QIZLog(@"取消蓝牙设备扫描");
         
+        if(weakSelf.scanVC.isShow){
+            [weakSelf.scanVC.activityIndicator stopAnimating];
+            
+        }
         [weakSelf hideAllHUDs];
-        
         //通知显示扫描出来的蓝牙列表，如果有显示出来，没有提示未发现
         NSMutableDictionary *noticeScanBLE = [NSMutableDictionary dictionary];
         noticeScanBLE[@"CancelScan"] = @"OK";
-        if (self.peripherals.count>0) {
-            [weakSelf showBluetoothDeviceList];
-        }
+        //        if (self.peripherals.count>0) {
+        //            [weakSelf showBluetoothDeviceList];
+        //        }
         
     }];
     
@@ -251,7 +276,11 @@
 }
 //连接蓝牙
 - (void)connectBluetoothDevice:(NSInteger)nIndex{
+    
     if (self.peripherals.count > 0){
+        if (self.isAutoConnect) {
+            self.isAutoConnect=NO;
+        }
         CBPeripheral *peripheral = [self.peripherals objectAtIndex:nIndex];
         
         self.currPeripheral = peripheral;
@@ -259,7 +288,7 @@
         
         [NSThread sleepForTimeInterval:0.01];
         
-       [self getComPlayTypeWith:self.currPeripheral]; self.baby.having(self.currPeripheral).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+        [self getComPlayTypeWith:self.currPeripheral]; self.baby.having(self.currPeripheral).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
     }
 }
 -(void)getComPlayTypeWith:(CBPeripheral *)peripheral{
@@ -281,10 +310,31 @@
         
         [self.peripherals addObject:peripheral];
         if (advertisementData) {
-             [self.peripheralsAD addObject:advertisementData];
+            [self.peripheralsAD addObject:advertisementData];
         }
-       
         
+        if(self.scanVC.isShow){
+            [self.scanVC reloadMytableView];
+        }
+        
+        NSString *lastName=[[NSUserDefaults standardUserDefaults]stringForKey:LastPeripheralName];
+        NSString *lastId=[[NSUserDefaults standardUserDefaults]stringForKey:LastPeripheral];
+        //是否上次连接过的
+        if ([peripheral.identifier.UUIDString isEqualToString:lastId]&&[peripheral.name isEqualToString:lastName]) {
+            BOOL isCancelAuto = [[NSUserDefaults standardUserDefaults]boolForKey:@"AutoConnectFlg"];
+            if (self.isAutoConnect&&(!isCancelAuto)) {
+                [self.baby cancelScan];
+                self.currPeripheral=peripheral;
+                [self getComPlayTypeWith:self.currPeripheral];
+                self.baby.having(self.currPeripheral).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+                self.scanVC.LastSelectP=peripheral;
+                self.isAutoConnect=NO;
+            }else{
+                self.scanVC.LastSelectP=peripheral;
+            }
+            
+            
+        }
     }
 }
 
@@ -304,48 +354,89 @@
  */
 
 -(void)doScanBluetoothPeriphals{
+    [self.baby cancelScan];
     [self hideAllHUDs];
     
+    
     if (self.baby.centralManager.state == CBCentralManagerStatePoweredOn){
-        [self showDeviceScan];
+        
+        failsTime=0;
+        //        [self showDeviceScan];
         BluetoothSwitch = true;
         //清除原来的蓝牙设备名称
         [self.peripherals removeAllObjects];
-       
+        
         //停止之前的连接
         [self.baby cancelAllPeripheralsConnection];
         //设置委托后直接可以使用，无需等待CBCentralManagerStatePoweredOn状态。
         //baby.scanForPeripherals().begin();
-        self.baby.scanForPeripherals().begin().stop(3);
-        [self getLastPeriphals];
+        if (!self.scanVC.isShow) {
+            UIWindow *window=[UIApplication sharedApplication].keyWindow;
+            [self.scanVC reloadMytableView];
+            [window.rootViewController presentViewController:self.scanVC animated:YES completion:^{
+                [self.scanVC.activityIndicator startAnimating];
+                self.baby.scanForPeripherals().begin().stop(30);
+                [self getLastPeriphals];
+            }];
+            
+        }else{
+            [self.scanVC.activityIndicator startAnimating];
+            self.baby.scanForPeripherals().begin().stop(30);
+            [self getLastPeriphals];
+        }
+        
     }else{
+        
         __weak typeof(self)weakself=self;
         [weakself.baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
+            NSLog(@"检测蓝牙状态");
+            failsTime=0;
             self.Mycentral=central;
             if (central.state == CBCentralManagerStatePoweredOn){
-                
                 [self.connectionAlert dismissViewControllerAnimated:NO completion:nil];
                 self.connectionAlert=nil;
-                [self showDeviceScan];
-                
+                //                [self showDeviceScan];
                 BluetoothSwitch = true;
-               
                 //停止之前的连接
-                [weakself.baby cancelAllPeripheralsConnection];
+                [self.baby cancelAllPeripheralsConnection];
+                [self.peripherals removeAllObjects];
+                [self.scanVC reloadMytableView];
                 //设置委托后直接可以使用，无需等待CBCentralManagerStatePoweredOn状态。
-                self.baby.scanForPeripherals().begin().stop(3);
-                [self getLastPeriphals];
+                if (!self.scanVC.isShow) {
+                    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+                    [self.scanVC reloadMytableView];
+                    [window.rootViewController presentViewController:self.scanVC animated:YES completion:^{
+                        [self.scanVC.activityIndicator startAnimating];
+                        self.baby.scanForPeripherals().begin().stop(30);
+                        [self getLastPeriphals];
+                    }];
+                    
+                }else{
+                    [self.scanVC.activityIndicator startAnimating];
+                    self.baby.scanForPeripherals().begin().stop(30);
+                    [self getLastPeriphals];
+                }
             }else if (central.state == CBCentralManagerStatePoweredOff){
+                if (COM_BLE_DEVICECONNECTED) {
+                    NSMutableDictionary *ConnectState = [NSMutableDictionary dictionary];
+                    ConnectState[@"ConnectState"] = @"NO";
+                    NSNotification * noticeConnectState = [NSNotification notificationWithName:MyNotification_ConnectSuccess object:nil userInfo:ConnectState];
+                    [[NSNotificationCenter defaultCenter] postNotification:noticeConnectState];
+                }
+                [self.peripherals removeAllObjects];
+                [self.scanVC reloadMytableView];
+                [self.scanVC dismissViewControllerAnimated:NO completion:nil];
                 BluetoothSwitch = false;
-                if (!self.connectionAlert) {
-                    self.connectionAlert=[UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_BLE_DeviceOpen"] message:[LANG DPLocalizedString:@"L_BLE_DeviceOpenSettings"] preferredStyle:UIAlertControllerStyleAlert];
+                if (!self.connectionAlert||(!self.connectionAlert.isShow)) {
+                    self.connectionAlert=[ConnectAlert alertControllerWithTitle:[LANG DPLocalizedString:@"L_BLE_DeviceOpen"] message:[LANG DPLocalizedString:@"L_BLE_DeviceOpenSettings"] preferredStyle:UIAlertControllerStyleAlert];
                     [self.connectionAlert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                         if (UIApplicationOpenSettingsURLString != NULL) {
-                            NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                            if ([[UIApplication sharedApplication]canOpenURL:appSettings]) {
-                                 [[UIApplication sharedApplication] openURL:appSettings];
+                            NSURL *appSettings = [NSURL URLWithString:@"App-Prefs:root=Bluetooth"];
+                            if([[UIApplication sharedApplication]canOpenURL:appSettings]){
+                                
+                                [[UIApplication sharedApplication] openURL:appSettings];
                             }
-                           
+                            
                         }
                         self.connectionAlert=nil;
                     }]];
@@ -356,7 +447,7 @@
                     UIViewController *vc=window.rootViewController;
                     [vc presentViewController:self.connectionAlert animated:YES completion:nil];
                 }
-               
+                
             }else if (central.state ==CBCentralManagerStateUnknown){
                 NSLog(@"========CBCentralManagerStateUnknown");
             }else if (central.state==CBCentralManagerStateResetting){
@@ -369,8 +460,12 @@
         }];
     }
     if(!BluetoothSwitch&&self.Mycentral.state==CBCentralManagerStatePoweredOff){//蓝牙开关已打开
-        if (!self.connectionAlert) {
-            self.connectionAlert=[UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_BLE_DeviceOpen"] message:[LANG DPLocalizedString:@"L_BLE_DeviceOpenSettings"] preferredStyle:UIAlertControllerStyleAlert];
+        failsTime++;
+        if (failsTime>2) {
+            [[DataProgressHUD shareManager]showAlertWithtis:[LANG DPLocalizedString:@"blueToothFailsOpen"]];
+        }
+        if (!self.connectionAlert||(!self.connectionAlert.isShow)) {
+            self.connectionAlert=[ConnectAlert alertControllerWithTitle:[LANG DPLocalizedString:@"L_BLE_DeviceOpen"] message:[LANG DPLocalizedString:@"L_BLE_DeviceOpenSettings"] preferredStyle:UIAlertControllerStyleAlert];
             [self.connectionAlert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 if (UIApplicationOpenSettingsURLString != NULL) {
                     NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
@@ -387,7 +482,7 @@
         }
     }
     
-
+    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -410,12 +505,17 @@
  *正式连接蓝牙设备
  */
 -(void)connectBLEDevice:(int)index;{
+    [self.baby cancelScan];
     if (self.peripherals.count > 0){
+        if (self.isAutoConnect) {
+            self.isAutoConnect=NO;
+        }
         CBPeripheral *peripheral = [self.peripherals objectAtIndex:index];
         
         self.currPeripheral = peripheral;
-        self.baby.having(self.currPeripheral).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+        [self getComPlayTypeWith:self.currPeripheral]; self.baby.having(self.currPeripheral).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
     }
+    
 }
 
 
@@ -448,18 +548,18 @@
 -(void)bluetoothReceiveData
 {
     [self.baby notify:self.currPeripheral
-        characteristic:self.readcharacteristic
-        block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
-            NSLog(@"notify block接收蓝牙的数据 %@",characteristics.value);
-            //数据处理开始
-            NSData *data = characteristics.value;
-            Byte *readByte = (Byte *)[data bytes];
-            for(int i=0;i<(int)[data length];i++){
-                [_mDataTransmitOpt ReceiveDataFromDevice : readByte[i] : COM_WITH_MODE];
-            }
-        }
-    ];
-
+       characteristic:self.readcharacteristic
+                block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
+                    NSLog(@"notify block接收蓝牙的数据 %@",characteristics.value);
+                    //数据处理开始
+                    NSData *data = characteristics.value;
+                    Byte *readByte = (Byte *)[data bytes];
+                    for(int i=0;i<(int)[data length];i++){
+                        [_mDataTransmitOpt ReceiveDataFromDevice : readByte[i] : COM_WITH_MODE];
+                    }
+                }
+     ];
+    
 }
 //通过设备id或者服务id 找到已和系统连接的设备对象（用于搜索普通扫不到的设备）
 -(NSArray <CBPeripheral *> *)getRetrievePeripheralsWithIdentifiers:(NSArray <NSString *>*)peripheralUuids AndserviceIds:(NSArray <NSString *> *)serviceUuids{
@@ -503,15 +603,15 @@
     }
 }
 - (void)sendData:(Byte[])data withSendMode:(int)mode{
-//    if (mode == COM_WITH_BLE) { //蓝牙发送
-        //QIZLog(@"####### 蓝牙发送 #######");
-        NSData* sendData = [[NSData alloc] initWithBytes:data length:20];
-        NSLog(@"分包发送数据：%@",sendData);
-        [self.currPeripheral writeValue:sendData forCharacteristic:self.writecharacteristic type:CBCharacteristicWriteWithoutResponse];
-        [NSThread sleepForTimeInterval:0.05f];
-//    } else { //wifi
-//        
-//    }
+    //    if (mode == COM_WITH_BLE) { //蓝牙发送
+    //QIZLog(@"####### 蓝牙发送 #######");
+    NSData* sendData = [[NSData alloc] initWithBytes:data length:20];
+    NSLog(@"分包发送数据：%@",sendData);
+    [self.currPeripheral writeValue:sendData forCharacteristic:self.writecharacteristic type:CBCharacteristicWriteWithoutResponse];
+    [NSThread sleepForTimeInterval:0.05f];
+    //    } else { //wifi
+    //
+    //    }
 }
 
 

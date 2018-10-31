@@ -161,7 +161,7 @@
         RecStructData.IN_CH[input_channel_sel].gain=val;
         LINK_MODE_AUTOTAG_IN(UI_OutVal);
     }
-    self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step];
+    self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step-60];
 }
 -(void)subClick{
     int val=0;
@@ -188,7 +188,10 @@
     }
    
     [self.sbVol setProgress:val];
-    self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step];
+    if(val==660){
+         [self.sbVol setProgress:val+10];
+    }
+    self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step-60];
 }
 -(void)incClick{
     int val=0;
@@ -213,7 +216,10 @@
         LINK_MODE_AUTOTAG_IN(UI_OutVal);
     }
     [self.sbVol setProgress:val];
-    self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step];
+    if(val==660){
+        [self.sbVol setProgress:val+10];
+    }
+    self.volLab.text=[NSString stringWithFormat:@"%d",val/Output_Volume_Step-60];
 }
 //主音量长按操作
 -(void)Btn_MasterVolumeSUB_LongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
@@ -344,7 +350,10 @@
         self.chTopLabel.text=[NSString stringWithFormat:@"输出%d音量",output_channel_sel+1];
         self.chLabel.text=[NSString stringWithFormat:@"输出%d",output_channel_sel+1];
         [self.sbVol setProgress:RecStructData.OUT_CH[output_channel_sel].gain];
-        self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.OUT_CH[output_channel_sel].gain/Output_Volume_Step];
+        if(RecStructData.OUT_CH[output_channel_sel].gain==660){
+            [self.sbVol setProgress:RecStructData.OUT_CH[output_channel_sel].gain+10];
+        }
+        self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.OUT_CH[output_channel_sel].gain/Output_Volume_Step-60];
         if (RecStructData.OUT_CH[output_channel_sel].polar==0) {
             [self.polarBtn setBackgroundImage:[UIImage imageNamed:@"polar_normal"] forState:UIControlStateNormal];
              [self.polarBtn setTitle:[LANG DPLocalizedString:@"L_Out_Polar_P"] forState:UIControlStateNormal] ;
@@ -372,7 +381,10 @@
             self.chLabel.text=[NSString stringWithFormat:@"输入%d",input_channel_sel-2];
         }
         [self.sbVol setProgress:RecStructData.IN_CH[input_channel_sel].gain];
-        self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.IN_CH[input_channel_sel].gain/Output_Volume_Step];
+        if(RecStructData.OUT_CH[output_channel_sel].gain==660){
+            [self.sbVol setProgress:RecStructData.IN_CH[output_channel_sel].gain+10];
+        }
+        self.volLab.text=[NSString stringWithFormat:@"%d",RecStructData.IN_CH[input_channel_sel].gain/Output_Volume_Step-60];
         if (RecStructData.IN_CH[input_channel_sel].polar==0) {
             [self.polarBtn setBackgroundImage:[UIImage imageNamed:@"polar_normal"] forState:UIControlStateNormal];
             [self.polarBtn setTitle:[LANG DPLocalizedString:@"L_Out_Polar_P"] forState:UIControlStateNormal] ;

@@ -36,7 +36,7 @@
     if (!_titleData) {
         _titleData = @[
                        [LANG DPLocalizedString:@"L_down_title_name"],
-                       [LANG DPLocalizedString:@"L_down_title_Collect"],
+//                       [LANG DPLocalizedString:@"L_down_title_Collect"],
                        [LANG DPLocalizedString:@"L_down_title_Favorite"],
                        [LANG DPLocalizedString:@"L_down_title_Recently"]];
     }
@@ -71,11 +71,11 @@
 
 - (void)setupNavigationBar
 {
-    self.backHomeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    self.backHomeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
 //    [self.backHomeBtn setImage:[UIImage imageNamed:@"topbar_back_seff"] forState:UIControlStateNormal];
     [self.backHomeBtn addTarget:self action:@selector(doBackHome:) forControlEvents:UIControlEventTouchUpInside];
     [self.backHomeBtn setTitle:[LANG DPLocalizedString:@"L_TopBar_Back"] forState:UIControlStateNormal];
-    self.backHomeBtn.titleLabel.textColor = SetColor(UI_SEFFFToolbarBackTitleColor);
+
     [self.backHomeBtn setTitleColor:SetColor(UI_SEFFFToolbarBackTitleColor) forState:UIControlStateNormal];
     self.backHomeBtn.titleLabel.adjustsFontSizeToFitWidth = true;
     self.backHomeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -89,7 +89,7 @@
     [self.searchBtn addTarget:self action:@selector(doSearchEffect:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
+    self.navigationController.navigationBar.translucent=NO;
     
     self.navigationController.navigationBar.barTintColor = SetColor(UI_TSEFFFToolbarBgColor);//[UIColor colorWithRed:23/255.0 green:56/255.0 blue:123/255.0 alpha:1.0];
     
@@ -141,19 +141,19 @@
         }
             
             break;
+//        case 1:{
+//
+//            QIZCollectionTableViewController *vcClass = [QIZCollectionTableViewController new];
+//            vcClass.arrayM =  [QIZDatabaseTool queryFilefavorite:@"1"];
+//            vcClass.title = @"2";
+//             self.collectionVC = vcClass;
+////            QIZLog(@"切换到收藏页面");
+//
+//            return vcClass;
+//
+//        }
+//            break;
         case 1:{
-            
-            QIZCollectionTableViewController *vcClass = [QIZCollectionTableViewController new];
-            vcClass.arrayM =  [QIZDatabaseTool queryFilefavorite:@"1"];
-            vcClass.title = @"2";
-             self.collectionVC = vcClass;
-//            QIZLog(@"切换到收藏页面");
-            
-            return vcClass;
-            
-        }
-            break;
-        case 2:{
             
             QIZLikeTableViewController *vcClass = [QIZLikeTableViewController new];
             vcClass.arrayM =  [QIZDatabaseTool queryFilelove:@"1"];
@@ -164,7 +164,7 @@
             
         }
             break;
-        case 3:{
+        case 2:{
             
             QIZLatelyTableViewController *vcClass = [QIZLatelyTableViewController new];
             vcClass.arrayM =  [QIZDatabaseTool queryApplyTimeAllData];
@@ -199,13 +199,17 @@
         }
             break;
         case 1:{
-            self.collectionVC.arrayM = [QIZDatabaseTool queryFilefavorite:@"1"];
-            [self.collectionVC.tableView reloadData];
+//            self.collectionVC.arrayM = [QIZDatabaseTool queryFilefavorite:@"1"];
+//            [self.collectionVC.tableView reloadData];
+            self.likeVC.arrayM = [QIZDatabaseTool queryFilelove:@"1"];
+            [self.likeVC.tableView reloadData];
         }
             break;
         case 2:{
-            self.likeVC.arrayM = [QIZDatabaseTool queryFilelove:@"1"];
-            [self.likeVC.tableView reloadData];
+//            self.likeVC.arrayM = [QIZDatabaseTool queryFilelove:@"1"];
+//            [self.likeVC.tableView reloadData];
+            self.latelyVC.arrayM = [QIZDatabaseTool queryApplyTimeAllData];
+            [self.latelyVC.tableView reloadData];
         }
             break;
         case 3:{

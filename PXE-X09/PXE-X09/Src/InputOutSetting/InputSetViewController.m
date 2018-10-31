@@ -150,13 +150,13 @@
             cell=[[SingleTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
+        cell.item.lineTop.hidden=NO;
+        cell.item.lineBottom.hidden=NO;
         if (indexPath.row==0) {
             cell.item.lineTop.hidden=YES;
-        }else if (indexPath.row==chCount-1){
+        }
+        if (indexPath.row==chCount-1){
             cell.item.lineBottom.hidden=YES;
-        }else{
-            cell.item.lineTop.hidden=NO;
-            cell.item.lineBottom.hidden=NO;
         }
         int chValue=[self.threeCells[indexPath.row] intValue];
         [cell.item setChannelIndex:chValue];
@@ -189,13 +189,13 @@
             cell=[[DoubleChTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
+        cell.item.item1.lineTop.hidden=NO;
+        cell.item.item2.lineBottom.hidden=NO;
         if (indexPath.row==0) {
             cell.item.item1.lineTop.hidden=YES;
-        }else if (indexPath.row==chCount-1){
+        }
+        if(indexPath.row==chCount-1){
             cell.item.item2.lineBottom.hidden=YES;
-        }else{
-            cell.item.item1.lineTop.hidden=NO;
-            cell.item.item2.lineBottom.hidden=NO;
         }
         
         cell.item.item1.eqblock = ^(int index) {

@@ -93,7 +93,7 @@
     [_multiSelectOpenBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_multiselect"]  forState:UIControlStateNormal];
     _multiSelectOpenBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [_multiSelectOpenBtn setTitleColor:SetColor(UI_TSEFFF_OPT_TextColor) forState:UIControlStateNormal];
-    [self.topView addSubview:_multiSelectOpenBtn];
+//    [self.topView addSubview:_multiSelectOpenBtn];
     
     _multiSelectLabel = [UILabel new];
     _multiSelectLabel.textColor = [UIColor whiteColor];
@@ -122,11 +122,11 @@
         make.size.mas_equalTo(CGSizeMake(kTopBtnW, kTopBtnH));
     }];
     
-    [self.multiSelectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.topView.mas_centerX);
-        make.centerY.mas_equalTo(self.topView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(kTopBtnW, kTopBtnH));
-    }];
+//    [self.multiSelectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.topView.mas_centerX);
+//        make.centerY.mas_equalTo(self.topView.mas_centerY);
+//        make.size.mas_equalTo(CGSizeMake(kTopBtnW, kTopBtnH));
+//    }];
     
     //底部视图
     _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight-kBottomViewH, KScreenWidth, kBottomViewH)];
@@ -619,9 +619,9 @@
     cell.effectTitleLabel.text = effData.data_group_name;
     
     if ([effData.file_type isEqualToString:@"complete"]) {
-        cell.singleLabel.text = [LANG DPLocalizedString:@"L_SSM_Machine"];
+        cell.singleLabel.text = [LANG DPLocalizedString:@"L_SSM_Machine2"];
     }else {
-        cell.singleLabel.text = [LANG DPLocalizedString:@"L_SSM_Single"];
+        cell.singleLabel.text = [LANG DPLocalizedString:@"L_SSM_Single2"];
     }
     
 //    BOOL isLogin = [CLZUserDefaults isLogined];
@@ -658,7 +658,7 @@
     
     [cell.applicationBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_apply"] forState:UIControlStateNormal];
     [cell.shareBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_share"] forState:UIControlStateNormal];
-    [cell.collectionBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_favoriate"] forState:UIControlStateNormal];
+//    [cell.collectionBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_favoriate"] forState:UIControlStateNormal];
     [cell.likeBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_love"] forState:UIControlStateNormal];
     [cell.deleteBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_delete"] forState:UIControlStateNormal];
     [cell.detailBtn setTitle:[LANG DPLocalizedString:@"L_seffitem_details"] forState:UIControlStateNormal];
@@ -666,7 +666,7 @@
     //添加监听事件
     [cell.applicationBtn addTarget:self action:@selector(doApplyEffect:) forControlEvents:UIControlEventTouchUpInside];
     [cell.shareBtn addTarget:self action:@selector(doShareEffect:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.collectionBtn addTarget:self action:@selector(doCollectionEffect:) forControlEvents:UIControlEventTouchUpInside];
+//    [cell.collectionBtn addTarget:self action:@selector(doCollectionEffect:) forControlEvents:UIControlEventTouchUpInside];
     [cell.likeBtn addTarget:self action:@selector(doLikeEffect:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteBtn addTarget:self action:@selector(doDeleteEffect:) forControlEvents:UIControlEventTouchUpInside];
     [cell.detailBtn addTarget:self action:@selector(doDetailEffect:) forControlEvents:UIControlEventTouchUpInside];
@@ -715,7 +715,7 @@
     cell.popMenuBtn.tag = indexPath.row;
     cell.applicationBtn.tag = indexPath.row;
     cell.shareBtn.tag = indexPath.row;
-    cell.collectionBtn.tag = indexPath.row;
+//    cell.collectionBtn.tag = indexPath.row;
     cell.likeBtn.tag = indexPath.row;
     cell.deleteBtn.tag = indexPath.row;
     cell.detailBtn.tag = indexPath.row;
@@ -906,7 +906,7 @@
     SEFFFile *effData = (SEFFFile *)self.arrayM[self.selectIndex];
     NSString *detailStr = effData.data_eff_briefing;
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[LANG DPLocalizedString:@"L_seffitem_details"]  message:detailStr delegate:self cancelButtonTitle:[LANG DPLocalizedString:@"L_System_OK"] otherButtonTitles:[LANG DPLocalizedString:@"L_System_Cancel"], nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[LANG DPLocalizedString:@"L_seffitem_details"]  message:detailStr delegate:self cancelButtonTitle:[LANG DPLocalizedString:@"L_System_OKstr"] otherButtonTitles:[LANG DPLocalizedString:@"L_System_Cancel"], nil];
     [alertView show];
     
     //NSLog(@"doDetailEffect");
@@ -1036,7 +1036,7 @@
             
             //4.如果连接则下发到设备
             if (gConnectState) {
-//                [self showSEFFLoadOrSaveProgress:[LANG DPLocalizedString:@"L_Data_Sync"] WithMode:SEFF_OPT_Save];
+                [self showSEFFLoadOrSaveProgress:[LANG DPLocalizedString:@"L_Data_Sync"] WithMode:SEFF_OPT_Save];
             }else{
                 [self ShowConnectDialog];
             }
@@ -1140,7 +1140,7 @@
 }
 //使用整机文件提示框
 - (void)showUseMACSEFFDialog{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_Master_PresetOpt"]message:[LANG DPLocalizedString:@"L_USE_MACSEFFMSG"]preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_Master_AlertPreset"]message:[LANG DPLocalizedString:@"L_USE_MACSEFFMSG"]preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"]style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
         [self dealWithSEFF];
@@ -1153,8 +1153,8 @@
 }
 //使用单组文件提示框
 - (void)showUseSingleSEFFDialog{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_Master_PresetOpt"]message:[LANG DPLocalizedString:@"L_USE_SEFFMSG"]preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"]style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[LANG DPLocalizedString:@"L_Master_AlertPreset"]message:[LANG DPLocalizedString:@"L_USE_SEFFMSG"]preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Confirm"]style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
         [self dealWithSEFF];
     }]];

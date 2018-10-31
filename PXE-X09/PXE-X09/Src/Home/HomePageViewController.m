@@ -1782,7 +1782,7 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_Master_PresetRecall"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_mDataTransmitOpt SEFF_Call:mGroup];
-        [self.Btn_SEFFC setNormal];
+        
         [alert dismissViewControllerAnimated:YES completion:nil];
     }]];
     
@@ -1797,7 +1797,7 @@
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self.Btn_SEFFC setNormal];
+//        [self.Btn_SEFFC setNormal];
         [alert dismissViewControllerAnimated:YES completion:nil];  //返回之前的界面
     }]];
     [self presentViewController:alert animated:YES completion:nil];
@@ -1835,12 +1835,12 @@
         }
         
         [self.Btn_SEFFC setTitle:[self getSEFFName:(mGroup)] forState:UIControlStateNormal];
-        [self.Btn_SEFFC setNormal];
+//        [self.Btn_SEFFC setNormal];
         [_mDataTransmitOpt SEFF_Save:mGroup];
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"]style:UIAlertActionStyleCancel handler:^(UIAlertAction*action) {
-        [self.Btn_SEFFC setNormal];
+//        [self.Btn_SEFFC setNormal];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
     
@@ -1872,12 +1872,12 @@
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_OK"]style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [_mDataTransmitOpt SEFF_Delete:mGroup];
         [self.Btn_SEFFC setTitle:[LANG DPLocalizedString:[NSString stringWithFormat:@"L_Master_Preset%d",(mGroup)]] forState:UIControlStateNormal] ;
-        [self.Btn_SEFFC setNormal];
+//        [self.Btn_SEFFC setNormal];
         NSLog(@"点击了确定按钮");
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:[LANG DPLocalizedString:@"L_System_Cancel"]style:UIAlertActionStyleCancel handler:^(UIAlertAction*action) {
-        [self.Btn_SEFFC setNormal];
+//        [self.Btn_SEFFC setNormal];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }

@@ -347,7 +347,7 @@
 //关于弹出窗口
 - (void) pushMenuAbout:(id)sender{
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
-    contentView.backgroundColor = [UIColor colorWithRed:48/255.0 green:48/255.0 blue:48/255.0 alpha:1.0];
+    contentView.backgroundColor =SetColor(0xFF052545);
     
     UILabel *labelTitle = [[UILabel alloc] init];
     labelTitle.textColor = [UIColor whiteColor];
@@ -402,12 +402,12 @@
     [btnOK setTitleColor:SetColor(UI_SystemBtnColorPress) forState:UIControlStateHighlighted];//选中
     //    [btnOK addTarget:self action:@selector(Btn_NormalButtom_PressStatus:) forControlEvents:UIControlEventTouchDown];
     //    [btnOK addTarget:self action:@selector(Btn_NormalButtom_NormalStatus:) forControlEvents:UIControlEventTouchDragOutside];
-    [btnOK setTitle:[LANG DPLocalizedString:@"L_System_OK"] forState:UIControlStateNormal];
+    [btnOK setTitle:[LANG DPLocalizedString:@"L_System_Confirm"] forState:UIControlStateNormal];
     btnOK.titleLabel.textAlignment = NSTextAlignmentCenter;
     //[btnOK addTarget:self action:@selector(gainExit) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:btnOK];
     
-    [[KGModal sharedInstance] setModalBackgroundColor:SetColor(0xff303030)];
+    [[KGModal sharedInstance] setModalBackgroundColor:SetColor(0xFF052545)];
     [[KGModal sharedInstance] setOKButton:btnOK];
     [[KGModal sharedInstance] showWithContentView:contentView andAnimated:YES];
     [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeNone;
@@ -424,21 +424,22 @@
     SEFFFile_Dital = @"";
     
     int contentW = 300;
-    int contentH = 160;
+    int contentH = 170;
     int margin = 10;
     int btnPadding = 35;
     int btnW = (contentW-3*btnPadding)/2;
     int btnH = 35;
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentW, contentH)];
-    contentView.backgroundColor = [UIColor whiteColor];
+    contentView.backgroundColor = SetColor(0xFF052545);
     
     //1.文件名称label
-    UITextView *labelTitle = [[UITextView alloc] init];
+    UILabel *labelTitle = [[UILabel alloc] init];
     labelTitle.textColor = [UIColor whiteColor];
-    labelTitle.frame = CGRectMake(10, 1, 250, 50);
-    labelTitle.text = [LANG DPLocalizedString:@"L_SSM_ShareMSG"];
+    labelTitle.frame = CGRectMake(10, 1, 250, 30);
+    labelTitle.text = [LANG DPLocalizedString:@"L_SSM_ShareMacMSG"];
+    labelTitle.numberOfLines=2;
     labelTitle.font = [UIFont systemFontOfSize:15.0];
-    labelTitle.textColor = [UIColor blackColor];
+    labelTitle.textColor = [UIColor whiteColor];
     [contentView addSubview:labelTitle];
     
     [labelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -452,40 +453,46 @@
     
     //3.选择单组、整组部分
     UIView *saView = [[UIView alloc] init];
-    saView.backgroundColor = [UIColor whiteColor];
+    saView.backgroundColor = [UIColor clearColor];
     [contentView addSubview:saView];
     [saView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(labelTitle.mas_bottom);
         make.left.mas_equalTo(contentView.mas_left);
         make.right.mas_equalTo(contentView.mas_right);
-        make.size.mas_equalTo(CGSizeMake(contentW, 70));
+        make.size.mas_equalTo(CGSizeMake(contentW, [Dimens GDimens:60]));
     }];
     
     UIButton *singleBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [singleBtn setImage:[[UIImage imageNamed:@"ssm_btncheck_press"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     [singleBtn setTitle:[LANG DPLocalizedString:@"L_SSM_Single"] forState:UIControlStateNormal];
-    [singleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [singleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    singleBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
+    singleBtn.titleLabel.numberOfLines=2;
+    //    singleBtn.backgroundColor=[UIColor yellowColor];
     singleBtn.tag = 0;
     [saView addSubview:singleBtn];
     [singleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(saView.mas_top).mas_equalTo(3);
-        make.left.mas_equalTo(saView.mas_left).mas_equalTo((contentW-2*70)/3);
-        make.size.mas_equalTo(CGSizeMake(70, 35));
+        make.right.mas_equalTo(saView.mas_centerX).mas_equalTo(-20);
+        make.size.mas_equalTo(CGSizeMake(110, 35));
     }];
     self.singleChoiceBtn = singleBtn;
     
     UIButton *allBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     allBtn.tag = 1;
+    //    allBtn.backgroundColor=[UIColor yellowColor];
     [allBtn setImage:[[UIImage imageNamed:@"ssm_btncheck_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     [allBtn setTitle:[LANG DPLocalizedString:@"L_SSM_Machine"] forState:UIControlStateNormal];
-    [allBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    allBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
+    allBtn.titleLabel.numberOfLines=2;
+    [allBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saView addSubview:allBtn];
     [allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(singleBtn.mas_centerY);
-        make.left.mas_equalTo(singleBtn.mas_right).mas_equalTo((contentW-2*70)/3);
+        make.left.mas_equalTo(saView.mas_centerX).mas_equalTo(20);
         make.size.mas_equalTo(CGSizeMake(100, 35));
     }];
-    
+    allBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
     self.allChoiceBtn = allBtn;
     
     //
@@ -493,16 +500,17 @@
     allGroupNotice.textColor = [UIColor whiteColor];
     allGroupNotice.frame = CGRectMake(10, 1, 70, 30);
     allGroupNotice.text = [LANG DPLocalizedString:@"L_SSM_ShareMacMSG"];
-    allGroupNotice.textColor = [UIColor blackColor];
+    allGroupNotice.textColor = [UIColor whiteColor];
     allGroupNotice.font = [UIFont systemFontOfSize:15.0];
-    [saView addSubview:allGroupNotice];
-    
-    [allGroupNotice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(saView.mas_centerX);
-        make.top.mas_equalTo(allBtn.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(contentW, 35));
-    }];
-    
+    allGroupNotice.adjustsFontSizeToFitWidth=YES;
+    //        [saView addSubview:allGroupNotice];
+    //
+    //        [allGroupNotice mas_makeConstraints:^(MASConstraintMaker *make) {
+    //            make.centerX.mas_equalTo(saView.mas_centerX);
+    //            make.top.mas_equalTo(allBtn.mas_bottom);
+    //            make.size.mas_equalTo(CGSizeMake(contentW, 35));
+    //        }];
+    //
     allGroupNotice.textAlignment = NSTextAlignmentCenter;
     self.allChoiceLabel = allGroupNotice;
     self.allChoiceLabel.hidden = YES;
@@ -513,6 +521,7 @@
     [allBtn addTarget:self action:@selector(doChoiceShareMode:) forControlEvents:UIControlEventTouchUpInside];
     
     //4.按钮部分
+    
     UIView *btnsView = [[UIView alloc] init];
     [contentView addSubview:btnsView];
     [btnsView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -521,12 +530,27 @@
         make.right.mas_equalTo(contentView.mas_right);
         make.bottom.mas_equalTo(contentView.mas_bottom);
     }];
-    
-    btnsView.backgroundColor = [UIColor lightGrayColor];
+    UIView *line=[[UIView alloc]init];
+    line.backgroundColor=SetColor(0xFF1e3b57);
+    [contentView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(btnsView.mas_top).offset([Dimens GDimens:-10]);
+        make.left.mas_equalTo(contentView.mas_left);
+        make.right.mas_equalTo(contentView.mas_right);
+        make.height.mas_equalTo(0.5);
+    }];
+    //    btnsView.backgroundColor = SetColor(c);
     
     UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    saveBtn.layer.borderWidth=1;
+    saveBtn.layer.cornerRadius=5;
+    saveBtn.layer.masksToBounds=YES;
+    saveBtn.layer.borderColor=SetColor(UI_Master_SB_Volume_Press).CGColor;
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
+    cancelBtn.layer.borderWidth=1;
+    cancelBtn.layer.borderColor=SetColor(UI_Master_SB_Volume_Press).CGColor;
+    cancelBtn.layer.cornerRadius=5;
+    cancelBtn.layer.masksToBounds=YES;
     [btnsView addSubview:saveBtn];
     [btnsView addSubview:cancelBtn];
     
@@ -535,10 +559,10 @@
         make.left.mas_equalTo(btnsView.mas_left).mas_equalTo(btnPadding);
         make.size.mas_equalTo(CGSizeMake(btnW, btnH));
     }];
-    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
-    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
+    //    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
+    //    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
     [saveBtn setTitle:[LANG DPLocalizedString:@"L_SSM_ShareOpt"] forState:UIControlStateNormal];
-    [saveBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [saveBtn setTitleColor:SetColor(UI_Master_SB_Volume_Press) forState:UIControlStateNormal];
     
     [saveBtn addTarget:self action:@selector(doShareEffectFileOK) forControlEvents:UIControlEventTouchUpInside];
     
@@ -547,22 +571,24 @@
         make.left.mas_equalTo(saveBtn.mas_right).mas_equalTo(btnPadding);
         make.size.mas_equalTo(CGSizeMake(btnW, btnH));
     }];
-    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
-    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
+    //    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
+    //    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
     [cancelBtn setTitle:[LANG DPLocalizedString:@"L_SSM_CancelOpt"] forState:UIControlStateNormal];
-    [cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:SetColor(UI_Master_SB_Volume_Press) forState:UIControlStateNormal];
     
     [cancelBtn addTarget:self action:@selector(doCancel) forControlEvents:UIControlEventTouchUpInside];
     
     [KGModal sharedInstance].tapOutsideToDismiss = NO;
+    [[KGModal sharedInstance] setModalBackgroundColor:SetColor(0xFF052545)];
     [[KGModal sharedInstance] showWithContentView:contentView andAnimated:YES];
     [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeNone;
 }
 
 - (void)doShareEffectFileOK{
     SEFFFILE_OPT = SEFFFILE_SHARE;
-    [self gotoSEFFFileOpt:SEFFFILE_SHARE];
-    [[KGModal sharedInstance] hide];
+    [[KGModal sharedInstance] hideWithCompletionBlock:^{
+        [self gotoSEFFFileOpt:SEFFFILE_SHARE];
+    }];
 }
 
 - (void)doCancel{
@@ -615,14 +641,18 @@
     SEFFFile_Dital = @"";
     
     int contentW = 300;
-    int contentH = 210;
+    int contentH = 260;
     int margin = 10;
     int btnPadding = 35;
     int btnW = (contentW-3*btnPadding)/2;
     int btnH = 35;
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentW, contentH)];
-    contentView.backgroundColor = [UIColor colorWithRed:48/255.0 green:48/255.0 blue:48/255.0 alpha:1.0];
-    
+    contentView.backgroundColor = [UIColor colorWithRed:48/255.0 green:48/255.0 blue:48/255.0 alpha:0.0];
+    UILabel *TitleLab=[[UILabel alloc]initWithFrame:CGRectMake(margin*0.5, 0, 70, 30)];
+    TitleLab.text=[LANG DPLocalizedString:@"L_System_Save"];
+    TitleLab.textColor = [UIColor whiteColor];
+    TitleLab.font=[UIFont systemFontOfSize:16];
+    [contentView addSubview:TitleLab];
     //1.文件名称label
     UILabel *labelTitle = [[UILabel alloc] init];
     labelTitle.textColor = [UIColor whiteColor];
@@ -635,7 +665,7 @@
     
     [labelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(contentView.mas_left).mas_equalTo(margin*0.5);
-        make.top.mas_equalTo(contentView.mas_top).mas_equalTo(margin*0.5);
+        make.top.mas_equalTo(contentView.mas_top).mas_equalTo(margin*0.5+30);
         make.size.mas_equalTo(CGSizeMake(70, 30));
     }];
     //2.输入文件名称
@@ -651,8 +681,12 @@
     
     nameTextField.placeholder = @"";
     nameTextField.textAlignment = NSTextAlignmentCenter;
+    nameTextField.backgroundColor=[UIColor clearColor];
     [nameTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    nameTextField.textColor = [UIColor blackColor];
+    nameTextField.layer.borderWidth=1;
+    nameTextField.layer.cornerRadius=5;
+    nameTextField.layer.borderColor=SetColor(UI_Master_SB_Volume_Press).CGColor;
+    nameTextField.textColor = [UIColor whiteColor];
     nameTextField.keyboardType = UIKeyboardTypeDefault;
     nameTextField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     nameTextField.returnKeyType = UIReturnKeyDone;
@@ -690,7 +724,11 @@
     detailTextField.placeholder = @"";
     detailTextField.textAlignment = NSTextAlignmentCenter;
     [detailTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    detailTextField.textColor = [UIColor blackColor];
+    detailTextField.textColor = [UIColor whiteColor];
+    detailTextField.backgroundColor=[UIColor clearColor];
+    detailTextField.layer.borderWidth=1;
+    detailTextField.layer.cornerRadius=5;
+    detailTextField.layer.borderColor=SetColor(UI_Master_SB_Volume_Press).CGColor;
     detailTextField.keyboardType = UIKeyboardTypeDefault;
     detailTextField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     detailTextField.returnKeyType = UIReturnKeyDone;
@@ -701,38 +739,40 @@
     
     //3.选择单组、整组部分
     UIView *saView = [[UIView alloc] init];
-    saView.backgroundColor = [UIColor whiteColor];
+    saView.backgroundColor = [UIColor clearColor];
     [contentView addSubview:saView];
     [saView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(detailTextField.mas_bottom).mas_equalTo(margin);
         make.left.mas_equalTo(contentView.mas_left);
         make.right.mas_equalTo(contentView.mas_right);
-        make.size.mas_equalTo(CGSizeMake(contentW, 70));
+        make.size.mas_equalTo(CGSizeMake(contentW, 90));
     }];
     
     UIButton *singleBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [singleBtn setImage:[[UIImage imageNamed:@"ssm_btncheck_press"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    singleBtn.titleLabel.numberOfLines=2;
     [singleBtn setTitle:[LANG DPLocalizedString:@"L_SSM_Single"] forState:UIControlStateNormal];
-    [singleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [singleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     singleBtn.tag = 0;
     [saView addSubview:singleBtn];
     [singleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(saView.mas_top).mas_equalTo(3);
         make.left.mas_equalTo(saView.mas_left).mas_equalTo((contentW-2*70)/3);
-        make.size.mas_equalTo(CGSizeMake(70, 35));
+        make.size.mas_equalTo(CGSizeMake(85, 35));
     }];
     self.singleChoiceBtn = singleBtn;
     
     UIButton *allBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     allBtn.tag = 1;
+    allBtn.titleLabel.numberOfLines=2;
     [allBtn setImage:[[UIImage imageNamed:@"ssm_btncheck_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     [allBtn setTitle:[LANG DPLocalizedString:@"L_SSM_Machine"] forState:UIControlStateNormal];
-    [allBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [allBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saView addSubview:allBtn];
     [allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(singleBtn.mas_centerY);
         make.left.mas_equalTo(singleBtn.mas_right).mas_equalTo((contentW-2*70)/3);
-        make.size.mas_equalTo(CGSizeMake(100, 35));
+        make.size.mas_equalTo(CGSizeMake(85, 35));
     }];
     
     self.allChoiceBtn = allBtn;
@@ -742,8 +782,10 @@
     allGroupNotice.textColor = [UIColor whiteColor];
     allGroupNotice.frame = CGRectMake(10, 1, 70, 30);
     allGroupNotice.text = [LANG DPLocalizedString:@"L_SSM_SaveMacMSG"];
-    allGroupNotice.textColor = [UIColor blackColor];
+    allGroupNotice.textColor = [UIColor whiteColor];
+    allGroupNotice.numberOfLines=2;
     allGroupNotice.font = [UIFont systemFontOfSize:15.0];
+    allGroupNotice.adjustsFontSizeToFitWidth=YES;
     [saView addSubview:allGroupNotice];
     
     [allGroupNotice mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -771,10 +813,28 @@
         make.bottom.mas_equalTo(contentView.mas_bottom);
     }];
     
-    btnsView.backgroundColor = [UIColor lightGrayColor];
+    btnsView.backgroundColor = [UIColor clearColor];
+    
+    UIView *line=[[UIView alloc]init];
+    line.backgroundColor=SetColor(0xFF1e3b57);
+    [contentView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(btnsView.mas_top).offset([Dimens GDimens:-10]);
+        make.left.mas_equalTo(contentView.mas_left);
+        make.right.mas_equalTo(contentView.mas_right);
+        make.height.mas_equalTo(0.5);
+    }];
     
     UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    saveBtn.layer.borderWidth=1;
+    saveBtn.layer.cornerRadius=5;
+    saveBtn.layer.masksToBounds=YES;
+    saveBtn.layer.borderColor=SetColor(UI_Master_SB_Volume_Press).CGColor;
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    cancelBtn.layer.borderWidth=1;
+    cancelBtn.layer.cornerRadius=5;
+    cancelBtn.layer.masksToBounds=YES;
+    cancelBtn.layer.borderColor=SetColor(UI_Master_SB_Volume_Press).CGColor;
     
     [btnsView addSubview:saveBtn];
     [btnsView addSubview:cancelBtn];
@@ -784,10 +844,10 @@
         make.left.mas_equalTo(btnsView.mas_left).mas_equalTo(btnPadding);
         make.size.mas_equalTo(CGSizeMake(btnW, btnH));
     }];
-    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
-    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
+    //    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
+    //    [saveBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
     [saveBtn setTitle:[LANG DPLocalizedString:@"L_SSM_SaveOpt"] forState:UIControlStateNormal];
-    [saveBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [saveBtn setTitleColor:SetColor(UI_Master_SB_Volume_Press) forState:UIControlStateNormal];
     
     [saveBtn addTarget:self action:@selector(doSaveEffectFileOK) forControlEvents:UIControlEventTouchUpInside];
     
@@ -797,15 +857,16 @@
         make.left.mas_equalTo(saveBtn.mas_right).mas_equalTo(btnPadding);
         make.size.mas_equalTo(CGSizeMake(btnW, btnH));
     }];
-    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
-    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
+    //    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_normal"] forState:UIControlStateNormal];
+    //    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"ssm_btn_press"] forState:UIControlStateHighlighted];
     [cancelBtn setTitle:[LANG DPLocalizedString:@"L_SSM_CancelOpt"] forState:UIControlStateNormal];
-    [cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:SetColor(UI_Master_SB_Volume_Press) forState:UIControlStateNormal];
     
     [cancelBtn addTarget:self action:@selector(doCancel) forControlEvents:UIControlEventTouchUpInside];
     
     [KGModal sharedInstance].tapOutsideToDismiss = NO;
     //    [[KGModal sharedInstance] setOKButton:saveBtn];
+    [[KGModal sharedInstance] setModalBackgroundColor:SetColor(0xFF052545)];
     [[KGModal sharedInstance] showWithContentView:contentView andAnimated:YES];
     [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeNone;
     
@@ -834,7 +895,8 @@
         //         [[KGModal sharedInstance] hideAnimated:YES];
         if ([QIZDatabaseTool queryExistFileName:self.saveLocalName]) {
             self.allChoiceLabel.hidden = false;
-            self.allChoiceLabel.text = [LANG DPLocalizedString:@"L_SSM_Save_repeat"];
+            //            self.allChoiceLabel.text = [LANG DPLocalizedString:@"L_SSM_Save_repeat"];
+            [[DataProgressHUD shareManager]showHub:[LANG DPLocalizedString:@"L_SSM_Save_repeat"] WithTime:1.5];
         }else{
             [[KGModal sharedInstance]hideAnimated:YES withCompletionBlock:^{
                 [self gotoSEFFFileOpt:SEFFFILE_Save];
@@ -905,6 +967,7 @@
 }
 //蓝牙设备连接
 -(void)deviceConnect{
+    [[BLEManager shareBLEManager].baby AutoReconnectCancel:[BLEManager shareBLEManager].currPeripheral];
     if (gConnectState) {
         [self.bleManager NotifyValue:NO];
         //连接状态

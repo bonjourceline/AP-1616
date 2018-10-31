@@ -183,7 +183,8 @@
 }
 -(void)clickSpk:(UIButton *)btn{
     input_channel_sel=chIndex;
-    if (RecStructData.IN_CH[input_channel_sel].LinkFlag==0) {
+    if (RecStructData.IN_CH[input_channel_sel].LinkFlag!=0) {
+        [[DataProgressHUD shareManager]showHub:[LANG DPLocalizedString:@"已联调不可操作"] WithTime:1.0];
         return;
     }
     SpkViewController *vc=[[SpkViewController alloc]init];
@@ -224,7 +225,7 @@
         [self.muteBtn setImage:[UIImage imageNamed:@"master_mute_normal"] forState:UIControlStateNormal];
     }
     [self.sbVol setProgress:RecStructData.IN_CH[chIndex].gain];
-    [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.IN_CH[chIndex].gain/Output_Volume_Step] forState:UIControlStateNormal];
+    [self.volBtn setTitle:[NSString stringWithFormat:@"%d",RecStructData.IN_CH[chIndex].gain/Output_Volume_Step-60] forState:UIControlStateNormal];
     if(chIndex>=3){
         [self.spkBtn setTitle:[SourceModeUtils getOutputSpkTypeNameByIndex:RecStructData.System.in_spk_type[chIndex-3]] forState:UIControlStateNormal];
     }

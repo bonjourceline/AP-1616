@@ -7,6 +7,7 @@
  */
 //*******系統用語*******//
 "L_System_OK" = "Sure";
+"L_System_Confirm"="Confirm";
 "L_System_Cancel" = "Cancel";
 "L_System_Save" = "Save";
 "L_System_Delete" = "Delete";
@@ -713,3 +714,8 @@
 "L_notice_playmode_repeat"="Play repeatly";
 "L_notice_playmode_toggle"="Play togglely";
 "L_notice_playmode_repeatone"="Play repeatonely";
+
+"spp_le_select_device"="Select device";
+"L_AutoConnect_device"="Autoconnect";
+"Rescan"="RESCAN";
+"blueToothFailsOpen"="The Bluetooth status of iphone is abnormal, Please reopen the Bluetooth of your iphone.";

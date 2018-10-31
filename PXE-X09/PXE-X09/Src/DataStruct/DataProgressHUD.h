@@ -11,14 +11,18 @@
 #import "DataCommunication.h"
 @interface DataProgressHUD : NSObject<MBProgressHUDDelegate>
 {
-    int SEFF_SendListTotal; 
+    int SEFF_SendListTotal;
 }
 @property (nonatomic,strong) DataCommunication *mDataTransmitOpt;
 @property (nonatomic,assign)BOOL showVolView;
 @property (nonatomic,strong) MBProgressHUD *HUD_SEFF;
 @property (nonatomic,strong)MasterVolView *volView;
+@property (nonatomic,strong)UIAlertController *ConnectfailsTis;
 + (instancetype)shareManager;
 -(void)addNotification;
 -(void)showFailConnectionHub;
 -(void)initSaveLoadSEFFProgress;
+-(void)showAlertWithtis:(NSString *)tis;
+-(void)hideFailConnectionHud;
+-(void)showHub:(NSString *)tis WithTime:(int)time;
 @end
