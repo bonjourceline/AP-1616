@@ -93,10 +93,6 @@
     //设置查找设备的过滤器
     [self.baby setFilterOnDiscoverPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
         //查找前缀
-        //@"DSP HD-A007B7"
-        //if ([peripheralName hasPrefix:@"DSP HD"] ) {
-        //            return YES;
-        //}
         
         if ([peripheralName hasPrefix:DSPHDS]|[peripheralName hasPrefix:SPPLE]|[peripheralName hasPrefix:@"DSP Play"]) {//DSP HD
             return YES;

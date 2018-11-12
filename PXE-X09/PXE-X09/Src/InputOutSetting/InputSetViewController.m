@@ -79,7 +79,7 @@
     UILabel *volLabel=[[UILabel alloc]init];
     volLabel.adjustsFontSizeToFitWidth=YES;
     volLabel.font=[UIFont systemFontOfSize:12];
-    volLabel.text=[LANG DPLocalizedString:@"音量"];
+    volLabel.text=[LANG DPLocalizedString:@"音量(dB)"];
     volLabel.textColor=SetColor(0XFF757f8b);
     [volLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:volLabel];
@@ -90,7 +90,7 @@
     UILabel *muteLabel=[[UILabel alloc]init];
     muteLabel.adjustsFontSizeToFitWidth=YES;
     muteLabel.font=[UIFont systemFontOfSize:12];
-    muteLabel.text=[LANG DPLocalizedString:@"音量"];
+    muteLabel.text=[LANG DPLocalizedString:@"静音"];
     muteLabel.textColor=SetColor(0XFF757f8b);
     [muteLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:muteLabel];

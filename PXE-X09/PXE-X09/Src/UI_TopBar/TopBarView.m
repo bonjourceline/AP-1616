@@ -7,7 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import "TopBarView.h"
-
+#import "LinkModeViewController.h"
 #import "Define_Color.h"
 #import "Masonry.h"
 #import "KxMenu.h"
@@ -16,6 +16,7 @@
 #import "NormalButton.h"
 #import "DataProgressHUD.h"
 #import "QIZDatabaseTool.h"
+#import "LinkViewController.h"
 
 @implementation TopBarView
 
@@ -299,7 +300,10 @@
 {
     NSArray *menuItems =
     @[
-      
+      [KxMenuItem menuItem:[LANG DPLocalizedString:@"联调设置"]
+                     image:[UIImage imageNamed:@"menu_share"]
+                    target:self
+                    action:@selector(creatLinkModeView)],
       [KxMenuItem menuItem:[LANG DPLocalizedString:@"L_Menu_Share"]
                      image:[UIImage imageNamed:@"menu_share"]
                     target:self
@@ -343,7 +347,15 @@
                   fromRect:fromRect
                  menuItems:menuItems];
 }
-#pragma mark ---- About
+#pragma mark ------------linkMode
+-(void)creatLinkModeView{
+    LinkModeViewController *vc=[[LinkModeViewController alloc]init];
+    vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    vc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    [window.rootViewController presentViewController:vc animated:YES completion:nil];
+}
+#pragma mark ------------- About
 //关于弹出窗口
 - (void) pushMenuAbout:(id)sender{
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];

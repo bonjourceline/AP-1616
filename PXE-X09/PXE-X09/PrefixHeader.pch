@@ -38,7 +38,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
 #import "MacDefine.h"
 #import "Masonry.h"
 #import "SourceModeUtils.h"
-#import "LinkTool.h"
 #import "DataProgressHUD.h"
 #define KNmusicMesArrive @"KNmusicMesArrive" //当前音乐数据返回
 #define KNmusiclistArrive @"KNmusiclistArrive"//音乐列表数据返回

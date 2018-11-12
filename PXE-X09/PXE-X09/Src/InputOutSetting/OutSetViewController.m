@@ -77,7 +77,7 @@
     UILabel *volLabel=[[UILabel alloc]init];
     volLabel.adjustsFontSizeToFitWidth=YES;
     volLabel.font=[UIFont systemFontOfSize:12];
-    volLabel.text=[LANG DPLocalizedString:@"音量"];
+    volLabel.text=[LANG DPLocalizedString:@"音量(dB)"];
     volLabel.textColor=SetColor(0XFF757f8b);
     [volLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:volLabel];

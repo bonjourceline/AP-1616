@@ -94,12 +94,10 @@
     NSNotification * noticeSynDataSucess = [NSNotification notificationWithName:MyNotification_UpdateUI object:nil userInfo:DictionaryMSG];
     while (true) {
         if(COM_BLE_DEVICECONNECTED){
-            //            if (MusicBoxManger.isSendStatus) {
-            //                [MusicBoxManger MBoxCmd];
-            //            }
-            //            [NSThread sleepForTimeInterval:1];
-            //            continue;
-            //if([BLEManager shareBLEManager].baby.centralManager.state == CBCentralManagerStatePoweredOn){
+           
+            if (SendbufferList.count == 0&&U0SynDataSucessFlg) {
+                [self ComparedToSendData:true];
+            }
             // 用户有新数据插入时发送
             if (SendbufferList.count > 0){//列表有數據發送
                 U0RcvFrameFlg = false;//有新接收到数据的标志，清除标志
@@ -154,18 +152,10 @@
                         [DataCManager ComparedToSendData:false];
                     }
                 }
-                // 发送进度条消息给主线程
-                //if (progressDialogStep > 0) {
-                //   Message msg = Message.obtain();
-                //    msg.what = WHAT_IS_PROGRESSDIALOG;
-                //    msg.arg1 = SendbufferList.size();
-                //    mHandler.sendMessage(msg);
-                //}
+                
             }else{//列表没有数据发送，则检测数据有没有理性和更新信号包
                 /**/
                 if (U0SynDataSucessFlg) {//同步初始化数据完成
-                    //经比较之前的数据（初始化数等），如有更新则发送新数据
-                    [self ComparedToSendData:true];
                     
                     if(++LEDPackageCnt > 1){
                         LEDPackageCnt = 0;
